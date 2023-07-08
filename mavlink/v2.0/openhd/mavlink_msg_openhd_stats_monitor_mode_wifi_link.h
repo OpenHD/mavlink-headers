@@ -1,72 +1,72 @@
 #pragma once
 // MESSAGE OPENHD_STATS_MONITOR_MODE_WIFI_LINK PACKING
 
-#define MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK 1212
+#define MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK 1211
 
 
 typedef struct __mavlink_openhd_stats_monitor_mode_wifi_link_t {
- uint64_t count_tx_inj_error_hint; /*<  count_tx_inj_error_hint*/
- uint64_t count_tx_dropped_packets; /*<  count_tx_dropped_packets*/
- uint64_t dummy3; /*<  for future use*/
  int32_t curr_tx_bps; /*<  tx bits per second*/
  int32_t curr_rx_bps; /*<  rx bits per second*/
- int32_t dummy1; /*<  for future use*/
+ uint32_t count_tx_inj_error_hint; /*<  count_tx_inj_error_hint*/
+ uint32_t count_tx_dropped_packets; /*<  count_tx_dropped_packets*/
  int32_t dummy2; /*<  for future use*/
+ uint32_t dummy3; /*<  for future use*/
  int16_t curr_tx_pps; /*<  tx packets per second*/
  int16_t curr_rx_pps; /*<  rx packets per second*/
  int16_t curr_rx_packet_loss_perc; /*<  curr_rx_packet_loss*/
+ int16_t dummy1; /*<  for future use*/
  uint8_t curr_tx_card_idx; /*<  curr_tx_card_idx*/
  uint8_t curr_tx_mcs_index; /*<  curr tx mcs index used when injecting packets*/
  int8_t dummy0; /*<  for future use*/
 } mavlink_openhd_stats_monitor_mode_wifi_link_t;
 
-#define MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN 49
-#define MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_MIN_LEN 49
-#define MAVLINK_MSG_ID_1212_LEN 49
-#define MAVLINK_MSG_ID_1212_MIN_LEN 49
+#define MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN 35
+#define MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_MIN_LEN 35
+#define MAVLINK_MSG_ID_1211_LEN 35
+#define MAVLINK_MSG_ID_1211_MIN_LEN 35
 
-#define MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_CRC 207
-#define MAVLINK_MSG_ID_1212_CRC 207
+#define MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_CRC 160
+#define MAVLINK_MSG_ID_1211_CRC 160
 
 
 
 #if MAVLINK_COMMAND_24BIT
 #define MAVLINK_MESSAGE_INFO_OPENHD_STATS_MONITOR_MODE_WIFI_LINK { \
-    1212, \
+    1211, \
     "OPENHD_STATS_MONITOR_MODE_WIFI_LINK", \
     13, \
-    {  { "curr_tx_pps", NULL, MAVLINK_TYPE_INT16_T, 0, 40, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_pps) }, \
-         { "curr_rx_pps", NULL, MAVLINK_TYPE_INT16_T, 0, 42, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_rx_pps) }, \
-         { "curr_tx_bps", NULL, MAVLINK_TYPE_INT32_T, 0, 24, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_bps) }, \
-         { "curr_rx_bps", NULL, MAVLINK_TYPE_INT32_T, 0, 28, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_rx_bps) }, \
-         { "curr_rx_packet_loss_perc", NULL, MAVLINK_TYPE_INT16_T, 0, 44, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_rx_packet_loss_perc) }, \
-         { "count_tx_inj_error_hint", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, count_tx_inj_error_hint) }, \
-         { "count_tx_dropped_packets", NULL, MAVLINK_TYPE_UINT64_T, 0, 8, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, count_tx_dropped_packets) }, \
-         { "curr_tx_card_idx", NULL, MAVLINK_TYPE_UINT8_T, 0, 46, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_card_idx) }, \
-         { "curr_tx_mcs_index", NULL, MAVLINK_TYPE_UINT8_T, 0, 47, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_mcs_index) }, \
-         { "dummy0", NULL, MAVLINK_TYPE_INT8_T, 0, 48, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy0) }, \
-         { "dummy1", NULL, MAVLINK_TYPE_INT32_T, 0, 32, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy1) }, \
-         { "dummy2", NULL, MAVLINK_TYPE_INT32_T, 0, 36, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy2) }, \
-         { "dummy3", NULL, MAVLINK_TYPE_UINT64_T, 0, 16, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy3) }, \
+    {  { "curr_tx_pps", NULL, MAVLINK_TYPE_INT16_T, 0, 24, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_pps) }, \
+         { "curr_rx_pps", NULL, MAVLINK_TYPE_INT16_T, 0, 26, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_rx_pps) }, \
+         { "curr_tx_bps", NULL, MAVLINK_TYPE_INT32_T, 0, 0, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_bps) }, \
+         { "curr_rx_bps", NULL, MAVLINK_TYPE_INT32_T, 0, 4, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_rx_bps) }, \
+         { "curr_rx_packet_loss_perc", NULL, MAVLINK_TYPE_INT16_T, 0, 28, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_rx_packet_loss_perc) }, \
+         { "count_tx_inj_error_hint", NULL, MAVLINK_TYPE_UINT32_T, 0, 8, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, count_tx_inj_error_hint) }, \
+         { "count_tx_dropped_packets", NULL, MAVLINK_TYPE_UINT32_T, 0, 12, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, count_tx_dropped_packets) }, \
+         { "curr_tx_card_idx", NULL, MAVLINK_TYPE_UINT8_T, 0, 32, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_card_idx) }, \
+         { "curr_tx_mcs_index", NULL, MAVLINK_TYPE_UINT8_T, 0, 33, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_mcs_index) }, \
+         { "dummy0", NULL, MAVLINK_TYPE_INT8_T, 0, 34, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy0) }, \
+         { "dummy1", NULL, MAVLINK_TYPE_INT16_T, 0, 30, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy1) }, \
+         { "dummy2", NULL, MAVLINK_TYPE_INT32_T, 0, 16, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy2) }, \
+         { "dummy3", NULL, MAVLINK_TYPE_UINT32_T, 0, 20, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy3) }, \
          } \
 }
 #else
 #define MAVLINK_MESSAGE_INFO_OPENHD_STATS_MONITOR_MODE_WIFI_LINK { \
     "OPENHD_STATS_MONITOR_MODE_WIFI_LINK", \
     13, \
-    {  { "curr_tx_pps", NULL, MAVLINK_TYPE_INT16_T, 0, 40, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_pps) }, \
-         { "curr_rx_pps", NULL, MAVLINK_TYPE_INT16_T, 0, 42, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_rx_pps) }, \
-         { "curr_tx_bps", NULL, MAVLINK_TYPE_INT32_T, 0, 24, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_bps) }, \
-         { "curr_rx_bps", NULL, MAVLINK_TYPE_INT32_T, 0, 28, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_rx_bps) }, \
-         { "curr_rx_packet_loss_perc", NULL, MAVLINK_TYPE_INT16_T, 0, 44, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_rx_packet_loss_perc) }, \
-         { "count_tx_inj_error_hint", NULL, MAVLINK_TYPE_UINT64_T, 0, 0, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, count_tx_inj_error_hint) }, \
-         { "count_tx_dropped_packets", NULL, MAVLINK_TYPE_UINT64_T, 0, 8, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, count_tx_dropped_packets) }, \
-         { "curr_tx_card_idx", NULL, MAVLINK_TYPE_UINT8_T, 0, 46, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_card_idx) }, \
-         { "curr_tx_mcs_index", NULL, MAVLINK_TYPE_UINT8_T, 0, 47, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_mcs_index) }, \
-         { "dummy0", NULL, MAVLINK_TYPE_INT8_T, 0, 48, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy0) }, \
-         { "dummy1", NULL, MAVLINK_TYPE_INT32_T, 0, 32, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy1) }, \
-         { "dummy2", NULL, MAVLINK_TYPE_INT32_T, 0, 36, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy2) }, \
-         { "dummy3", NULL, MAVLINK_TYPE_UINT64_T, 0, 16, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy3) }, \
+    {  { "curr_tx_pps", NULL, MAVLINK_TYPE_INT16_T, 0, 24, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_pps) }, \
+         { "curr_rx_pps", NULL, MAVLINK_TYPE_INT16_T, 0, 26, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_rx_pps) }, \
+         { "curr_tx_bps", NULL, MAVLINK_TYPE_INT32_T, 0, 0, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_bps) }, \
+         { "curr_rx_bps", NULL, MAVLINK_TYPE_INT32_T, 0, 4, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_rx_bps) }, \
+         { "curr_rx_packet_loss_perc", NULL, MAVLINK_TYPE_INT16_T, 0, 28, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_rx_packet_loss_perc) }, \
+         { "count_tx_inj_error_hint", NULL, MAVLINK_TYPE_UINT32_T, 0, 8, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, count_tx_inj_error_hint) }, \
+         { "count_tx_dropped_packets", NULL, MAVLINK_TYPE_UINT32_T, 0, 12, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, count_tx_dropped_packets) }, \
+         { "curr_tx_card_idx", NULL, MAVLINK_TYPE_UINT8_T, 0, 32, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_card_idx) }, \
+         { "curr_tx_mcs_index", NULL, MAVLINK_TYPE_UINT8_T, 0, 33, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_mcs_index) }, \
+         { "dummy0", NULL, MAVLINK_TYPE_INT8_T, 0, 34, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy0) }, \
+         { "dummy1", NULL, MAVLINK_TYPE_INT16_T, 0, 30, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy1) }, \
+         { "dummy2", NULL, MAVLINK_TYPE_INT32_T, 0, 16, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy2) }, \
+         { "dummy3", NULL, MAVLINK_TYPE_UINT32_T, 0, 20, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy3) }, \
          } \
 }
 #endif
@@ -93,37 +93,37 @@ typedef struct __mavlink_openhd_stats_monitor_mode_wifi_link_t {
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
-                               int16_t curr_tx_pps, int16_t curr_rx_pps, int32_t curr_tx_bps, int32_t curr_rx_bps, int16_t curr_rx_packet_loss_perc, uint64_t count_tx_inj_error_hint, uint64_t count_tx_dropped_packets, uint8_t curr_tx_card_idx, uint8_t curr_tx_mcs_index, int8_t dummy0, int32_t dummy1, int32_t dummy2, uint64_t dummy3)
+                               int16_t curr_tx_pps, int16_t curr_rx_pps, int32_t curr_tx_bps, int32_t curr_rx_bps, int16_t curr_rx_packet_loss_perc, uint32_t count_tx_inj_error_hint, uint32_t count_tx_dropped_packets, uint8_t curr_tx_card_idx, uint8_t curr_tx_mcs_index, int8_t dummy0, int16_t dummy1, int32_t dummy2, uint32_t dummy3)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN];
-    _mav_put_uint64_t(buf, 0, count_tx_inj_error_hint);
-    _mav_put_uint64_t(buf, 8, count_tx_dropped_packets);
-    _mav_put_uint64_t(buf, 16, dummy3);
-    _mav_put_int32_t(buf, 24, curr_tx_bps);
-    _mav_put_int32_t(buf, 28, curr_rx_bps);
-    _mav_put_int32_t(buf, 32, dummy1);
-    _mav_put_int32_t(buf, 36, dummy2);
-    _mav_put_int16_t(buf, 40, curr_tx_pps);
-    _mav_put_int16_t(buf, 42, curr_rx_pps);
-    _mav_put_int16_t(buf, 44, curr_rx_packet_loss_perc);
-    _mav_put_uint8_t(buf, 46, curr_tx_card_idx);
-    _mav_put_uint8_t(buf, 47, curr_tx_mcs_index);
-    _mav_put_int8_t(buf, 48, dummy0);
+    _mav_put_int32_t(buf, 0, curr_tx_bps);
+    _mav_put_int32_t(buf, 4, curr_rx_bps);
+    _mav_put_uint32_t(buf, 8, count_tx_inj_error_hint);
+    _mav_put_uint32_t(buf, 12, count_tx_dropped_packets);
+    _mav_put_int32_t(buf, 16, dummy2);
+    _mav_put_uint32_t(buf, 20, dummy3);
+    _mav_put_int16_t(buf, 24, curr_tx_pps);
+    _mav_put_int16_t(buf, 26, curr_rx_pps);
+    _mav_put_int16_t(buf, 28, curr_rx_packet_loss_perc);
+    _mav_put_int16_t(buf, 30, dummy1);
+    _mav_put_uint8_t(buf, 32, curr_tx_card_idx);
+    _mav_put_uint8_t(buf, 33, curr_tx_mcs_index);
+    _mav_put_int8_t(buf, 34, dummy0);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN);
 #else
     mavlink_openhd_stats_monitor_mode_wifi_link_t packet;
-    packet.count_tx_inj_error_hint = count_tx_inj_error_hint;
-    packet.count_tx_dropped_packets = count_tx_dropped_packets;
-    packet.dummy3 = dummy3;
     packet.curr_tx_bps = curr_tx_bps;
     packet.curr_rx_bps = curr_rx_bps;
-    packet.dummy1 = dummy1;
+    packet.count_tx_inj_error_hint = count_tx_inj_error_hint;
+    packet.count_tx_dropped_packets = count_tx_dropped_packets;
     packet.dummy2 = dummy2;
+    packet.dummy3 = dummy3;
     packet.curr_tx_pps = curr_tx_pps;
     packet.curr_rx_pps = curr_rx_pps;
     packet.curr_rx_packet_loss_perc = curr_rx_packet_loss_perc;
+    packet.dummy1 = dummy1;
     packet.curr_tx_card_idx = curr_tx_card_idx;
     packet.curr_tx_mcs_index = curr_tx_mcs_index;
     packet.dummy0 = dummy0;
@@ -158,37 +158,37 @@ static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_pack(uint
  */
 static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
-                                   int16_t curr_tx_pps,int16_t curr_rx_pps,int32_t curr_tx_bps,int32_t curr_rx_bps,int16_t curr_rx_packet_loss_perc,uint64_t count_tx_inj_error_hint,uint64_t count_tx_dropped_packets,uint8_t curr_tx_card_idx,uint8_t curr_tx_mcs_index,int8_t dummy0,int32_t dummy1,int32_t dummy2,uint64_t dummy3)
+                                   int16_t curr_tx_pps,int16_t curr_rx_pps,int32_t curr_tx_bps,int32_t curr_rx_bps,int16_t curr_rx_packet_loss_perc,uint32_t count_tx_inj_error_hint,uint32_t count_tx_dropped_packets,uint8_t curr_tx_card_idx,uint8_t curr_tx_mcs_index,int8_t dummy0,int16_t dummy1,int32_t dummy2,uint32_t dummy3)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN];
-    _mav_put_uint64_t(buf, 0, count_tx_inj_error_hint);
-    _mav_put_uint64_t(buf, 8, count_tx_dropped_packets);
-    _mav_put_uint64_t(buf, 16, dummy3);
-    _mav_put_int32_t(buf, 24, curr_tx_bps);
-    _mav_put_int32_t(buf, 28, curr_rx_bps);
-    _mav_put_int32_t(buf, 32, dummy1);
-    _mav_put_int32_t(buf, 36, dummy2);
-    _mav_put_int16_t(buf, 40, curr_tx_pps);
-    _mav_put_int16_t(buf, 42, curr_rx_pps);
-    _mav_put_int16_t(buf, 44, curr_rx_packet_loss_perc);
-    _mav_put_uint8_t(buf, 46, curr_tx_card_idx);
-    _mav_put_uint8_t(buf, 47, curr_tx_mcs_index);
-    _mav_put_int8_t(buf, 48, dummy0);
+    _mav_put_int32_t(buf, 0, curr_tx_bps);
+    _mav_put_int32_t(buf, 4, curr_rx_bps);
+    _mav_put_uint32_t(buf, 8, count_tx_inj_error_hint);
+    _mav_put_uint32_t(buf, 12, count_tx_dropped_packets);
+    _mav_put_int32_t(buf, 16, dummy2);
+    _mav_put_uint32_t(buf, 20, dummy3);
+    _mav_put_int16_t(buf, 24, curr_tx_pps);
+    _mav_put_int16_t(buf, 26, curr_rx_pps);
+    _mav_put_int16_t(buf, 28, curr_rx_packet_loss_perc);
+    _mav_put_int16_t(buf, 30, dummy1);
+    _mav_put_uint8_t(buf, 32, curr_tx_card_idx);
+    _mav_put_uint8_t(buf, 33, curr_tx_mcs_index);
+    _mav_put_int8_t(buf, 34, dummy0);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN);
 #else
     mavlink_openhd_stats_monitor_mode_wifi_link_t packet;
-    packet.count_tx_inj_error_hint = count_tx_inj_error_hint;
-    packet.count_tx_dropped_packets = count_tx_dropped_packets;
-    packet.dummy3 = dummy3;
     packet.curr_tx_bps = curr_tx_bps;
     packet.curr_rx_bps = curr_rx_bps;
-    packet.dummy1 = dummy1;
+    packet.count_tx_inj_error_hint = count_tx_inj_error_hint;
+    packet.count_tx_dropped_packets = count_tx_dropped_packets;
     packet.dummy2 = dummy2;
+    packet.dummy3 = dummy3;
     packet.curr_tx_pps = curr_tx_pps;
     packet.curr_rx_pps = curr_rx_pps;
     packet.curr_rx_packet_loss_perc = curr_rx_packet_loss_perc;
+    packet.dummy1 = dummy1;
     packet.curr_tx_card_idx = curr_tx_card_idx;
     packet.curr_tx_mcs_index = curr_tx_mcs_index;
     packet.dummy0 = dummy0;
@@ -247,37 +247,37 @@ static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_encode_ch
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
-static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_link_send(mavlink_channel_t chan, int16_t curr_tx_pps, int16_t curr_rx_pps, int32_t curr_tx_bps, int32_t curr_rx_bps, int16_t curr_rx_packet_loss_perc, uint64_t count_tx_inj_error_hint, uint64_t count_tx_dropped_packets, uint8_t curr_tx_card_idx, uint8_t curr_tx_mcs_index, int8_t dummy0, int32_t dummy1, int32_t dummy2, uint64_t dummy3)
+static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_link_send(mavlink_channel_t chan, int16_t curr_tx_pps, int16_t curr_rx_pps, int32_t curr_tx_bps, int32_t curr_rx_bps, int16_t curr_rx_packet_loss_perc, uint32_t count_tx_inj_error_hint, uint32_t count_tx_dropped_packets, uint8_t curr_tx_card_idx, uint8_t curr_tx_mcs_index, int8_t dummy0, int16_t dummy1, int32_t dummy2, uint32_t dummy3)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN];
-    _mav_put_uint64_t(buf, 0, count_tx_inj_error_hint);
-    _mav_put_uint64_t(buf, 8, count_tx_dropped_packets);
-    _mav_put_uint64_t(buf, 16, dummy3);
-    _mav_put_int32_t(buf, 24, curr_tx_bps);
-    _mav_put_int32_t(buf, 28, curr_rx_bps);
-    _mav_put_int32_t(buf, 32, dummy1);
-    _mav_put_int32_t(buf, 36, dummy2);
-    _mav_put_int16_t(buf, 40, curr_tx_pps);
-    _mav_put_int16_t(buf, 42, curr_rx_pps);
-    _mav_put_int16_t(buf, 44, curr_rx_packet_loss_perc);
-    _mav_put_uint8_t(buf, 46, curr_tx_card_idx);
-    _mav_put_uint8_t(buf, 47, curr_tx_mcs_index);
-    _mav_put_int8_t(buf, 48, dummy0);
+    _mav_put_int32_t(buf, 0, curr_tx_bps);
+    _mav_put_int32_t(buf, 4, curr_rx_bps);
+    _mav_put_uint32_t(buf, 8, count_tx_inj_error_hint);
+    _mav_put_uint32_t(buf, 12, count_tx_dropped_packets);
+    _mav_put_int32_t(buf, 16, dummy2);
+    _mav_put_uint32_t(buf, 20, dummy3);
+    _mav_put_int16_t(buf, 24, curr_tx_pps);
+    _mav_put_int16_t(buf, 26, curr_rx_pps);
+    _mav_put_int16_t(buf, 28, curr_rx_packet_loss_perc);
+    _mav_put_int16_t(buf, 30, dummy1);
+    _mav_put_uint8_t(buf, 32, curr_tx_card_idx);
+    _mav_put_uint8_t(buf, 33, curr_tx_mcs_index);
+    _mav_put_int8_t(buf, 34, dummy0);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK, buf, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_MIN_LEN, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_CRC);
 #else
     mavlink_openhd_stats_monitor_mode_wifi_link_t packet;
-    packet.count_tx_inj_error_hint = count_tx_inj_error_hint;
-    packet.count_tx_dropped_packets = count_tx_dropped_packets;
-    packet.dummy3 = dummy3;
     packet.curr_tx_bps = curr_tx_bps;
     packet.curr_rx_bps = curr_rx_bps;
-    packet.dummy1 = dummy1;
+    packet.count_tx_inj_error_hint = count_tx_inj_error_hint;
+    packet.count_tx_dropped_packets = count_tx_dropped_packets;
     packet.dummy2 = dummy2;
+    packet.dummy3 = dummy3;
     packet.curr_tx_pps = curr_tx_pps;
     packet.curr_rx_pps = curr_rx_pps;
     packet.curr_rx_packet_loss_perc = curr_rx_packet_loss_perc;
+    packet.dummy1 = dummy1;
     packet.curr_tx_card_idx = curr_tx_card_idx;
     packet.curr_tx_mcs_index = curr_tx_mcs_index;
     packet.dummy0 = dummy0;
@@ -308,37 +308,37 @@ static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_link_send_struct(m
   is usually the receive buffer for the channel, and allows a reply to an
   incoming message with minimum stack space usage.
  */
-static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_link_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  int16_t curr_tx_pps, int16_t curr_rx_pps, int32_t curr_tx_bps, int32_t curr_rx_bps, int16_t curr_rx_packet_loss_perc, uint64_t count_tx_inj_error_hint, uint64_t count_tx_dropped_packets, uint8_t curr_tx_card_idx, uint8_t curr_tx_mcs_index, int8_t dummy0, int32_t dummy1, int32_t dummy2, uint64_t dummy3)
+static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_link_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  int16_t curr_tx_pps, int16_t curr_rx_pps, int32_t curr_tx_bps, int32_t curr_rx_bps, int16_t curr_rx_packet_loss_perc, uint32_t count_tx_inj_error_hint, uint32_t count_tx_dropped_packets, uint8_t curr_tx_card_idx, uint8_t curr_tx_mcs_index, int8_t dummy0, int16_t dummy1, int32_t dummy2, uint32_t dummy3)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char *buf = (char *)msgbuf;
-    _mav_put_uint64_t(buf, 0, count_tx_inj_error_hint);
-    _mav_put_uint64_t(buf, 8, count_tx_dropped_packets);
-    _mav_put_uint64_t(buf, 16, dummy3);
-    _mav_put_int32_t(buf, 24, curr_tx_bps);
-    _mav_put_int32_t(buf, 28, curr_rx_bps);
-    _mav_put_int32_t(buf, 32, dummy1);
-    _mav_put_int32_t(buf, 36, dummy2);
-    _mav_put_int16_t(buf, 40, curr_tx_pps);
-    _mav_put_int16_t(buf, 42, curr_rx_pps);
-    _mav_put_int16_t(buf, 44, curr_rx_packet_loss_perc);
-    _mav_put_uint8_t(buf, 46, curr_tx_card_idx);
-    _mav_put_uint8_t(buf, 47, curr_tx_mcs_index);
-    _mav_put_int8_t(buf, 48, dummy0);
+    _mav_put_int32_t(buf, 0, curr_tx_bps);
+    _mav_put_int32_t(buf, 4, curr_rx_bps);
+    _mav_put_uint32_t(buf, 8, count_tx_inj_error_hint);
+    _mav_put_uint32_t(buf, 12, count_tx_dropped_packets);
+    _mav_put_int32_t(buf, 16, dummy2);
+    _mav_put_uint32_t(buf, 20, dummy3);
+    _mav_put_int16_t(buf, 24, curr_tx_pps);
+    _mav_put_int16_t(buf, 26, curr_rx_pps);
+    _mav_put_int16_t(buf, 28, curr_rx_packet_loss_perc);
+    _mav_put_int16_t(buf, 30, dummy1);
+    _mav_put_uint8_t(buf, 32, curr_tx_card_idx);
+    _mav_put_uint8_t(buf, 33, curr_tx_mcs_index);
+    _mav_put_int8_t(buf, 34, dummy0);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK, buf, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_MIN_LEN, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_CRC);
 #else
     mavlink_openhd_stats_monitor_mode_wifi_link_t *packet = (mavlink_openhd_stats_monitor_mode_wifi_link_t *)msgbuf;
-    packet->count_tx_inj_error_hint = count_tx_inj_error_hint;
-    packet->count_tx_dropped_packets = count_tx_dropped_packets;
-    packet->dummy3 = dummy3;
     packet->curr_tx_bps = curr_tx_bps;
     packet->curr_rx_bps = curr_rx_bps;
-    packet->dummy1 = dummy1;
+    packet->count_tx_inj_error_hint = count_tx_inj_error_hint;
+    packet->count_tx_dropped_packets = count_tx_dropped_packets;
     packet->dummy2 = dummy2;
+    packet->dummy3 = dummy3;
     packet->curr_tx_pps = curr_tx_pps;
     packet->curr_rx_pps = curr_rx_pps;
     packet->curr_rx_packet_loss_perc = curr_rx_packet_loss_perc;
+    packet->dummy1 = dummy1;
     packet->curr_tx_card_idx = curr_tx_card_idx;
     packet->curr_tx_mcs_index = curr_tx_mcs_index;
     packet->dummy0 = dummy0;
@@ -360,7 +360,7 @@ static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_link_send_buf(mavl
  */
 static inline int16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_tx_pps(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int16_t(msg,  40);
+    return _MAV_RETURN_int16_t(msg,  24);
 }
 
 /**
@@ -370,7 +370,7 @@ static inline int16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_t
  */
 static inline int16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_rx_pps(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int16_t(msg,  42);
+    return _MAV_RETURN_int16_t(msg,  26);
 }
 
 /**
@@ -380,7 +380,7 @@ static inline int16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_r
  */
 static inline int32_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_tx_bps(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int32_t(msg,  24);
+    return _MAV_RETURN_int32_t(msg,  0);
 }
 
 /**
@@ -390,7 +390,7 @@ static inline int32_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_t
  */
 static inline int32_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_rx_bps(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int32_t(msg,  28);
+    return _MAV_RETURN_int32_t(msg,  4);
 }
 
 /**
@@ -400,7 +400,7 @@ static inline int32_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_r
  */
 static inline int16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_rx_packet_loss_perc(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int16_t(msg,  44);
+    return _MAV_RETURN_int16_t(msg,  28);
 }
 
 /**
@@ -408,9 +408,9 @@ static inline int16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_r
  *
  * @return  count_tx_inj_error_hint
  */
-static inline uint64_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_count_tx_inj_error_hint(const mavlink_message_t* msg)
+static inline uint32_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_count_tx_inj_error_hint(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint64_t(msg,  0);
+    return _MAV_RETURN_uint32_t(msg,  8);
 }
 
 /**
@@ -418,9 +418,9 @@ static inline uint64_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_count
  *
  * @return  count_tx_dropped_packets
  */
-static inline uint64_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_count_tx_dropped_packets(const mavlink_message_t* msg)
+static inline uint32_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_count_tx_dropped_packets(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint64_t(msg,  8);
+    return _MAV_RETURN_uint32_t(msg,  12);
 }
 
 /**
@@ -430,7 +430,7 @@ static inline uint64_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_count
  */
 static inline uint8_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_tx_card_idx(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  46);
+    return _MAV_RETURN_uint8_t(msg,  32);
 }
 
 /**
@@ -440,7 +440,7 @@ static inline uint8_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_t
  */
 static inline uint8_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_tx_mcs_index(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  47);
+    return _MAV_RETURN_uint8_t(msg,  33);
 }
 
 /**
@@ -450,7 +450,7 @@ static inline uint8_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_t
  */
 static inline int8_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_dummy0(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int8_t(msg,  48);
+    return _MAV_RETURN_int8_t(msg,  34);
 }
 
 /**
@@ -458,9 +458,9 @@ static inline int8_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_dummy0(
  *
  * @return  for future use
  */
-static inline int32_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_dummy1(const mavlink_message_t* msg)
+static inline int16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_dummy1(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int32_t(msg,  32);
+    return _MAV_RETURN_int16_t(msg,  30);
 }
 
 /**
@@ -470,7 +470,7 @@ static inline int32_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_dummy1
  */
 static inline int32_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_dummy2(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int32_t(msg,  36);
+    return _MAV_RETURN_int32_t(msg,  16);
 }
 
 /**
@@ -478,9 +478,9 @@ static inline int32_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_dummy2
  *
  * @return  for future use
  */
-static inline uint64_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_dummy3(const mavlink_message_t* msg)
+static inline uint32_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_dummy3(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint64_t(msg,  16);
+    return _MAV_RETURN_uint32_t(msg,  20);
 }
 
 /**
@@ -492,16 +492,16 @@ static inline uint64_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_dummy
 static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_link_decode(const mavlink_message_t* msg, mavlink_openhd_stats_monitor_mode_wifi_link_t* openhd_stats_monitor_mode_wifi_link)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    openhd_stats_monitor_mode_wifi_link->count_tx_inj_error_hint = mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_count_tx_inj_error_hint(msg);
-    openhd_stats_monitor_mode_wifi_link->count_tx_dropped_packets = mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_count_tx_dropped_packets(msg);
-    openhd_stats_monitor_mode_wifi_link->dummy3 = mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_dummy3(msg);
     openhd_stats_monitor_mode_wifi_link->curr_tx_bps = mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_tx_bps(msg);
     openhd_stats_monitor_mode_wifi_link->curr_rx_bps = mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_rx_bps(msg);
-    openhd_stats_monitor_mode_wifi_link->dummy1 = mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_dummy1(msg);
+    openhd_stats_monitor_mode_wifi_link->count_tx_inj_error_hint = mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_count_tx_inj_error_hint(msg);
+    openhd_stats_monitor_mode_wifi_link->count_tx_dropped_packets = mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_count_tx_dropped_packets(msg);
     openhd_stats_monitor_mode_wifi_link->dummy2 = mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_dummy2(msg);
+    openhd_stats_monitor_mode_wifi_link->dummy3 = mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_dummy3(msg);
     openhd_stats_monitor_mode_wifi_link->curr_tx_pps = mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_tx_pps(msg);
     openhd_stats_monitor_mode_wifi_link->curr_rx_pps = mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_rx_pps(msg);
     openhd_stats_monitor_mode_wifi_link->curr_rx_packet_loss_perc = mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_rx_packet_loss_perc(msg);
+    openhd_stats_monitor_mode_wifi_link->dummy1 = mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_dummy1(msg);
     openhd_stats_monitor_mode_wifi_link->curr_tx_card_idx = mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_tx_card_idx(msg);
     openhd_stats_monitor_mode_wifi_link->curr_tx_mcs_index = mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_tx_mcs_index(msg);
     openhd_stats_monitor_mode_wifi_link->dummy0 = mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_dummy0(msg);
