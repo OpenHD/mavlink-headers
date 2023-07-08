@@ -7,6 +7,10 @@ https://github.com/OpenHD/mavlink
 
 using the "openhd" flavour.
 
+Command used:
+python3 -m pymavlink.tools.mavgen --lang=C --wire-protocol=2.0 --output=generated/include/mavlink/v2.0 message_definitions/v1.0/openhd.xml
+and then copy over the mavlink folder under generated
+
 # Explanation why:
 
 Even though this requires some manual maintenance (REMEMBER: If you do any changes to our custom mavlink headers in the main fork, you have to then remember to update this repo ) we decided to use this workflow since the "compilation" of mavlink (aka compiling .xml into .h) just creates annoying issues
