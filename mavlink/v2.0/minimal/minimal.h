@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_MINIMAL.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_MINIMAL_XML_HASH -2883110998553586832
+#define MAVLINK_MINIMAL_XML_HASH 7619787233603593862
 
 #ifdef __cplusplus
 extern "C" {
@@ -92,7 +92,7 @@ typedef enum MAV_TYPE
    MAV_TYPE_VTOL_TILTROTOR=21, /* Tiltrotor VTOL. Fuselage and wings stay (nominally) horizontal in all flight phases. It able to tilt (some) rotors to provide thrust in cruise flight. | */
    MAV_TYPE_VTOL_FIXEDROTOR=22, /* VTOL with separate fixed rotors for hover and cruise flight. Fuselage and wings stay (nominally) horizontal in all flight phases. | */
    MAV_TYPE_VTOL_TAILSITTER=23, /* Tailsitter VTOL. Fuselage and wings orientation changes depending on flight phase: vertical for hover, horizontal for cruise. Use more specific VTOL MAV_TYPE_VTOL_DUOROTOR or MAV_TYPE_VTOL_QUADROTOR if appropriate. | */
-   MAV_TYPE_VTOL_RESERVED4=24, /* VTOL reserved 4 | */
+   MAV_TYPE_VTOL_TILTWING=24, /* Tiltwing VTOL. Fuselage stays horizontal in all flight phases. The whole wing, along with any attached engine, can tilt between vertical and horizontal mode. | */
    MAV_TYPE_VTOL_RESERVED5=25, /* VTOL reserved 5 | */
    MAV_TYPE_GIMBAL=26, /* Gimbal | */
    MAV_TYPE_ADSB=27, /* ADSB system | */
@@ -111,7 +111,8 @@ typedef enum MAV_TYPE
    MAV_TYPE_IMU=40, /* IMU | */
    MAV_TYPE_GPS=41, /* GPS | */
    MAV_TYPE_WINCH=42, /* Winch | */
-   MAV_TYPE_ENUM_END=43, /*  | */
+   MAV_TYPE_GENERIC_MULTIROTOR=43, /* Generic multirotor that does not fit into a specific type or whose type is unknown | */
+   MAV_TYPE_ENUM_END=44, /*  | */
 } MAV_TYPE;
 #endif
 
@@ -159,10 +160,10 @@ typedef enum MAV_STATE
    MAV_STATE_CALIBRATING=2, /* System is calibrating and not flight-ready. | */
    MAV_STATE_STANDBY=3, /* System is grounded and on standby. It can be launched any time. | */
    MAV_STATE_ACTIVE=4, /* System is active and might be already airborne. Motors are engaged. | */
-   MAV_STATE_CRITICAL=5, /* System is in a non-normal flight mode. It can however still navigate. | */
-   MAV_STATE_EMERGENCY=6, /* System is in a non-normal flight mode. It lost control over parts or over the whole airframe. It is in mayday and going down. | */
+   MAV_STATE_CRITICAL=5, /* System is in a non-normal flight mode (failsafe). It can however still navigate. | */
+   MAV_STATE_EMERGENCY=6, /* System is in a non-normal flight mode (failsafe). It lost control over parts or over the whole airframe. It is in mayday and going down. | */
    MAV_STATE_POWEROFF=7, /* System just initialized its power-down sequence, will shut down now. | */
-   MAV_STATE_FLIGHT_TERMINATION=8, /* System is terminating itself. | */
+   MAV_STATE_FLIGHT_TERMINATION=8, /* System is terminating itself (failsafe or commanded). | */
    MAV_STATE_ENUM_END=9, /*  | */
 } MAV_STATE;
 #endif
@@ -279,6 +280,7 @@ typedef enum MAV_COMPONENT
    MAV_COMP_ID_QX1_GIMBAL=159, /* Gimbal ID for QX1. | */
    MAV_COMP_ID_FLARM=160, /* FLARM collision alert component. | */
    MAV_COMP_ID_PARACHUTE=161, /* Parachute component. | */
+   MAV_COMP_ID_WINCH=169, /* Winch component. | */
    MAV_COMP_ID_GIMBAL2=171, /* Gimbal #2. | */
    MAV_COMP_ID_GIMBAL3=172, /* Gimbal #3. | */
    MAV_COMP_ID_GIMBAL4=173, /* Gimbal #4 | */
@@ -307,7 +309,7 @@ typedef enum MAV_COMPONENT
    MAV_COMP_ID_UDP_BRIDGE=240, /* Component to bridge MAVLink to UDP (i.e. from a UART). | */
    MAV_COMP_ID_UART_BRIDGE=241, /* Component to bridge to UART (i.e. from UDP). | */
    MAV_COMP_ID_TUNNEL_NODE=242, /* Component handling TUNNEL messages (e.g. vendor specific GUI of a component). | */
-   MAV_COMP_ID_SYSTEM_CONTROL=250, /* Component for handling system messages (e.g. to ARM, takeoff, etc.). | */
+   MAV_COMP_ID_SYSTEM_CONTROL=250, /* Deprecated, don't use. Component for handling system messages (e.g. to ARM, takeoff, etc.). | */
    MAV_COMPONENT_ENUM_END=251, /*  | */
 } MAV_COMPONENT;
 #endif
