@@ -20,16 +20,18 @@ typedef struct __mavlink_openhd_stats_monitor_mode_wifi_link_t {
  uint8_t curr_tx_card_idx; /*<  multi rx - idx of card currently selected for TX*/
  uint8_t curr_tx_channel_w_mhz; /*<  curr tx channel width used when injecting packets (20mhz/40Mhz)*/
  uint8_t curr_tx_mcs_index; /*<  curr tx mcs index used when injecting packets*/
+ int8_t tx_passive_mode_is_enabled; /*<  OpenHD, act as a passive listener (NO TX EVER), 0=disabled, 1=enabled*/
+ uint8_t curr_n_rate_adjustments; /*<  If the TX cannot keep up (at a given mcs), openhd reduces the bitrate in 1MBit/s increments*/
  int8_t dummy0; /*<  for future use*/
 } mavlink_openhd_stats_monitor_mode_wifi_link_t;
 
-#define MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN 40
-#define MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_MIN_LEN 40
-#define MAVLINK_MSG_ID_1211_LEN 40
-#define MAVLINK_MSG_ID_1211_MIN_LEN 40
+#define MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN 42
+#define MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_MIN_LEN 42
+#define MAVLINK_MSG_ID_1211_LEN 42
+#define MAVLINK_MSG_ID_1211_MIN_LEN 42
 
-#define MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_CRC 55
-#define MAVLINK_MSG_ID_1211_CRC 55
+#define MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_CRC 5
+#define MAVLINK_MSG_ID_1211_CRC 5
 
 
 
@@ -37,7 +39,7 @@ typedef struct __mavlink_openhd_stats_monitor_mode_wifi_link_t {
 #define MAVLINK_MESSAGE_INFO_OPENHD_STATS_MONITOR_MODE_WIFI_LINK { \
     1211, \
     "OPENHD_STATS_MONITOR_MODE_WIFI_LINK", \
-    16, \
+    18, \
     {  { "curr_tx_pps", NULL, MAVLINK_TYPE_INT16_T, 0, 24, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_pps) }, \
          { "curr_rx_pps", NULL, MAVLINK_TYPE_INT16_T, 0, 26, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_rx_pps) }, \
          { "curr_tx_bps", NULL, MAVLINK_TYPE_INT32_T, 0, 0, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_bps) }, \
@@ -50,7 +52,9 @@ typedef struct __mavlink_openhd_stats_monitor_mode_wifi_link_t {
          { "curr_tx_channel_mhz", NULL, MAVLINK_TYPE_UINT16_T, 0, 32, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_channel_mhz) }, \
          { "curr_tx_channel_w_mhz", NULL, MAVLINK_TYPE_UINT8_T, 0, 37, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_channel_w_mhz) }, \
          { "curr_tx_mcs_index", NULL, MAVLINK_TYPE_UINT8_T, 0, 38, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_mcs_index) }, \
-         { "dummy0", NULL, MAVLINK_TYPE_INT8_T, 0, 39, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy0) }, \
+         { "tx_passive_mode_is_enabled", NULL, MAVLINK_TYPE_INT8_T, 0, 39, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, tx_passive_mode_is_enabled) }, \
+         { "curr_n_rate_adjustments", NULL, MAVLINK_TYPE_UINT8_T, 0, 40, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_n_rate_adjustments) }, \
+         { "dummy0", NULL, MAVLINK_TYPE_INT8_T, 0, 41, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy0) }, \
          { "dummy1", NULL, MAVLINK_TYPE_INT16_T, 0, 34, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy1) }, \
          { "dummy2", NULL, MAVLINK_TYPE_INT32_T, 0, 16, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy2) }, \
          { "dummy3", NULL, MAVLINK_TYPE_UINT32_T, 0, 20, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy3) }, \
@@ -59,7 +63,7 @@ typedef struct __mavlink_openhd_stats_monitor_mode_wifi_link_t {
 #else
 #define MAVLINK_MESSAGE_INFO_OPENHD_STATS_MONITOR_MODE_WIFI_LINK { \
     "OPENHD_STATS_MONITOR_MODE_WIFI_LINK", \
-    16, \
+    18, \
     {  { "curr_tx_pps", NULL, MAVLINK_TYPE_INT16_T, 0, 24, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_pps) }, \
          { "curr_rx_pps", NULL, MAVLINK_TYPE_INT16_T, 0, 26, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_rx_pps) }, \
          { "curr_tx_bps", NULL, MAVLINK_TYPE_INT32_T, 0, 0, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_bps) }, \
@@ -72,7 +76,9 @@ typedef struct __mavlink_openhd_stats_monitor_mode_wifi_link_t {
          { "curr_tx_channel_mhz", NULL, MAVLINK_TYPE_UINT16_T, 0, 32, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_channel_mhz) }, \
          { "curr_tx_channel_w_mhz", NULL, MAVLINK_TYPE_UINT8_T, 0, 37, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_channel_w_mhz) }, \
          { "curr_tx_mcs_index", NULL, MAVLINK_TYPE_UINT8_T, 0, 38, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_tx_mcs_index) }, \
-         { "dummy0", NULL, MAVLINK_TYPE_INT8_T, 0, 39, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy0) }, \
+         { "tx_passive_mode_is_enabled", NULL, MAVLINK_TYPE_INT8_T, 0, 39, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, tx_passive_mode_is_enabled) }, \
+         { "curr_n_rate_adjustments", NULL, MAVLINK_TYPE_UINT8_T, 0, 40, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, curr_n_rate_adjustments) }, \
+         { "dummy0", NULL, MAVLINK_TYPE_INT8_T, 0, 41, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy0) }, \
          { "dummy1", NULL, MAVLINK_TYPE_INT16_T, 0, 34, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy1) }, \
          { "dummy2", NULL, MAVLINK_TYPE_INT32_T, 0, 16, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy2) }, \
          { "dummy3", NULL, MAVLINK_TYPE_UINT32_T, 0, 20, offsetof(mavlink_openhd_stats_monitor_mode_wifi_link_t, dummy3) }, \
@@ -98,6 +104,8 @@ typedef struct __mavlink_openhd_stats_monitor_mode_wifi_link_t {
  * @param curr_tx_channel_mhz  curr tx channel used when injecting packets
  * @param curr_tx_channel_w_mhz  curr tx channel width used when injecting packets (20mhz/40Mhz)
  * @param curr_tx_mcs_index  curr tx mcs index used when injecting packets
+ * @param tx_passive_mode_is_enabled  OpenHD, act as a passive listener (NO TX EVER), 0=disabled, 1=enabled
+ * @param curr_n_rate_adjustments  If the TX cannot keep up (at a given mcs), openhd reduces the bitrate in 1MBit/s increments
  * @param dummy0  for future use
  * @param dummy1  for future use
  * @param dummy2  for future use
@@ -105,7 +113,7 @@ typedef struct __mavlink_openhd_stats_monitor_mode_wifi_link_t {
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
-                               int16_t curr_tx_pps, int16_t curr_rx_pps, int32_t curr_tx_bps, int32_t curr_rx_bps, int16_t curr_rx_packet_loss_perc, int16_t curr_rx_big_gaps_counter, uint32_t count_tx_inj_error_hint, uint32_t count_tx_dropped_packets, uint8_t curr_tx_card_idx, uint16_t curr_tx_channel_mhz, uint8_t curr_tx_channel_w_mhz, uint8_t curr_tx_mcs_index, int8_t dummy0, int16_t dummy1, int32_t dummy2, uint32_t dummy3)
+                               int16_t curr_tx_pps, int16_t curr_rx_pps, int32_t curr_tx_bps, int32_t curr_rx_bps, int16_t curr_rx_packet_loss_perc, int16_t curr_rx_big_gaps_counter, uint32_t count_tx_inj_error_hint, uint32_t count_tx_dropped_packets, uint8_t curr_tx_card_idx, uint16_t curr_tx_channel_mhz, uint8_t curr_tx_channel_w_mhz, uint8_t curr_tx_mcs_index, int8_t tx_passive_mode_is_enabled, uint8_t curr_n_rate_adjustments, int8_t dummy0, int16_t dummy1, int32_t dummy2, uint32_t dummy3)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN];
@@ -124,7 +132,9 @@ static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_pack(uint
     _mav_put_uint8_t(buf, 36, curr_tx_card_idx);
     _mav_put_uint8_t(buf, 37, curr_tx_channel_w_mhz);
     _mav_put_uint8_t(buf, 38, curr_tx_mcs_index);
-    _mav_put_int8_t(buf, 39, dummy0);
+    _mav_put_int8_t(buf, 39, tx_passive_mode_is_enabled);
+    _mav_put_uint8_t(buf, 40, curr_n_rate_adjustments);
+    _mav_put_int8_t(buf, 41, dummy0);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN);
 #else
@@ -144,6 +154,8 @@ static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_pack(uint
     packet.curr_tx_card_idx = curr_tx_card_idx;
     packet.curr_tx_channel_w_mhz = curr_tx_channel_w_mhz;
     packet.curr_tx_mcs_index = curr_tx_mcs_index;
+    packet.tx_passive_mode_is_enabled = tx_passive_mode_is_enabled;
+    packet.curr_n_rate_adjustments = curr_n_rate_adjustments;
     packet.dummy0 = dummy0;
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN);
@@ -171,6 +183,8 @@ static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_pack(uint
  * @param curr_tx_channel_mhz  curr tx channel used when injecting packets
  * @param curr_tx_channel_w_mhz  curr tx channel width used when injecting packets (20mhz/40Mhz)
  * @param curr_tx_mcs_index  curr tx mcs index used when injecting packets
+ * @param tx_passive_mode_is_enabled  OpenHD, act as a passive listener (NO TX EVER), 0=disabled, 1=enabled
+ * @param curr_n_rate_adjustments  If the TX cannot keep up (at a given mcs), openhd reduces the bitrate in 1MBit/s increments
  * @param dummy0  for future use
  * @param dummy1  for future use
  * @param dummy2  for future use
@@ -179,7 +193,7 @@ static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_pack(uint
  */
 static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
-                                   int16_t curr_tx_pps,int16_t curr_rx_pps,int32_t curr_tx_bps,int32_t curr_rx_bps,int16_t curr_rx_packet_loss_perc,int16_t curr_rx_big_gaps_counter,uint32_t count_tx_inj_error_hint,uint32_t count_tx_dropped_packets,uint8_t curr_tx_card_idx,uint16_t curr_tx_channel_mhz,uint8_t curr_tx_channel_w_mhz,uint8_t curr_tx_mcs_index,int8_t dummy0,int16_t dummy1,int32_t dummy2,uint32_t dummy3)
+                                   int16_t curr_tx_pps,int16_t curr_rx_pps,int32_t curr_tx_bps,int32_t curr_rx_bps,int16_t curr_rx_packet_loss_perc,int16_t curr_rx_big_gaps_counter,uint32_t count_tx_inj_error_hint,uint32_t count_tx_dropped_packets,uint8_t curr_tx_card_idx,uint16_t curr_tx_channel_mhz,uint8_t curr_tx_channel_w_mhz,uint8_t curr_tx_mcs_index,int8_t tx_passive_mode_is_enabled,uint8_t curr_n_rate_adjustments,int8_t dummy0,int16_t dummy1,int32_t dummy2,uint32_t dummy3)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN];
@@ -198,7 +212,9 @@ static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_pack_chan
     _mav_put_uint8_t(buf, 36, curr_tx_card_idx);
     _mav_put_uint8_t(buf, 37, curr_tx_channel_w_mhz);
     _mav_put_uint8_t(buf, 38, curr_tx_mcs_index);
-    _mav_put_int8_t(buf, 39, dummy0);
+    _mav_put_int8_t(buf, 39, tx_passive_mode_is_enabled);
+    _mav_put_uint8_t(buf, 40, curr_n_rate_adjustments);
+    _mav_put_int8_t(buf, 41, dummy0);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN);
 #else
@@ -218,6 +234,8 @@ static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_pack_chan
     packet.curr_tx_card_idx = curr_tx_card_idx;
     packet.curr_tx_channel_w_mhz = curr_tx_channel_w_mhz;
     packet.curr_tx_mcs_index = curr_tx_mcs_index;
+    packet.tx_passive_mode_is_enabled = tx_passive_mode_is_enabled;
+    packet.curr_n_rate_adjustments = curr_n_rate_adjustments;
     packet.dummy0 = dummy0;
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN);
@@ -237,7 +255,7 @@ static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_pack_chan
  */
 static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_stats_monitor_mode_wifi_link_t* openhd_stats_monitor_mode_wifi_link)
 {
-    return mavlink_msg_openhd_stats_monitor_mode_wifi_link_pack(system_id, component_id, msg, openhd_stats_monitor_mode_wifi_link->curr_tx_pps, openhd_stats_monitor_mode_wifi_link->curr_rx_pps, openhd_stats_monitor_mode_wifi_link->curr_tx_bps, openhd_stats_monitor_mode_wifi_link->curr_rx_bps, openhd_stats_monitor_mode_wifi_link->curr_rx_packet_loss_perc, openhd_stats_monitor_mode_wifi_link->curr_rx_big_gaps_counter, openhd_stats_monitor_mode_wifi_link->count_tx_inj_error_hint, openhd_stats_monitor_mode_wifi_link->count_tx_dropped_packets, openhd_stats_monitor_mode_wifi_link->curr_tx_card_idx, openhd_stats_monitor_mode_wifi_link->curr_tx_channel_mhz, openhd_stats_monitor_mode_wifi_link->curr_tx_channel_w_mhz, openhd_stats_monitor_mode_wifi_link->curr_tx_mcs_index, openhd_stats_monitor_mode_wifi_link->dummy0, openhd_stats_monitor_mode_wifi_link->dummy1, openhd_stats_monitor_mode_wifi_link->dummy2, openhd_stats_monitor_mode_wifi_link->dummy3);
+    return mavlink_msg_openhd_stats_monitor_mode_wifi_link_pack(system_id, component_id, msg, openhd_stats_monitor_mode_wifi_link->curr_tx_pps, openhd_stats_monitor_mode_wifi_link->curr_rx_pps, openhd_stats_monitor_mode_wifi_link->curr_tx_bps, openhd_stats_monitor_mode_wifi_link->curr_rx_bps, openhd_stats_monitor_mode_wifi_link->curr_rx_packet_loss_perc, openhd_stats_monitor_mode_wifi_link->curr_rx_big_gaps_counter, openhd_stats_monitor_mode_wifi_link->count_tx_inj_error_hint, openhd_stats_monitor_mode_wifi_link->count_tx_dropped_packets, openhd_stats_monitor_mode_wifi_link->curr_tx_card_idx, openhd_stats_monitor_mode_wifi_link->curr_tx_channel_mhz, openhd_stats_monitor_mode_wifi_link->curr_tx_channel_w_mhz, openhd_stats_monitor_mode_wifi_link->curr_tx_mcs_index, openhd_stats_monitor_mode_wifi_link->tx_passive_mode_is_enabled, openhd_stats_monitor_mode_wifi_link->curr_n_rate_adjustments, openhd_stats_monitor_mode_wifi_link->dummy0, openhd_stats_monitor_mode_wifi_link->dummy1, openhd_stats_monitor_mode_wifi_link->dummy2, openhd_stats_monitor_mode_wifi_link->dummy3);
 }
 
 /**
@@ -251,7 +269,7 @@ static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_encode(ui
  */
 static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_stats_monitor_mode_wifi_link_t* openhd_stats_monitor_mode_wifi_link)
 {
-    return mavlink_msg_openhd_stats_monitor_mode_wifi_link_pack_chan(system_id, component_id, chan, msg, openhd_stats_monitor_mode_wifi_link->curr_tx_pps, openhd_stats_monitor_mode_wifi_link->curr_rx_pps, openhd_stats_monitor_mode_wifi_link->curr_tx_bps, openhd_stats_monitor_mode_wifi_link->curr_rx_bps, openhd_stats_monitor_mode_wifi_link->curr_rx_packet_loss_perc, openhd_stats_monitor_mode_wifi_link->curr_rx_big_gaps_counter, openhd_stats_monitor_mode_wifi_link->count_tx_inj_error_hint, openhd_stats_monitor_mode_wifi_link->count_tx_dropped_packets, openhd_stats_monitor_mode_wifi_link->curr_tx_card_idx, openhd_stats_monitor_mode_wifi_link->curr_tx_channel_mhz, openhd_stats_monitor_mode_wifi_link->curr_tx_channel_w_mhz, openhd_stats_monitor_mode_wifi_link->curr_tx_mcs_index, openhd_stats_monitor_mode_wifi_link->dummy0, openhd_stats_monitor_mode_wifi_link->dummy1, openhd_stats_monitor_mode_wifi_link->dummy2, openhd_stats_monitor_mode_wifi_link->dummy3);
+    return mavlink_msg_openhd_stats_monitor_mode_wifi_link_pack_chan(system_id, component_id, chan, msg, openhd_stats_monitor_mode_wifi_link->curr_tx_pps, openhd_stats_monitor_mode_wifi_link->curr_rx_pps, openhd_stats_monitor_mode_wifi_link->curr_tx_bps, openhd_stats_monitor_mode_wifi_link->curr_rx_bps, openhd_stats_monitor_mode_wifi_link->curr_rx_packet_loss_perc, openhd_stats_monitor_mode_wifi_link->curr_rx_big_gaps_counter, openhd_stats_monitor_mode_wifi_link->count_tx_inj_error_hint, openhd_stats_monitor_mode_wifi_link->count_tx_dropped_packets, openhd_stats_monitor_mode_wifi_link->curr_tx_card_idx, openhd_stats_monitor_mode_wifi_link->curr_tx_channel_mhz, openhd_stats_monitor_mode_wifi_link->curr_tx_channel_w_mhz, openhd_stats_monitor_mode_wifi_link->curr_tx_mcs_index, openhd_stats_monitor_mode_wifi_link->tx_passive_mode_is_enabled, openhd_stats_monitor_mode_wifi_link->curr_n_rate_adjustments, openhd_stats_monitor_mode_wifi_link->dummy0, openhd_stats_monitor_mode_wifi_link->dummy1, openhd_stats_monitor_mode_wifi_link->dummy2, openhd_stats_monitor_mode_wifi_link->dummy3);
 }
 
 /**
@@ -270,6 +288,8 @@ static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_encode_ch
  * @param curr_tx_channel_mhz  curr tx channel used when injecting packets
  * @param curr_tx_channel_w_mhz  curr tx channel width used when injecting packets (20mhz/40Mhz)
  * @param curr_tx_mcs_index  curr tx mcs index used when injecting packets
+ * @param tx_passive_mode_is_enabled  OpenHD, act as a passive listener (NO TX EVER), 0=disabled, 1=enabled
+ * @param curr_n_rate_adjustments  If the TX cannot keep up (at a given mcs), openhd reduces the bitrate in 1MBit/s increments
  * @param dummy0  for future use
  * @param dummy1  for future use
  * @param dummy2  for future use
@@ -277,7 +297,7 @@ static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_encode_ch
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
-static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_link_send(mavlink_channel_t chan, int16_t curr_tx_pps, int16_t curr_rx_pps, int32_t curr_tx_bps, int32_t curr_rx_bps, int16_t curr_rx_packet_loss_perc, int16_t curr_rx_big_gaps_counter, uint32_t count_tx_inj_error_hint, uint32_t count_tx_dropped_packets, uint8_t curr_tx_card_idx, uint16_t curr_tx_channel_mhz, uint8_t curr_tx_channel_w_mhz, uint8_t curr_tx_mcs_index, int8_t dummy0, int16_t dummy1, int32_t dummy2, uint32_t dummy3)
+static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_link_send(mavlink_channel_t chan, int16_t curr_tx_pps, int16_t curr_rx_pps, int32_t curr_tx_bps, int32_t curr_rx_bps, int16_t curr_rx_packet_loss_perc, int16_t curr_rx_big_gaps_counter, uint32_t count_tx_inj_error_hint, uint32_t count_tx_dropped_packets, uint8_t curr_tx_card_idx, uint16_t curr_tx_channel_mhz, uint8_t curr_tx_channel_w_mhz, uint8_t curr_tx_mcs_index, int8_t tx_passive_mode_is_enabled, uint8_t curr_n_rate_adjustments, int8_t dummy0, int16_t dummy1, int32_t dummy2, uint32_t dummy3)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN];
@@ -296,7 +316,9 @@ static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_link_send(mavlink_
     _mav_put_uint8_t(buf, 36, curr_tx_card_idx);
     _mav_put_uint8_t(buf, 37, curr_tx_channel_w_mhz);
     _mav_put_uint8_t(buf, 38, curr_tx_mcs_index);
-    _mav_put_int8_t(buf, 39, dummy0);
+    _mav_put_int8_t(buf, 39, tx_passive_mode_is_enabled);
+    _mav_put_uint8_t(buf, 40, curr_n_rate_adjustments);
+    _mav_put_int8_t(buf, 41, dummy0);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK, buf, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_MIN_LEN, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_CRC);
 #else
@@ -316,6 +338,8 @@ static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_link_send(mavlink_
     packet.curr_tx_card_idx = curr_tx_card_idx;
     packet.curr_tx_channel_w_mhz = curr_tx_channel_w_mhz;
     packet.curr_tx_mcs_index = curr_tx_mcs_index;
+    packet.tx_passive_mode_is_enabled = tx_passive_mode_is_enabled;
+    packet.curr_n_rate_adjustments = curr_n_rate_adjustments;
     packet.dummy0 = dummy0;
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK, (const char *)&packet, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_MIN_LEN, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_CRC);
@@ -330,7 +354,7 @@ static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_link_send(mavlink_
 static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_link_send_struct(mavlink_channel_t chan, const mavlink_openhd_stats_monitor_mode_wifi_link_t* openhd_stats_monitor_mode_wifi_link)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    mavlink_msg_openhd_stats_monitor_mode_wifi_link_send(chan, openhd_stats_monitor_mode_wifi_link->curr_tx_pps, openhd_stats_monitor_mode_wifi_link->curr_rx_pps, openhd_stats_monitor_mode_wifi_link->curr_tx_bps, openhd_stats_monitor_mode_wifi_link->curr_rx_bps, openhd_stats_monitor_mode_wifi_link->curr_rx_packet_loss_perc, openhd_stats_monitor_mode_wifi_link->curr_rx_big_gaps_counter, openhd_stats_monitor_mode_wifi_link->count_tx_inj_error_hint, openhd_stats_monitor_mode_wifi_link->count_tx_dropped_packets, openhd_stats_monitor_mode_wifi_link->curr_tx_card_idx, openhd_stats_monitor_mode_wifi_link->curr_tx_channel_mhz, openhd_stats_monitor_mode_wifi_link->curr_tx_channel_w_mhz, openhd_stats_monitor_mode_wifi_link->curr_tx_mcs_index, openhd_stats_monitor_mode_wifi_link->dummy0, openhd_stats_monitor_mode_wifi_link->dummy1, openhd_stats_monitor_mode_wifi_link->dummy2, openhd_stats_monitor_mode_wifi_link->dummy3);
+    mavlink_msg_openhd_stats_monitor_mode_wifi_link_send(chan, openhd_stats_monitor_mode_wifi_link->curr_tx_pps, openhd_stats_monitor_mode_wifi_link->curr_rx_pps, openhd_stats_monitor_mode_wifi_link->curr_tx_bps, openhd_stats_monitor_mode_wifi_link->curr_rx_bps, openhd_stats_monitor_mode_wifi_link->curr_rx_packet_loss_perc, openhd_stats_monitor_mode_wifi_link->curr_rx_big_gaps_counter, openhd_stats_monitor_mode_wifi_link->count_tx_inj_error_hint, openhd_stats_monitor_mode_wifi_link->count_tx_dropped_packets, openhd_stats_monitor_mode_wifi_link->curr_tx_card_idx, openhd_stats_monitor_mode_wifi_link->curr_tx_channel_mhz, openhd_stats_monitor_mode_wifi_link->curr_tx_channel_w_mhz, openhd_stats_monitor_mode_wifi_link->curr_tx_mcs_index, openhd_stats_monitor_mode_wifi_link->tx_passive_mode_is_enabled, openhd_stats_monitor_mode_wifi_link->curr_n_rate_adjustments, openhd_stats_monitor_mode_wifi_link->dummy0, openhd_stats_monitor_mode_wifi_link->dummy1, openhd_stats_monitor_mode_wifi_link->dummy2, openhd_stats_monitor_mode_wifi_link->dummy3);
 #else
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK, (const char *)openhd_stats_monitor_mode_wifi_link, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_MIN_LEN, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_CRC);
 #endif
@@ -344,7 +368,7 @@ static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_link_send_struct(m
   is usually the receive buffer for the channel, and allows a reply to an
   incoming message with minimum stack space usage.
  */
-static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_link_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  int16_t curr_tx_pps, int16_t curr_rx_pps, int32_t curr_tx_bps, int32_t curr_rx_bps, int16_t curr_rx_packet_loss_perc, int16_t curr_rx_big_gaps_counter, uint32_t count_tx_inj_error_hint, uint32_t count_tx_dropped_packets, uint8_t curr_tx_card_idx, uint16_t curr_tx_channel_mhz, uint8_t curr_tx_channel_w_mhz, uint8_t curr_tx_mcs_index, int8_t dummy0, int16_t dummy1, int32_t dummy2, uint32_t dummy3)
+static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_link_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  int16_t curr_tx_pps, int16_t curr_rx_pps, int32_t curr_tx_bps, int32_t curr_rx_bps, int16_t curr_rx_packet_loss_perc, int16_t curr_rx_big_gaps_counter, uint32_t count_tx_inj_error_hint, uint32_t count_tx_dropped_packets, uint8_t curr_tx_card_idx, uint16_t curr_tx_channel_mhz, uint8_t curr_tx_channel_w_mhz, uint8_t curr_tx_mcs_index, int8_t tx_passive_mode_is_enabled, uint8_t curr_n_rate_adjustments, int8_t dummy0, int16_t dummy1, int32_t dummy2, uint32_t dummy3)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char *buf = (char *)msgbuf;
@@ -363,7 +387,9 @@ static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_link_send_buf(mavl
     _mav_put_uint8_t(buf, 36, curr_tx_card_idx);
     _mav_put_uint8_t(buf, 37, curr_tx_channel_w_mhz);
     _mav_put_uint8_t(buf, 38, curr_tx_mcs_index);
-    _mav_put_int8_t(buf, 39, dummy0);
+    _mav_put_int8_t(buf, 39, tx_passive_mode_is_enabled);
+    _mav_put_uint8_t(buf, 40, curr_n_rate_adjustments);
+    _mav_put_int8_t(buf, 41, dummy0);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK, buf, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_MIN_LEN, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_CRC);
 #else
@@ -383,6 +409,8 @@ static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_link_send_buf(mavl
     packet->curr_tx_card_idx = curr_tx_card_idx;
     packet->curr_tx_channel_w_mhz = curr_tx_channel_w_mhz;
     packet->curr_tx_mcs_index = curr_tx_mcs_index;
+    packet->tx_passive_mode_is_enabled = tx_passive_mode_is_enabled;
+    packet->curr_n_rate_adjustments = curr_n_rate_adjustments;
     packet->dummy0 = dummy0;
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK, (const char *)packet, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_MIN_LEN, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_CRC);
@@ -516,13 +544,33 @@ static inline uint8_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_t
 }
 
 /**
+ * @brief Get field tx_passive_mode_is_enabled from openhd_stats_monitor_mode_wifi_link message
+ *
+ * @return  OpenHD, act as a passive listener (NO TX EVER), 0=disabled, 1=enabled
+ */
+static inline int8_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_tx_passive_mode_is_enabled(const mavlink_message_t* msg)
+{
+    return _MAV_RETURN_int8_t(msg,  39);
+}
+
+/**
+ * @brief Get field curr_n_rate_adjustments from openhd_stats_monitor_mode_wifi_link message
+ *
+ * @return  If the TX cannot keep up (at a given mcs), openhd reduces the bitrate in 1MBit/s increments
+ */
+static inline uint8_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_n_rate_adjustments(const mavlink_message_t* msg)
+{
+    return _MAV_RETURN_uint8_t(msg,  40);
+}
+
+/**
  * @brief Get field dummy0 from openhd_stats_monitor_mode_wifi_link message
  *
  * @return  for future use
  */
 static inline int8_t mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_dummy0(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int8_t(msg,  39);
+    return _MAV_RETURN_int8_t(msg,  41);
 }
 
 /**
@@ -579,6 +627,8 @@ static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_link_decode(const 
     openhd_stats_monitor_mode_wifi_link->curr_tx_card_idx = mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_tx_card_idx(msg);
     openhd_stats_monitor_mode_wifi_link->curr_tx_channel_w_mhz = mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_tx_channel_w_mhz(msg);
     openhd_stats_monitor_mode_wifi_link->curr_tx_mcs_index = mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_tx_mcs_index(msg);
+    openhd_stats_monitor_mode_wifi_link->tx_passive_mode_is_enabled = mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_tx_passive_mode_is_enabled(msg);
+    openhd_stats_monitor_mode_wifi_link->curr_n_rate_adjustments = mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_curr_n_rate_adjustments(msg);
     openhd_stats_monitor_mode_wifi_link->dummy0 = mavlink_msg_openhd_stats_monitor_mode_wifi_link_get_dummy0(msg);
 #else
         uint8_t len = msg->len < MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN? msg->len : MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_LINK_LEN;
