@@ -1,7 +1,7 @@
 #pragma once
 // MESSAGE OPENHD_LOG_MESSAGE PACKING
 
-#define MAVLINK_MSG_ID_OPENHD_LOG_MESSAGE 1260
+#define MAVLINK_MSG_ID_OPENHD_LOG_MESSAGE 1220
 
 
 typedef struct __mavlink_openhd_log_message_t {
@@ -13,18 +13,18 @@ typedef struct __mavlink_openhd_log_message_t {
 
 #define MAVLINK_MSG_ID_OPENHD_LOG_MESSAGE_LEN 69
 #define MAVLINK_MSG_ID_OPENHD_LOG_MESSAGE_MIN_LEN 69
-#define MAVLINK_MSG_ID_1260_LEN 69
-#define MAVLINK_MSG_ID_1260_MIN_LEN 69
+#define MAVLINK_MSG_ID_1220_LEN 69
+#define MAVLINK_MSG_ID_1220_MIN_LEN 69
 
 #define MAVLINK_MSG_ID_OPENHD_LOG_MESSAGE_CRC 84
-#define MAVLINK_MSG_ID_1260_CRC 84
+#define MAVLINK_MSG_ID_1220_CRC 84
 
 #define MAVLINK_MSG_OPENHD_LOG_MESSAGE_FIELD_TAG_LEN 10
 #define MAVLINK_MSG_OPENHD_LOG_MESSAGE_FIELD_MESSAGE_LEN 50
 
 #if MAVLINK_COMMAND_24BIT
 #define MAVLINK_MESSAGE_INFO_OPENHD_LOG_MESSAGE { \
-    1260, \
+    1220, \
     "OPENHD_LOG_MESSAGE", \
     4, \
     {  { "severity", NULL, MAVLINK_TYPE_UINT8_T, 0, 8, offsetof(mavlink_openhd_log_message_t, severity) }, \
