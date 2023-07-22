@@ -9,7 +9,6 @@ typedef struct __mavlink_openhd_stats_wb_video_air_fec_performance_t {
  uint32_t curr_fec_encode_time_min_us; /*<  curr_fec_encode_time_min_us*/
  uint32_t curr_fec_encode_time_max_us; /*<  curr_fec_encode_time_max_us*/
  int32_t dummy2; /*<  for future use*/
- uint32_t dummy3; /*<  for future use*/
  uint16_t curr_fec_block_size_avg; /*<  curr_fec_block_size_avg*/
  uint16_t curr_fec_block_size_min; /*<  curr_fec_block_size_min*/
  uint16_t curr_fec_block_size_max; /*<  curr_fec_block_size_max*/
@@ -18,13 +17,13 @@ typedef struct __mavlink_openhd_stats_wb_video_air_fec_performance_t {
  int8_t dummy0; /*<  for future use*/
 } mavlink_openhd_stats_wb_video_air_fec_performance_t;
 
-#define MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE_LEN 30
-#define MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE_MIN_LEN 30
-#define MAVLINK_MSG_ID_1215_LEN 30
-#define MAVLINK_MSG_ID_1215_MIN_LEN 30
+#define MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE_LEN 26
+#define MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE_MIN_LEN 26
+#define MAVLINK_MSG_ID_1215_LEN 26
+#define MAVLINK_MSG_ID_1215_MIN_LEN 26
 
-#define MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE_CRC 209
-#define MAVLINK_MSG_ID_1215_CRC 209
+#define MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE_CRC 219
+#define MAVLINK_MSG_ID_1215_CRC 219
 
 
 
@@ -32,35 +31,33 @@ typedef struct __mavlink_openhd_stats_wb_video_air_fec_performance_t {
 #define MAVLINK_MESSAGE_INFO_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE { \
     1215, \
     "OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE", \
-    11, \
-    {  { "link_index", NULL, MAVLINK_TYPE_UINT8_T, 0, 28, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, link_index) }, \
+    10, \
+    {  { "link_index", NULL, MAVLINK_TYPE_UINT8_T, 0, 24, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, link_index) }, \
          { "curr_fec_encode_time_avg_us", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, curr_fec_encode_time_avg_us) }, \
          { "curr_fec_encode_time_min_us", NULL, MAVLINK_TYPE_UINT32_T, 0, 4, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, curr_fec_encode_time_min_us) }, \
          { "curr_fec_encode_time_max_us", NULL, MAVLINK_TYPE_UINT32_T, 0, 8, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, curr_fec_encode_time_max_us) }, \
-         { "curr_fec_block_size_avg", NULL, MAVLINK_TYPE_UINT16_T, 0, 20, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, curr_fec_block_size_avg) }, \
-         { "curr_fec_block_size_min", NULL, MAVLINK_TYPE_UINT16_T, 0, 22, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, curr_fec_block_size_min) }, \
-         { "curr_fec_block_size_max", NULL, MAVLINK_TYPE_UINT16_T, 0, 24, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, curr_fec_block_size_max) }, \
-         { "dummy0", NULL, MAVLINK_TYPE_INT8_T, 0, 29, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, dummy0) }, \
-         { "dummy1", NULL, MAVLINK_TYPE_INT16_T, 0, 26, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, dummy1) }, \
+         { "curr_fec_block_size_avg", NULL, MAVLINK_TYPE_UINT16_T, 0, 16, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, curr_fec_block_size_avg) }, \
+         { "curr_fec_block_size_min", NULL, MAVLINK_TYPE_UINT16_T, 0, 18, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, curr_fec_block_size_min) }, \
+         { "curr_fec_block_size_max", NULL, MAVLINK_TYPE_UINT16_T, 0, 20, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, curr_fec_block_size_max) }, \
+         { "dummy0", NULL, MAVLINK_TYPE_INT8_T, 0, 25, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, dummy0) }, \
+         { "dummy1", NULL, MAVLINK_TYPE_INT16_T, 0, 22, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, dummy1) }, \
          { "dummy2", NULL, MAVLINK_TYPE_INT32_T, 0, 12, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, dummy2) }, \
-         { "dummy3", NULL, MAVLINK_TYPE_UINT32_T, 0, 16, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, dummy3) }, \
          } \
 }
 #else
 #define MAVLINK_MESSAGE_INFO_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE { \
     "OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE", \
-    11, \
-    {  { "link_index", NULL, MAVLINK_TYPE_UINT8_T, 0, 28, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, link_index) }, \
+    10, \
+    {  { "link_index", NULL, MAVLINK_TYPE_UINT8_T, 0, 24, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, link_index) }, \
          { "curr_fec_encode_time_avg_us", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, curr_fec_encode_time_avg_us) }, \
          { "curr_fec_encode_time_min_us", NULL, MAVLINK_TYPE_UINT32_T, 0, 4, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, curr_fec_encode_time_min_us) }, \
          { "curr_fec_encode_time_max_us", NULL, MAVLINK_TYPE_UINT32_T, 0, 8, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, curr_fec_encode_time_max_us) }, \
-         { "curr_fec_block_size_avg", NULL, MAVLINK_TYPE_UINT16_T, 0, 20, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, curr_fec_block_size_avg) }, \
-         { "curr_fec_block_size_min", NULL, MAVLINK_TYPE_UINT16_T, 0, 22, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, curr_fec_block_size_min) }, \
-         { "curr_fec_block_size_max", NULL, MAVLINK_TYPE_UINT16_T, 0, 24, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, curr_fec_block_size_max) }, \
-         { "dummy0", NULL, MAVLINK_TYPE_INT8_T, 0, 29, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, dummy0) }, \
-         { "dummy1", NULL, MAVLINK_TYPE_INT16_T, 0, 26, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, dummy1) }, \
+         { "curr_fec_block_size_avg", NULL, MAVLINK_TYPE_UINT16_T, 0, 16, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, curr_fec_block_size_avg) }, \
+         { "curr_fec_block_size_min", NULL, MAVLINK_TYPE_UINT16_T, 0, 18, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, curr_fec_block_size_min) }, \
+         { "curr_fec_block_size_max", NULL, MAVLINK_TYPE_UINT16_T, 0, 20, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, curr_fec_block_size_max) }, \
+         { "dummy0", NULL, MAVLINK_TYPE_INT8_T, 0, 25, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, dummy0) }, \
+         { "dummy1", NULL, MAVLINK_TYPE_INT16_T, 0, 22, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, dummy1) }, \
          { "dummy2", NULL, MAVLINK_TYPE_INT32_T, 0, 12, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, dummy2) }, \
-         { "dummy3", NULL, MAVLINK_TYPE_UINT32_T, 0, 16, offsetof(mavlink_openhd_stats_wb_video_air_fec_performance_t, dummy3) }, \
          } \
 }
 #endif
@@ -81,11 +78,10 @@ typedef struct __mavlink_openhd_stats_wb_video_air_fec_performance_t {
  * @param dummy0  for future use
  * @param dummy1  for future use
  * @param dummy2  for future use
- * @param dummy3  for future use
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
-                               uint8_t link_index, uint32_t curr_fec_encode_time_avg_us, uint32_t curr_fec_encode_time_min_us, uint32_t curr_fec_encode_time_max_us, uint16_t curr_fec_block_size_avg, uint16_t curr_fec_block_size_min, uint16_t curr_fec_block_size_max, int8_t dummy0, int16_t dummy1, int32_t dummy2, uint32_t dummy3)
+                               uint8_t link_index, uint32_t curr_fec_encode_time_avg_us, uint32_t curr_fec_encode_time_min_us, uint32_t curr_fec_encode_time_max_us, uint16_t curr_fec_block_size_avg, uint16_t curr_fec_block_size_min, uint16_t curr_fec_block_size_max, int8_t dummy0, int16_t dummy1, int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE_LEN];
@@ -93,13 +89,12 @@ static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_pac
     _mav_put_uint32_t(buf, 4, curr_fec_encode_time_min_us);
     _mav_put_uint32_t(buf, 8, curr_fec_encode_time_max_us);
     _mav_put_int32_t(buf, 12, dummy2);
-    _mav_put_uint32_t(buf, 16, dummy3);
-    _mav_put_uint16_t(buf, 20, curr_fec_block_size_avg);
-    _mav_put_uint16_t(buf, 22, curr_fec_block_size_min);
-    _mav_put_uint16_t(buf, 24, curr_fec_block_size_max);
-    _mav_put_int16_t(buf, 26, dummy1);
-    _mav_put_uint8_t(buf, 28, link_index);
-    _mav_put_int8_t(buf, 29, dummy0);
+    _mav_put_uint16_t(buf, 16, curr_fec_block_size_avg);
+    _mav_put_uint16_t(buf, 18, curr_fec_block_size_min);
+    _mav_put_uint16_t(buf, 20, curr_fec_block_size_max);
+    _mav_put_int16_t(buf, 22, dummy1);
+    _mav_put_uint8_t(buf, 24, link_index);
+    _mav_put_int8_t(buf, 25, dummy0);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE_LEN);
 #else
@@ -108,7 +103,6 @@ static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_pac
     packet.curr_fec_encode_time_min_us = curr_fec_encode_time_min_us;
     packet.curr_fec_encode_time_max_us = curr_fec_encode_time_max_us;
     packet.dummy2 = dummy2;
-    packet.dummy3 = dummy3;
     packet.curr_fec_block_size_avg = curr_fec_block_size_avg;
     packet.curr_fec_block_size_min = curr_fec_block_size_min;
     packet.curr_fec_block_size_max = curr_fec_block_size_max;
@@ -139,12 +133,11 @@ static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_pac
  * @param dummy0  for future use
  * @param dummy1  for future use
  * @param dummy2  for future use
- * @param dummy3  for future use
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
-                                   uint8_t link_index,uint32_t curr_fec_encode_time_avg_us,uint32_t curr_fec_encode_time_min_us,uint32_t curr_fec_encode_time_max_us,uint16_t curr_fec_block_size_avg,uint16_t curr_fec_block_size_min,uint16_t curr_fec_block_size_max,int8_t dummy0,int16_t dummy1,int32_t dummy2,uint32_t dummy3)
+                                   uint8_t link_index,uint32_t curr_fec_encode_time_avg_us,uint32_t curr_fec_encode_time_min_us,uint32_t curr_fec_encode_time_max_us,uint16_t curr_fec_block_size_avg,uint16_t curr_fec_block_size_min,uint16_t curr_fec_block_size_max,int8_t dummy0,int16_t dummy1,int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE_LEN];
@@ -152,13 +145,12 @@ static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_pac
     _mav_put_uint32_t(buf, 4, curr_fec_encode_time_min_us);
     _mav_put_uint32_t(buf, 8, curr_fec_encode_time_max_us);
     _mav_put_int32_t(buf, 12, dummy2);
-    _mav_put_uint32_t(buf, 16, dummy3);
-    _mav_put_uint16_t(buf, 20, curr_fec_block_size_avg);
-    _mav_put_uint16_t(buf, 22, curr_fec_block_size_min);
-    _mav_put_uint16_t(buf, 24, curr_fec_block_size_max);
-    _mav_put_int16_t(buf, 26, dummy1);
-    _mav_put_uint8_t(buf, 28, link_index);
-    _mav_put_int8_t(buf, 29, dummy0);
+    _mav_put_uint16_t(buf, 16, curr_fec_block_size_avg);
+    _mav_put_uint16_t(buf, 18, curr_fec_block_size_min);
+    _mav_put_uint16_t(buf, 20, curr_fec_block_size_max);
+    _mav_put_int16_t(buf, 22, dummy1);
+    _mav_put_uint8_t(buf, 24, link_index);
+    _mav_put_int8_t(buf, 25, dummy0);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE_LEN);
 #else
@@ -167,7 +159,6 @@ static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_pac
     packet.curr_fec_encode_time_min_us = curr_fec_encode_time_min_us;
     packet.curr_fec_encode_time_max_us = curr_fec_encode_time_max_us;
     packet.dummy2 = dummy2;
-    packet.dummy3 = dummy3;
     packet.curr_fec_block_size_avg = curr_fec_block_size_avg;
     packet.curr_fec_block_size_min = curr_fec_block_size_min;
     packet.curr_fec_block_size_max = curr_fec_block_size_max;
@@ -192,7 +183,7 @@ static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_pac
  */
 static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_stats_wb_video_air_fec_performance_t* openhd_stats_wb_video_air_fec_performance)
 {
-    return mavlink_msg_openhd_stats_wb_video_air_fec_performance_pack(system_id, component_id, msg, openhd_stats_wb_video_air_fec_performance->link_index, openhd_stats_wb_video_air_fec_performance->curr_fec_encode_time_avg_us, openhd_stats_wb_video_air_fec_performance->curr_fec_encode_time_min_us, openhd_stats_wb_video_air_fec_performance->curr_fec_encode_time_max_us, openhd_stats_wb_video_air_fec_performance->curr_fec_block_size_avg, openhd_stats_wb_video_air_fec_performance->curr_fec_block_size_min, openhd_stats_wb_video_air_fec_performance->curr_fec_block_size_max, openhd_stats_wb_video_air_fec_performance->dummy0, openhd_stats_wb_video_air_fec_performance->dummy1, openhd_stats_wb_video_air_fec_performance->dummy2, openhd_stats_wb_video_air_fec_performance->dummy3);
+    return mavlink_msg_openhd_stats_wb_video_air_fec_performance_pack(system_id, component_id, msg, openhd_stats_wb_video_air_fec_performance->link_index, openhd_stats_wb_video_air_fec_performance->curr_fec_encode_time_avg_us, openhd_stats_wb_video_air_fec_performance->curr_fec_encode_time_min_us, openhd_stats_wb_video_air_fec_performance->curr_fec_encode_time_max_us, openhd_stats_wb_video_air_fec_performance->curr_fec_block_size_avg, openhd_stats_wb_video_air_fec_performance->curr_fec_block_size_min, openhd_stats_wb_video_air_fec_performance->curr_fec_block_size_max, openhd_stats_wb_video_air_fec_performance->dummy0, openhd_stats_wb_video_air_fec_performance->dummy1, openhd_stats_wb_video_air_fec_performance->dummy2);
 }
 
 /**
@@ -206,7 +197,7 @@ static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_enc
  */
 static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_stats_wb_video_air_fec_performance_t* openhd_stats_wb_video_air_fec_performance)
 {
-    return mavlink_msg_openhd_stats_wb_video_air_fec_performance_pack_chan(system_id, component_id, chan, msg, openhd_stats_wb_video_air_fec_performance->link_index, openhd_stats_wb_video_air_fec_performance->curr_fec_encode_time_avg_us, openhd_stats_wb_video_air_fec_performance->curr_fec_encode_time_min_us, openhd_stats_wb_video_air_fec_performance->curr_fec_encode_time_max_us, openhd_stats_wb_video_air_fec_performance->curr_fec_block_size_avg, openhd_stats_wb_video_air_fec_performance->curr_fec_block_size_min, openhd_stats_wb_video_air_fec_performance->curr_fec_block_size_max, openhd_stats_wb_video_air_fec_performance->dummy0, openhd_stats_wb_video_air_fec_performance->dummy1, openhd_stats_wb_video_air_fec_performance->dummy2, openhd_stats_wb_video_air_fec_performance->dummy3);
+    return mavlink_msg_openhd_stats_wb_video_air_fec_performance_pack_chan(system_id, component_id, chan, msg, openhd_stats_wb_video_air_fec_performance->link_index, openhd_stats_wb_video_air_fec_performance->curr_fec_encode_time_avg_us, openhd_stats_wb_video_air_fec_performance->curr_fec_encode_time_min_us, openhd_stats_wb_video_air_fec_performance->curr_fec_encode_time_max_us, openhd_stats_wb_video_air_fec_performance->curr_fec_block_size_avg, openhd_stats_wb_video_air_fec_performance->curr_fec_block_size_min, openhd_stats_wb_video_air_fec_performance->curr_fec_block_size_max, openhd_stats_wb_video_air_fec_performance->dummy0, openhd_stats_wb_video_air_fec_performance->dummy1, openhd_stats_wb_video_air_fec_performance->dummy2);
 }
 
 /**
@@ -223,11 +214,10 @@ static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_enc
  * @param dummy0  for future use
  * @param dummy1  for future use
  * @param dummy2  for future use
- * @param dummy3  for future use
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
-static inline void mavlink_msg_openhd_stats_wb_video_air_fec_performance_send(mavlink_channel_t chan, uint8_t link_index, uint32_t curr_fec_encode_time_avg_us, uint32_t curr_fec_encode_time_min_us, uint32_t curr_fec_encode_time_max_us, uint16_t curr_fec_block_size_avg, uint16_t curr_fec_block_size_min, uint16_t curr_fec_block_size_max, int8_t dummy0, int16_t dummy1, int32_t dummy2, uint32_t dummy3)
+static inline void mavlink_msg_openhd_stats_wb_video_air_fec_performance_send(mavlink_channel_t chan, uint8_t link_index, uint32_t curr_fec_encode_time_avg_us, uint32_t curr_fec_encode_time_min_us, uint32_t curr_fec_encode_time_max_us, uint16_t curr_fec_block_size_avg, uint16_t curr_fec_block_size_min, uint16_t curr_fec_block_size_max, int8_t dummy0, int16_t dummy1, int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE_LEN];
@@ -235,13 +225,12 @@ static inline void mavlink_msg_openhd_stats_wb_video_air_fec_performance_send(ma
     _mav_put_uint32_t(buf, 4, curr_fec_encode_time_min_us);
     _mav_put_uint32_t(buf, 8, curr_fec_encode_time_max_us);
     _mav_put_int32_t(buf, 12, dummy2);
-    _mav_put_uint32_t(buf, 16, dummy3);
-    _mav_put_uint16_t(buf, 20, curr_fec_block_size_avg);
-    _mav_put_uint16_t(buf, 22, curr_fec_block_size_min);
-    _mav_put_uint16_t(buf, 24, curr_fec_block_size_max);
-    _mav_put_int16_t(buf, 26, dummy1);
-    _mav_put_uint8_t(buf, 28, link_index);
-    _mav_put_int8_t(buf, 29, dummy0);
+    _mav_put_uint16_t(buf, 16, curr_fec_block_size_avg);
+    _mav_put_uint16_t(buf, 18, curr_fec_block_size_min);
+    _mav_put_uint16_t(buf, 20, curr_fec_block_size_max);
+    _mav_put_int16_t(buf, 22, dummy1);
+    _mav_put_uint8_t(buf, 24, link_index);
+    _mav_put_int8_t(buf, 25, dummy0);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE, buf, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE_MIN_LEN, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE_LEN, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE_CRC);
 #else
@@ -250,7 +239,6 @@ static inline void mavlink_msg_openhd_stats_wb_video_air_fec_performance_send(ma
     packet.curr_fec_encode_time_min_us = curr_fec_encode_time_min_us;
     packet.curr_fec_encode_time_max_us = curr_fec_encode_time_max_us;
     packet.dummy2 = dummy2;
-    packet.dummy3 = dummy3;
     packet.curr_fec_block_size_avg = curr_fec_block_size_avg;
     packet.curr_fec_block_size_min = curr_fec_block_size_min;
     packet.curr_fec_block_size_max = curr_fec_block_size_max;
@@ -270,7 +258,7 @@ static inline void mavlink_msg_openhd_stats_wb_video_air_fec_performance_send(ma
 static inline void mavlink_msg_openhd_stats_wb_video_air_fec_performance_send_struct(mavlink_channel_t chan, const mavlink_openhd_stats_wb_video_air_fec_performance_t* openhd_stats_wb_video_air_fec_performance)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    mavlink_msg_openhd_stats_wb_video_air_fec_performance_send(chan, openhd_stats_wb_video_air_fec_performance->link_index, openhd_stats_wb_video_air_fec_performance->curr_fec_encode_time_avg_us, openhd_stats_wb_video_air_fec_performance->curr_fec_encode_time_min_us, openhd_stats_wb_video_air_fec_performance->curr_fec_encode_time_max_us, openhd_stats_wb_video_air_fec_performance->curr_fec_block_size_avg, openhd_stats_wb_video_air_fec_performance->curr_fec_block_size_min, openhd_stats_wb_video_air_fec_performance->curr_fec_block_size_max, openhd_stats_wb_video_air_fec_performance->dummy0, openhd_stats_wb_video_air_fec_performance->dummy1, openhd_stats_wb_video_air_fec_performance->dummy2, openhd_stats_wb_video_air_fec_performance->dummy3);
+    mavlink_msg_openhd_stats_wb_video_air_fec_performance_send(chan, openhd_stats_wb_video_air_fec_performance->link_index, openhd_stats_wb_video_air_fec_performance->curr_fec_encode_time_avg_us, openhd_stats_wb_video_air_fec_performance->curr_fec_encode_time_min_us, openhd_stats_wb_video_air_fec_performance->curr_fec_encode_time_max_us, openhd_stats_wb_video_air_fec_performance->curr_fec_block_size_avg, openhd_stats_wb_video_air_fec_performance->curr_fec_block_size_min, openhd_stats_wb_video_air_fec_performance->curr_fec_block_size_max, openhd_stats_wb_video_air_fec_performance->dummy0, openhd_stats_wb_video_air_fec_performance->dummy1, openhd_stats_wb_video_air_fec_performance->dummy2);
 #else
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE, (const char *)openhd_stats_wb_video_air_fec_performance, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE_MIN_LEN, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE_LEN, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE_CRC);
 #endif
@@ -284,7 +272,7 @@ static inline void mavlink_msg_openhd_stats_wb_video_air_fec_performance_send_st
   is usually the receive buffer for the channel, and allows a reply to an
   incoming message with minimum stack space usage.
  */
-static inline void mavlink_msg_openhd_stats_wb_video_air_fec_performance_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint8_t link_index, uint32_t curr_fec_encode_time_avg_us, uint32_t curr_fec_encode_time_min_us, uint32_t curr_fec_encode_time_max_us, uint16_t curr_fec_block_size_avg, uint16_t curr_fec_block_size_min, uint16_t curr_fec_block_size_max, int8_t dummy0, int16_t dummy1, int32_t dummy2, uint32_t dummy3)
+static inline void mavlink_msg_openhd_stats_wb_video_air_fec_performance_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint8_t link_index, uint32_t curr_fec_encode_time_avg_us, uint32_t curr_fec_encode_time_min_us, uint32_t curr_fec_encode_time_max_us, uint16_t curr_fec_block_size_avg, uint16_t curr_fec_block_size_min, uint16_t curr_fec_block_size_max, int8_t dummy0, int16_t dummy1, int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char *buf = (char *)msgbuf;
@@ -292,13 +280,12 @@ static inline void mavlink_msg_openhd_stats_wb_video_air_fec_performance_send_bu
     _mav_put_uint32_t(buf, 4, curr_fec_encode_time_min_us);
     _mav_put_uint32_t(buf, 8, curr_fec_encode_time_max_us);
     _mav_put_int32_t(buf, 12, dummy2);
-    _mav_put_uint32_t(buf, 16, dummy3);
-    _mav_put_uint16_t(buf, 20, curr_fec_block_size_avg);
-    _mav_put_uint16_t(buf, 22, curr_fec_block_size_min);
-    _mav_put_uint16_t(buf, 24, curr_fec_block_size_max);
-    _mav_put_int16_t(buf, 26, dummy1);
-    _mav_put_uint8_t(buf, 28, link_index);
-    _mav_put_int8_t(buf, 29, dummy0);
+    _mav_put_uint16_t(buf, 16, curr_fec_block_size_avg);
+    _mav_put_uint16_t(buf, 18, curr_fec_block_size_min);
+    _mav_put_uint16_t(buf, 20, curr_fec_block_size_max);
+    _mav_put_int16_t(buf, 22, dummy1);
+    _mav_put_uint8_t(buf, 24, link_index);
+    _mav_put_int8_t(buf, 25, dummy0);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE, buf, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE_MIN_LEN, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE_LEN, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE_CRC);
 #else
@@ -307,7 +294,6 @@ static inline void mavlink_msg_openhd_stats_wb_video_air_fec_performance_send_bu
     packet->curr_fec_encode_time_min_us = curr_fec_encode_time_min_us;
     packet->curr_fec_encode_time_max_us = curr_fec_encode_time_max_us;
     packet->dummy2 = dummy2;
-    packet->dummy3 = dummy3;
     packet->curr_fec_block_size_avg = curr_fec_block_size_avg;
     packet->curr_fec_block_size_min = curr_fec_block_size_min;
     packet->curr_fec_block_size_max = curr_fec_block_size_max;
@@ -332,7 +318,7 @@ static inline void mavlink_msg_openhd_stats_wb_video_air_fec_performance_send_bu
  */
 static inline uint8_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_get_link_index(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  28);
+    return _MAV_RETURN_uint8_t(msg,  24);
 }
 
 /**
@@ -372,7 +358,7 @@ static inline uint32_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_get
  */
 static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_get_curr_fec_block_size_avg(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint16_t(msg,  20);
+    return _MAV_RETURN_uint16_t(msg,  16);
 }
 
 /**
@@ -382,7 +368,7 @@ static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_get
  */
 static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_get_curr_fec_block_size_min(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint16_t(msg,  22);
+    return _MAV_RETURN_uint16_t(msg,  18);
 }
 
 /**
@@ -392,7 +378,7 @@ static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_get
  */
 static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_get_curr_fec_block_size_max(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint16_t(msg,  24);
+    return _MAV_RETURN_uint16_t(msg,  20);
 }
 
 /**
@@ -402,7 +388,7 @@ static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_get
  */
 static inline int8_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_get_dummy0(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int8_t(msg,  29);
+    return _MAV_RETURN_int8_t(msg,  25);
 }
 
 /**
@@ -412,7 +398,7 @@ static inline int8_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_get_d
  */
 static inline int16_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_get_dummy1(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int16_t(msg,  26);
+    return _MAV_RETURN_int16_t(msg,  22);
 }
 
 /**
@@ -423,16 +409,6 @@ static inline int16_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_get_
 static inline int32_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_get_dummy2(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_int32_t(msg,  12);
-}
-
-/**
- * @brief Get field dummy3 from openhd_stats_wb_video_air_fec_performance message
- *
- * @return  for future use
- */
-static inline uint32_t mavlink_msg_openhd_stats_wb_video_air_fec_performance_get_dummy3(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint32_t(msg,  16);
 }
 
 /**
@@ -448,7 +424,6 @@ static inline void mavlink_msg_openhd_stats_wb_video_air_fec_performance_decode(
     openhd_stats_wb_video_air_fec_performance->curr_fec_encode_time_min_us = mavlink_msg_openhd_stats_wb_video_air_fec_performance_get_curr_fec_encode_time_min_us(msg);
     openhd_stats_wb_video_air_fec_performance->curr_fec_encode_time_max_us = mavlink_msg_openhd_stats_wb_video_air_fec_performance_get_curr_fec_encode_time_max_us(msg);
     openhd_stats_wb_video_air_fec_performance->dummy2 = mavlink_msg_openhd_stats_wb_video_air_fec_performance_get_dummy2(msg);
-    openhd_stats_wb_video_air_fec_performance->dummy3 = mavlink_msg_openhd_stats_wb_video_air_fec_performance_get_dummy3(msg);
     openhd_stats_wb_video_air_fec_performance->curr_fec_block_size_avg = mavlink_msg_openhd_stats_wb_video_air_fec_performance_get_curr_fec_block_size_avg(msg);
     openhd_stats_wb_video_air_fec_performance->curr_fec_block_size_min = mavlink_msg_openhd_stats_wb_video_air_fec_performance_get_curr_fec_block_size_min(msg);
     openhd_stats_wb_video_air_fec_performance->curr_fec_block_size_max = mavlink_msg_openhd_stats_wb_video_air_fec_performance_get_curr_fec_block_size_max(msg);
