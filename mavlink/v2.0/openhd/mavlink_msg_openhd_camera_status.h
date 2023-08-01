@@ -12,19 +12,21 @@ typedef struct __mavlink_openhd_camera_status_t {
  uint16_t stream_fps; /*<  streamed video fps*/
  int16_t dummy1; /*<  for future use*/
  uint8_t cam_type; /*<  0==Unknown, follows the definitions in openhd (camera_enums.hpp)*/
+ uint8_t cam_status; /*<  0==Unknown, 1==camera is currently streaming, 2==camera is currently restarting*/
+ uint8_t supports_variable_bitrate; /*<  Set to 1 if camera supports variable bitrate (changing the bitrate)*/
  uint8_t air_recording_active; /*<  air_recording_active*/
  uint8_t encoding_format; /*<  0 for h264, 1 for h265, 2 for mjpeg*/
  uint8_t encoding_keyframe_interval; /*<  encoding_keyframe_interval*/
  int8_t dummy0; /*<  for future use*/
 } mavlink_openhd_camera_status_t;
 
-#define MAVLINK_MSG_ID_OPENHD_CAMERA_STATUS_LEN 19
-#define MAVLINK_MSG_ID_OPENHD_CAMERA_STATUS_MIN_LEN 19
-#define MAVLINK_MSG_ID_1219_LEN 19
-#define MAVLINK_MSG_ID_1219_MIN_LEN 19
+#define MAVLINK_MSG_ID_OPENHD_CAMERA_STATUS_LEN 21
+#define MAVLINK_MSG_ID_OPENHD_CAMERA_STATUS_MIN_LEN 21
+#define MAVLINK_MSG_ID_1219_LEN 21
+#define MAVLINK_MSG_ID_1219_MIN_LEN 21
 
-#define MAVLINK_MSG_ID_OPENHD_CAMERA_STATUS_CRC 16
-#define MAVLINK_MSG_ID_1219_CRC 16
+#define MAVLINK_MSG_ID_OPENHD_CAMERA_STATUS_CRC 51
+#define MAVLINK_MSG_ID_1219_CRC 51
 
 
 
@@ -32,16 +34,18 @@ typedef struct __mavlink_openhd_camera_status_t {
 #define MAVLINK_MESSAGE_INFO_OPENHD_CAMERA_STATUS { \
     1219, \
     "OPENHD_CAMERA_STATUS", \
-    11, \
+    13, \
     {  { "cam_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 14, offsetof(mavlink_openhd_camera_status_t, cam_type) }, \
-         { "air_recording_active", NULL, MAVLINK_TYPE_UINT8_T, 0, 15, offsetof(mavlink_openhd_camera_status_t, air_recording_active) }, \
-         { "encoding_format", NULL, MAVLINK_TYPE_UINT8_T, 0, 16, offsetof(mavlink_openhd_camera_status_t, encoding_format) }, \
+         { "cam_status", NULL, MAVLINK_TYPE_UINT8_T, 0, 15, offsetof(mavlink_openhd_camera_status_t, cam_status) }, \
+         { "supports_variable_bitrate", NULL, MAVLINK_TYPE_UINT8_T, 0, 16, offsetof(mavlink_openhd_camera_status_t, supports_variable_bitrate) }, \
+         { "air_recording_active", NULL, MAVLINK_TYPE_UINT8_T, 0, 17, offsetof(mavlink_openhd_camera_status_t, air_recording_active) }, \
+         { "encoding_format", NULL, MAVLINK_TYPE_UINT8_T, 0, 18, offsetof(mavlink_openhd_camera_status_t, encoding_format) }, \
          { "encoding_bitrate_kbits", NULL, MAVLINK_TYPE_UINT16_T, 0, 4, offsetof(mavlink_openhd_camera_status_t, encoding_bitrate_kbits) }, \
-         { "encoding_keyframe_interval", NULL, MAVLINK_TYPE_UINT8_T, 0, 17, offsetof(mavlink_openhd_camera_status_t, encoding_keyframe_interval) }, \
+         { "encoding_keyframe_interval", NULL, MAVLINK_TYPE_UINT8_T, 0, 19, offsetof(mavlink_openhd_camera_status_t, encoding_keyframe_interval) }, \
          { "stream_w", NULL, MAVLINK_TYPE_UINT16_T, 0, 6, offsetof(mavlink_openhd_camera_status_t, stream_w) }, \
          { "stream_h", NULL, MAVLINK_TYPE_UINT16_T, 0, 8, offsetof(mavlink_openhd_camera_status_t, stream_h) }, \
          { "stream_fps", NULL, MAVLINK_TYPE_UINT16_T, 0, 10, offsetof(mavlink_openhd_camera_status_t, stream_fps) }, \
-         { "dummy0", NULL, MAVLINK_TYPE_INT8_T, 0, 18, offsetof(mavlink_openhd_camera_status_t, dummy0) }, \
+         { "dummy0", NULL, MAVLINK_TYPE_INT8_T, 0, 20, offsetof(mavlink_openhd_camera_status_t, dummy0) }, \
          { "dummy1", NULL, MAVLINK_TYPE_INT16_T, 0, 12, offsetof(mavlink_openhd_camera_status_t, dummy1) }, \
          { "dummy2", NULL, MAVLINK_TYPE_INT32_T, 0, 0, offsetof(mavlink_openhd_camera_status_t, dummy2) }, \
          } \
@@ -49,16 +53,18 @@ typedef struct __mavlink_openhd_camera_status_t {
 #else
 #define MAVLINK_MESSAGE_INFO_OPENHD_CAMERA_STATUS { \
     "OPENHD_CAMERA_STATUS", \
-    11, \
+    13, \
     {  { "cam_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 14, offsetof(mavlink_openhd_camera_status_t, cam_type) }, \
-         { "air_recording_active", NULL, MAVLINK_TYPE_UINT8_T, 0, 15, offsetof(mavlink_openhd_camera_status_t, air_recording_active) }, \
-         { "encoding_format", NULL, MAVLINK_TYPE_UINT8_T, 0, 16, offsetof(mavlink_openhd_camera_status_t, encoding_format) }, \
+         { "cam_status", NULL, MAVLINK_TYPE_UINT8_T, 0, 15, offsetof(mavlink_openhd_camera_status_t, cam_status) }, \
+         { "supports_variable_bitrate", NULL, MAVLINK_TYPE_UINT8_T, 0, 16, offsetof(mavlink_openhd_camera_status_t, supports_variable_bitrate) }, \
+         { "air_recording_active", NULL, MAVLINK_TYPE_UINT8_T, 0, 17, offsetof(mavlink_openhd_camera_status_t, air_recording_active) }, \
+         { "encoding_format", NULL, MAVLINK_TYPE_UINT8_T, 0, 18, offsetof(mavlink_openhd_camera_status_t, encoding_format) }, \
          { "encoding_bitrate_kbits", NULL, MAVLINK_TYPE_UINT16_T, 0, 4, offsetof(mavlink_openhd_camera_status_t, encoding_bitrate_kbits) }, \
-         { "encoding_keyframe_interval", NULL, MAVLINK_TYPE_UINT8_T, 0, 17, offsetof(mavlink_openhd_camera_status_t, encoding_keyframe_interval) }, \
+         { "encoding_keyframe_interval", NULL, MAVLINK_TYPE_UINT8_T, 0, 19, offsetof(mavlink_openhd_camera_status_t, encoding_keyframe_interval) }, \
          { "stream_w", NULL, MAVLINK_TYPE_UINT16_T, 0, 6, offsetof(mavlink_openhd_camera_status_t, stream_w) }, \
          { "stream_h", NULL, MAVLINK_TYPE_UINT16_T, 0, 8, offsetof(mavlink_openhd_camera_status_t, stream_h) }, \
          { "stream_fps", NULL, MAVLINK_TYPE_UINT16_T, 0, 10, offsetof(mavlink_openhd_camera_status_t, stream_fps) }, \
-         { "dummy0", NULL, MAVLINK_TYPE_INT8_T, 0, 18, offsetof(mavlink_openhd_camera_status_t, dummy0) }, \
+         { "dummy0", NULL, MAVLINK_TYPE_INT8_T, 0, 20, offsetof(mavlink_openhd_camera_status_t, dummy0) }, \
          { "dummy1", NULL, MAVLINK_TYPE_INT16_T, 0, 12, offsetof(mavlink_openhd_camera_status_t, dummy1) }, \
          { "dummy2", NULL, MAVLINK_TYPE_INT32_T, 0, 0, offsetof(mavlink_openhd_camera_status_t, dummy2) }, \
          } \
@@ -72,6 +78,8 @@ typedef struct __mavlink_openhd_camera_status_t {
  * @param msg The MAVLink message to compress the data into
  *
  * @param cam_type  0==Unknown, follows the definitions in openhd (camera_enums.hpp)
+ * @param cam_status  0==Unknown, 1==camera is currently streaming, 2==camera is currently restarting
+ * @param supports_variable_bitrate  Set to 1 if camera supports variable bitrate (changing the bitrate)
  * @param air_recording_active  air_recording_active
  * @param encoding_format  0 for h264, 1 for h265, 2 for mjpeg
  * @param encoding_bitrate_kbits  encoding_bitrate_kbits
@@ -85,7 +93,7 @@ typedef struct __mavlink_openhd_camera_status_t {
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_openhd_camera_status_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
-                               uint8_t cam_type, uint8_t air_recording_active, uint8_t encoding_format, uint16_t encoding_bitrate_kbits, uint8_t encoding_keyframe_interval, uint16_t stream_w, uint16_t stream_h, uint16_t stream_fps, int8_t dummy0, int16_t dummy1, int32_t dummy2)
+                               uint8_t cam_type, uint8_t cam_status, uint8_t supports_variable_bitrate, uint8_t air_recording_active, uint8_t encoding_format, uint16_t encoding_bitrate_kbits, uint8_t encoding_keyframe_interval, uint16_t stream_w, uint16_t stream_h, uint16_t stream_fps, int8_t dummy0, int16_t dummy1, int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_OPENHD_CAMERA_STATUS_LEN];
@@ -96,10 +104,12 @@ static inline uint16_t mavlink_msg_openhd_camera_status_pack(uint8_t system_id, 
     _mav_put_uint16_t(buf, 10, stream_fps);
     _mav_put_int16_t(buf, 12, dummy1);
     _mav_put_uint8_t(buf, 14, cam_type);
-    _mav_put_uint8_t(buf, 15, air_recording_active);
-    _mav_put_uint8_t(buf, 16, encoding_format);
-    _mav_put_uint8_t(buf, 17, encoding_keyframe_interval);
-    _mav_put_int8_t(buf, 18, dummy0);
+    _mav_put_uint8_t(buf, 15, cam_status);
+    _mav_put_uint8_t(buf, 16, supports_variable_bitrate);
+    _mav_put_uint8_t(buf, 17, air_recording_active);
+    _mav_put_uint8_t(buf, 18, encoding_format);
+    _mav_put_uint8_t(buf, 19, encoding_keyframe_interval);
+    _mav_put_int8_t(buf, 20, dummy0);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_OPENHD_CAMERA_STATUS_LEN);
 #else
@@ -111,6 +121,8 @@ static inline uint16_t mavlink_msg_openhd_camera_status_pack(uint8_t system_id, 
     packet.stream_fps = stream_fps;
     packet.dummy1 = dummy1;
     packet.cam_type = cam_type;
+    packet.cam_status = cam_status;
+    packet.supports_variable_bitrate = supports_variable_bitrate;
     packet.air_recording_active = air_recording_active;
     packet.encoding_format = encoding_format;
     packet.encoding_keyframe_interval = encoding_keyframe_interval;
@@ -130,6 +142,8 @@ static inline uint16_t mavlink_msg_openhd_camera_status_pack(uint8_t system_id, 
  * @param chan The MAVLink channel this message will be sent over
  * @param msg The MAVLink message to compress the data into
  * @param cam_type  0==Unknown, follows the definitions in openhd (camera_enums.hpp)
+ * @param cam_status  0==Unknown, 1==camera is currently streaming, 2==camera is currently restarting
+ * @param supports_variable_bitrate  Set to 1 if camera supports variable bitrate (changing the bitrate)
  * @param air_recording_active  air_recording_active
  * @param encoding_format  0 for h264, 1 for h265, 2 for mjpeg
  * @param encoding_bitrate_kbits  encoding_bitrate_kbits
@@ -144,7 +158,7 @@ static inline uint16_t mavlink_msg_openhd_camera_status_pack(uint8_t system_id, 
  */
 static inline uint16_t mavlink_msg_openhd_camera_status_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
-                                   uint8_t cam_type,uint8_t air_recording_active,uint8_t encoding_format,uint16_t encoding_bitrate_kbits,uint8_t encoding_keyframe_interval,uint16_t stream_w,uint16_t stream_h,uint16_t stream_fps,int8_t dummy0,int16_t dummy1,int32_t dummy2)
+                                   uint8_t cam_type,uint8_t cam_status,uint8_t supports_variable_bitrate,uint8_t air_recording_active,uint8_t encoding_format,uint16_t encoding_bitrate_kbits,uint8_t encoding_keyframe_interval,uint16_t stream_w,uint16_t stream_h,uint16_t stream_fps,int8_t dummy0,int16_t dummy1,int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_OPENHD_CAMERA_STATUS_LEN];
@@ -155,10 +169,12 @@ static inline uint16_t mavlink_msg_openhd_camera_status_pack_chan(uint8_t system
     _mav_put_uint16_t(buf, 10, stream_fps);
     _mav_put_int16_t(buf, 12, dummy1);
     _mav_put_uint8_t(buf, 14, cam_type);
-    _mav_put_uint8_t(buf, 15, air_recording_active);
-    _mav_put_uint8_t(buf, 16, encoding_format);
-    _mav_put_uint8_t(buf, 17, encoding_keyframe_interval);
-    _mav_put_int8_t(buf, 18, dummy0);
+    _mav_put_uint8_t(buf, 15, cam_status);
+    _mav_put_uint8_t(buf, 16, supports_variable_bitrate);
+    _mav_put_uint8_t(buf, 17, air_recording_active);
+    _mav_put_uint8_t(buf, 18, encoding_format);
+    _mav_put_uint8_t(buf, 19, encoding_keyframe_interval);
+    _mav_put_int8_t(buf, 20, dummy0);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_OPENHD_CAMERA_STATUS_LEN);
 #else
@@ -170,6 +186,8 @@ static inline uint16_t mavlink_msg_openhd_camera_status_pack_chan(uint8_t system
     packet.stream_fps = stream_fps;
     packet.dummy1 = dummy1;
     packet.cam_type = cam_type;
+    packet.cam_status = cam_status;
+    packet.supports_variable_bitrate = supports_variable_bitrate;
     packet.air_recording_active = air_recording_active;
     packet.encoding_format = encoding_format;
     packet.encoding_keyframe_interval = encoding_keyframe_interval;
@@ -192,7 +210,7 @@ static inline uint16_t mavlink_msg_openhd_camera_status_pack_chan(uint8_t system
  */
 static inline uint16_t mavlink_msg_openhd_camera_status_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_camera_status_t* openhd_camera_status)
 {
-    return mavlink_msg_openhd_camera_status_pack(system_id, component_id, msg, openhd_camera_status->cam_type, openhd_camera_status->air_recording_active, openhd_camera_status->encoding_format, openhd_camera_status->encoding_bitrate_kbits, openhd_camera_status->encoding_keyframe_interval, openhd_camera_status->stream_w, openhd_camera_status->stream_h, openhd_camera_status->stream_fps, openhd_camera_status->dummy0, openhd_camera_status->dummy1, openhd_camera_status->dummy2);
+    return mavlink_msg_openhd_camera_status_pack(system_id, component_id, msg, openhd_camera_status->cam_type, openhd_camera_status->cam_status, openhd_camera_status->supports_variable_bitrate, openhd_camera_status->air_recording_active, openhd_camera_status->encoding_format, openhd_camera_status->encoding_bitrate_kbits, openhd_camera_status->encoding_keyframe_interval, openhd_camera_status->stream_w, openhd_camera_status->stream_h, openhd_camera_status->stream_fps, openhd_camera_status->dummy0, openhd_camera_status->dummy1, openhd_camera_status->dummy2);
 }
 
 /**
@@ -206,7 +224,7 @@ static inline uint16_t mavlink_msg_openhd_camera_status_encode(uint8_t system_id
  */
 static inline uint16_t mavlink_msg_openhd_camera_status_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_camera_status_t* openhd_camera_status)
 {
-    return mavlink_msg_openhd_camera_status_pack_chan(system_id, component_id, chan, msg, openhd_camera_status->cam_type, openhd_camera_status->air_recording_active, openhd_camera_status->encoding_format, openhd_camera_status->encoding_bitrate_kbits, openhd_camera_status->encoding_keyframe_interval, openhd_camera_status->stream_w, openhd_camera_status->stream_h, openhd_camera_status->stream_fps, openhd_camera_status->dummy0, openhd_camera_status->dummy1, openhd_camera_status->dummy2);
+    return mavlink_msg_openhd_camera_status_pack_chan(system_id, component_id, chan, msg, openhd_camera_status->cam_type, openhd_camera_status->cam_status, openhd_camera_status->supports_variable_bitrate, openhd_camera_status->air_recording_active, openhd_camera_status->encoding_format, openhd_camera_status->encoding_bitrate_kbits, openhd_camera_status->encoding_keyframe_interval, openhd_camera_status->stream_w, openhd_camera_status->stream_h, openhd_camera_status->stream_fps, openhd_camera_status->dummy0, openhd_camera_status->dummy1, openhd_camera_status->dummy2);
 }
 
 /**
@@ -214,6 +232,8 @@ static inline uint16_t mavlink_msg_openhd_camera_status_encode_chan(uint8_t syst
  * @param chan MAVLink channel to send the message
  *
  * @param cam_type  0==Unknown, follows the definitions in openhd (camera_enums.hpp)
+ * @param cam_status  0==Unknown, 1==camera is currently streaming, 2==camera is currently restarting
+ * @param supports_variable_bitrate  Set to 1 if camera supports variable bitrate (changing the bitrate)
  * @param air_recording_active  air_recording_active
  * @param encoding_format  0 for h264, 1 for h265, 2 for mjpeg
  * @param encoding_bitrate_kbits  encoding_bitrate_kbits
@@ -227,7 +247,7 @@ static inline uint16_t mavlink_msg_openhd_camera_status_encode_chan(uint8_t syst
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
-static inline void mavlink_msg_openhd_camera_status_send(mavlink_channel_t chan, uint8_t cam_type, uint8_t air_recording_active, uint8_t encoding_format, uint16_t encoding_bitrate_kbits, uint8_t encoding_keyframe_interval, uint16_t stream_w, uint16_t stream_h, uint16_t stream_fps, int8_t dummy0, int16_t dummy1, int32_t dummy2)
+static inline void mavlink_msg_openhd_camera_status_send(mavlink_channel_t chan, uint8_t cam_type, uint8_t cam_status, uint8_t supports_variable_bitrate, uint8_t air_recording_active, uint8_t encoding_format, uint16_t encoding_bitrate_kbits, uint8_t encoding_keyframe_interval, uint16_t stream_w, uint16_t stream_h, uint16_t stream_fps, int8_t dummy0, int16_t dummy1, int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_OPENHD_CAMERA_STATUS_LEN];
@@ -238,10 +258,12 @@ static inline void mavlink_msg_openhd_camera_status_send(mavlink_channel_t chan,
     _mav_put_uint16_t(buf, 10, stream_fps);
     _mav_put_int16_t(buf, 12, dummy1);
     _mav_put_uint8_t(buf, 14, cam_type);
-    _mav_put_uint8_t(buf, 15, air_recording_active);
-    _mav_put_uint8_t(buf, 16, encoding_format);
-    _mav_put_uint8_t(buf, 17, encoding_keyframe_interval);
-    _mav_put_int8_t(buf, 18, dummy0);
+    _mav_put_uint8_t(buf, 15, cam_status);
+    _mav_put_uint8_t(buf, 16, supports_variable_bitrate);
+    _mav_put_uint8_t(buf, 17, air_recording_active);
+    _mav_put_uint8_t(buf, 18, encoding_format);
+    _mav_put_uint8_t(buf, 19, encoding_keyframe_interval);
+    _mav_put_int8_t(buf, 20, dummy0);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_CAMERA_STATUS, buf, MAVLINK_MSG_ID_OPENHD_CAMERA_STATUS_MIN_LEN, MAVLINK_MSG_ID_OPENHD_CAMERA_STATUS_LEN, MAVLINK_MSG_ID_OPENHD_CAMERA_STATUS_CRC);
 #else
@@ -253,6 +275,8 @@ static inline void mavlink_msg_openhd_camera_status_send(mavlink_channel_t chan,
     packet.stream_fps = stream_fps;
     packet.dummy1 = dummy1;
     packet.cam_type = cam_type;
+    packet.cam_status = cam_status;
+    packet.supports_variable_bitrate = supports_variable_bitrate;
     packet.air_recording_active = air_recording_active;
     packet.encoding_format = encoding_format;
     packet.encoding_keyframe_interval = encoding_keyframe_interval;
@@ -270,7 +294,7 @@ static inline void mavlink_msg_openhd_camera_status_send(mavlink_channel_t chan,
 static inline void mavlink_msg_openhd_camera_status_send_struct(mavlink_channel_t chan, const mavlink_openhd_camera_status_t* openhd_camera_status)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    mavlink_msg_openhd_camera_status_send(chan, openhd_camera_status->cam_type, openhd_camera_status->air_recording_active, openhd_camera_status->encoding_format, openhd_camera_status->encoding_bitrate_kbits, openhd_camera_status->encoding_keyframe_interval, openhd_camera_status->stream_w, openhd_camera_status->stream_h, openhd_camera_status->stream_fps, openhd_camera_status->dummy0, openhd_camera_status->dummy1, openhd_camera_status->dummy2);
+    mavlink_msg_openhd_camera_status_send(chan, openhd_camera_status->cam_type, openhd_camera_status->cam_status, openhd_camera_status->supports_variable_bitrate, openhd_camera_status->air_recording_active, openhd_camera_status->encoding_format, openhd_camera_status->encoding_bitrate_kbits, openhd_camera_status->encoding_keyframe_interval, openhd_camera_status->stream_w, openhd_camera_status->stream_h, openhd_camera_status->stream_fps, openhd_camera_status->dummy0, openhd_camera_status->dummy1, openhd_camera_status->dummy2);
 #else
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_CAMERA_STATUS, (const char *)openhd_camera_status, MAVLINK_MSG_ID_OPENHD_CAMERA_STATUS_MIN_LEN, MAVLINK_MSG_ID_OPENHD_CAMERA_STATUS_LEN, MAVLINK_MSG_ID_OPENHD_CAMERA_STATUS_CRC);
 #endif
@@ -284,7 +308,7 @@ static inline void mavlink_msg_openhd_camera_status_send_struct(mavlink_channel_
   is usually the receive buffer for the channel, and allows a reply to an
   incoming message with minimum stack space usage.
  */
-static inline void mavlink_msg_openhd_camera_status_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint8_t cam_type, uint8_t air_recording_active, uint8_t encoding_format, uint16_t encoding_bitrate_kbits, uint8_t encoding_keyframe_interval, uint16_t stream_w, uint16_t stream_h, uint16_t stream_fps, int8_t dummy0, int16_t dummy1, int32_t dummy2)
+static inline void mavlink_msg_openhd_camera_status_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint8_t cam_type, uint8_t cam_status, uint8_t supports_variable_bitrate, uint8_t air_recording_active, uint8_t encoding_format, uint16_t encoding_bitrate_kbits, uint8_t encoding_keyframe_interval, uint16_t stream_w, uint16_t stream_h, uint16_t stream_fps, int8_t dummy0, int16_t dummy1, int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char *buf = (char *)msgbuf;
@@ -295,10 +319,12 @@ static inline void mavlink_msg_openhd_camera_status_send_buf(mavlink_message_t *
     _mav_put_uint16_t(buf, 10, stream_fps);
     _mav_put_int16_t(buf, 12, dummy1);
     _mav_put_uint8_t(buf, 14, cam_type);
-    _mav_put_uint8_t(buf, 15, air_recording_active);
-    _mav_put_uint8_t(buf, 16, encoding_format);
-    _mav_put_uint8_t(buf, 17, encoding_keyframe_interval);
-    _mav_put_int8_t(buf, 18, dummy0);
+    _mav_put_uint8_t(buf, 15, cam_status);
+    _mav_put_uint8_t(buf, 16, supports_variable_bitrate);
+    _mav_put_uint8_t(buf, 17, air_recording_active);
+    _mav_put_uint8_t(buf, 18, encoding_format);
+    _mav_put_uint8_t(buf, 19, encoding_keyframe_interval);
+    _mav_put_int8_t(buf, 20, dummy0);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_CAMERA_STATUS, buf, MAVLINK_MSG_ID_OPENHD_CAMERA_STATUS_MIN_LEN, MAVLINK_MSG_ID_OPENHD_CAMERA_STATUS_LEN, MAVLINK_MSG_ID_OPENHD_CAMERA_STATUS_CRC);
 #else
@@ -310,6 +336,8 @@ static inline void mavlink_msg_openhd_camera_status_send_buf(mavlink_message_t *
     packet->stream_fps = stream_fps;
     packet->dummy1 = dummy1;
     packet->cam_type = cam_type;
+    packet->cam_status = cam_status;
+    packet->supports_variable_bitrate = supports_variable_bitrate;
     packet->air_recording_active = air_recording_active;
     packet->encoding_format = encoding_format;
     packet->encoding_keyframe_interval = encoding_keyframe_interval;
@@ -336,13 +364,33 @@ static inline uint8_t mavlink_msg_openhd_camera_status_get_cam_type(const mavlin
 }
 
 /**
+ * @brief Get field cam_status from openhd_camera_status message
+ *
+ * @return  0==Unknown, 1==camera is currently streaming, 2==camera is currently restarting
+ */
+static inline uint8_t mavlink_msg_openhd_camera_status_get_cam_status(const mavlink_message_t* msg)
+{
+    return _MAV_RETURN_uint8_t(msg,  15);
+}
+
+/**
+ * @brief Get field supports_variable_bitrate from openhd_camera_status message
+ *
+ * @return  Set to 1 if camera supports variable bitrate (changing the bitrate)
+ */
+static inline uint8_t mavlink_msg_openhd_camera_status_get_supports_variable_bitrate(const mavlink_message_t* msg)
+{
+    return _MAV_RETURN_uint8_t(msg,  16);
+}
+
+/**
  * @brief Get field air_recording_active from openhd_camera_status message
  *
  * @return  air_recording_active
  */
 static inline uint8_t mavlink_msg_openhd_camera_status_get_air_recording_active(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  15);
+    return _MAV_RETURN_uint8_t(msg,  17);
 }
 
 /**
@@ -352,7 +400,7 @@ static inline uint8_t mavlink_msg_openhd_camera_status_get_air_recording_active(
  */
 static inline uint8_t mavlink_msg_openhd_camera_status_get_encoding_format(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  16);
+    return _MAV_RETURN_uint8_t(msg,  18);
 }
 
 /**
@@ -372,7 +420,7 @@ static inline uint16_t mavlink_msg_openhd_camera_status_get_encoding_bitrate_kbi
  */
 static inline uint8_t mavlink_msg_openhd_camera_status_get_encoding_keyframe_interval(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  17);
+    return _MAV_RETURN_uint8_t(msg,  19);
 }
 
 /**
@@ -412,7 +460,7 @@ static inline uint16_t mavlink_msg_openhd_camera_status_get_stream_fps(const mav
  */
 static inline int8_t mavlink_msg_openhd_camera_status_get_dummy0(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int8_t(msg,  18);
+    return _MAV_RETURN_int8_t(msg,  20);
 }
 
 /**
@@ -451,6 +499,8 @@ static inline void mavlink_msg_openhd_camera_status_decode(const mavlink_message
     openhd_camera_status->stream_fps = mavlink_msg_openhd_camera_status_get_stream_fps(msg);
     openhd_camera_status->dummy1 = mavlink_msg_openhd_camera_status_get_dummy1(msg);
     openhd_camera_status->cam_type = mavlink_msg_openhd_camera_status_get_cam_type(msg);
+    openhd_camera_status->cam_status = mavlink_msg_openhd_camera_status_get_cam_status(msg);
+    openhd_camera_status->supports_variable_bitrate = mavlink_msg_openhd_camera_status_get_supports_variable_bitrate(msg);
     openhd_camera_status->air_recording_active = mavlink_msg_openhd_camera_status_get_air_recording_active(msg);
     openhd_camera_status->encoding_format = mavlink_msg_openhd_camera_status_get_encoding_format(msg);
     openhd_camera_status->encoding_keyframe_interval = mavlink_msg_openhd_camera_status_get_encoding_keyframe_interval(msg);

@@ -117,7 +117,7 @@ static void mavlink_test_openhd_stats_monitor_mode_wifi_card(uint8_t system_id, 
         uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
         uint16_t i;
     mavlink_openhd_stats_monitor_mode_wifi_card_t packet_in = {
-        963497464,963497672,963497880,17859,17963,53,120,187,254,65,132,199
+        963497464,963497672,963497880,17859,17963,53,120,187,254,65,132,199,10
     };
     mavlink_openhd_stats_monitor_mode_wifi_card_t packet1, packet2;
         memset(&packet1, 0, sizeof(packet1));
@@ -130,6 +130,7 @@ static void mavlink_test_openhd_stats_monitor_mode_wifi_card(uint8_t system_id, 
         packet1.card_type = packet_in.card_type;
         packet1.rx_rssi_1 = packet_in.rx_rssi_1;
         packet1.rx_rssi_2 = packet_in.rx_rssi_2;
+        packet1.rx_signal_quality = packet_in.rx_signal_quality;
         packet1.curr_rx_packet_loss_perc = packet_in.curr_rx_packet_loss_perc;
         packet1.curr_status = packet_in.curr_status;
         packet1.dummy0 = packet_in.dummy0;
@@ -147,12 +148,12 @@ static void mavlink_test_openhd_stats_monitor_mode_wifi_card(uint8_t system_id, 
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_openhd_stats_monitor_mode_wifi_card_pack(system_id, component_id, &msg , packet1.card_index , packet1.card_type , packet1.rx_rssi_1 , packet1.rx_rssi_2 , packet1.tx_power , packet1.count_p_received , packet1.count_p_injected , packet1.curr_rx_packet_loss_perc , packet1.curr_status , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
+    mavlink_msg_openhd_stats_monitor_mode_wifi_card_pack(system_id, component_id, &msg , packet1.card_index , packet1.card_type , packet1.rx_rssi_1 , packet1.rx_rssi_2 , packet1.rx_signal_quality , packet1.tx_power , packet1.count_p_received , packet1.count_p_injected , packet1.curr_rx_packet_loss_perc , packet1.curr_status , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
     mavlink_msg_openhd_stats_monitor_mode_wifi_card_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_openhd_stats_monitor_mode_wifi_card_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.card_index , packet1.card_type , packet1.rx_rssi_1 , packet1.rx_rssi_2 , packet1.tx_power , packet1.count_p_received , packet1.count_p_injected , packet1.curr_rx_packet_loss_perc , packet1.curr_status , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
+    mavlink_msg_openhd_stats_monitor_mode_wifi_card_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.card_index , packet1.card_type , packet1.rx_rssi_1 , packet1.rx_rssi_2 , packet1.rx_signal_quality , packet1.tx_power , packet1.count_p_received , packet1.count_p_injected , packet1.curr_rx_packet_loss_perc , packet1.curr_status , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
     mavlink_msg_openhd_stats_monitor_mode_wifi_card_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
@@ -165,7 +166,7 @@ static void mavlink_test_openhd_stats_monitor_mode_wifi_card(uint8_t system_id, 
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
         
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_openhd_stats_monitor_mode_wifi_card_send(MAVLINK_COMM_1 , packet1.card_index , packet1.card_type , packet1.rx_rssi_1 , packet1.rx_rssi_2 , packet1.tx_power , packet1.count_p_received , packet1.count_p_injected , packet1.curr_rx_packet_loss_perc , packet1.curr_status , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
+    mavlink_msg_openhd_stats_monitor_mode_wifi_card_send(MAVLINK_COMM_1 , packet1.card_index , packet1.card_type , packet1.rx_rssi_1 , packet1.rx_rssi_2 , packet1.rx_signal_quality , packet1.tx_power , packet1.count_p_received , packet1.count_p_injected , packet1.curr_rx_packet_loss_perc , packet1.curr_status , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
     mavlink_msg_openhd_stats_monitor_mode_wifi_card_decode(last_msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
@@ -585,7 +586,7 @@ static void mavlink_test_openhd_camera_status(uint8_t system_id, uint8_t compone
         uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
         uint16_t i;
     mavlink_openhd_camera_status_t packet_in = {
-        963497464,17443,17547,17651,17755,17859,175,242,53,120,187
+        963497464,17443,17547,17651,17755,17859,175,242,53,120,187,254,65
     };
     mavlink_openhd_camera_status_t packet1, packet2;
         memset(&packet1, 0, sizeof(packet1));
@@ -596,6 +597,8 @@ static void mavlink_test_openhd_camera_status(uint8_t system_id, uint8_t compone
         packet1.stream_fps = packet_in.stream_fps;
         packet1.dummy1 = packet_in.dummy1;
         packet1.cam_type = packet_in.cam_type;
+        packet1.cam_status = packet_in.cam_status;
+        packet1.supports_variable_bitrate = packet_in.supports_variable_bitrate;
         packet1.air_recording_active = packet_in.air_recording_active;
         packet1.encoding_format = packet_in.encoding_format;
         packet1.encoding_keyframe_interval = packet_in.encoding_keyframe_interval;
@@ -614,12 +617,12 @@ static void mavlink_test_openhd_camera_status(uint8_t system_id, uint8_t compone
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_openhd_camera_status_pack(system_id, component_id, &msg , packet1.cam_type , packet1.air_recording_active , packet1.encoding_format , packet1.encoding_bitrate_kbits , packet1.encoding_keyframe_interval , packet1.stream_w , packet1.stream_h , packet1.stream_fps , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
+    mavlink_msg_openhd_camera_status_pack(system_id, component_id, &msg , packet1.cam_type , packet1.cam_status , packet1.supports_variable_bitrate , packet1.air_recording_active , packet1.encoding_format , packet1.encoding_bitrate_kbits , packet1.encoding_keyframe_interval , packet1.stream_w , packet1.stream_h , packet1.stream_fps , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
     mavlink_msg_openhd_camera_status_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_openhd_camera_status_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.cam_type , packet1.air_recording_active , packet1.encoding_format , packet1.encoding_bitrate_kbits , packet1.encoding_keyframe_interval , packet1.stream_w , packet1.stream_h , packet1.stream_fps , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
+    mavlink_msg_openhd_camera_status_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.cam_type , packet1.cam_status , packet1.supports_variable_bitrate , packet1.air_recording_active , packet1.encoding_format , packet1.encoding_bitrate_kbits , packet1.encoding_keyframe_interval , packet1.stream_w , packet1.stream_h , packet1.stream_fps , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
     mavlink_msg_openhd_camera_status_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
@@ -632,7 +635,7 @@ static void mavlink_test_openhd_camera_status(uint8_t system_id, uint8_t compone
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
         
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_openhd_camera_status_send(MAVLINK_COMM_1 , packet1.cam_type , packet1.air_recording_active , packet1.encoding_format , packet1.encoding_bitrate_kbits , packet1.encoding_keyframe_interval , packet1.stream_w , packet1.stream_h , packet1.stream_fps , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
+    mavlink_msg_openhd_camera_status_send(MAVLINK_COMM_1 , packet1.cam_type , packet1.cam_status , packet1.supports_variable_bitrate , packet1.air_recording_active , packet1.encoding_format , packet1.encoding_bitrate_kbits , packet1.encoding_keyframe_interval , packet1.stream_w , packet1.stream_h , packet1.stream_fps , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
     mavlink_msg_openhd_camera_status_decode(last_msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
