@@ -10,12 +10,12 @@ cd mavlink
 
 python3 -m pymavlink.tools.mavgen --lang=C --wire-protocol=2.0 --output=generated/include/mavlink/v2.0 message_definitions/v1.0/openhd.xml
 
+
 echo "Header generated, copying"
 
 cd ../../
 
-mv tmp/mavlink/generated/include mavlink-headers
-
+mv tmp/mavlink/generated/include/mavlink mavlink
 rm -rf tmp
 
 echo "copying done, done"
