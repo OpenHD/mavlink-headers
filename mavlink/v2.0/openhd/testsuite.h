@@ -830,6 +830,132 @@ static void mavlink_test_openhd_wifbroadcast_supported_channels(uint8_t system_i
 #endif
 }
 
+static void mavlink_test_openhd_wifbroadcast_scan_channels_progress(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
+{
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+    mavlink_status_t *status = mavlink_get_channel_status(MAVLINK_COMM_0);
+        if ((status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) && MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SCAN_CHANNELS_PROGRESS >= 256) {
+            return;
+        }
+#endif
+    mavlink_message_t msg;
+        uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
+        uint16_t i;
+    mavlink_openhd_wifbroadcast_scan_channels_progress_t packet_in = {
+        17235,139,206
+    };
+    mavlink_openhd_wifbroadcast_scan_channels_progress_t packet1, packet2;
+        memset(&packet1, 0, sizeof(packet1));
+        packet1.channel_mhz = packet_in.channel_mhz;
+        packet1.progress = packet_in.progress;
+        packet1.channel_width_mhz = packet_in.channel_width_mhz;
+        
+        
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+        if (status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) {
+           // cope with extensions
+           memset(MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SCAN_CHANNELS_PROGRESS_MIN_LEN + (char *)&packet1, 0, sizeof(packet1)-MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SCAN_CHANNELS_PROGRESS_MIN_LEN);
+        }
+#endif
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_openhd_wifbroadcast_scan_channels_progress_encode(system_id, component_id, &msg, &packet1);
+    mavlink_msg_openhd_wifbroadcast_scan_channels_progress_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_openhd_wifbroadcast_scan_channels_progress_pack(system_id, component_id, &msg , packet1.progress , packet1.channel_mhz , packet1.channel_width_mhz );
+    mavlink_msg_openhd_wifbroadcast_scan_channels_progress_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_openhd_wifbroadcast_scan_channels_progress_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.progress , packet1.channel_mhz , packet1.channel_width_mhz );
+    mavlink_msg_openhd_wifbroadcast_scan_channels_progress_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+        mavlink_msg_to_send_buffer(buffer, &msg);
+        for (i=0; i<mavlink_msg_get_send_buffer_length(&msg); i++) {
+            comm_send_ch(MAVLINK_COMM_0, buffer[i]);
+        }
+    mavlink_msg_openhd_wifbroadcast_scan_channels_progress_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+        
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_openhd_wifbroadcast_scan_channels_progress_send(MAVLINK_COMM_1 , packet1.progress , packet1.channel_mhz , packet1.channel_width_mhz );
+    mavlink_msg_openhd_wifbroadcast_scan_channels_progress_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+#ifdef MAVLINK_HAVE_GET_MESSAGE_INFO
+    MAVLINK_ASSERT(mavlink_get_message_info_by_name("OPENHD_WIFBROADCAST_SCAN_CHANNELS_PROGRESS") != NULL);
+    MAVLINK_ASSERT(mavlink_get_message_info_by_id(MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SCAN_CHANNELS_PROGRESS) != NULL);
+#endif
+}
+
+static void mavlink_test_openhd_wifbroadcast_analyze_channels_progress(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
+{
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+    mavlink_status_t *status = mavlink_get_channel_status(MAVLINK_COMM_0);
+        if ((status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) && MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_ANALYZE_CHANNELS_PROGRESS >= 256) {
+            return;
+        }
+#endif
+    mavlink_message_t msg;
+        uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
+        uint16_t i;
+    mavlink_openhd_wifbroadcast_analyze_channels_progress_t packet_in = {
+        963497464,963497672,17651,17755,17859,175,242
+    };
+    mavlink_openhd_wifbroadcast_analyze_channels_progress_t packet1, packet2;
+        memset(&packet1, 0, sizeof(packet1));
+        packet1.dummy1 = packet_in.dummy1;
+        packet1.dummy2 = packet_in.dummy2;
+        packet1.channel_mhz = packet_in.channel_mhz;
+        packet1.foreign_packets = packet_in.foreign_packets;
+        packet1.dummy0 = packet_in.dummy0;
+        packet1.progress = packet_in.progress;
+        packet1.channel_width_mhz = packet_in.channel_width_mhz;
+        
+        
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+        if (status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) {
+           // cope with extensions
+           memset(MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_ANALYZE_CHANNELS_PROGRESS_MIN_LEN + (char *)&packet1, 0, sizeof(packet1)-MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_ANALYZE_CHANNELS_PROGRESS_MIN_LEN);
+        }
+#endif
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_openhd_wifbroadcast_analyze_channels_progress_encode(system_id, component_id, &msg, &packet1);
+    mavlink_msg_openhd_wifbroadcast_analyze_channels_progress_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_openhd_wifbroadcast_analyze_channels_progress_pack(system_id, component_id, &msg , packet1.progress , packet1.channel_mhz , packet1.channel_width_mhz , packet1.foreign_packets , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
+    mavlink_msg_openhd_wifbroadcast_analyze_channels_progress_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_openhd_wifbroadcast_analyze_channels_progress_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.progress , packet1.channel_mhz , packet1.channel_width_mhz , packet1.foreign_packets , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
+    mavlink_msg_openhd_wifbroadcast_analyze_channels_progress_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+        mavlink_msg_to_send_buffer(buffer, &msg);
+        for (i=0; i<mavlink_msg_get_send_buffer_length(&msg); i++) {
+            comm_send_ch(MAVLINK_COMM_0, buffer[i]);
+        }
+    mavlink_msg_openhd_wifbroadcast_analyze_channels_progress_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+        
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_openhd_wifbroadcast_analyze_channels_progress_send(MAVLINK_COMM_1 , packet1.progress , packet1.channel_mhz , packet1.channel_width_mhz , packet1.foreign_packets , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
+    mavlink_msg_openhd_wifbroadcast_analyze_channels_progress_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+#ifdef MAVLINK_HAVE_GET_MESSAGE_INFO
+    MAVLINK_ASSERT(mavlink_get_message_info_by_name("OPENHD_WIFBROADCAST_ANALYZE_CHANNELS_PROGRESS") != NULL);
+    MAVLINK_ASSERT(mavlink_get_message_info_by_id(MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_ANALYZE_CHANNELS_PROGRESS) != NULL);
+#endif
+}
+
 static void mavlink_test_openhd(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
 {
     mavlink_test_openhd_stats_monitor_mode_wifi_link(system_id, component_id, last_msg);
@@ -844,6 +970,8 @@ static void mavlink_test_openhd(uint8_t system_id, uint8_t component_id, mavlink
     mavlink_test_openhd_log_message(system_id, component_id, last_msg);
     mavlink_test_openhd_version_message(system_id, component_id, last_msg);
     mavlink_test_openhd_wifbroadcast_supported_channels(system_id, component_id, last_msg);
+    mavlink_test_openhd_wifbroadcast_scan_channels_progress(system_id, component_id, last_msg);
+    mavlink_test_openhd_wifbroadcast_analyze_channels_progress(system_id, component_id, last_msg);
 }
 
 #ifdef __cplusplus
