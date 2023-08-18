@@ -15,7 +15,8 @@ echo "Header generated, copying"
 
 cd ../../
 
-mv tmp/mavlink/generated/include/mavlink mavlink
+rm -rf mavlink
+mv tmp/mavlink/generated/include/mavlink .
 rm -rf tmp
 
 echo "copying done, done"
