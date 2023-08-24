@@ -117,14 +117,16 @@ static void mavlink_test_openhd_stats_monitor_mode_wifi_card(uint8_t system_id, 
         uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
         uint16_t i;
     mavlink_openhd_stats_monitor_mode_wifi_card_t packet_in = {
-        963497464,963497672,963497880,17859,17963,53,120,187,254,65,132,199,10,77,144
+        963497464,963497672,963497880,17859,17963,18067,18171,65,132,199,10,77,144,211,22,89,156
     };
     mavlink_openhd_stats_monitor_mode_wifi_card_t packet1, packet2;
         memset(&packet1, 0, sizeof(packet1));
         packet1.count_p_received = packet_in.count_p_received;
         packet1.count_p_injected = packet_in.count_p_injected;
         packet1.dummy2 = packet_in.dummy2;
-        packet1.tx_power = packet_in.tx_power;
+        packet1.tx_power_current = packet_in.tx_power_current;
+        packet1.tx_power_armed = packet_in.tx_power_armed;
+        packet1.tx_power_disarmed = packet_in.tx_power_disarmed;
         packet1.dummy1 = packet_in.dummy1;
         packet1.card_index = packet_in.card_index;
         packet1.card_type = packet_in.card_type;
@@ -150,12 +152,12 @@ static void mavlink_test_openhd_stats_monitor_mode_wifi_card(uint8_t system_id, 
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_openhd_stats_monitor_mode_wifi_card_pack(system_id, component_id, &msg , packet1.card_index , packet1.card_type , packet1.rx_rssi , packet1.rx_rssi_1 , packet1.rx_rssi_2 , packet1.rx_rssi_noise , packet1.rx_signal_quality , packet1.tx_power , packet1.count_p_received , packet1.count_p_injected , packet1.curr_rx_packet_loss_perc , packet1.curr_status , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
+    mavlink_msg_openhd_stats_monitor_mode_wifi_card_pack(system_id, component_id, &msg , packet1.card_index , packet1.card_type , packet1.rx_rssi , packet1.rx_rssi_1 , packet1.rx_rssi_2 , packet1.rx_rssi_noise , packet1.rx_signal_quality , packet1.tx_power_current , packet1.tx_power_armed , packet1.tx_power_disarmed , packet1.count_p_received , packet1.count_p_injected , packet1.curr_rx_packet_loss_perc , packet1.curr_status , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
     mavlink_msg_openhd_stats_monitor_mode_wifi_card_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_openhd_stats_monitor_mode_wifi_card_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.card_index , packet1.card_type , packet1.rx_rssi , packet1.rx_rssi_1 , packet1.rx_rssi_2 , packet1.rx_rssi_noise , packet1.rx_signal_quality , packet1.tx_power , packet1.count_p_received , packet1.count_p_injected , packet1.curr_rx_packet_loss_perc , packet1.curr_status , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
+    mavlink_msg_openhd_stats_monitor_mode_wifi_card_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.card_index , packet1.card_type , packet1.rx_rssi , packet1.rx_rssi_1 , packet1.rx_rssi_2 , packet1.rx_rssi_noise , packet1.rx_signal_quality , packet1.tx_power_current , packet1.tx_power_armed , packet1.tx_power_disarmed , packet1.count_p_received , packet1.count_p_injected , packet1.curr_rx_packet_loss_perc , packet1.curr_status , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
     mavlink_msg_openhd_stats_monitor_mode_wifi_card_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
@@ -168,7 +170,7 @@ static void mavlink_test_openhd_stats_monitor_mode_wifi_card(uint8_t system_id, 
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
         
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_openhd_stats_monitor_mode_wifi_card_send(MAVLINK_COMM_1 , packet1.card_index , packet1.card_type , packet1.rx_rssi , packet1.rx_rssi_1 , packet1.rx_rssi_2 , packet1.rx_rssi_noise , packet1.rx_signal_quality , packet1.tx_power , packet1.count_p_received , packet1.count_p_injected , packet1.curr_rx_packet_loss_perc , packet1.curr_status , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
+    mavlink_msg_openhd_stats_monitor_mode_wifi_card_send(MAVLINK_COMM_1 , packet1.card_index , packet1.card_type , packet1.rx_rssi , packet1.rx_rssi_1 , packet1.rx_rssi_2 , packet1.rx_rssi_noise , packet1.rx_signal_quality , packet1.tx_power_current , packet1.tx_power_armed , packet1.tx_power_disarmed , packet1.count_p_received , packet1.count_p_injected , packet1.curr_rx_packet_loss_perc , packet1.curr_status , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
     mavlink_msg_openhd_stats_monitor_mode_wifi_card_decode(last_msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
@@ -324,7 +326,7 @@ static void mavlink_test_openhd_stats_wb_video_air_fec_performance(uint8_t syste
         uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
         uint16_t i;
     mavlink_openhd_stats_wb_video_air_fec_performance_t packet_in = {
-        963497464,963497672,963497880,963498088,18067,18171,18275,18379,77,144
+        963497464,963497672,963497880,963498088,18067,18171,18275,18379,18483,18587,18691,223,34
     };
     mavlink_openhd_stats_wb_video_air_fec_performance_t packet1, packet2;
         memset(&packet1, 0, sizeof(packet1));
@@ -335,6 +337,9 @@ static void mavlink_test_openhd_stats_wb_video_air_fec_performance(uint8_t syste
         packet1.curr_fec_block_size_avg = packet_in.curr_fec_block_size_avg;
         packet1.curr_fec_block_size_min = packet_in.curr_fec_block_size_min;
         packet1.curr_fec_block_size_max = packet_in.curr_fec_block_size_max;
+        packet1.curr_tx_delay_avg_us = packet_in.curr_tx_delay_avg_us;
+        packet1.curr_tx_delay_min_us = packet_in.curr_tx_delay_min_us;
+        packet1.curr_tx_delay_max_us = packet_in.curr_tx_delay_max_us;
         packet1.dummy1 = packet_in.dummy1;
         packet1.link_index = packet_in.link_index;
         packet1.dummy0 = packet_in.dummy0;
@@ -352,12 +357,12 @@ static void mavlink_test_openhd_stats_wb_video_air_fec_performance(uint8_t syste
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_openhd_stats_wb_video_air_fec_performance_pack(system_id, component_id, &msg , packet1.link_index , packet1.curr_fec_encode_time_avg_us , packet1.curr_fec_encode_time_min_us , packet1.curr_fec_encode_time_max_us , packet1.curr_fec_block_size_avg , packet1.curr_fec_block_size_min , packet1.curr_fec_block_size_max , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
+    mavlink_msg_openhd_stats_wb_video_air_fec_performance_pack(system_id, component_id, &msg , packet1.link_index , packet1.curr_fec_encode_time_avg_us , packet1.curr_fec_encode_time_min_us , packet1.curr_fec_encode_time_max_us , packet1.curr_fec_block_size_avg , packet1.curr_fec_block_size_min , packet1.curr_fec_block_size_max , packet1.curr_tx_delay_avg_us , packet1.curr_tx_delay_min_us , packet1.curr_tx_delay_max_us , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
     mavlink_msg_openhd_stats_wb_video_air_fec_performance_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_openhd_stats_wb_video_air_fec_performance_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.link_index , packet1.curr_fec_encode_time_avg_us , packet1.curr_fec_encode_time_min_us , packet1.curr_fec_encode_time_max_us , packet1.curr_fec_block_size_avg , packet1.curr_fec_block_size_min , packet1.curr_fec_block_size_max , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
+    mavlink_msg_openhd_stats_wb_video_air_fec_performance_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.link_index , packet1.curr_fec_encode_time_avg_us , packet1.curr_fec_encode_time_min_us , packet1.curr_fec_encode_time_max_us , packet1.curr_fec_block_size_avg , packet1.curr_fec_block_size_min , packet1.curr_fec_block_size_max , packet1.curr_tx_delay_avg_us , packet1.curr_tx_delay_min_us , packet1.curr_tx_delay_max_us , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
     mavlink_msg_openhd_stats_wb_video_air_fec_performance_decode(&msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
@@ -370,7 +375,7 @@ static void mavlink_test_openhd_stats_wb_video_air_fec_performance(uint8_t syste
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
         
         memset(&packet2, 0, sizeof(packet2));
-    mavlink_msg_openhd_stats_wb_video_air_fec_performance_send(MAVLINK_COMM_1 , packet1.link_index , packet1.curr_fec_encode_time_avg_us , packet1.curr_fec_encode_time_min_us , packet1.curr_fec_encode_time_max_us , packet1.curr_fec_block_size_avg , packet1.curr_fec_block_size_min , packet1.curr_fec_block_size_max , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
+    mavlink_msg_openhd_stats_wb_video_air_fec_performance_send(MAVLINK_COMM_1 , packet1.link_index , packet1.curr_fec_encode_time_avg_us , packet1.curr_fec_encode_time_min_us , packet1.curr_fec_encode_time_max_us , packet1.curr_fec_block_size_avg , packet1.curr_fec_block_size_min , packet1.curr_fec_block_size_max , packet1.curr_tx_delay_avg_us , packet1.curr_tx_delay_min_us , packet1.curr_tx_delay_max_us , packet1.dummy0 , packet1.dummy1 , packet1.dummy2 );
     mavlink_msg_openhd_stats_wb_video_air_fec_performance_decode(last_msg, &packet2);
         MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
 
