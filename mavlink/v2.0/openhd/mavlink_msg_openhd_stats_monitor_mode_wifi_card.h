@@ -12,11 +12,14 @@ typedef struct __mavlink_openhd_stats_monitor_mode_wifi_card_t {
  int16_t tx_power_armed; /*<  either in override index units or mW*/
  int16_t tx_power_disarmed; /*<  either in override index units or mW*/
  int16_t dummy1; /*<  for future use*/
- uint8_t card_index; /*<  A system / component might have more than one card for diversity*/
- uint8_t card_type; /*<  0=unknown, 1=RTL8812AU, 2=RTL8812BU, ... (see openhd card_type enum)*/
- int8_t rx_rssi; /*<  rx rssi in dBm of this card - depending on the hw, might be the max of all antennas or different*/
+ uint8_t card_index; /*<  Ground might have multiple card(s) for diversity.*/
+ uint8_t card_type; /*<  See openhd card_type enum*/
+ uint8_t tx_active; /*<  On ground stations with multiple card(s), only one card is selected for TX at a time.*/
+ int8_t rx_rssi; /*<  rx rssi in dBm of this card - depending on the hw, might be the max of all antennas or different.*/
  int8_t rx_rssi_1; /*<  rx rssi in dBm for antenna 1*/
  int8_t rx_rssi_2; /*<  rx rssi in dBm for antenna 2*/
+ int8_t rx_evm_1; /*<  rx evm in dBm for antenna 1*/
+ int8_t rx_evm_2; /*<  rx evm in dBm for antenna 2*/
  int8_t rx_rssi_noise; /*<  depends on the wifi driver*/
  int8_t rx_signal_quality; /*<  depends on the wifi driver*/
  int8_t curr_rx_packet_loss_perc; /*<  rx packet loss (for this card)*/
@@ -24,13 +27,13 @@ typedef struct __mavlink_openhd_stats_monitor_mode_wifi_card_t {
  int8_t dummy0; /*<  for future use*/
 } mavlink_openhd_stats_monitor_mode_wifi_card_t;
 
-#define MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_CARD_LEN 30
-#define MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_CARD_MIN_LEN 30
-#define MAVLINK_MSG_ID_1212_LEN 30
-#define MAVLINK_MSG_ID_1212_MIN_LEN 30
+#define MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_CARD_LEN 33
+#define MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_CARD_MIN_LEN 33
+#define MAVLINK_MSG_ID_1212_LEN 33
+#define MAVLINK_MSG_ID_1212_MIN_LEN 33
 
-#define MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_CARD_CRC 159
-#define MAVLINK_MSG_ID_1212_CRC 159
+#define MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_CARD_CRC 211
+#define MAVLINK_MSG_ID_1212_CRC 211
 
 
 
@@ -38,22 +41,25 @@ typedef struct __mavlink_openhd_stats_monitor_mode_wifi_card_t {
 #define MAVLINK_MESSAGE_INFO_OPENHD_STATS_MONITOR_MODE_WIFI_CARD { \
     1212, \
     "OPENHD_STATS_MONITOR_MODE_WIFI_CARD", \
-    17, \
+    20, \
     {  { "card_index", NULL, MAVLINK_TYPE_UINT8_T, 0, 20, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, card_index) }, \
          { "card_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 21, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, card_type) }, \
-         { "rx_rssi", NULL, MAVLINK_TYPE_INT8_T, 0, 22, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, rx_rssi) }, \
-         { "rx_rssi_1", NULL, MAVLINK_TYPE_INT8_T, 0, 23, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, rx_rssi_1) }, \
-         { "rx_rssi_2", NULL, MAVLINK_TYPE_INT8_T, 0, 24, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, rx_rssi_2) }, \
-         { "rx_rssi_noise", NULL, MAVLINK_TYPE_INT8_T, 0, 25, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, rx_rssi_noise) }, \
-         { "rx_signal_quality", NULL, MAVLINK_TYPE_INT8_T, 0, 26, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, rx_signal_quality) }, \
+         { "tx_active", NULL, MAVLINK_TYPE_UINT8_T, 0, 22, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, tx_active) }, \
+         { "rx_rssi", NULL, MAVLINK_TYPE_INT8_T, 0, 23, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, rx_rssi) }, \
+         { "rx_rssi_1", NULL, MAVLINK_TYPE_INT8_T, 0, 24, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, rx_rssi_1) }, \
+         { "rx_rssi_2", NULL, MAVLINK_TYPE_INT8_T, 0, 25, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, rx_rssi_2) }, \
+         { "rx_evm_1", NULL, MAVLINK_TYPE_INT8_T, 0, 26, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, rx_evm_1) }, \
+         { "rx_evm_2", NULL, MAVLINK_TYPE_INT8_T, 0, 27, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, rx_evm_2) }, \
+         { "rx_rssi_noise", NULL, MAVLINK_TYPE_INT8_T, 0, 28, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, rx_rssi_noise) }, \
+         { "rx_signal_quality", NULL, MAVLINK_TYPE_INT8_T, 0, 29, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, rx_signal_quality) }, \
          { "tx_power_current", NULL, MAVLINK_TYPE_INT16_T, 0, 12, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, tx_power_current) }, \
          { "tx_power_armed", NULL, MAVLINK_TYPE_INT16_T, 0, 14, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, tx_power_armed) }, \
          { "tx_power_disarmed", NULL, MAVLINK_TYPE_INT16_T, 0, 16, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, tx_power_disarmed) }, \
          { "count_p_received", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, count_p_received) }, \
          { "count_p_injected", NULL, MAVLINK_TYPE_UINT32_T, 0, 4, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, count_p_injected) }, \
-         { "curr_rx_packet_loss_perc", NULL, MAVLINK_TYPE_INT8_T, 0, 27, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, curr_rx_packet_loss_perc) }, \
-         { "curr_status", NULL, MAVLINK_TYPE_UINT8_T, 0, 28, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, curr_status) }, \
-         { "dummy0", NULL, MAVLINK_TYPE_INT8_T, 0, 29, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, dummy0) }, \
+         { "curr_rx_packet_loss_perc", NULL, MAVLINK_TYPE_INT8_T, 0, 30, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, curr_rx_packet_loss_perc) }, \
+         { "curr_status", NULL, MAVLINK_TYPE_UINT8_T, 0, 31, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, curr_status) }, \
+         { "dummy0", NULL, MAVLINK_TYPE_INT8_T, 0, 32, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, dummy0) }, \
          { "dummy1", NULL, MAVLINK_TYPE_INT16_T, 0, 18, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, dummy1) }, \
          { "dummy2", NULL, MAVLINK_TYPE_INT32_T, 0, 8, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, dummy2) }, \
          } \
@@ -61,22 +67,25 @@ typedef struct __mavlink_openhd_stats_monitor_mode_wifi_card_t {
 #else
 #define MAVLINK_MESSAGE_INFO_OPENHD_STATS_MONITOR_MODE_WIFI_CARD { \
     "OPENHD_STATS_MONITOR_MODE_WIFI_CARD", \
-    17, \
+    20, \
     {  { "card_index", NULL, MAVLINK_TYPE_UINT8_T, 0, 20, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, card_index) }, \
          { "card_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 21, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, card_type) }, \
-         { "rx_rssi", NULL, MAVLINK_TYPE_INT8_T, 0, 22, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, rx_rssi) }, \
-         { "rx_rssi_1", NULL, MAVLINK_TYPE_INT8_T, 0, 23, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, rx_rssi_1) }, \
-         { "rx_rssi_2", NULL, MAVLINK_TYPE_INT8_T, 0, 24, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, rx_rssi_2) }, \
-         { "rx_rssi_noise", NULL, MAVLINK_TYPE_INT8_T, 0, 25, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, rx_rssi_noise) }, \
-         { "rx_signal_quality", NULL, MAVLINK_TYPE_INT8_T, 0, 26, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, rx_signal_quality) }, \
+         { "tx_active", NULL, MAVLINK_TYPE_UINT8_T, 0, 22, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, tx_active) }, \
+         { "rx_rssi", NULL, MAVLINK_TYPE_INT8_T, 0, 23, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, rx_rssi) }, \
+         { "rx_rssi_1", NULL, MAVLINK_TYPE_INT8_T, 0, 24, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, rx_rssi_1) }, \
+         { "rx_rssi_2", NULL, MAVLINK_TYPE_INT8_T, 0, 25, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, rx_rssi_2) }, \
+         { "rx_evm_1", NULL, MAVLINK_TYPE_INT8_T, 0, 26, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, rx_evm_1) }, \
+         { "rx_evm_2", NULL, MAVLINK_TYPE_INT8_T, 0, 27, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, rx_evm_2) }, \
+         { "rx_rssi_noise", NULL, MAVLINK_TYPE_INT8_T, 0, 28, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, rx_rssi_noise) }, \
+         { "rx_signal_quality", NULL, MAVLINK_TYPE_INT8_T, 0, 29, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, rx_signal_quality) }, \
          { "tx_power_current", NULL, MAVLINK_TYPE_INT16_T, 0, 12, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, tx_power_current) }, \
          { "tx_power_armed", NULL, MAVLINK_TYPE_INT16_T, 0, 14, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, tx_power_armed) }, \
          { "tx_power_disarmed", NULL, MAVLINK_TYPE_INT16_T, 0, 16, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, tx_power_disarmed) }, \
          { "count_p_received", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, count_p_received) }, \
          { "count_p_injected", NULL, MAVLINK_TYPE_UINT32_T, 0, 4, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, count_p_injected) }, \
-         { "curr_rx_packet_loss_perc", NULL, MAVLINK_TYPE_INT8_T, 0, 27, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, curr_rx_packet_loss_perc) }, \
-         { "curr_status", NULL, MAVLINK_TYPE_UINT8_T, 0, 28, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, curr_status) }, \
-         { "dummy0", NULL, MAVLINK_TYPE_INT8_T, 0, 29, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, dummy0) }, \
+         { "curr_rx_packet_loss_perc", NULL, MAVLINK_TYPE_INT8_T, 0, 30, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, curr_rx_packet_loss_perc) }, \
+         { "curr_status", NULL, MAVLINK_TYPE_UINT8_T, 0, 31, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, curr_status) }, \
+         { "dummy0", NULL, MAVLINK_TYPE_INT8_T, 0, 32, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, dummy0) }, \
          { "dummy1", NULL, MAVLINK_TYPE_INT16_T, 0, 18, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, dummy1) }, \
          { "dummy2", NULL, MAVLINK_TYPE_INT32_T, 0, 8, offsetof(mavlink_openhd_stats_monitor_mode_wifi_card_t, dummy2) }, \
          } \
@@ -89,11 +98,14 @@ typedef struct __mavlink_openhd_stats_monitor_mode_wifi_card_t {
  * @param component_id ID of this component (e.g. 200 for IMU)
  * @param msg The MAVLink message to compress the data into
  *
- * @param card_index  A system / component might have more than one card for diversity
- * @param card_type  0=unknown, 1=RTL8812AU, 2=RTL8812BU, ... (see openhd card_type enum)
- * @param rx_rssi  rx rssi in dBm of this card - depending on the hw, might be the max of all antennas or different
+ * @param card_index  Ground might have multiple card(s) for diversity.
+ * @param card_type  See openhd card_type enum
+ * @param tx_active  On ground stations with multiple card(s), only one card is selected for TX at a time.
+ * @param rx_rssi  rx rssi in dBm of this card - depending on the hw, might be the max of all antennas or different.
  * @param rx_rssi_1  rx rssi in dBm for antenna 1
  * @param rx_rssi_2  rx rssi in dBm for antenna 2
+ * @param rx_evm_1  rx evm in dBm for antenna 1
+ * @param rx_evm_2  rx evm in dBm for antenna 2
  * @param rx_rssi_noise  depends on the wifi driver
  * @param rx_signal_quality  depends on the wifi driver
  * @param tx_power_current  either in override index units or mW
@@ -109,7 +121,7 @@ typedef struct __mavlink_openhd_stats_monitor_mode_wifi_card_t {
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
-                               uint8_t card_index, uint8_t card_type, int8_t rx_rssi, int8_t rx_rssi_1, int8_t rx_rssi_2, int8_t rx_rssi_noise, int8_t rx_signal_quality, int16_t tx_power_current, int16_t tx_power_armed, int16_t tx_power_disarmed, uint32_t count_p_received, uint32_t count_p_injected, int8_t curr_rx_packet_loss_perc, uint8_t curr_status, int8_t dummy0, int16_t dummy1, int32_t dummy2)
+                               uint8_t card_index, uint8_t card_type, uint8_t tx_active, int8_t rx_rssi, int8_t rx_rssi_1, int8_t rx_rssi_2, int8_t rx_evm_1, int8_t rx_evm_2, int8_t rx_rssi_noise, int8_t rx_signal_quality, int16_t tx_power_current, int16_t tx_power_armed, int16_t tx_power_disarmed, uint32_t count_p_received, uint32_t count_p_injected, int8_t curr_rx_packet_loss_perc, uint8_t curr_status, int8_t dummy0, int16_t dummy1, int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_CARD_LEN];
@@ -122,14 +134,17 @@ static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_pack(uint
     _mav_put_int16_t(buf, 18, dummy1);
     _mav_put_uint8_t(buf, 20, card_index);
     _mav_put_uint8_t(buf, 21, card_type);
-    _mav_put_int8_t(buf, 22, rx_rssi);
-    _mav_put_int8_t(buf, 23, rx_rssi_1);
-    _mav_put_int8_t(buf, 24, rx_rssi_2);
-    _mav_put_int8_t(buf, 25, rx_rssi_noise);
-    _mav_put_int8_t(buf, 26, rx_signal_quality);
-    _mav_put_int8_t(buf, 27, curr_rx_packet_loss_perc);
-    _mav_put_uint8_t(buf, 28, curr_status);
-    _mav_put_int8_t(buf, 29, dummy0);
+    _mav_put_uint8_t(buf, 22, tx_active);
+    _mav_put_int8_t(buf, 23, rx_rssi);
+    _mav_put_int8_t(buf, 24, rx_rssi_1);
+    _mav_put_int8_t(buf, 25, rx_rssi_2);
+    _mav_put_int8_t(buf, 26, rx_evm_1);
+    _mav_put_int8_t(buf, 27, rx_evm_2);
+    _mav_put_int8_t(buf, 28, rx_rssi_noise);
+    _mav_put_int8_t(buf, 29, rx_signal_quality);
+    _mav_put_int8_t(buf, 30, curr_rx_packet_loss_perc);
+    _mav_put_uint8_t(buf, 31, curr_status);
+    _mav_put_int8_t(buf, 32, dummy0);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_CARD_LEN);
 #else
@@ -143,9 +158,12 @@ static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_pack(uint
     packet.dummy1 = dummy1;
     packet.card_index = card_index;
     packet.card_type = card_type;
+    packet.tx_active = tx_active;
     packet.rx_rssi = rx_rssi;
     packet.rx_rssi_1 = rx_rssi_1;
     packet.rx_rssi_2 = rx_rssi_2;
+    packet.rx_evm_1 = rx_evm_1;
+    packet.rx_evm_2 = rx_evm_2;
     packet.rx_rssi_noise = rx_rssi_noise;
     packet.rx_signal_quality = rx_signal_quality;
     packet.curr_rx_packet_loss_perc = curr_rx_packet_loss_perc;
@@ -165,11 +183,14 @@ static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_pack(uint
  * @param component_id ID of this component (e.g. 200 for IMU)
  * @param chan The MAVLink channel this message will be sent over
  * @param msg The MAVLink message to compress the data into
- * @param card_index  A system / component might have more than one card for diversity
- * @param card_type  0=unknown, 1=RTL8812AU, 2=RTL8812BU, ... (see openhd card_type enum)
- * @param rx_rssi  rx rssi in dBm of this card - depending on the hw, might be the max of all antennas or different
+ * @param card_index  Ground might have multiple card(s) for diversity.
+ * @param card_type  See openhd card_type enum
+ * @param tx_active  On ground stations with multiple card(s), only one card is selected for TX at a time.
+ * @param rx_rssi  rx rssi in dBm of this card - depending on the hw, might be the max of all antennas or different.
  * @param rx_rssi_1  rx rssi in dBm for antenna 1
  * @param rx_rssi_2  rx rssi in dBm for antenna 2
+ * @param rx_evm_1  rx evm in dBm for antenna 1
+ * @param rx_evm_2  rx evm in dBm for antenna 2
  * @param rx_rssi_noise  depends on the wifi driver
  * @param rx_signal_quality  depends on the wifi driver
  * @param tx_power_current  either in override index units or mW
@@ -186,7 +207,7 @@ static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_pack(uint
  */
 static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
-                                   uint8_t card_index,uint8_t card_type,int8_t rx_rssi,int8_t rx_rssi_1,int8_t rx_rssi_2,int8_t rx_rssi_noise,int8_t rx_signal_quality,int16_t tx_power_current,int16_t tx_power_armed,int16_t tx_power_disarmed,uint32_t count_p_received,uint32_t count_p_injected,int8_t curr_rx_packet_loss_perc,uint8_t curr_status,int8_t dummy0,int16_t dummy1,int32_t dummy2)
+                                   uint8_t card_index,uint8_t card_type,uint8_t tx_active,int8_t rx_rssi,int8_t rx_rssi_1,int8_t rx_rssi_2,int8_t rx_evm_1,int8_t rx_evm_2,int8_t rx_rssi_noise,int8_t rx_signal_quality,int16_t tx_power_current,int16_t tx_power_armed,int16_t tx_power_disarmed,uint32_t count_p_received,uint32_t count_p_injected,int8_t curr_rx_packet_loss_perc,uint8_t curr_status,int8_t dummy0,int16_t dummy1,int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_CARD_LEN];
@@ -199,14 +220,17 @@ static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_pack_chan
     _mav_put_int16_t(buf, 18, dummy1);
     _mav_put_uint8_t(buf, 20, card_index);
     _mav_put_uint8_t(buf, 21, card_type);
-    _mav_put_int8_t(buf, 22, rx_rssi);
-    _mav_put_int8_t(buf, 23, rx_rssi_1);
-    _mav_put_int8_t(buf, 24, rx_rssi_2);
-    _mav_put_int8_t(buf, 25, rx_rssi_noise);
-    _mav_put_int8_t(buf, 26, rx_signal_quality);
-    _mav_put_int8_t(buf, 27, curr_rx_packet_loss_perc);
-    _mav_put_uint8_t(buf, 28, curr_status);
-    _mav_put_int8_t(buf, 29, dummy0);
+    _mav_put_uint8_t(buf, 22, tx_active);
+    _mav_put_int8_t(buf, 23, rx_rssi);
+    _mav_put_int8_t(buf, 24, rx_rssi_1);
+    _mav_put_int8_t(buf, 25, rx_rssi_2);
+    _mav_put_int8_t(buf, 26, rx_evm_1);
+    _mav_put_int8_t(buf, 27, rx_evm_2);
+    _mav_put_int8_t(buf, 28, rx_rssi_noise);
+    _mav_put_int8_t(buf, 29, rx_signal_quality);
+    _mav_put_int8_t(buf, 30, curr_rx_packet_loss_perc);
+    _mav_put_uint8_t(buf, 31, curr_status);
+    _mav_put_int8_t(buf, 32, dummy0);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_CARD_LEN);
 #else
@@ -220,9 +244,12 @@ static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_pack_chan
     packet.dummy1 = dummy1;
     packet.card_index = card_index;
     packet.card_type = card_type;
+    packet.tx_active = tx_active;
     packet.rx_rssi = rx_rssi;
     packet.rx_rssi_1 = rx_rssi_1;
     packet.rx_rssi_2 = rx_rssi_2;
+    packet.rx_evm_1 = rx_evm_1;
+    packet.rx_evm_2 = rx_evm_2;
     packet.rx_rssi_noise = rx_rssi_noise;
     packet.rx_signal_quality = rx_signal_quality;
     packet.curr_rx_packet_loss_perc = curr_rx_packet_loss_perc;
@@ -246,7 +273,7 @@ static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_pack_chan
  */
 static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_stats_monitor_mode_wifi_card_t* openhd_stats_monitor_mode_wifi_card)
 {
-    return mavlink_msg_openhd_stats_monitor_mode_wifi_card_pack(system_id, component_id, msg, openhd_stats_monitor_mode_wifi_card->card_index, openhd_stats_monitor_mode_wifi_card->card_type, openhd_stats_monitor_mode_wifi_card->rx_rssi, openhd_stats_monitor_mode_wifi_card->rx_rssi_1, openhd_stats_monitor_mode_wifi_card->rx_rssi_2, openhd_stats_monitor_mode_wifi_card->rx_rssi_noise, openhd_stats_monitor_mode_wifi_card->rx_signal_quality, openhd_stats_monitor_mode_wifi_card->tx_power_current, openhd_stats_monitor_mode_wifi_card->tx_power_armed, openhd_stats_monitor_mode_wifi_card->tx_power_disarmed, openhd_stats_monitor_mode_wifi_card->count_p_received, openhd_stats_monitor_mode_wifi_card->count_p_injected, openhd_stats_monitor_mode_wifi_card->curr_rx_packet_loss_perc, openhd_stats_monitor_mode_wifi_card->curr_status, openhd_stats_monitor_mode_wifi_card->dummy0, openhd_stats_monitor_mode_wifi_card->dummy1, openhd_stats_monitor_mode_wifi_card->dummy2);
+    return mavlink_msg_openhd_stats_monitor_mode_wifi_card_pack(system_id, component_id, msg, openhd_stats_monitor_mode_wifi_card->card_index, openhd_stats_monitor_mode_wifi_card->card_type, openhd_stats_monitor_mode_wifi_card->tx_active, openhd_stats_monitor_mode_wifi_card->rx_rssi, openhd_stats_monitor_mode_wifi_card->rx_rssi_1, openhd_stats_monitor_mode_wifi_card->rx_rssi_2, openhd_stats_monitor_mode_wifi_card->rx_evm_1, openhd_stats_monitor_mode_wifi_card->rx_evm_2, openhd_stats_monitor_mode_wifi_card->rx_rssi_noise, openhd_stats_monitor_mode_wifi_card->rx_signal_quality, openhd_stats_monitor_mode_wifi_card->tx_power_current, openhd_stats_monitor_mode_wifi_card->tx_power_armed, openhd_stats_monitor_mode_wifi_card->tx_power_disarmed, openhd_stats_monitor_mode_wifi_card->count_p_received, openhd_stats_monitor_mode_wifi_card->count_p_injected, openhd_stats_monitor_mode_wifi_card->curr_rx_packet_loss_perc, openhd_stats_monitor_mode_wifi_card->curr_status, openhd_stats_monitor_mode_wifi_card->dummy0, openhd_stats_monitor_mode_wifi_card->dummy1, openhd_stats_monitor_mode_wifi_card->dummy2);
 }
 
 /**
@@ -260,18 +287,21 @@ static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_encode(ui
  */
 static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_stats_monitor_mode_wifi_card_t* openhd_stats_monitor_mode_wifi_card)
 {
-    return mavlink_msg_openhd_stats_monitor_mode_wifi_card_pack_chan(system_id, component_id, chan, msg, openhd_stats_monitor_mode_wifi_card->card_index, openhd_stats_monitor_mode_wifi_card->card_type, openhd_stats_monitor_mode_wifi_card->rx_rssi, openhd_stats_monitor_mode_wifi_card->rx_rssi_1, openhd_stats_monitor_mode_wifi_card->rx_rssi_2, openhd_stats_monitor_mode_wifi_card->rx_rssi_noise, openhd_stats_monitor_mode_wifi_card->rx_signal_quality, openhd_stats_monitor_mode_wifi_card->tx_power_current, openhd_stats_monitor_mode_wifi_card->tx_power_armed, openhd_stats_monitor_mode_wifi_card->tx_power_disarmed, openhd_stats_monitor_mode_wifi_card->count_p_received, openhd_stats_monitor_mode_wifi_card->count_p_injected, openhd_stats_monitor_mode_wifi_card->curr_rx_packet_loss_perc, openhd_stats_monitor_mode_wifi_card->curr_status, openhd_stats_monitor_mode_wifi_card->dummy0, openhd_stats_monitor_mode_wifi_card->dummy1, openhd_stats_monitor_mode_wifi_card->dummy2);
+    return mavlink_msg_openhd_stats_monitor_mode_wifi_card_pack_chan(system_id, component_id, chan, msg, openhd_stats_monitor_mode_wifi_card->card_index, openhd_stats_monitor_mode_wifi_card->card_type, openhd_stats_monitor_mode_wifi_card->tx_active, openhd_stats_monitor_mode_wifi_card->rx_rssi, openhd_stats_monitor_mode_wifi_card->rx_rssi_1, openhd_stats_monitor_mode_wifi_card->rx_rssi_2, openhd_stats_monitor_mode_wifi_card->rx_evm_1, openhd_stats_monitor_mode_wifi_card->rx_evm_2, openhd_stats_monitor_mode_wifi_card->rx_rssi_noise, openhd_stats_monitor_mode_wifi_card->rx_signal_quality, openhd_stats_monitor_mode_wifi_card->tx_power_current, openhd_stats_monitor_mode_wifi_card->tx_power_armed, openhd_stats_monitor_mode_wifi_card->tx_power_disarmed, openhd_stats_monitor_mode_wifi_card->count_p_received, openhd_stats_monitor_mode_wifi_card->count_p_injected, openhd_stats_monitor_mode_wifi_card->curr_rx_packet_loss_perc, openhd_stats_monitor_mode_wifi_card->curr_status, openhd_stats_monitor_mode_wifi_card->dummy0, openhd_stats_monitor_mode_wifi_card->dummy1, openhd_stats_monitor_mode_wifi_card->dummy2);
 }
 
 /**
  * @brief Send a openhd_stats_monitor_mode_wifi_card message
  * @param chan MAVLink channel to send the message
  *
- * @param card_index  A system / component might have more than one card for diversity
- * @param card_type  0=unknown, 1=RTL8812AU, 2=RTL8812BU, ... (see openhd card_type enum)
- * @param rx_rssi  rx rssi in dBm of this card - depending on the hw, might be the max of all antennas or different
+ * @param card_index  Ground might have multiple card(s) for diversity.
+ * @param card_type  See openhd card_type enum
+ * @param tx_active  On ground stations with multiple card(s), only one card is selected for TX at a time.
+ * @param rx_rssi  rx rssi in dBm of this card - depending on the hw, might be the max of all antennas or different.
  * @param rx_rssi_1  rx rssi in dBm for antenna 1
  * @param rx_rssi_2  rx rssi in dBm for antenna 2
+ * @param rx_evm_1  rx evm in dBm for antenna 1
+ * @param rx_evm_2  rx evm in dBm for antenna 2
  * @param rx_rssi_noise  depends on the wifi driver
  * @param rx_signal_quality  depends on the wifi driver
  * @param tx_power_current  either in override index units or mW
@@ -287,7 +317,7 @@ static inline uint16_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_encode_ch
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
-static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_card_send(mavlink_channel_t chan, uint8_t card_index, uint8_t card_type, int8_t rx_rssi, int8_t rx_rssi_1, int8_t rx_rssi_2, int8_t rx_rssi_noise, int8_t rx_signal_quality, int16_t tx_power_current, int16_t tx_power_armed, int16_t tx_power_disarmed, uint32_t count_p_received, uint32_t count_p_injected, int8_t curr_rx_packet_loss_perc, uint8_t curr_status, int8_t dummy0, int16_t dummy1, int32_t dummy2)
+static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_card_send(mavlink_channel_t chan, uint8_t card_index, uint8_t card_type, uint8_t tx_active, int8_t rx_rssi, int8_t rx_rssi_1, int8_t rx_rssi_2, int8_t rx_evm_1, int8_t rx_evm_2, int8_t rx_rssi_noise, int8_t rx_signal_quality, int16_t tx_power_current, int16_t tx_power_armed, int16_t tx_power_disarmed, uint32_t count_p_received, uint32_t count_p_injected, int8_t curr_rx_packet_loss_perc, uint8_t curr_status, int8_t dummy0, int16_t dummy1, int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_CARD_LEN];
@@ -300,14 +330,17 @@ static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_card_send(mavlink_
     _mav_put_int16_t(buf, 18, dummy1);
     _mav_put_uint8_t(buf, 20, card_index);
     _mav_put_uint8_t(buf, 21, card_type);
-    _mav_put_int8_t(buf, 22, rx_rssi);
-    _mav_put_int8_t(buf, 23, rx_rssi_1);
-    _mav_put_int8_t(buf, 24, rx_rssi_2);
-    _mav_put_int8_t(buf, 25, rx_rssi_noise);
-    _mav_put_int8_t(buf, 26, rx_signal_quality);
-    _mav_put_int8_t(buf, 27, curr_rx_packet_loss_perc);
-    _mav_put_uint8_t(buf, 28, curr_status);
-    _mav_put_int8_t(buf, 29, dummy0);
+    _mav_put_uint8_t(buf, 22, tx_active);
+    _mav_put_int8_t(buf, 23, rx_rssi);
+    _mav_put_int8_t(buf, 24, rx_rssi_1);
+    _mav_put_int8_t(buf, 25, rx_rssi_2);
+    _mav_put_int8_t(buf, 26, rx_evm_1);
+    _mav_put_int8_t(buf, 27, rx_evm_2);
+    _mav_put_int8_t(buf, 28, rx_rssi_noise);
+    _mav_put_int8_t(buf, 29, rx_signal_quality);
+    _mav_put_int8_t(buf, 30, curr_rx_packet_loss_perc);
+    _mav_put_uint8_t(buf, 31, curr_status);
+    _mav_put_int8_t(buf, 32, dummy0);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_CARD, buf, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_CARD_MIN_LEN, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_CARD_LEN, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_CARD_CRC);
 #else
@@ -321,9 +354,12 @@ static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_card_send(mavlink_
     packet.dummy1 = dummy1;
     packet.card_index = card_index;
     packet.card_type = card_type;
+    packet.tx_active = tx_active;
     packet.rx_rssi = rx_rssi;
     packet.rx_rssi_1 = rx_rssi_1;
     packet.rx_rssi_2 = rx_rssi_2;
+    packet.rx_evm_1 = rx_evm_1;
+    packet.rx_evm_2 = rx_evm_2;
     packet.rx_rssi_noise = rx_rssi_noise;
     packet.rx_signal_quality = rx_signal_quality;
     packet.curr_rx_packet_loss_perc = curr_rx_packet_loss_perc;
@@ -342,7 +378,7 @@ static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_card_send(mavlink_
 static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_card_send_struct(mavlink_channel_t chan, const mavlink_openhd_stats_monitor_mode_wifi_card_t* openhd_stats_monitor_mode_wifi_card)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    mavlink_msg_openhd_stats_monitor_mode_wifi_card_send(chan, openhd_stats_monitor_mode_wifi_card->card_index, openhd_stats_monitor_mode_wifi_card->card_type, openhd_stats_monitor_mode_wifi_card->rx_rssi, openhd_stats_monitor_mode_wifi_card->rx_rssi_1, openhd_stats_monitor_mode_wifi_card->rx_rssi_2, openhd_stats_monitor_mode_wifi_card->rx_rssi_noise, openhd_stats_monitor_mode_wifi_card->rx_signal_quality, openhd_stats_monitor_mode_wifi_card->tx_power_current, openhd_stats_monitor_mode_wifi_card->tx_power_armed, openhd_stats_monitor_mode_wifi_card->tx_power_disarmed, openhd_stats_monitor_mode_wifi_card->count_p_received, openhd_stats_monitor_mode_wifi_card->count_p_injected, openhd_stats_monitor_mode_wifi_card->curr_rx_packet_loss_perc, openhd_stats_monitor_mode_wifi_card->curr_status, openhd_stats_monitor_mode_wifi_card->dummy0, openhd_stats_monitor_mode_wifi_card->dummy1, openhd_stats_monitor_mode_wifi_card->dummy2);
+    mavlink_msg_openhd_stats_monitor_mode_wifi_card_send(chan, openhd_stats_monitor_mode_wifi_card->card_index, openhd_stats_monitor_mode_wifi_card->card_type, openhd_stats_monitor_mode_wifi_card->tx_active, openhd_stats_monitor_mode_wifi_card->rx_rssi, openhd_stats_monitor_mode_wifi_card->rx_rssi_1, openhd_stats_monitor_mode_wifi_card->rx_rssi_2, openhd_stats_monitor_mode_wifi_card->rx_evm_1, openhd_stats_monitor_mode_wifi_card->rx_evm_2, openhd_stats_monitor_mode_wifi_card->rx_rssi_noise, openhd_stats_monitor_mode_wifi_card->rx_signal_quality, openhd_stats_monitor_mode_wifi_card->tx_power_current, openhd_stats_monitor_mode_wifi_card->tx_power_armed, openhd_stats_monitor_mode_wifi_card->tx_power_disarmed, openhd_stats_monitor_mode_wifi_card->count_p_received, openhd_stats_monitor_mode_wifi_card->count_p_injected, openhd_stats_monitor_mode_wifi_card->curr_rx_packet_loss_perc, openhd_stats_monitor_mode_wifi_card->curr_status, openhd_stats_monitor_mode_wifi_card->dummy0, openhd_stats_monitor_mode_wifi_card->dummy1, openhd_stats_monitor_mode_wifi_card->dummy2);
 #else
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_CARD, (const char *)openhd_stats_monitor_mode_wifi_card, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_CARD_MIN_LEN, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_CARD_LEN, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_CARD_CRC);
 #endif
@@ -356,7 +392,7 @@ static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_card_send_struct(m
   is usually the receive buffer for the channel, and allows a reply to an
   incoming message with minimum stack space usage.
  */
-static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_card_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint8_t card_index, uint8_t card_type, int8_t rx_rssi, int8_t rx_rssi_1, int8_t rx_rssi_2, int8_t rx_rssi_noise, int8_t rx_signal_quality, int16_t tx_power_current, int16_t tx_power_armed, int16_t tx_power_disarmed, uint32_t count_p_received, uint32_t count_p_injected, int8_t curr_rx_packet_loss_perc, uint8_t curr_status, int8_t dummy0, int16_t dummy1, int32_t dummy2)
+static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_card_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint8_t card_index, uint8_t card_type, uint8_t tx_active, int8_t rx_rssi, int8_t rx_rssi_1, int8_t rx_rssi_2, int8_t rx_evm_1, int8_t rx_evm_2, int8_t rx_rssi_noise, int8_t rx_signal_quality, int16_t tx_power_current, int16_t tx_power_armed, int16_t tx_power_disarmed, uint32_t count_p_received, uint32_t count_p_injected, int8_t curr_rx_packet_loss_perc, uint8_t curr_status, int8_t dummy0, int16_t dummy1, int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char *buf = (char *)msgbuf;
@@ -369,14 +405,17 @@ static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_card_send_buf(mavl
     _mav_put_int16_t(buf, 18, dummy1);
     _mav_put_uint8_t(buf, 20, card_index);
     _mav_put_uint8_t(buf, 21, card_type);
-    _mav_put_int8_t(buf, 22, rx_rssi);
-    _mav_put_int8_t(buf, 23, rx_rssi_1);
-    _mav_put_int8_t(buf, 24, rx_rssi_2);
-    _mav_put_int8_t(buf, 25, rx_rssi_noise);
-    _mav_put_int8_t(buf, 26, rx_signal_quality);
-    _mav_put_int8_t(buf, 27, curr_rx_packet_loss_perc);
-    _mav_put_uint8_t(buf, 28, curr_status);
-    _mav_put_int8_t(buf, 29, dummy0);
+    _mav_put_uint8_t(buf, 22, tx_active);
+    _mav_put_int8_t(buf, 23, rx_rssi);
+    _mav_put_int8_t(buf, 24, rx_rssi_1);
+    _mav_put_int8_t(buf, 25, rx_rssi_2);
+    _mav_put_int8_t(buf, 26, rx_evm_1);
+    _mav_put_int8_t(buf, 27, rx_evm_2);
+    _mav_put_int8_t(buf, 28, rx_rssi_noise);
+    _mav_put_int8_t(buf, 29, rx_signal_quality);
+    _mav_put_int8_t(buf, 30, curr_rx_packet_loss_perc);
+    _mav_put_uint8_t(buf, 31, curr_status);
+    _mav_put_int8_t(buf, 32, dummy0);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_CARD, buf, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_CARD_MIN_LEN, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_CARD_LEN, MAVLINK_MSG_ID_OPENHD_STATS_MONITOR_MODE_WIFI_CARD_CRC);
 #else
@@ -390,9 +429,12 @@ static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_card_send_buf(mavl
     packet->dummy1 = dummy1;
     packet->card_index = card_index;
     packet->card_type = card_type;
+    packet->tx_active = tx_active;
     packet->rx_rssi = rx_rssi;
     packet->rx_rssi_1 = rx_rssi_1;
     packet->rx_rssi_2 = rx_rssi_2;
+    packet->rx_evm_1 = rx_evm_1;
+    packet->rx_evm_2 = rx_evm_2;
     packet->rx_rssi_noise = rx_rssi_noise;
     packet->rx_signal_quality = rx_signal_quality;
     packet->curr_rx_packet_loss_perc = curr_rx_packet_loss_perc;
@@ -412,7 +454,7 @@ static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_card_send_buf(mavl
 /**
  * @brief Get field card_index from openhd_stats_monitor_mode_wifi_card message
  *
- * @return  A system / component might have more than one card for diversity
+ * @return  Ground might have multiple card(s) for diversity.
  */
 static inline uint8_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_card_index(const mavlink_message_t* msg)
 {
@@ -422,7 +464,7 @@ static inline uint8_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_card_i
 /**
  * @brief Get field card_type from openhd_stats_monitor_mode_wifi_card message
  *
- * @return  0=unknown, 1=RTL8812AU, 2=RTL8812BU, ... (see openhd card_type enum)
+ * @return  See openhd card_type enum
  */
 static inline uint8_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_card_type(const mavlink_message_t* msg)
 {
@@ -430,13 +472,23 @@ static inline uint8_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_card_t
 }
 
 /**
+ * @brief Get field tx_active from openhd_stats_monitor_mode_wifi_card message
+ *
+ * @return  On ground stations with multiple card(s), only one card is selected for TX at a time.
+ */
+static inline uint8_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_tx_active(const mavlink_message_t* msg)
+{
+    return _MAV_RETURN_uint8_t(msg,  22);
+}
+
+/**
  * @brief Get field rx_rssi from openhd_stats_monitor_mode_wifi_card message
  *
- * @return  rx rssi in dBm of this card - depending on the hw, might be the max of all antennas or different
+ * @return  rx rssi in dBm of this card - depending on the hw, might be the max of all antennas or different.
  */
 static inline int8_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_rx_rssi(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int8_t(msg,  22);
+    return _MAV_RETURN_int8_t(msg,  23);
 }
 
 /**
@@ -446,7 +498,7 @@ static inline int8_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_rx_rssi
  */
 static inline int8_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_rx_rssi_1(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int8_t(msg,  23);
+    return _MAV_RETURN_int8_t(msg,  24);
 }
 
 /**
@@ -456,7 +508,27 @@ static inline int8_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_rx_rssi
  */
 static inline int8_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_rx_rssi_2(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int8_t(msg,  24);
+    return _MAV_RETURN_int8_t(msg,  25);
+}
+
+/**
+ * @brief Get field rx_evm_1 from openhd_stats_monitor_mode_wifi_card message
+ *
+ * @return  rx evm in dBm for antenna 1
+ */
+static inline int8_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_rx_evm_1(const mavlink_message_t* msg)
+{
+    return _MAV_RETURN_int8_t(msg,  26);
+}
+
+/**
+ * @brief Get field rx_evm_2 from openhd_stats_monitor_mode_wifi_card message
+ *
+ * @return  rx evm in dBm for antenna 2
+ */
+static inline int8_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_rx_evm_2(const mavlink_message_t* msg)
+{
+    return _MAV_RETURN_int8_t(msg,  27);
 }
 
 /**
@@ -466,7 +538,7 @@ static inline int8_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_rx_rssi
  */
 static inline int8_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_rx_rssi_noise(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int8_t(msg,  25);
+    return _MAV_RETURN_int8_t(msg,  28);
 }
 
 /**
@@ -476,7 +548,7 @@ static inline int8_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_rx_rssi
  */
 static inline int8_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_rx_signal_quality(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int8_t(msg,  26);
+    return _MAV_RETURN_int8_t(msg,  29);
 }
 
 /**
@@ -536,7 +608,7 @@ static inline uint32_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_count
  */
 static inline int8_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_curr_rx_packet_loss_perc(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int8_t(msg,  27);
+    return _MAV_RETURN_int8_t(msg,  30);
 }
 
 /**
@@ -546,7 +618,7 @@ static inline int8_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_curr_rx
  */
 static inline uint8_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_curr_status(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  28);
+    return _MAV_RETURN_uint8_t(msg,  31);
 }
 
 /**
@@ -556,7 +628,7 @@ static inline uint8_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_curr_s
  */
 static inline int8_t mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_dummy0(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int8_t(msg,  29);
+    return _MAV_RETURN_int8_t(msg,  32);
 }
 
 /**
@@ -597,9 +669,12 @@ static inline void mavlink_msg_openhd_stats_monitor_mode_wifi_card_decode(const 
     openhd_stats_monitor_mode_wifi_card->dummy1 = mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_dummy1(msg);
     openhd_stats_monitor_mode_wifi_card->card_index = mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_card_index(msg);
     openhd_stats_monitor_mode_wifi_card->card_type = mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_card_type(msg);
+    openhd_stats_monitor_mode_wifi_card->tx_active = mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_tx_active(msg);
     openhd_stats_monitor_mode_wifi_card->rx_rssi = mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_rx_rssi(msg);
     openhd_stats_monitor_mode_wifi_card->rx_rssi_1 = mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_rx_rssi_1(msg);
     openhd_stats_monitor_mode_wifi_card->rx_rssi_2 = mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_rx_rssi_2(msg);
+    openhd_stats_monitor_mode_wifi_card->rx_evm_1 = mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_rx_evm_1(msg);
+    openhd_stats_monitor_mode_wifi_card->rx_evm_2 = mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_rx_evm_2(msg);
     openhd_stats_monitor_mode_wifi_card->rx_rssi_noise = mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_rx_rssi_noise(msg);
     openhd_stats_monitor_mode_wifi_card->rx_signal_quality = mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_rx_signal_quality(msg);
     openhd_stats_monitor_mode_wifi_card->curr_rx_packet_loss_perc = mavlink_msg_openhd_stats_monitor_mode_wifi_card_get_curr_rx_packet_loss_perc(msg);

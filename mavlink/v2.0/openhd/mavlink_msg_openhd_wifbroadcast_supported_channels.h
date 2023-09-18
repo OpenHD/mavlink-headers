@@ -7,19 +7,19 @@
 typedef struct __mavlink_openhd_wifbroadcast_supported_channels_t {
  uint16_t channels[60]; /*<  List of supported channels, 0 to indicate an empty field.Always in 20Mhz increments*/
  uint8_t card_index; /*<  index of the wifibroadcast card (RX might have multiple)*/
- uint8_t bandwidths[80]; /*<  TODO*/
+ uint8_t bandwidths[60]; /*<  TODO*/
 } mavlink_openhd_wifbroadcast_supported_channels_t;
 
-#define MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN 201
-#define MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_MIN_LEN 201
-#define MAVLINK_MSG_ID_1222_LEN 201
-#define MAVLINK_MSG_ID_1222_MIN_LEN 201
+#define MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN 181
+#define MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_MIN_LEN 181
+#define MAVLINK_MSG_ID_1222_LEN 181
+#define MAVLINK_MSG_ID_1222_MIN_LEN 181
 
-#define MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_CRC 85
-#define MAVLINK_MSG_ID_1222_CRC 85
+#define MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_CRC 150
+#define MAVLINK_MSG_ID_1222_CRC 150
 
 #define MAVLINK_MSG_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_FIELD_CHANNELS_LEN 60
-#define MAVLINK_MSG_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_FIELD_BANDWIDTHS_LEN 80
+#define MAVLINK_MSG_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_FIELD_BANDWIDTHS_LEN 60
 
 #if MAVLINK_COMMAND_24BIT
 #define MAVLINK_MESSAGE_INFO_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS { \
@@ -28,7 +28,7 @@ typedef struct __mavlink_openhd_wifbroadcast_supported_channels_t {
     3, \
     {  { "card_index", NULL, MAVLINK_TYPE_UINT8_T, 0, 120, offsetof(mavlink_openhd_wifbroadcast_supported_channels_t, card_index) }, \
          { "channels", NULL, MAVLINK_TYPE_UINT16_T, 60, 0, offsetof(mavlink_openhd_wifbroadcast_supported_channels_t, channels) }, \
-         { "bandwidths", NULL, MAVLINK_TYPE_UINT8_T, 80, 121, offsetof(mavlink_openhd_wifbroadcast_supported_channels_t, bandwidths) }, \
+         { "bandwidths", NULL, MAVLINK_TYPE_UINT8_T, 60, 121, offsetof(mavlink_openhd_wifbroadcast_supported_channels_t, bandwidths) }, \
          } \
 }
 #else
@@ -37,7 +37,7 @@ typedef struct __mavlink_openhd_wifbroadcast_supported_channels_t {
     3, \
     {  { "card_index", NULL, MAVLINK_TYPE_UINT8_T, 0, 120, offsetof(mavlink_openhd_wifbroadcast_supported_channels_t, card_index) }, \
          { "channels", NULL, MAVLINK_TYPE_UINT16_T, 60, 0, offsetof(mavlink_openhd_wifbroadcast_supported_channels_t, channels) }, \
-         { "bandwidths", NULL, MAVLINK_TYPE_UINT8_T, 80, 121, offsetof(mavlink_openhd_wifbroadcast_supported_channels_t, bandwidths) }, \
+         { "bandwidths", NULL, MAVLINK_TYPE_UINT8_T, 60, 121, offsetof(mavlink_openhd_wifbroadcast_supported_channels_t, bandwidths) }, \
          } \
 }
 #endif
@@ -60,13 +60,13 @@ static inline uint16_t mavlink_msg_openhd_wifbroadcast_supported_channels_pack(u
     char buf[MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN];
     _mav_put_uint8_t(buf, 120, card_index);
     _mav_put_uint16_t_array(buf, 0, channels, 60);
-    _mav_put_uint8_t_array(buf, 121, bandwidths, 80);
+    _mav_put_uint8_t_array(buf, 121, bandwidths, 60);
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN);
 #else
     mavlink_openhd_wifbroadcast_supported_channels_t packet;
     packet.card_index = card_index;
     mav_array_memcpy(packet.channels, channels, sizeof(uint16_t)*60);
-    mav_array_memcpy(packet.bandwidths, bandwidths, sizeof(uint8_t)*80);
+    mav_array_memcpy(packet.bandwidths, bandwidths, sizeof(uint8_t)*60);
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN);
 #endif
 
@@ -93,13 +93,13 @@ static inline uint16_t mavlink_msg_openhd_wifbroadcast_supported_channels_pack_c
     char buf[MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN];
     _mav_put_uint8_t(buf, 120, card_index);
     _mav_put_uint16_t_array(buf, 0, channels, 60);
-    _mav_put_uint8_t_array(buf, 121, bandwidths, 80);
+    _mav_put_uint8_t_array(buf, 121, bandwidths, 60);
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN);
 #else
     mavlink_openhd_wifbroadcast_supported_channels_t packet;
     packet.card_index = card_index;
     mav_array_memcpy(packet.channels, channels, sizeof(uint16_t)*60);
-    mav_array_memcpy(packet.bandwidths, bandwidths, sizeof(uint8_t)*80);
+    mav_array_memcpy(packet.bandwidths, bandwidths, sizeof(uint8_t)*60);
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN);
 #endif
 
@@ -150,13 +150,13 @@ static inline void mavlink_msg_openhd_wifbroadcast_supported_channels_send(mavli
     char buf[MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN];
     _mav_put_uint8_t(buf, 120, card_index);
     _mav_put_uint16_t_array(buf, 0, channels, 60);
-    _mav_put_uint8_t_array(buf, 121, bandwidths, 80);
+    _mav_put_uint8_t_array(buf, 121, bandwidths, 60);
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS, buf, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_MIN_LEN, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_CRC);
 #else
     mavlink_openhd_wifbroadcast_supported_channels_t packet;
     packet.card_index = card_index;
     mav_array_memcpy(packet.channels, channels, sizeof(uint16_t)*60);
-    mav_array_memcpy(packet.bandwidths, bandwidths, sizeof(uint8_t)*80);
+    mav_array_memcpy(packet.bandwidths, bandwidths, sizeof(uint8_t)*60);
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS, (const char *)&packet, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_MIN_LEN, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_CRC);
 #endif
 }
@@ -189,13 +189,13 @@ static inline void mavlink_msg_openhd_wifbroadcast_supported_channels_send_buf(m
     char *buf = (char *)msgbuf;
     _mav_put_uint8_t(buf, 120, card_index);
     _mav_put_uint16_t_array(buf, 0, channels, 60);
-    _mav_put_uint8_t_array(buf, 121, bandwidths, 80);
+    _mav_put_uint8_t_array(buf, 121, bandwidths, 60);
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS, buf, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_MIN_LEN, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_CRC);
 #else
     mavlink_openhd_wifbroadcast_supported_channels_t *packet = (mavlink_openhd_wifbroadcast_supported_channels_t *)msgbuf;
     packet->card_index = card_index;
     mav_array_memcpy(packet->channels, channels, sizeof(uint16_t)*60);
-    mav_array_memcpy(packet->bandwidths, bandwidths, sizeof(uint8_t)*80);
+    mav_array_memcpy(packet->bandwidths, bandwidths, sizeof(uint8_t)*60);
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS, (const char *)packet, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_MIN_LEN, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_CRC);
 #endif
 }
@@ -233,7 +233,7 @@ static inline uint16_t mavlink_msg_openhd_wifbroadcast_supported_channels_get_ch
  */
 static inline uint16_t mavlink_msg_openhd_wifbroadcast_supported_channels_get_bandwidths(const mavlink_message_t* msg, uint8_t *bandwidths)
 {
-    return _MAV_RETURN_uint8_t_array(msg, bandwidths, 80,  121);
+    return _MAV_RETURN_uint8_t_array(msg, bandwidths, 60,  121);
 }
 
 /**
