@@ -1,43 +1,35 @@
 #pragma once
 // MESSAGE OPENHD_WIFBROADCAST_GND_OPERATING_MODE PACKING
 
-#define MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE 1224
+#define MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE 1225
 
 
 typedef struct __mavlink_openhd_wifbroadcast_gnd_operating_mode_t {
  int32_t dummy1; /*<  future use*/
  int32_t dummy2; /*<  future use*/
- uint16_t extra_channel_mhz; /*<  channel that is currently scanned / analyzed, 0 otherwise*/
  uint16_t dummy0; /*<  future use*/
  uint8_t operating_mode; /*<  0=normal,1=currently scanning, 2=currently analyzing*/
- uint8_t extra_channel_width_mhz; /*<  samel like extra channel, for bandwidth*/
- uint8_t progress; /*<  progress [0..100], when scanning / analyzing is active,undefined otherwise.*/
- uint8_t success; /*<  Set to 1 if channel scan succeeded.*/
  int8_t tx_passive_mode_is_enabled; /*<  Act as a passive listener (NO TX EVER), 0=disabled, 1=enabled.*/
 } mavlink_openhd_wifbroadcast_gnd_operating_mode_t;
 
-#define MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_LEN 17
-#define MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_MIN_LEN 17
-#define MAVLINK_MSG_ID_1224_LEN 17
-#define MAVLINK_MSG_ID_1224_MIN_LEN 17
+#define MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_LEN 12
+#define MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_MIN_LEN 12
+#define MAVLINK_MSG_ID_1225_LEN 12
+#define MAVLINK_MSG_ID_1225_MIN_LEN 12
 
-#define MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_CRC 212
-#define MAVLINK_MSG_ID_1224_CRC 212
+#define MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_CRC 169
+#define MAVLINK_MSG_ID_1225_CRC 169
 
 
 
 #if MAVLINK_COMMAND_24BIT
 #define MAVLINK_MESSAGE_INFO_OPENHD_WIFBROADCAST_GND_OPERATING_MODE { \
-    1224, \
+    1225, \
     "OPENHD_WIFBROADCAST_GND_OPERATING_MODE", \
-    9, \
-    {  { "operating_mode", NULL, MAVLINK_TYPE_UINT8_T, 0, 12, offsetof(mavlink_openhd_wifbroadcast_gnd_operating_mode_t, operating_mode) }, \
-         { "extra_channel_mhz", NULL, MAVLINK_TYPE_UINT16_T, 0, 8, offsetof(mavlink_openhd_wifbroadcast_gnd_operating_mode_t, extra_channel_mhz) }, \
-         { "extra_channel_width_mhz", NULL, MAVLINK_TYPE_UINT8_T, 0, 13, offsetof(mavlink_openhd_wifbroadcast_gnd_operating_mode_t, extra_channel_width_mhz) }, \
-         { "progress", NULL, MAVLINK_TYPE_UINT8_T, 0, 14, offsetof(mavlink_openhd_wifbroadcast_gnd_operating_mode_t, progress) }, \
-         { "success", NULL, MAVLINK_TYPE_UINT8_T, 0, 15, offsetof(mavlink_openhd_wifbroadcast_gnd_operating_mode_t, success) }, \
-         { "tx_passive_mode_is_enabled", NULL, MAVLINK_TYPE_INT8_T, 0, 16, offsetof(mavlink_openhd_wifbroadcast_gnd_operating_mode_t, tx_passive_mode_is_enabled) }, \
-         { "dummy0", NULL, MAVLINK_TYPE_UINT16_T, 0, 10, offsetof(mavlink_openhd_wifbroadcast_gnd_operating_mode_t, dummy0) }, \
+    5, \
+    {  { "operating_mode", NULL, MAVLINK_TYPE_UINT8_T, 0, 10, offsetof(mavlink_openhd_wifbroadcast_gnd_operating_mode_t, operating_mode) }, \
+         { "tx_passive_mode_is_enabled", NULL, MAVLINK_TYPE_INT8_T, 0, 11, offsetof(mavlink_openhd_wifbroadcast_gnd_operating_mode_t, tx_passive_mode_is_enabled) }, \
+         { "dummy0", NULL, MAVLINK_TYPE_UINT16_T, 0, 8, offsetof(mavlink_openhd_wifbroadcast_gnd_operating_mode_t, dummy0) }, \
          { "dummy1", NULL, MAVLINK_TYPE_INT32_T, 0, 0, offsetof(mavlink_openhd_wifbroadcast_gnd_operating_mode_t, dummy1) }, \
          { "dummy2", NULL, MAVLINK_TYPE_INT32_T, 0, 4, offsetof(mavlink_openhd_wifbroadcast_gnd_operating_mode_t, dummy2) }, \
          } \
@@ -45,14 +37,10 @@ typedef struct __mavlink_openhd_wifbroadcast_gnd_operating_mode_t {
 #else
 #define MAVLINK_MESSAGE_INFO_OPENHD_WIFBROADCAST_GND_OPERATING_MODE { \
     "OPENHD_WIFBROADCAST_GND_OPERATING_MODE", \
-    9, \
-    {  { "operating_mode", NULL, MAVLINK_TYPE_UINT8_T, 0, 12, offsetof(mavlink_openhd_wifbroadcast_gnd_operating_mode_t, operating_mode) }, \
-         { "extra_channel_mhz", NULL, MAVLINK_TYPE_UINT16_T, 0, 8, offsetof(mavlink_openhd_wifbroadcast_gnd_operating_mode_t, extra_channel_mhz) }, \
-         { "extra_channel_width_mhz", NULL, MAVLINK_TYPE_UINT8_T, 0, 13, offsetof(mavlink_openhd_wifbroadcast_gnd_operating_mode_t, extra_channel_width_mhz) }, \
-         { "progress", NULL, MAVLINK_TYPE_UINT8_T, 0, 14, offsetof(mavlink_openhd_wifbroadcast_gnd_operating_mode_t, progress) }, \
-         { "success", NULL, MAVLINK_TYPE_UINT8_T, 0, 15, offsetof(mavlink_openhd_wifbroadcast_gnd_operating_mode_t, success) }, \
-         { "tx_passive_mode_is_enabled", NULL, MAVLINK_TYPE_INT8_T, 0, 16, offsetof(mavlink_openhd_wifbroadcast_gnd_operating_mode_t, tx_passive_mode_is_enabled) }, \
-         { "dummy0", NULL, MAVLINK_TYPE_UINT16_T, 0, 10, offsetof(mavlink_openhd_wifbroadcast_gnd_operating_mode_t, dummy0) }, \
+    5, \
+    {  { "operating_mode", NULL, MAVLINK_TYPE_UINT8_T, 0, 10, offsetof(mavlink_openhd_wifbroadcast_gnd_operating_mode_t, operating_mode) }, \
+         { "tx_passive_mode_is_enabled", NULL, MAVLINK_TYPE_INT8_T, 0, 11, offsetof(mavlink_openhd_wifbroadcast_gnd_operating_mode_t, tx_passive_mode_is_enabled) }, \
+         { "dummy0", NULL, MAVLINK_TYPE_UINT16_T, 0, 8, offsetof(mavlink_openhd_wifbroadcast_gnd_operating_mode_t, dummy0) }, \
          { "dummy1", NULL, MAVLINK_TYPE_INT32_T, 0, 0, offsetof(mavlink_openhd_wifbroadcast_gnd_operating_mode_t, dummy1) }, \
          { "dummy2", NULL, MAVLINK_TYPE_INT32_T, 0, 4, offsetof(mavlink_openhd_wifbroadcast_gnd_operating_mode_t, dummy2) }, \
          } \
@@ -66,10 +54,6 @@ typedef struct __mavlink_openhd_wifbroadcast_gnd_operating_mode_t {
  * @param msg The MAVLink message to compress the data into
  *
  * @param operating_mode  0=normal,1=currently scanning, 2=currently analyzing
- * @param extra_channel_mhz  channel that is currently scanned / analyzed, 0 otherwise
- * @param extra_channel_width_mhz  samel like extra channel, for bandwidth
- * @param progress  progress [0..100], when scanning / analyzing is active,undefined otherwise.
- * @param success  Set to 1 if channel scan succeeded.
  * @param tx_passive_mode_is_enabled  Act as a passive listener (NO TX EVER), 0=disabled, 1=enabled.
  * @param dummy0  future use
  * @param dummy1  future use
@@ -77,31 +61,23 @@ typedef struct __mavlink_openhd_wifbroadcast_gnd_operating_mode_t {
  * @return length of the message in bytes (excluding serial stream start sign)
  */
 static inline uint16_t mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
-                               uint8_t operating_mode, uint16_t extra_channel_mhz, uint8_t extra_channel_width_mhz, uint8_t progress, uint8_t success, int8_t tx_passive_mode_is_enabled, uint16_t dummy0, int32_t dummy1, int32_t dummy2)
+                               uint8_t operating_mode, int8_t tx_passive_mode_is_enabled, uint16_t dummy0, int32_t dummy1, int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_LEN];
     _mav_put_int32_t(buf, 0, dummy1);
     _mav_put_int32_t(buf, 4, dummy2);
-    _mav_put_uint16_t(buf, 8, extra_channel_mhz);
-    _mav_put_uint16_t(buf, 10, dummy0);
-    _mav_put_uint8_t(buf, 12, operating_mode);
-    _mav_put_uint8_t(buf, 13, extra_channel_width_mhz);
-    _mav_put_uint8_t(buf, 14, progress);
-    _mav_put_uint8_t(buf, 15, success);
-    _mav_put_int8_t(buf, 16, tx_passive_mode_is_enabled);
+    _mav_put_uint16_t(buf, 8, dummy0);
+    _mav_put_uint8_t(buf, 10, operating_mode);
+    _mav_put_int8_t(buf, 11, tx_passive_mode_is_enabled);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_LEN);
 #else
     mavlink_openhd_wifbroadcast_gnd_operating_mode_t packet;
     packet.dummy1 = dummy1;
     packet.dummy2 = dummy2;
-    packet.extra_channel_mhz = extra_channel_mhz;
     packet.dummy0 = dummy0;
     packet.operating_mode = operating_mode;
-    packet.extra_channel_width_mhz = extra_channel_width_mhz;
-    packet.progress = progress;
-    packet.success = success;
     packet.tx_passive_mode_is_enabled = tx_passive_mode_is_enabled;
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_LEN);
@@ -118,10 +94,6 @@ static inline uint16_t mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_pack(u
  * @param chan The MAVLink channel this message will be sent over
  * @param msg The MAVLink message to compress the data into
  * @param operating_mode  0=normal,1=currently scanning, 2=currently analyzing
- * @param extra_channel_mhz  channel that is currently scanned / analyzed, 0 otherwise
- * @param extra_channel_width_mhz  samel like extra channel, for bandwidth
- * @param progress  progress [0..100], when scanning / analyzing is active,undefined otherwise.
- * @param success  Set to 1 if channel scan succeeded.
  * @param tx_passive_mode_is_enabled  Act as a passive listener (NO TX EVER), 0=disabled, 1=enabled.
  * @param dummy0  future use
  * @param dummy1  future use
@@ -130,31 +102,23 @@ static inline uint16_t mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_pack(u
  */
 static inline uint16_t mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
-                                   uint8_t operating_mode,uint16_t extra_channel_mhz,uint8_t extra_channel_width_mhz,uint8_t progress,uint8_t success,int8_t tx_passive_mode_is_enabled,uint16_t dummy0,int32_t dummy1,int32_t dummy2)
+                                   uint8_t operating_mode,int8_t tx_passive_mode_is_enabled,uint16_t dummy0,int32_t dummy1,int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_LEN];
     _mav_put_int32_t(buf, 0, dummy1);
     _mav_put_int32_t(buf, 4, dummy2);
-    _mav_put_uint16_t(buf, 8, extra_channel_mhz);
-    _mav_put_uint16_t(buf, 10, dummy0);
-    _mav_put_uint8_t(buf, 12, operating_mode);
-    _mav_put_uint8_t(buf, 13, extra_channel_width_mhz);
-    _mav_put_uint8_t(buf, 14, progress);
-    _mav_put_uint8_t(buf, 15, success);
-    _mav_put_int8_t(buf, 16, tx_passive_mode_is_enabled);
+    _mav_put_uint16_t(buf, 8, dummy0);
+    _mav_put_uint8_t(buf, 10, operating_mode);
+    _mav_put_int8_t(buf, 11, tx_passive_mode_is_enabled);
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_LEN);
 #else
     mavlink_openhd_wifbroadcast_gnd_operating_mode_t packet;
     packet.dummy1 = dummy1;
     packet.dummy2 = dummy2;
-    packet.extra_channel_mhz = extra_channel_mhz;
     packet.dummy0 = dummy0;
     packet.operating_mode = operating_mode;
-    packet.extra_channel_width_mhz = extra_channel_width_mhz;
-    packet.progress = progress;
-    packet.success = success;
     packet.tx_passive_mode_is_enabled = tx_passive_mode_is_enabled;
 
         memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_LEN);
@@ -174,7 +138,7 @@ static inline uint16_t mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_pack_c
  */
 static inline uint16_t mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_wifbroadcast_gnd_operating_mode_t* openhd_wifbroadcast_gnd_operating_mode)
 {
-    return mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_pack(system_id, component_id, msg, openhd_wifbroadcast_gnd_operating_mode->operating_mode, openhd_wifbroadcast_gnd_operating_mode->extra_channel_mhz, openhd_wifbroadcast_gnd_operating_mode->extra_channel_width_mhz, openhd_wifbroadcast_gnd_operating_mode->progress, openhd_wifbroadcast_gnd_operating_mode->success, openhd_wifbroadcast_gnd_operating_mode->tx_passive_mode_is_enabled, openhd_wifbroadcast_gnd_operating_mode->dummy0, openhd_wifbroadcast_gnd_operating_mode->dummy1, openhd_wifbroadcast_gnd_operating_mode->dummy2);
+    return mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_pack(system_id, component_id, msg, openhd_wifbroadcast_gnd_operating_mode->operating_mode, openhd_wifbroadcast_gnd_operating_mode->tx_passive_mode_is_enabled, openhd_wifbroadcast_gnd_operating_mode->dummy0, openhd_wifbroadcast_gnd_operating_mode->dummy1, openhd_wifbroadcast_gnd_operating_mode->dummy2);
 }
 
 /**
@@ -188,7 +152,7 @@ static inline uint16_t mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_encode
  */
 static inline uint16_t mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_wifbroadcast_gnd_operating_mode_t* openhd_wifbroadcast_gnd_operating_mode)
 {
-    return mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_pack_chan(system_id, component_id, chan, msg, openhd_wifbroadcast_gnd_operating_mode->operating_mode, openhd_wifbroadcast_gnd_operating_mode->extra_channel_mhz, openhd_wifbroadcast_gnd_operating_mode->extra_channel_width_mhz, openhd_wifbroadcast_gnd_operating_mode->progress, openhd_wifbroadcast_gnd_operating_mode->success, openhd_wifbroadcast_gnd_operating_mode->tx_passive_mode_is_enabled, openhd_wifbroadcast_gnd_operating_mode->dummy0, openhd_wifbroadcast_gnd_operating_mode->dummy1, openhd_wifbroadcast_gnd_operating_mode->dummy2);
+    return mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_pack_chan(system_id, component_id, chan, msg, openhd_wifbroadcast_gnd_operating_mode->operating_mode, openhd_wifbroadcast_gnd_operating_mode->tx_passive_mode_is_enabled, openhd_wifbroadcast_gnd_operating_mode->dummy0, openhd_wifbroadcast_gnd_operating_mode->dummy1, openhd_wifbroadcast_gnd_operating_mode->dummy2);
 }
 
 /**
@@ -196,10 +160,6 @@ static inline uint16_t mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_encode
  * @param chan MAVLink channel to send the message
  *
  * @param operating_mode  0=normal,1=currently scanning, 2=currently analyzing
- * @param extra_channel_mhz  channel that is currently scanned / analyzed, 0 otherwise
- * @param extra_channel_width_mhz  samel like extra channel, for bandwidth
- * @param progress  progress [0..100], when scanning / analyzing is active,undefined otherwise.
- * @param success  Set to 1 if channel scan succeeded.
  * @param tx_passive_mode_is_enabled  Act as a passive listener (NO TX EVER), 0=disabled, 1=enabled.
  * @param dummy0  future use
  * @param dummy1  future use
@@ -207,31 +167,23 @@ static inline uint16_t mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_encode
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
-static inline void mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_send(mavlink_channel_t chan, uint8_t operating_mode, uint16_t extra_channel_mhz, uint8_t extra_channel_width_mhz, uint8_t progress, uint8_t success, int8_t tx_passive_mode_is_enabled, uint16_t dummy0, int32_t dummy1, int32_t dummy2)
+static inline void mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_send(mavlink_channel_t chan, uint8_t operating_mode, int8_t tx_passive_mode_is_enabled, uint16_t dummy0, int32_t dummy1, int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char buf[MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_LEN];
     _mav_put_int32_t(buf, 0, dummy1);
     _mav_put_int32_t(buf, 4, dummy2);
-    _mav_put_uint16_t(buf, 8, extra_channel_mhz);
-    _mav_put_uint16_t(buf, 10, dummy0);
-    _mav_put_uint8_t(buf, 12, operating_mode);
-    _mav_put_uint8_t(buf, 13, extra_channel_width_mhz);
-    _mav_put_uint8_t(buf, 14, progress);
-    _mav_put_uint8_t(buf, 15, success);
-    _mav_put_int8_t(buf, 16, tx_passive_mode_is_enabled);
+    _mav_put_uint16_t(buf, 8, dummy0);
+    _mav_put_uint8_t(buf, 10, operating_mode);
+    _mav_put_int8_t(buf, 11, tx_passive_mode_is_enabled);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE, buf, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_MIN_LEN, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_LEN, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_CRC);
 #else
     mavlink_openhd_wifbroadcast_gnd_operating_mode_t packet;
     packet.dummy1 = dummy1;
     packet.dummy2 = dummy2;
-    packet.extra_channel_mhz = extra_channel_mhz;
     packet.dummy0 = dummy0;
     packet.operating_mode = operating_mode;
-    packet.extra_channel_width_mhz = extra_channel_width_mhz;
-    packet.progress = progress;
-    packet.success = success;
     packet.tx_passive_mode_is_enabled = tx_passive_mode_is_enabled;
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE, (const char *)&packet, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_MIN_LEN, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_LEN, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_CRC);
@@ -246,7 +198,7 @@ static inline void mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_send(mavli
 static inline void mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_send_struct(mavlink_channel_t chan, const mavlink_openhd_wifbroadcast_gnd_operating_mode_t* openhd_wifbroadcast_gnd_operating_mode)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
-    mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_send(chan, openhd_wifbroadcast_gnd_operating_mode->operating_mode, openhd_wifbroadcast_gnd_operating_mode->extra_channel_mhz, openhd_wifbroadcast_gnd_operating_mode->extra_channel_width_mhz, openhd_wifbroadcast_gnd_operating_mode->progress, openhd_wifbroadcast_gnd_operating_mode->success, openhd_wifbroadcast_gnd_operating_mode->tx_passive_mode_is_enabled, openhd_wifbroadcast_gnd_operating_mode->dummy0, openhd_wifbroadcast_gnd_operating_mode->dummy1, openhd_wifbroadcast_gnd_operating_mode->dummy2);
+    mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_send(chan, openhd_wifbroadcast_gnd_operating_mode->operating_mode, openhd_wifbroadcast_gnd_operating_mode->tx_passive_mode_is_enabled, openhd_wifbroadcast_gnd_operating_mode->dummy0, openhd_wifbroadcast_gnd_operating_mode->dummy1, openhd_wifbroadcast_gnd_operating_mode->dummy2);
 #else
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE, (const char *)openhd_wifbroadcast_gnd_operating_mode, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_MIN_LEN, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_LEN, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_CRC);
 #endif
@@ -260,31 +212,23 @@ static inline void mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_send_struc
   is usually the receive buffer for the channel, and allows a reply to an
   incoming message with minimum stack space usage.
  */
-static inline void mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint8_t operating_mode, uint16_t extra_channel_mhz, uint8_t extra_channel_width_mhz, uint8_t progress, uint8_t success, int8_t tx_passive_mode_is_enabled, uint16_t dummy0, int32_t dummy1, int32_t dummy2)
+static inline void mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint8_t operating_mode, int8_t tx_passive_mode_is_enabled, uint16_t dummy0, int32_t dummy1, int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     char *buf = (char *)msgbuf;
     _mav_put_int32_t(buf, 0, dummy1);
     _mav_put_int32_t(buf, 4, dummy2);
-    _mav_put_uint16_t(buf, 8, extra_channel_mhz);
-    _mav_put_uint16_t(buf, 10, dummy0);
-    _mav_put_uint8_t(buf, 12, operating_mode);
-    _mav_put_uint8_t(buf, 13, extra_channel_width_mhz);
-    _mav_put_uint8_t(buf, 14, progress);
-    _mav_put_uint8_t(buf, 15, success);
-    _mav_put_int8_t(buf, 16, tx_passive_mode_is_enabled);
+    _mav_put_uint16_t(buf, 8, dummy0);
+    _mav_put_uint8_t(buf, 10, operating_mode);
+    _mav_put_int8_t(buf, 11, tx_passive_mode_is_enabled);
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE, buf, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_MIN_LEN, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_LEN, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_CRC);
 #else
     mavlink_openhd_wifbroadcast_gnd_operating_mode_t *packet = (mavlink_openhd_wifbroadcast_gnd_operating_mode_t *)msgbuf;
     packet->dummy1 = dummy1;
     packet->dummy2 = dummy2;
-    packet->extra_channel_mhz = extra_channel_mhz;
     packet->dummy0 = dummy0;
     packet->operating_mode = operating_mode;
-    packet->extra_channel_width_mhz = extra_channel_width_mhz;
-    packet->progress = progress;
-    packet->success = success;
     packet->tx_passive_mode_is_enabled = tx_passive_mode_is_enabled;
 
     _mav_finalize_message_chan_send(chan, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE, (const char *)packet, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_MIN_LEN, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_LEN, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_CRC);
@@ -304,47 +248,7 @@ static inline void mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_send_buf(m
  */
 static inline uint8_t mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_get_operating_mode(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint8_t(msg,  12);
-}
-
-/**
- * @brief Get field extra_channel_mhz from openhd_wifbroadcast_gnd_operating_mode message
- *
- * @return  channel that is currently scanned / analyzed, 0 otherwise
- */
-static inline uint16_t mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_get_extra_channel_mhz(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint16_t(msg,  8);
-}
-
-/**
- * @brief Get field extra_channel_width_mhz from openhd_wifbroadcast_gnd_operating_mode message
- *
- * @return  samel like extra channel, for bandwidth
- */
-static inline uint8_t mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_get_extra_channel_width_mhz(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  13);
-}
-
-/**
- * @brief Get field progress from openhd_wifbroadcast_gnd_operating_mode message
- *
- * @return  progress [0..100], when scanning / analyzing is active,undefined otherwise.
- */
-static inline uint8_t mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_get_progress(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  14);
-}
-
-/**
- * @brief Get field success from openhd_wifbroadcast_gnd_operating_mode message
- *
- * @return  Set to 1 if channel scan succeeded.
- */
-static inline uint8_t mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_get_success(const mavlink_message_t* msg)
-{
-    return _MAV_RETURN_uint8_t(msg,  15);
+    return _MAV_RETURN_uint8_t(msg,  10);
 }
 
 /**
@@ -354,7 +258,7 @@ static inline uint8_t mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_get_suc
  */
 static inline int8_t mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_get_tx_passive_mode_is_enabled(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_int8_t(msg,  16);
+    return _MAV_RETURN_int8_t(msg,  11);
 }
 
 /**
@@ -364,7 +268,7 @@ static inline int8_t mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_get_tx_p
  */
 static inline uint16_t mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_get_dummy0(const mavlink_message_t* msg)
 {
-    return _MAV_RETURN_uint16_t(msg,  10);
+    return _MAV_RETURN_uint16_t(msg,  8);
 }
 
 /**
@@ -398,12 +302,8 @@ static inline void mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_decode(con
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     openhd_wifbroadcast_gnd_operating_mode->dummy1 = mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_get_dummy1(msg);
     openhd_wifbroadcast_gnd_operating_mode->dummy2 = mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_get_dummy2(msg);
-    openhd_wifbroadcast_gnd_operating_mode->extra_channel_mhz = mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_get_extra_channel_mhz(msg);
     openhd_wifbroadcast_gnd_operating_mode->dummy0 = mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_get_dummy0(msg);
     openhd_wifbroadcast_gnd_operating_mode->operating_mode = mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_get_operating_mode(msg);
-    openhd_wifbroadcast_gnd_operating_mode->extra_channel_width_mhz = mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_get_extra_channel_width_mhz(msg);
-    openhd_wifbroadcast_gnd_operating_mode->progress = mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_get_progress(msg);
-    openhd_wifbroadcast_gnd_operating_mode->success = mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_get_success(msg);
     openhd_wifbroadcast_gnd_operating_mode->tx_passive_mode_is_enabled = mavlink_msg_openhd_wifbroadcast_gnd_operating_mode_get_tx_passive_mode_is_enabled(msg);
 #else
         uint8_t len = msg->len < MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_LEN? msg->len : MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_GND_OPERATING_MODE_LEN;

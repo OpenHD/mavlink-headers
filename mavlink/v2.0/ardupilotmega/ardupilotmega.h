@@ -10,7 +10,7 @@
     #error Wrong include order: MAVLINK_ARDUPILOTMEGA.H MUST NOT BE DIRECTLY USED. Include mavlink.h from the same directory instead or set ALL AND EVERY defines from MAVLINK.H manually accordingly, including the #define MAVLINK_H call.
 #endif
 
-#define MAVLINK_ARDUPILOTMEGA_XML_HASH 204305318335810542
+#define MAVLINK_ARDUPILOTMEGA_XML_HASH 6893063966826789364
 
 #ifdef __cplusplus
 extern "C" {
