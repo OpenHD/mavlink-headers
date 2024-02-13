@@ -11,7 +11,7 @@ typedef struct __mavlink_openhd_camera_status_air_t {
  uint16_t stream_h; /*<  streamed video height*/
  uint16_t stream_fps; /*<  streamed video fps*/
  int16_t dummy1; /*<  for future use*/
- uint8_t cam_type; /*<  0==Unknown, follows the definitions in openhd (camera_enums.hpp)*/
+ uint8_t cam_type; /*<  0==Unknown, follows the definitions in openhd*/
  uint8_t cam_status; /*<  0==Unknown, 1==camera is currently streaming, 2==camera is currently restarting*/
  uint8_t supports_variable_bitrate; /*<  Set to 1 if camera supports variable bitrate (changing the bitrate)*/
  uint8_t air_recording_active; /*<  air_recording_active*/
@@ -77,7 +77,7 @@ typedef struct __mavlink_openhd_camera_status_air_t {
  * @param component_id ID of this component (e.g. 200 for IMU)
  * @param msg The MAVLink message to compress the data into
  *
- * @param cam_type  0==Unknown, follows the definitions in openhd (camera_enums.hpp)
+ * @param cam_type  0==Unknown, follows the definitions in openhd
  * @param cam_status  0==Unknown, 1==camera is currently streaming, 2==camera is currently restarting
  * @param supports_variable_bitrate  Set to 1 if camera supports variable bitrate (changing the bitrate)
  * @param air_recording_active  air_recording_active
@@ -141,7 +141,7 @@ static inline uint16_t mavlink_msg_openhd_camera_status_air_pack(uint8_t system_
  * @param component_id ID of this component (e.g. 200 for IMU)
  * @param chan The MAVLink channel this message will be sent over
  * @param msg The MAVLink message to compress the data into
- * @param cam_type  0==Unknown, follows the definitions in openhd (camera_enums.hpp)
+ * @param cam_type  0==Unknown, follows the definitions in openhd
  * @param cam_status  0==Unknown, 1==camera is currently streaming, 2==camera is currently restarting
  * @param supports_variable_bitrate  Set to 1 if camera supports variable bitrate (changing the bitrate)
  * @param air_recording_active  air_recording_active
@@ -231,7 +231,7 @@ static inline uint16_t mavlink_msg_openhd_camera_status_air_encode_chan(uint8_t 
  * @brief Send a openhd_camera_status_air message
  * @param chan MAVLink channel to send the message
  *
- * @param cam_type  0==Unknown, follows the definitions in openhd (camera_enums.hpp)
+ * @param cam_type  0==Unknown, follows the definitions in openhd
  * @param cam_status  0==Unknown, 1==camera is currently streaming, 2==camera is currently restarting
  * @param supports_variable_bitrate  Set to 1 if camera supports variable bitrate (changing the bitrate)
  * @param air_recording_active  air_recording_active
@@ -356,7 +356,7 @@ static inline void mavlink_msg_openhd_camera_status_air_send_buf(mavlink_message
 /**
  * @brief Get field cam_type from openhd_camera_status_air message
  *
- * @return  0==Unknown, follows the definitions in openhd (camera_enums.hpp)
+ * @return  0==Unknown, follows the definitions in openhd
  */
 static inline uint8_t mavlink_msg_openhd_camera_status_air_get_cam_type(const mavlink_message_t* msg)
 {
