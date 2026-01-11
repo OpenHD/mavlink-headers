@@ -1036,6 +1036,264 @@ static void mavlink_test_openhd_sys_status1(uint8_t system_id, uint8_t component
 #endif
 }
 
+static void mavlink_test_openhd_core_status(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
+{
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+    mavlink_status_t *status = mavlink_get_channel_status(MAVLINK_COMM_0);
+        if ((status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) && MAVLINK_MSG_ID_OPENHD_CORE_STATUS >= 256) {
+            return;
+        }
+#endif
+    mavlink_message_t msg;
+        uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
+        uint16_t i;
+    mavlink_openhd_core_status_t packet_in = {
+        963497464,17443,17547,17651,17755,17859,175,242,53,120,187,254,65,132
+    };
+    mavlink_openhd_core_status_t packet1, packet2;
+        memset(&packet1, 0, sizeof(packet1));
+        packet1.storage_left_mb = packet_in.storage_left_mb;
+        packet1.cpu_clock = packet_in.cpu_clock;
+        packet1.isp_clock = packet_in.isp_clock;
+        packet1.h264_clock = packet_in.h264_clock;
+        packet1.core_clock = packet_in.core_clock;
+        packet1.v3d_clock = packet_in.v3d_clock;
+        packet1.cpu_temp = packet_in.cpu_temp;
+        packet1.wifi0_temp = packet_in.wifi0_temp;
+        packet1.wifi1_temp = packet_in.wifi1_temp;
+        packet1.undervolt_status = packet_in.undervolt_status;
+        packet1.platform_type = packet_in.platform_type;
+        packet1.encryption_enabled = packet_in.encryption_enabled;
+        packet1.fc_sys_id = packet_in.fc_sys_id;
+        packet1.operating_mode = packet_in.operating_mode;
+
+
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+        if (status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) {
+           // cope with extensions
+           memset(MAVLINK_MSG_ID_OPENHD_CORE_STATUS_MIN_LEN + (char *)&packet1, 0, sizeof(packet1)-MAVLINK_MSG_ID_OPENHD_CORE_STATUS_MIN_LEN);
+        }
+#endif
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_openhd_core_status_encode(system_id, component_id, &msg, &packet1);
+    mavlink_msg_openhd_core_status_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_openhd_core_status_pack(system_id, component_id, &msg , packet1.cpu_temp , packet1.wifi0_temp , packet1.wifi1_temp , packet1.cpu_clock , packet1.isp_clock , packet1.h264_clock , packet1.core_clock , packet1.v3d_clock , packet1.storage_left_mb , packet1.undervolt_status , packet1.platform_type , packet1.encryption_enabled , packet1.fc_sys_id , packet1.operating_mode );
+    mavlink_msg_openhd_core_status_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_openhd_core_status_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.cpu_temp , packet1.wifi0_temp , packet1.wifi1_temp , packet1.cpu_clock , packet1.isp_clock , packet1.h264_clock , packet1.core_clock , packet1.v3d_clock , packet1.storage_left_mb , packet1.undervolt_status , packet1.platform_type , packet1.encryption_enabled , packet1.fc_sys_id , packet1.operating_mode );
+    mavlink_msg_openhd_core_status_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+        mavlink_msg_to_send_buffer(buffer, &msg);
+        for (i=0; i<mavlink_msg_get_send_buffer_length(&msg); i++) {
+            comm_send_ch(MAVLINK_COMM_0, buffer[i]);
+        }
+    mavlink_msg_openhd_core_status_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_openhd_core_status_send(MAVLINK_COMM_1 , packet1.cpu_temp , packet1.wifi0_temp , packet1.wifi1_temp , packet1.cpu_clock , packet1.isp_clock , packet1.h264_clock , packet1.core_clock , packet1.v3d_clock , packet1.storage_left_mb , packet1.undervolt_status , packet1.platform_type , packet1.encryption_enabled , packet1.fc_sys_id , packet1.operating_mode );
+    mavlink_msg_openhd_core_status_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+#ifdef MAVLINK_HAVE_GET_MESSAGE_INFO
+    MAVLINK_ASSERT(mavlink_get_message_info_by_name("OPENHD_CORE_STATUS") != NULL);
+    MAVLINK_ASSERT(mavlink_get_message_info_by_id(MAVLINK_MSG_ID_OPENHD_CORE_STATUS) != NULL);
+#endif
+}
+
+static void mavlink_test_openhd_power_status(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
+{
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+    mavlink_status_t *status = mavlink_get_channel_status(MAVLINK_COMM_0);
+        if ((status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) && MAVLINK_MSG_ID_OPENHD_POWER_STATUS >= 256) {
+            return;
+        }
+#endif
+    mavlink_message_t msg;
+        uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
+        uint16_t i;
+    mavlink_openhd_power_status_t packet_in = {
+        17235,17339,17,84
+    };
+    mavlink_openhd_power_status_t packet1, packet2;
+        memset(&packet1, 0, sizeof(packet1));
+        packet1.voltage_mv = packet_in.voltage_mv;
+        packet1.current_ma = packet_in.current_ma;
+        packet1.charging_status = packet_in.charging_status;
+        packet1.battery_percent = packet_in.battery_percent;
+
+
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+        if (status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) {
+           // cope with extensions
+           memset(MAVLINK_MSG_ID_OPENHD_POWER_STATUS_MIN_LEN + (char *)&packet1, 0, sizeof(packet1)-MAVLINK_MSG_ID_OPENHD_POWER_STATUS_MIN_LEN);
+        }
+#endif
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_openhd_power_status_encode(system_id, component_id, &msg, &packet1);
+    mavlink_msg_openhd_power_status_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_openhd_power_status_pack(system_id, component_id, &msg , packet1.voltage_mv , packet1.current_ma , packet1.charging_status , packet1.battery_percent );
+    mavlink_msg_openhd_power_status_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_openhd_power_status_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.voltage_mv , packet1.current_ma , packet1.charging_status , packet1.battery_percent );
+    mavlink_msg_openhd_power_status_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+        mavlink_msg_to_send_buffer(buffer, &msg);
+        for (i=0; i<mavlink_msg_get_send_buffer_length(&msg); i++) {
+            comm_send_ch(MAVLINK_COMM_0, buffer[i]);
+        }
+    mavlink_msg_openhd_power_status_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_openhd_power_status_send(MAVLINK_COMM_1 , packet1.voltage_mv , packet1.current_ma , packet1.charging_status , packet1.battery_percent );
+    mavlink_msg_openhd_power_status_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+#ifdef MAVLINK_HAVE_GET_MESSAGE_INFO
+    MAVLINK_ASSERT(mavlink_get_message_info_by_name("OPENHD_POWER_STATUS") != NULL);
+    MAVLINK_ASSERT(mavlink_get_message_info_by_id(MAVLINK_MSG_ID_OPENHD_POWER_STATUS) != NULL);
+#endif
+}
+
+static void mavlink_test_openhd_microhard_status(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
+{
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+    mavlink_status_t *status = mavlink_get_channel_status(MAVLINK_COMM_0);
+        if ((status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) && MAVLINK_MSG_ID_OPENHD_MICROHARD_STATUS >= 256) {
+            return;
+        }
+#endif
+    mavlink_message_t msg;
+        uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
+        uint16_t i;
+    mavlink_openhd_microhard_status_t packet_in = {
+        963497464,17,84,151,218,29,96
+    };
+    mavlink_openhd_microhard_status_t packet1, packet2;
+        memset(&packet1, 0, sizeof(packet1));
+        packet1.frequency = packet_in.frequency;
+        packet1.enabled = packet_in.enabled;
+        packet1.rssi = packet_in.rssi;
+        packet1.tx_power = packet_in.tx_power;
+        packet1.bandwidth = packet_in.bandwidth;
+        packet1.noise = packet_in.noise;
+        packet1.snr = packet_in.snr;
+
+
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+        if (status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) {
+           // cope with extensions
+           memset(MAVLINK_MSG_ID_OPENHD_MICROHARD_STATUS_MIN_LEN + (char *)&packet1, 0, sizeof(packet1)-MAVLINK_MSG_ID_OPENHD_MICROHARD_STATUS_MIN_LEN);
+        }
+#endif
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_openhd_microhard_status_encode(system_id, component_id, &msg, &packet1);
+    mavlink_msg_openhd_microhard_status_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_openhd_microhard_status_pack(system_id, component_id, &msg , packet1.enabled , packet1.rssi , packet1.tx_power , packet1.bandwidth , packet1.frequency , packet1.noise , packet1.snr );
+    mavlink_msg_openhd_microhard_status_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_openhd_microhard_status_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.enabled , packet1.rssi , packet1.tx_power , packet1.bandwidth , packet1.frequency , packet1.noise , packet1.snr );
+    mavlink_msg_openhd_microhard_status_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+        mavlink_msg_to_send_buffer(buffer, &msg);
+        for (i=0; i<mavlink_msg_get_send_buffer_length(&msg); i++) {
+            comm_send_ch(MAVLINK_COMM_0, buffer[i]);
+        }
+    mavlink_msg_openhd_microhard_status_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_openhd_microhard_status_send(MAVLINK_COMM_1 , packet1.enabled , packet1.rssi , packet1.tx_power , packet1.bandwidth , packet1.frequency , packet1.noise , packet1.snr );
+    mavlink_msg_openhd_microhard_status_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+#ifdef MAVLINK_HAVE_GET_MESSAGE_INFO
+    MAVLINK_ASSERT(mavlink_get_message_info_by_name("OPENHD_MICROHARD_STATUS") != NULL);
+    MAVLINK_ASSERT(mavlink_get_message_info_by_id(MAVLINK_MSG_ID_OPENHD_MICROHARD_STATUS) != NULL);
+#endif
+}
+
+static void mavlink_test_openhd_rtsp_configuration(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
+{
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+    mavlink_status_t *status = mavlink_get_channel_status(MAVLINK_COMM_0);
+        if ((status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) && MAVLINK_MSG_ID_OPENHD_RTSP_CONFIGURATION >= 256) {
+            return;
+        }
+#endif
+    mavlink_message_t msg;
+        uint8_t buffer[MAVLINK_MAX_PACKET_LEN];
+        uint16_t i;
+    mavlink_openhd_rtsp_configuration_t packet_in = {
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRST"
+    };
+    mavlink_openhd_rtsp_configuration_t packet1, packet2;
+        memset(&packet1, 0, sizeof(packet1));
+
+        mav_array_memcpy(packet1.stream_uri, packet_in.stream_uri, sizeof(char)*255);
+
+#ifdef MAVLINK_STATUS_FLAG_OUT_MAVLINK1
+        if (status->flags & MAVLINK_STATUS_FLAG_OUT_MAVLINK1) {
+           // cope with extensions
+           memset(MAVLINK_MSG_ID_OPENHD_RTSP_CONFIGURATION_MIN_LEN + (char *)&packet1, 0, sizeof(packet1)-MAVLINK_MSG_ID_OPENHD_RTSP_CONFIGURATION_MIN_LEN);
+        }
+#endif
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_openhd_rtsp_configuration_encode(system_id, component_id, &msg, &packet1);
+    mavlink_msg_openhd_rtsp_configuration_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_openhd_rtsp_configuration_pack(system_id, component_id, &msg , packet1.stream_uri );
+    mavlink_msg_openhd_rtsp_configuration_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_openhd_rtsp_configuration_pack_chan(system_id, component_id, MAVLINK_COMM_0, &msg , packet1.stream_uri );
+    mavlink_msg_openhd_rtsp_configuration_decode(&msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+        mavlink_msg_to_send_buffer(buffer, &msg);
+        for (i=0; i<mavlink_msg_get_send_buffer_length(&msg); i++) {
+            comm_send_ch(MAVLINK_COMM_0, buffer[i]);
+        }
+    mavlink_msg_openhd_rtsp_configuration_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+        memset(&packet2, 0, sizeof(packet2));
+    mavlink_msg_openhd_rtsp_configuration_send(MAVLINK_COMM_1 , packet1.stream_uri );
+    mavlink_msg_openhd_rtsp_configuration_decode(last_msg, &packet2);
+        MAVLINK_ASSERT(memcmp(&packet1, &packet2, sizeof(packet1)) == 0);
+
+#ifdef MAVLINK_HAVE_GET_MESSAGE_INFO
+    MAVLINK_ASSERT(mavlink_get_message_info_by_name("OPENHD_RTSP_CONFIGURATION") != NULL);
+    MAVLINK_ASSERT(mavlink_get_message_info_by_id(MAVLINK_MSG_ID_OPENHD_RTSP_CONFIGURATION) != NULL);
+#endif
+}
+
 static void mavlink_test_openhd(uint8_t system_id, uint8_t component_id, mavlink_message_t *last_msg)
 {
     mavlink_test_openhd_stats_monitor_mode_wifi_link(system_id, component_id, last_msg);
@@ -1053,6 +1311,10 @@ static void mavlink_test_openhd(uint8_t system_id, uint8_t component_id, mavlink
     mavlink_test_openhd_wifbroadcast_analyze_channels_progress(system_id, component_id, last_msg);
     mavlink_test_openhd_wifbroadcast_gnd_operating_mode(system_id, component_id, last_msg);
     mavlink_test_openhd_sys_status1(system_id, component_id, last_msg);
+    mavlink_test_openhd_core_status(system_id, component_id, last_msg);
+    mavlink_test_openhd_power_status(system_id, component_id, last_msg);
+    mavlink_test_openhd_microhard_status(system_id, component_id, last_msg);
+    mavlink_test_openhd_rtsp_configuration(system_id, component_id, last_msg);
 }
 
 #ifdef __cplusplus
