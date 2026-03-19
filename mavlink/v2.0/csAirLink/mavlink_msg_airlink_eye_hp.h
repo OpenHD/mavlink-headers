@@ -23,14 +23,14 @@ typedef struct __mavlink_airlink_eye_hp_t {
     52004, \
     "AIRLINK_EYE_HP", \
     1, \
-    {  { "resp_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 0, offsetof(mavlink_airlink_eye_hp_t, resp_type) }, \
+    {  { "resp_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 0, 0 }, \
          } \
 }
 #else
 #define MAVLINK_MESSAGE_INFO_AIRLINK_EYE_HP { \
     "AIRLINK_EYE_HP", \
     1, \
-    {  { "resp_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 0, offsetof(mavlink_airlink_eye_hp_t, resp_type) }, \
+    {  { "resp_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 0, 0 }, \
          } \
 }
 #endif

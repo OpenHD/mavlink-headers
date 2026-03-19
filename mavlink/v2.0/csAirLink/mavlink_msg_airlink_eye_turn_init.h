@@ -23,14 +23,14 @@ typedef struct __mavlink_airlink_eye_turn_init_t {
     52005, \
     "AIRLINK_EYE_TURN_INIT", \
     1, \
-    {  { "resp_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 0, offsetof(mavlink_airlink_eye_turn_init_t, resp_type) }, \
+    {  { "resp_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 0, 0 }, \
          } \
 }
 #else
 #define MAVLINK_MESSAGE_INFO_AIRLINK_EYE_TURN_INIT { \
     "AIRLINK_EYE_TURN_INIT", \
     1, \
-    {  { "resp_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 0, offsetof(mavlink_airlink_eye_turn_init_t, resp_type) }, \
+    {  { "resp_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 0, 0 }, \
          } \
 }
 #endif

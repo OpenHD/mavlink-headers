@@ -28,22 +28,22 @@ typedef struct __mavlink_airlink_eye_gs_hole_push_response_t {
     52003, \
     "AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE", \
     5, \
-    {  { "resp_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 4, offsetof(mavlink_airlink_eye_gs_hole_push_response_t, resp_type) }, \
-         { "ip_version", NULL, MAVLINK_TYPE_UINT8_T, 0, 5, offsetof(mavlink_airlink_eye_gs_hole_push_response_t, ip_version) }, \
-         { "ip_address_4", NULL, MAVLINK_TYPE_UINT8_T, 4, 6, offsetof(mavlink_airlink_eye_gs_hole_push_response_t, ip_address_4) }, \
-         { "ip_address_6", NULL, MAVLINK_TYPE_UINT8_T, 16, 10, offsetof(mavlink_airlink_eye_gs_hole_push_response_t, ip_address_6) }, \
-         { "ip_port", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_airlink_eye_gs_hole_push_response_t, ip_port) }, \
+    {  { "resp_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 4, 4 }, \
+         { "ip_version", NULL, MAVLINK_TYPE_UINT8_T, 0, 5, 5 }, \
+         { "ip_address_4", NULL, MAVLINK_TYPE_UINT8_T, 4, 6, 6 }, \
+         { "ip_address_6", NULL, MAVLINK_TYPE_UINT8_T, 16, 10, 10 }, \
+         { "ip_port", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, 0 }, \
          } \
 }
 #else
 #define MAVLINK_MESSAGE_INFO_AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE { \
     "AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE", \
     5, \
-    {  { "resp_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 4, offsetof(mavlink_airlink_eye_gs_hole_push_response_t, resp_type) }, \
-         { "ip_version", NULL, MAVLINK_TYPE_UINT8_T, 0, 5, offsetof(mavlink_airlink_eye_gs_hole_push_response_t, ip_version) }, \
-         { "ip_address_4", NULL, MAVLINK_TYPE_UINT8_T, 4, 6, offsetof(mavlink_airlink_eye_gs_hole_push_response_t, ip_address_4) }, \
-         { "ip_address_6", NULL, MAVLINK_TYPE_UINT8_T, 16, 10, offsetof(mavlink_airlink_eye_gs_hole_push_response_t, ip_address_6) }, \
-         { "ip_port", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_airlink_eye_gs_hole_push_response_t, ip_port) }, \
+    {  { "resp_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 4, 4 }, \
+         { "ip_version", NULL, MAVLINK_TYPE_UINT8_T, 0, 5, 5 }, \
+         { "ip_address_4", NULL, MAVLINK_TYPE_UINT8_T, 4, 6, 6 }, \
+         { "ip_address_6", NULL, MAVLINK_TYPE_UINT8_T, 16, 10, 10 }, \
+         { "ip_port", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, 0 }, \
          } \
 }
 #endif
