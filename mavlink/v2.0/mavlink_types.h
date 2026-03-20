@@ -7,6 +7,7 @@
 
 #include <stdbool.h>
 #include <stdint.h>
+#include <stddef.h>
 
 #ifdef MAVLINK_USE_CXX_NAMESPACE
 namespace mavlink {
