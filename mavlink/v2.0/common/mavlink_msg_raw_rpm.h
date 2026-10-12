@@ -1,6 +1,8 @@
 #pragma once
 // MESSAGE RAW_RPM PACKING
 
+#include <stdint.h>
+
 #define MAVLINK_MSG_ID_RAW_RPM 339
 
 
@@ -48,7 +50,7 @@ typedef struct __mavlink_raw_rpm_t {
  * @param frequency [rpm] Indicated rate
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_raw_rpm_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
+static inline uint16_t mavlink_msg_raw_rpm_pack(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg,
                                uint8_t index, float frequency)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -70,6 +72,42 @@ static inline uint16_t mavlink_msg_raw_rpm_pack(uint8_t system_id, uint8_t compo
 }
 
 /**
+ * @brief Pack a raw_rpm message
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ *
+ * @param index  Index of this RPM sensor (0-indexed)
+ * @param frequency [rpm] Indicated rate
+ * @return length of the message in bytes (excluding serial stream start sign)
+ */
+static inline uint16_t mavlink_msg_raw_rpm_pack_status(uint32_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
+                               uint8_t index, float frequency)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+    char buf[MAVLINK_MSG_ID_RAW_RPM_LEN];
+    _mav_put_float(buf, 0, frequency);
+    _mav_put_uint8_t(buf, 4, index);
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_RAW_RPM_LEN);
+#else
+    mavlink_raw_rpm_t packet;
+    packet.frequency = frequency;
+    packet.index = index;
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_RAW_RPM_LEN);
+#endif
+
+    msg->msgid = MAVLINK_MSG_ID_RAW_RPM;
+#if MAVLINK_CRC_EXTRA
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_RAW_RPM_MIN_LEN, MAVLINK_MSG_ID_RAW_RPM_LEN, MAVLINK_MSG_ID_RAW_RPM_CRC);
+#else
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_RAW_RPM_MIN_LEN, MAVLINK_MSG_ID_RAW_RPM_LEN, 0);
+#endif
+}
+
+/**
  * @brief Pack a raw_rpm message on a channel
  * @param system_id ID of this system
  * @param component_id ID of this component (e.g. 200 for IMU)
@@ -79,7 +117,7 @@ static inline uint16_t mavlink_msg_raw_rpm_pack(uint8_t system_id, uint8_t compo
  * @param frequency [rpm] Indicated rate
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_raw_rpm_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
+static inline uint16_t mavlink_msg_raw_rpm_pack_chan(uint32_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
                                    uint8_t index,float frequency)
 {
@@ -109,7 +147,7 @@ static inline uint16_t mavlink_msg_raw_rpm_pack_chan(uint8_t system_id, uint8_t 
  * @param msg The MAVLink message to compress the data into
  * @param raw_rpm C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_raw_rpm_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_raw_rpm_t* raw_rpm)
+static inline uint16_t mavlink_msg_raw_rpm_encode(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_raw_rpm_t* raw_rpm)
 {
     return mavlink_msg_raw_rpm_pack(system_id, component_id, msg, raw_rpm->index, raw_rpm->frequency);
 }
@@ -123,9 +161,23 @@ static inline uint16_t mavlink_msg_raw_rpm_encode(uint8_t system_id, uint8_t com
  * @param msg The MAVLink message to compress the data into
  * @param raw_rpm C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_raw_rpm_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_raw_rpm_t* raw_rpm)
+static inline uint16_t mavlink_msg_raw_rpm_encode_chan(uint32_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_raw_rpm_t* raw_rpm)
 {
     return mavlink_msg_raw_rpm_pack_chan(system_id, component_id, chan, msg, raw_rpm->index, raw_rpm->frequency);
+}
+
+/**
+ * @brief Encode a raw_rpm struct with provided status structure
+ *
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ * @param raw_rpm C-struct to read the message contents from
+ */
+static inline uint16_t mavlink_msg_raw_rpm_encode_status(uint32_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_raw_rpm_t* raw_rpm)
+{
+    return mavlink_msg_raw_rpm_pack_status(system_id, component_id, _status, msg,  raw_rpm->index, raw_rpm->frequency);
 }
 
 /**
@@ -170,7 +222,7 @@ static inline void mavlink_msg_raw_rpm_send_struct(mavlink_channel_t chan, const
 
 #if MAVLINK_MSG_ID_RAW_RPM_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
+  This variant of _send() can be used to save stack space by reusing
   memory from the receive buffer.  The caller provides a
   mavlink_message_t which is the size of a full mavlink message. This
   is usually the receive buffer for the channel, and allows a reply to an
@@ -230,9 +282,10 @@ static inline void mavlink_msg_raw_rpm_decode(const mavlink_message_t* msg, mavl
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     raw_rpm->frequency = mavlink_msg_raw_rpm_get_frequency(msg);
     raw_rpm->index = mavlink_msg_raw_rpm_get_index(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_RAW_RPM_LEN? msg->len : MAVLINK_MSG_ID_RAW_RPM_LEN;
-        memset(raw_rpm, 0, MAVLINK_MSG_ID_RAW_RPM_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_RAW_RPM_LEN ? msg->len : MAVLINK_MSG_ID_RAW_RPM_LEN;
+    memset(raw_rpm, 0, MAVLINK_MSG_ID_RAW_RPM_LEN);
     memcpy(raw_rpm, _MAV_PAYLOAD(msg), len);
 #endif
 }

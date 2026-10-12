@@ -1,6 +1,8 @@
 #pragma once
 // MESSAGE OPENHD_STATS_WB_VIDEO_GROUND_FEC_PERFORMANCE PACKING
 
+#include <stdint.h>
+
 #define MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_GROUND_FEC_PERFORMANCE 1217
 
 
@@ -68,7 +70,8 @@ typedef struct __mavlink_openhd_stats_wb_video_ground_fec_performance_t {
  * @param dummy2  for future use
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
+MAVLINK_WIP
+static inline uint16_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_pack(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg,
                                uint8_t link_index, uint32_t curr_fec_decode_time_avg_us, uint32_t curr_fec_decode_time_min_us, uint32_t curr_fec_decode_time_max_us, int8_t dummy0, int16_t dummy1, int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -100,6 +103,57 @@ static inline uint16_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_
 }
 
 /**
+ * @brief Pack a openhd_stats_wb_video_ground_fec_performance message
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ *
+ * @param link_index  link_index
+ * @param curr_fec_decode_time_avg_us  todo
+ * @param curr_fec_decode_time_min_us  todo
+ * @param curr_fec_decode_time_max_us  todo
+ * @param dummy0  for future use
+ * @param dummy1  for future use
+ * @param dummy2  for future use
+ * @return length of the message in bytes (excluding serial stream start sign)
+ */
+static inline uint16_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_pack_status(uint32_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
+                               uint8_t link_index, uint32_t curr_fec_decode_time_avg_us, uint32_t curr_fec_decode_time_min_us, uint32_t curr_fec_decode_time_max_us, int8_t dummy0, int16_t dummy1, int32_t dummy2)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+    char buf[MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_GROUND_FEC_PERFORMANCE_LEN];
+    _mav_put_uint32_t(buf, 0, curr_fec_decode_time_avg_us);
+    _mav_put_uint32_t(buf, 4, curr_fec_decode_time_min_us);
+    _mav_put_uint32_t(buf, 8, curr_fec_decode_time_max_us);
+    _mav_put_int32_t(buf, 12, dummy2);
+    _mav_put_int16_t(buf, 16, dummy1);
+    _mav_put_uint8_t(buf, 18, link_index);
+    _mav_put_int8_t(buf, 19, dummy0);
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_GROUND_FEC_PERFORMANCE_LEN);
+#else
+    mavlink_openhd_stats_wb_video_ground_fec_performance_t packet;
+    packet.curr_fec_decode_time_avg_us = curr_fec_decode_time_avg_us;
+    packet.curr_fec_decode_time_min_us = curr_fec_decode_time_min_us;
+    packet.curr_fec_decode_time_max_us = curr_fec_decode_time_max_us;
+    packet.dummy2 = dummy2;
+    packet.dummy1 = dummy1;
+    packet.link_index = link_index;
+    packet.dummy0 = dummy0;
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_GROUND_FEC_PERFORMANCE_LEN);
+#endif
+
+    msg->msgid = MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_GROUND_FEC_PERFORMANCE;
+#if MAVLINK_CRC_EXTRA
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_GROUND_FEC_PERFORMANCE_MIN_LEN, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_GROUND_FEC_PERFORMANCE_LEN, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_GROUND_FEC_PERFORMANCE_CRC);
+#else
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_GROUND_FEC_PERFORMANCE_MIN_LEN, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_GROUND_FEC_PERFORMANCE_LEN, 0);
+#endif
+}
+
+/**
  * @brief Pack a openhd_stats_wb_video_ground_fec_performance message on a channel
  * @param system_id ID of this system
  * @param component_id ID of this component (e.g. 200 for IMU)
@@ -114,7 +168,8 @@ static inline uint16_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_
  * @param dummy2  for future use
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
+MAVLINK_WIP
+static inline uint16_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_pack_chan(uint32_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
                                    uint8_t link_index,uint32_t curr_fec_decode_time_avg_us,uint32_t curr_fec_decode_time_min_us,uint32_t curr_fec_decode_time_max_us,int8_t dummy0,int16_t dummy1,int32_t dummy2)
 {
@@ -154,7 +209,8 @@ static inline uint16_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_
  * @param msg The MAVLink message to compress the data into
  * @param openhd_stats_wb_video_ground_fec_performance C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_stats_wb_video_ground_fec_performance_t* openhd_stats_wb_video_ground_fec_performance)
+MAVLINK_WIP
+static inline uint16_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_encode(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_stats_wb_video_ground_fec_performance_t* openhd_stats_wb_video_ground_fec_performance)
 {
     return mavlink_msg_openhd_stats_wb_video_ground_fec_performance_pack(system_id, component_id, msg, openhd_stats_wb_video_ground_fec_performance->link_index, openhd_stats_wb_video_ground_fec_performance->curr_fec_decode_time_avg_us, openhd_stats_wb_video_ground_fec_performance->curr_fec_decode_time_min_us, openhd_stats_wb_video_ground_fec_performance->curr_fec_decode_time_max_us, openhd_stats_wb_video_ground_fec_performance->dummy0, openhd_stats_wb_video_ground_fec_performance->dummy1, openhd_stats_wb_video_ground_fec_performance->dummy2);
 }
@@ -168,9 +224,24 @@ static inline uint16_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_
  * @param msg The MAVLink message to compress the data into
  * @param openhd_stats_wb_video_ground_fec_performance C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_stats_wb_video_ground_fec_performance_t* openhd_stats_wb_video_ground_fec_performance)
+MAVLINK_WIP
+static inline uint16_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_encode_chan(uint32_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_stats_wb_video_ground_fec_performance_t* openhd_stats_wb_video_ground_fec_performance)
 {
     return mavlink_msg_openhd_stats_wb_video_ground_fec_performance_pack_chan(system_id, component_id, chan, msg, openhd_stats_wb_video_ground_fec_performance->link_index, openhd_stats_wb_video_ground_fec_performance->curr_fec_decode_time_avg_us, openhd_stats_wb_video_ground_fec_performance->curr_fec_decode_time_min_us, openhd_stats_wb_video_ground_fec_performance->curr_fec_decode_time_max_us, openhd_stats_wb_video_ground_fec_performance->dummy0, openhd_stats_wb_video_ground_fec_performance->dummy1, openhd_stats_wb_video_ground_fec_performance->dummy2);
+}
+
+/**
+ * @brief Encode a openhd_stats_wb_video_ground_fec_performance struct with provided status structure
+ *
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ * @param openhd_stats_wb_video_ground_fec_performance C-struct to read the message contents from
+ */
+static inline uint16_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_encode_status(uint32_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_openhd_stats_wb_video_ground_fec_performance_t* openhd_stats_wb_video_ground_fec_performance)
+{
+    return mavlink_msg_openhd_stats_wb_video_ground_fec_performance_pack_status(system_id, component_id, _status, msg,  openhd_stats_wb_video_ground_fec_performance->link_index, openhd_stats_wb_video_ground_fec_performance->curr_fec_decode_time_avg_us, openhd_stats_wb_video_ground_fec_performance->curr_fec_decode_time_min_us, openhd_stats_wb_video_ground_fec_performance->curr_fec_decode_time_max_us, openhd_stats_wb_video_ground_fec_performance->dummy0, openhd_stats_wb_video_ground_fec_performance->dummy1, openhd_stats_wb_video_ground_fec_performance->dummy2);
 }
 
 /**
@@ -187,6 +258,7 @@ static inline uint16_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
+MAVLINK_WIP
 static inline void mavlink_msg_openhd_stats_wb_video_ground_fec_performance_send(mavlink_channel_t chan, uint8_t link_index, uint32_t curr_fec_decode_time_avg_us, uint32_t curr_fec_decode_time_min_us, uint32_t curr_fec_decode_time_max_us, int8_t dummy0, int16_t dummy1, int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -219,6 +291,7 @@ static inline void mavlink_msg_openhd_stats_wb_video_ground_fec_performance_send
  * @param chan MAVLink channel to send the message
  * @param struct The MAVLink struct to serialize
  */
+MAVLINK_WIP
 static inline void mavlink_msg_openhd_stats_wb_video_ground_fec_performance_send_struct(mavlink_channel_t chan, const mavlink_openhd_stats_wb_video_ground_fec_performance_t* openhd_stats_wb_video_ground_fec_performance)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -230,12 +303,13 @@ static inline void mavlink_msg_openhd_stats_wb_video_ground_fec_performance_send
 
 #if MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_GROUND_FEC_PERFORMANCE_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
+  This variant of _send() can be used to save stack space by reusing
   memory from the receive buffer.  The caller provides a
   mavlink_message_t which is the size of a full mavlink message. This
   is usually the receive buffer for the channel, and allows a reply to an
   incoming message with minimum stack space usage.
  */
+MAVLINK_WIP
 static inline void mavlink_msg_openhd_stats_wb_video_ground_fec_performance_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint8_t link_index, uint32_t curr_fec_decode_time_avg_us, uint32_t curr_fec_decode_time_min_us, uint32_t curr_fec_decode_time_max_us, int8_t dummy0, int16_t dummy1, int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -274,6 +348,7 @@ static inline void mavlink_msg_openhd_stats_wb_video_ground_fec_performance_send
  *
  * @return  link_index
  */
+MAVLINK_WIP
 static inline uint8_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_get_link_index(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_uint8_t(msg,  18);
@@ -284,6 +359,7 @@ static inline uint8_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_g
  *
  * @return  todo
  */
+MAVLINK_WIP
 static inline uint32_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_get_curr_fec_decode_time_avg_us(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_uint32_t(msg,  0);
@@ -294,6 +370,7 @@ static inline uint32_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_
  *
  * @return  todo
  */
+MAVLINK_WIP
 static inline uint32_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_get_curr_fec_decode_time_min_us(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_uint32_t(msg,  4);
@@ -304,6 +381,7 @@ static inline uint32_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_
  *
  * @return  todo
  */
+MAVLINK_WIP
 static inline uint32_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_get_curr_fec_decode_time_max_us(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_uint32_t(msg,  8);
@@ -314,6 +392,7 @@ static inline uint32_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_
  *
  * @return  for future use
  */
+MAVLINK_WIP
 static inline int8_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_get_dummy0(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_int8_t(msg,  19);
@@ -324,6 +403,7 @@ static inline int8_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_ge
  *
  * @return  for future use
  */
+MAVLINK_WIP
 static inline int16_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_get_dummy1(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_int16_t(msg,  16);
@@ -334,6 +414,7 @@ static inline int16_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_g
  *
  * @return  for future use
  */
+MAVLINK_WIP
 static inline int32_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_get_dummy2(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_int32_t(msg,  12);
@@ -345,6 +426,7 @@ static inline int32_t mavlink_msg_openhd_stats_wb_video_ground_fec_performance_g
  * @param msg The message to decode
  * @param openhd_stats_wb_video_ground_fec_performance C-struct to decode the message contents into
  */
+MAVLINK_WIP
 static inline void mavlink_msg_openhd_stats_wb_video_ground_fec_performance_decode(const mavlink_message_t* msg, mavlink_openhd_stats_wb_video_ground_fec_performance_t* openhd_stats_wb_video_ground_fec_performance)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -355,9 +437,10 @@ static inline void mavlink_msg_openhd_stats_wb_video_ground_fec_performance_deco
     openhd_stats_wb_video_ground_fec_performance->dummy1 = mavlink_msg_openhd_stats_wb_video_ground_fec_performance_get_dummy1(msg);
     openhd_stats_wb_video_ground_fec_performance->link_index = mavlink_msg_openhd_stats_wb_video_ground_fec_performance_get_link_index(msg);
     openhd_stats_wb_video_ground_fec_performance->dummy0 = mavlink_msg_openhd_stats_wb_video_ground_fec_performance_get_dummy0(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_GROUND_FEC_PERFORMANCE_LEN? msg->len : MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_GROUND_FEC_PERFORMANCE_LEN;
-        memset(openhd_stats_wb_video_ground_fec_performance, 0, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_GROUND_FEC_PERFORMANCE_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_GROUND_FEC_PERFORMANCE_LEN ? msg->len : MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_GROUND_FEC_PERFORMANCE_LEN;
+    memset(openhd_stats_wb_video_ground_fec_performance, 0, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_GROUND_FEC_PERFORMANCE_LEN);
     memcpy(openhd_stats_wb_video_ground_fec_performance, _MAV_PAYLOAD(msg), len);
 #endif
 }

@@ -1,6 +1,8 @@
 #pragma once
 // MESSAGE OPENHD_ONBOARD_COMPUTER_STATUS_EXTENSION PACKING
 
+#include <stdint.h>
+
 #define MAVLINK_MSG_ID_OPENHD_ONBOARD_COMPUTER_STATUS_EXTENSION 1218
 
 
@@ -64,7 +66,8 @@ typedef struct __mavlink_openhd_onboard_computer_status_extension_t {
  * @param reserved4  reserved1
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
+MAVLINK_WIP
+static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_pack(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg,
                                uint16_t cpu_core_voltage_milliV, uint8_t over_current, uint16_t reserved1, uint16_t reserved2, uint16_t reserved3, uint16_t reserved4)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -94,6 +97,54 @@ static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_pack
 }
 
 /**
+ * @brief Pack a openhd_onboard_computer_status_extension message
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ *
+ * @param cpu_core_voltage_milliV  cpu_core_voltage_milliV
+ * @param over_current  bool over_current
+ * @param reserved1  reserved1
+ * @param reserved2  reserved1
+ * @param reserved3  reserved1
+ * @param reserved4  reserved1
+ * @return length of the message in bytes (excluding serial stream start sign)
+ */
+static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_pack_status(uint32_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
+                               uint16_t cpu_core_voltage_milliV, uint8_t over_current, uint16_t reserved1, uint16_t reserved2, uint16_t reserved3, uint16_t reserved4)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+    char buf[MAVLINK_MSG_ID_OPENHD_ONBOARD_COMPUTER_STATUS_EXTENSION_LEN];
+    _mav_put_uint16_t(buf, 0, cpu_core_voltage_milliV);
+    _mav_put_uint16_t(buf, 2, reserved1);
+    _mav_put_uint16_t(buf, 4, reserved2);
+    _mav_put_uint16_t(buf, 6, reserved3);
+    _mav_put_uint16_t(buf, 8, reserved4);
+    _mav_put_uint8_t(buf, 10, over_current);
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_OPENHD_ONBOARD_COMPUTER_STATUS_EXTENSION_LEN);
+#else
+    mavlink_openhd_onboard_computer_status_extension_t packet;
+    packet.cpu_core_voltage_milliV = cpu_core_voltage_milliV;
+    packet.reserved1 = reserved1;
+    packet.reserved2 = reserved2;
+    packet.reserved3 = reserved3;
+    packet.reserved4 = reserved4;
+    packet.over_current = over_current;
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_OPENHD_ONBOARD_COMPUTER_STATUS_EXTENSION_LEN);
+#endif
+
+    msg->msgid = MAVLINK_MSG_ID_OPENHD_ONBOARD_COMPUTER_STATUS_EXTENSION;
+#if MAVLINK_CRC_EXTRA
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_OPENHD_ONBOARD_COMPUTER_STATUS_EXTENSION_MIN_LEN, MAVLINK_MSG_ID_OPENHD_ONBOARD_COMPUTER_STATUS_EXTENSION_LEN, MAVLINK_MSG_ID_OPENHD_ONBOARD_COMPUTER_STATUS_EXTENSION_CRC);
+#else
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_OPENHD_ONBOARD_COMPUTER_STATUS_EXTENSION_MIN_LEN, MAVLINK_MSG_ID_OPENHD_ONBOARD_COMPUTER_STATUS_EXTENSION_LEN, 0);
+#endif
+}
+
+/**
  * @brief Pack a openhd_onboard_computer_status_extension message on a channel
  * @param system_id ID of this system
  * @param component_id ID of this component (e.g. 200 for IMU)
@@ -107,7 +158,8 @@ static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_pack
  * @param reserved4  reserved1
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
+MAVLINK_WIP
+static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_pack_chan(uint32_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
                                    uint16_t cpu_core_voltage_milliV,uint8_t over_current,uint16_t reserved1,uint16_t reserved2,uint16_t reserved3,uint16_t reserved4)
 {
@@ -145,7 +197,8 @@ static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_pack
  * @param msg The MAVLink message to compress the data into
  * @param openhd_onboard_computer_status_extension C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_onboard_computer_status_extension_t* openhd_onboard_computer_status_extension)
+MAVLINK_WIP
+static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_encode(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_onboard_computer_status_extension_t* openhd_onboard_computer_status_extension)
 {
     return mavlink_msg_openhd_onboard_computer_status_extension_pack(system_id, component_id, msg, openhd_onboard_computer_status_extension->cpu_core_voltage_milliV, openhd_onboard_computer_status_extension->over_current, openhd_onboard_computer_status_extension->reserved1, openhd_onboard_computer_status_extension->reserved2, openhd_onboard_computer_status_extension->reserved3, openhd_onboard_computer_status_extension->reserved4);
 }
@@ -159,9 +212,24 @@ static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_enco
  * @param msg The MAVLink message to compress the data into
  * @param openhd_onboard_computer_status_extension C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_onboard_computer_status_extension_t* openhd_onboard_computer_status_extension)
+MAVLINK_WIP
+static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_encode_chan(uint32_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_onboard_computer_status_extension_t* openhd_onboard_computer_status_extension)
 {
     return mavlink_msg_openhd_onboard_computer_status_extension_pack_chan(system_id, component_id, chan, msg, openhd_onboard_computer_status_extension->cpu_core_voltage_milliV, openhd_onboard_computer_status_extension->over_current, openhd_onboard_computer_status_extension->reserved1, openhd_onboard_computer_status_extension->reserved2, openhd_onboard_computer_status_extension->reserved3, openhd_onboard_computer_status_extension->reserved4);
+}
+
+/**
+ * @brief Encode a openhd_onboard_computer_status_extension struct with provided status structure
+ *
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ * @param openhd_onboard_computer_status_extension C-struct to read the message contents from
+ */
+static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_encode_status(uint32_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_openhd_onboard_computer_status_extension_t* openhd_onboard_computer_status_extension)
+{
+    return mavlink_msg_openhd_onboard_computer_status_extension_pack_status(system_id, component_id, _status, msg,  openhd_onboard_computer_status_extension->cpu_core_voltage_milliV, openhd_onboard_computer_status_extension->over_current, openhd_onboard_computer_status_extension->reserved1, openhd_onboard_computer_status_extension->reserved2, openhd_onboard_computer_status_extension->reserved3, openhd_onboard_computer_status_extension->reserved4);
 }
 
 /**
@@ -177,6 +245,7 @@ static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_enco
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
+MAVLINK_WIP
 static inline void mavlink_msg_openhd_onboard_computer_status_extension_send(mavlink_channel_t chan, uint16_t cpu_core_voltage_milliV, uint8_t over_current, uint16_t reserved1, uint16_t reserved2, uint16_t reserved3, uint16_t reserved4)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -207,6 +276,7 @@ static inline void mavlink_msg_openhd_onboard_computer_status_extension_send(mav
  * @param chan MAVLink channel to send the message
  * @param struct The MAVLink struct to serialize
  */
+MAVLINK_WIP
 static inline void mavlink_msg_openhd_onboard_computer_status_extension_send_struct(mavlink_channel_t chan, const mavlink_openhd_onboard_computer_status_extension_t* openhd_onboard_computer_status_extension)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -218,12 +288,13 @@ static inline void mavlink_msg_openhd_onboard_computer_status_extension_send_str
 
 #if MAVLINK_MSG_ID_OPENHD_ONBOARD_COMPUTER_STATUS_EXTENSION_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
+  This variant of _send() can be used to save stack space by reusing
   memory from the receive buffer.  The caller provides a
   mavlink_message_t which is the size of a full mavlink message. This
   is usually the receive buffer for the channel, and allows a reply to an
   incoming message with minimum stack space usage.
  */
+MAVLINK_WIP
 static inline void mavlink_msg_openhd_onboard_computer_status_extension_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint16_t cpu_core_voltage_milliV, uint8_t over_current, uint16_t reserved1, uint16_t reserved2, uint16_t reserved3, uint16_t reserved4)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -260,6 +331,7 @@ static inline void mavlink_msg_openhd_onboard_computer_status_extension_send_buf
  *
  * @return  cpu_core_voltage_milliV
  */
+MAVLINK_WIP
 static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_get_cpu_core_voltage_milliV(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_uint16_t(msg,  0);
@@ -270,6 +342,7 @@ static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_get_
  *
  * @return  bool over_current
  */
+MAVLINK_WIP
 static inline uint8_t mavlink_msg_openhd_onboard_computer_status_extension_get_over_current(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_uint8_t(msg,  10);
@@ -280,6 +353,7 @@ static inline uint8_t mavlink_msg_openhd_onboard_computer_status_extension_get_o
  *
  * @return  reserved1
  */
+MAVLINK_WIP
 static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_get_reserved1(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_uint16_t(msg,  2);
@@ -290,6 +364,7 @@ static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_get_
  *
  * @return  reserved1
  */
+MAVLINK_WIP
 static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_get_reserved2(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_uint16_t(msg,  4);
@@ -300,6 +375,7 @@ static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_get_
  *
  * @return  reserved1
  */
+MAVLINK_WIP
 static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_get_reserved3(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_uint16_t(msg,  6);
@@ -310,6 +386,7 @@ static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_get_
  *
  * @return  reserved1
  */
+MAVLINK_WIP
 static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_get_reserved4(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_uint16_t(msg,  8);
@@ -321,6 +398,7 @@ static inline uint16_t mavlink_msg_openhd_onboard_computer_status_extension_get_
  * @param msg The message to decode
  * @param openhd_onboard_computer_status_extension C-struct to decode the message contents into
  */
+MAVLINK_WIP
 static inline void mavlink_msg_openhd_onboard_computer_status_extension_decode(const mavlink_message_t* msg, mavlink_openhd_onboard_computer_status_extension_t* openhd_onboard_computer_status_extension)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -330,9 +408,10 @@ static inline void mavlink_msg_openhd_onboard_computer_status_extension_decode(c
     openhd_onboard_computer_status_extension->reserved3 = mavlink_msg_openhd_onboard_computer_status_extension_get_reserved3(msg);
     openhd_onboard_computer_status_extension->reserved4 = mavlink_msg_openhd_onboard_computer_status_extension_get_reserved4(msg);
     openhd_onboard_computer_status_extension->over_current = mavlink_msg_openhd_onboard_computer_status_extension_get_over_current(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_OPENHD_ONBOARD_COMPUTER_STATUS_EXTENSION_LEN? msg->len : MAVLINK_MSG_ID_OPENHD_ONBOARD_COMPUTER_STATUS_EXTENSION_LEN;
-        memset(openhd_onboard_computer_status_extension, 0, MAVLINK_MSG_ID_OPENHD_ONBOARD_COMPUTER_STATUS_EXTENSION_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_OPENHD_ONBOARD_COMPUTER_STATUS_EXTENSION_LEN ? msg->len : MAVLINK_MSG_ID_OPENHD_ONBOARD_COMPUTER_STATUS_EXTENSION_LEN;
+    memset(openhd_onboard_computer_status_extension, 0, MAVLINK_MSG_ID_OPENHD_ONBOARD_COMPUTER_STATUS_EXTENSION_LEN);
     memcpy(openhd_onboard_computer_status_extension, _MAV_PAYLOAD(msg), len);
 #endif
 }

@@ -1,6 +1,8 @@
 #pragma once
 // MESSAGE CAMERA_FOV_STATUS PACKING
 
+#include <stdint.h>
+
 #define MAVLINK_MSG_ID_CAMERA_FOV_STATUS 271
 
 
@@ -80,7 +82,7 @@ typedef struct __mavlink_camera_fov_status_t {
  * @param vfov [deg] Vertical field of view (NaN if unknown).
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_camera_fov_status_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
+static inline uint16_t mavlink_msg_camera_fov_status_pack(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg,
                                uint32_t time_boot_ms, int32_t lat_camera, int32_t lon_camera, int32_t alt_camera, int32_t lat_image, int32_t lon_image, int32_t alt_image, const float *q, float hfov, float vfov)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -116,6 +118,64 @@ static inline uint16_t mavlink_msg_camera_fov_status_pack(uint8_t system_id, uin
 }
 
 /**
+ * @brief Pack a camera_fov_status message
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ *
+ * @param time_boot_ms [ms] Timestamp (time since system boot).
+ * @param lat_camera [degE7] Latitude of camera (INT32_MAX if unknown).
+ * @param lon_camera [degE7] Longitude of camera (INT32_MAX if unknown).
+ * @param alt_camera [mm] Altitude (MSL) of camera (INT32_MAX if unknown).
+ * @param lat_image [degE7] Latitude of center of image (INT32_MAX if unknown, INT32_MIN if at infinity, not intersecting with horizon).
+ * @param lon_image [degE7] Longitude of center of image (INT32_MAX if unknown, INT32_MIN if at infinity, not intersecting with horizon).
+ * @param alt_image [mm] Altitude (MSL) of center of image (INT32_MAX if unknown, INT32_MIN if at infinity, not intersecting with horizon).
+ * @param q  Quaternion of camera orientation (w, x, y, z order, zero-rotation is 1, 0, 0, 0)
+ * @param hfov [deg] Horizontal field of view (NaN if unknown).
+ * @param vfov [deg] Vertical field of view (NaN if unknown).
+ * @return length of the message in bytes (excluding serial stream start sign)
+ */
+static inline uint16_t mavlink_msg_camera_fov_status_pack_status(uint32_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
+                               uint32_t time_boot_ms, int32_t lat_camera, int32_t lon_camera, int32_t alt_camera, int32_t lat_image, int32_t lon_image, int32_t alt_image, const float *q, float hfov, float vfov)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+    char buf[MAVLINK_MSG_ID_CAMERA_FOV_STATUS_LEN];
+    _mav_put_uint32_t(buf, 0, time_boot_ms);
+    _mav_put_int32_t(buf, 4, lat_camera);
+    _mav_put_int32_t(buf, 8, lon_camera);
+    _mav_put_int32_t(buf, 12, alt_camera);
+    _mav_put_int32_t(buf, 16, lat_image);
+    _mav_put_int32_t(buf, 20, lon_image);
+    _mav_put_int32_t(buf, 24, alt_image);
+    _mav_put_float(buf, 44, hfov);
+    _mav_put_float(buf, 48, vfov);
+    _mav_put_float_array(buf, 28, q, 4);
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_CAMERA_FOV_STATUS_LEN);
+#else
+    mavlink_camera_fov_status_t packet;
+    packet.time_boot_ms = time_boot_ms;
+    packet.lat_camera = lat_camera;
+    packet.lon_camera = lon_camera;
+    packet.alt_camera = alt_camera;
+    packet.lat_image = lat_image;
+    packet.lon_image = lon_image;
+    packet.alt_image = alt_image;
+    packet.hfov = hfov;
+    packet.vfov = vfov;
+    mav_array_memcpy(packet.q, q, sizeof(float)*4);
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_CAMERA_FOV_STATUS_LEN);
+#endif
+
+    msg->msgid = MAVLINK_MSG_ID_CAMERA_FOV_STATUS;
+#if MAVLINK_CRC_EXTRA
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_CAMERA_FOV_STATUS_MIN_LEN, MAVLINK_MSG_ID_CAMERA_FOV_STATUS_LEN, MAVLINK_MSG_ID_CAMERA_FOV_STATUS_CRC);
+#else
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_CAMERA_FOV_STATUS_MIN_LEN, MAVLINK_MSG_ID_CAMERA_FOV_STATUS_LEN, 0);
+#endif
+}
+
+/**
  * @brief Pack a camera_fov_status message on a channel
  * @param system_id ID of this system
  * @param component_id ID of this component (e.g. 200 for IMU)
@@ -133,7 +193,7 @@ static inline uint16_t mavlink_msg_camera_fov_status_pack(uint8_t system_id, uin
  * @param vfov [deg] Vertical field of view (NaN if unknown).
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_camera_fov_status_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
+static inline uint16_t mavlink_msg_camera_fov_status_pack_chan(uint32_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
                                    uint32_t time_boot_ms,int32_t lat_camera,int32_t lon_camera,int32_t alt_camera,int32_t lat_image,int32_t lon_image,int32_t alt_image,const float *q,float hfov,float vfov)
 {
@@ -177,7 +237,7 @@ static inline uint16_t mavlink_msg_camera_fov_status_pack_chan(uint8_t system_id
  * @param msg The MAVLink message to compress the data into
  * @param camera_fov_status C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_camera_fov_status_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_camera_fov_status_t* camera_fov_status)
+static inline uint16_t mavlink_msg_camera_fov_status_encode(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_camera_fov_status_t* camera_fov_status)
 {
     return mavlink_msg_camera_fov_status_pack(system_id, component_id, msg, camera_fov_status->time_boot_ms, camera_fov_status->lat_camera, camera_fov_status->lon_camera, camera_fov_status->alt_camera, camera_fov_status->lat_image, camera_fov_status->lon_image, camera_fov_status->alt_image, camera_fov_status->q, camera_fov_status->hfov, camera_fov_status->vfov);
 }
@@ -191,9 +251,23 @@ static inline uint16_t mavlink_msg_camera_fov_status_encode(uint8_t system_id, u
  * @param msg The MAVLink message to compress the data into
  * @param camera_fov_status C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_camera_fov_status_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_camera_fov_status_t* camera_fov_status)
+static inline uint16_t mavlink_msg_camera_fov_status_encode_chan(uint32_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_camera_fov_status_t* camera_fov_status)
 {
     return mavlink_msg_camera_fov_status_pack_chan(system_id, component_id, chan, msg, camera_fov_status->time_boot_ms, camera_fov_status->lat_camera, camera_fov_status->lon_camera, camera_fov_status->alt_camera, camera_fov_status->lat_image, camera_fov_status->lon_image, camera_fov_status->alt_image, camera_fov_status->q, camera_fov_status->hfov, camera_fov_status->vfov);
+}
+
+/**
+ * @brief Encode a camera_fov_status struct with provided status structure
+ *
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ * @param camera_fov_status C-struct to read the message contents from
+ */
+static inline uint16_t mavlink_msg_camera_fov_status_encode_status(uint32_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_camera_fov_status_t* camera_fov_status)
+{
+    return mavlink_msg_camera_fov_status_pack_status(system_id, component_id, _status, msg,  camera_fov_status->time_boot_ms, camera_fov_status->lat_camera, camera_fov_status->lon_camera, camera_fov_status->alt_camera, camera_fov_status->lat_image, camera_fov_status->lon_image, camera_fov_status->alt_image, camera_fov_status->q, camera_fov_status->hfov, camera_fov_status->vfov);
 }
 
 /**
@@ -260,7 +334,7 @@ static inline void mavlink_msg_camera_fov_status_send_struct(mavlink_channel_t c
 
 #if MAVLINK_MSG_ID_CAMERA_FOV_STATUS_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
+  This variant of _send() can be used to save stack space by reusing
   memory from the receive buffer.  The caller provides a
   mavlink_message_t which is the size of a full mavlink message. This
   is usually the receive buffer for the channel, and allows a reply to an
@@ -422,9 +496,10 @@ static inline void mavlink_msg_camera_fov_status_decode(const mavlink_message_t*
     mavlink_msg_camera_fov_status_get_q(msg, camera_fov_status->q);
     camera_fov_status->hfov = mavlink_msg_camera_fov_status_get_hfov(msg);
     camera_fov_status->vfov = mavlink_msg_camera_fov_status_get_vfov(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_CAMERA_FOV_STATUS_LEN? msg->len : MAVLINK_MSG_ID_CAMERA_FOV_STATUS_LEN;
-        memset(camera_fov_status, 0, MAVLINK_MSG_ID_CAMERA_FOV_STATUS_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_CAMERA_FOV_STATUS_LEN ? msg->len : MAVLINK_MSG_ID_CAMERA_FOV_STATUS_LEN;
+    memset(camera_fov_status, 0, MAVLINK_MSG_ID_CAMERA_FOV_STATUS_LEN);
     memcpy(camera_fov_status, _MAV_PAYLOAD(msg), len);
 #endif
 }

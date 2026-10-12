@@ -1,6 +1,8 @@
 #pragma once
 // MESSAGE ATTITUDE PACKING
 
+#include <stdint.h>
+
 #define MAVLINK_MSG_ID_ATTITUDE 30
 
 
@@ -68,7 +70,7 @@ typedef struct __mavlink_attitude_t {
  * @param yawspeed [rad/s] Yaw angular speed
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_attitude_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
+static inline uint16_t mavlink_msg_attitude_pack(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg,
                                uint32_t time_boot_ms, float roll, float pitch, float yaw, float rollspeed, float pitchspeed, float yawspeed)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -100,6 +102,57 @@ static inline uint16_t mavlink_msg_attitude_pack(uint8_t system_id, uint8_t comp
 }
 
 /**
+ * @brief Pack a attitude message
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ *
+ * @param time_boot_ms [ms] Timestamp (time since system boot).
+ * @param roll [rad] Roll angle (-pi..+pi)
+ * @param pitch [rad] Pitch angle (-pi..+pi)
+ * @param yaw [rad] Yaw angle (-pi..+pi)
+ * @param rollspeed [rad/s] Roll angular speed
+ * @param pitchspeed [rad/s] Pitch angular speed
+ * @param yawspeed [rad/s] Yaw angular speed
+ * @return length of the message in bytes (excluding serial stream start sign)
+ */
+static inline uint16_t mavlink_msg_attitude_pack_status(uint32_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
+                               uint32_t time_boot_ms, float roll, float pitch, float yaw, float rollspeed, float pitchspeed, float yawspeed)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+    char buf[MAVLINK_MSG_ID_ATTITUDE_LEN];
+    _mav_put_uint32_t(buf, 0, time_boot_ms);
+    _mav_put_float(buf, 4, roll);
+    _mav_put_float(buf, 8, pitch);
+    _mav_put_float(buf, 12, yaw);
+    _mav_put_float(buf, 16, rollspeed);
+    _mav_put_float(buf, 20, pitchspeed);
+    _mav_put_float(buf, 24, yawspeed);
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_ATTITUDE_LEN);
+#else
+    mavlink_attitude_t packet;
+    packet.time_boot_ms = time_boot_ms;
+    packet.roll = roll;
+    packet.pitch = pitch;
+    packet.yaw = yaw;
+    packet.rollspeed = rollspeed;
+    packet.pitchspeed = pitchspeed;
+    packet.yawspeed = yawspeed;
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_ATTITUDE_LEN);
+#endif
+
+    msg->msgid = MAVLINK_MSG_ID_ATTITUDE;
+#if MAVLINK_CRC_EXTRA
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_ATTITUDE_MIN_LEN, MAVLINK_MSG_ID_ATTITUDE_LEN, MAVLINK_MSG_ID_ATTITUDE_CRC);
+#else
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_ATTITUDE_MIN_LEN, MAVLINK_MSG_ID_ATTITUDE_LEN, 0);
+#endif
+}
+
+/**
  * @brief Pack a attitude message on a channel
  * @param system_id ID of this system
  * @param component_id ID of this component (e.g. 200 for IMU)
@@ -114,7 +167,7 @@ static inline uint16_t mavlink_msg_attitude_pack(uint8_t system_id, uint8_t comp
  * @param yawspeed [rad/s] Yaw angular speed
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_attitude_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
+static inline uint16_t mavlink_msg_attitude_pack_chan(uint32_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
                                    uint32_t time_boot_ms,float roll,float pitch,float yaw,float rollspeed,float pitchspeed,float yawspeed)
 {
@@ -154,7 +207,7 @@ static inline uint16_t mavlink_msg_attitude_pack_chan(uint8_t system_id, uint8_t
  * @param msg The MAVLink message to compress the data into
  * @param attitude C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_attitude_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_attitude_t* attitude)
+static inline uint16_t mavlink_msg_attitude_encode(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_attitude_t* attitude)
 {
     return mavlink_msg_attitude_pack(system_id, component_id, msg, attitude->time_boot_ms, attitude->roll, attitude->pitch, attitude->yaw, attitude->rollspeed, attitude->pitchspeed, attitude->yawspeed);
 }
@@ -168,9 +221,23 @@ static inline uint16_t mavlink_msg_attitude_encode(uint8_t system_id, uint8_t co
  * @param msg The MAVLink message to compress the data into
  * @param attitude C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_attitude_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_attitude_t* attitude)
+static inline uint16_t mavlink_msg_attitude_encode_chan(uint32_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_attitude_t* attitude)
 {
     return mavlink_msg_attitude_pack_chan(system_id, component_id, chan, msg, attitude->time_boot_ms, attitude->roll, attitude->pitch, attitude->yaw, attitude->rollspeed, attitude->pitchspeed, attitude->yawspeed);
+}
+
+/**
+ * @brief Encode a attitude struct with provided status structure
+ *
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ * @param attitude C-struct to read the message contents from
+ */
+static inline uint16_t mavlink_msg_attitude_encode_status(uint32_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_attitude_t* attitude)
+{
+    return mavlink_msg_attitude_pack_status(system_id, component_id, _status, msg,  attitude->time_boot_ms, attitude->roll, attitude->pitch, attitude->yaw, attitude->rollspeed, attitude->pitchspeed, attitude->yawspeed);
 }
 
 /**
@@ -230,7 +297,7 @@ static inline void mavlink_msg_attitude_send_struct(mavlink_channel_t chan, cons
 
 #if MAVLINK_MSG_ID_ATTITUDE_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
+  This variant of _send() can be used to save stack space by reusing
   memory from the receive buffer.  The caller provides a
   mavlink_message_t which is the size of a full mavlink message. This
   is usually the receive buffer for the channel, and allows a reply to an
@@ -355,9 +422,10 @@ static inline void mavlink_msg_attitude_decode(const mavlink_message_t* msg, mav
     attitude->rollspeed = mavlink_msg_attitude_get_rollspeed(msg);
     attitude->pitchspeed = mavlink_msg_attitude_get_pitchspeed(msg);
     attitude->yawspeed = mavlink_msg_attitude_get_yawspeed(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_ATTITUDE_LEN? msg->len : MAVLINK_MSG_ID_ATTITUDE_LEN;
-        memset(attitude, 0, MAVLINK_MSG_ID_ATTITUDE_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_ATTITUDE_LEN ? msg->len : MAVLINK_MSG_ID_ATTITUDE_LEN;
+    memset(attitude, 0, MAVLINK_MSG_ID_ATTITUDE_LEN);
     memcpy(attitude, _MAV_PAYLOAD(msg), len);
 #endif
 }

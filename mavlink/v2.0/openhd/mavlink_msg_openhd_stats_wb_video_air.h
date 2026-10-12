@@ -1,6 +1,8 @@
 #pragma once
 // MESSAGE OPENHD_STATS_WB_VIDEO_AIR PACKING
 
+#include <stdint.h>
+
 #define MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR 1214
 
 
@@ -80,7 +82,8 @@ typedef struct __mavlink_openhd_stats_wb_video_air_t {
  * @param dummy2  for future use
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
+MAVLINK_WIP
+static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_pack(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg,
                                uint8_t link_index, int16_t curr_recommended_bitrate, int32_t curr_measured_encoder_bitrate, int32_t curr_injected_bitrate, int32_t curr_injected_pps, int32_t curr_dropped_frames, int16_t curr_fec_percentage, int8_t dummy0, int16_t dummy1, int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -118,6 +121,66 @@ static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_pack(uint8_t system
 }
 
 /**
+ * @brief Pack a openhd_stats_wb_video_air message
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ *
+ * @param link_index  link_index
+ * @param curr_recommended_bitrate  curr_recommended_bitrate
+ * @param curr_measured_encoder_bitrate  curr_measured_encoder_bitrate
+ * @param curr_injected_bitrate  curr_injected_bitrate (+FEC overhead)
+ * @param curr_injected_pps  curr_injected_pps
+ * @param curr_dropped_frames  curr_dropped_frames
+ * @param curr_fec_percentage  curr_fec_percentage
+ * @param dummy0  for future use
+ * @param dummy1  for future use
+ * @param dummy2  for future use
+ * @return length of the message in bytes (excluding serial stream start sign)
+ */
+static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_pack_status(uint32_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
+                               uint8_t link_index, int16_t curr_recommended_bitrate, int32_t curr_measured_encoder_bitrate, int32_t curr_injected_bitrate, int32_t curr_injected_pps, int32_t curr_dropped_frames, int16_t curr_fec_percentage, int8_t dummy0, int16_t dummy1, int32_t dummy2)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+    char buf[MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_LEN];
+    _mav_put_int32_t(buf, 0, curr_measured_encoder_bitrate);
+    _mav_put_int32_t(buf, 4, curr_injected_bitrate);
+    _mav_put_int32_t(buf, 8, curr_injected_pps);
+    _mav_put_int32_t(buf, 12, curr_dropped_frames);
+    _mav_put_int32_t(buf, 16, dummy2);
+    _mav_put_int16_t(buf, 20, curr_recommended_bitrate);
+    _mav_put_int16_t(buf, 22, curr_fec_percentage);
+    _mav_put_int16_t(buf, 24, dummy1);
+    _mav_put_uint8_t(buf, 26, link_index);
+    _mav_put_int8_t(buf, 27, dummy0);
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_LEN);
+#else
+    mavlink_openhd_stats_wb_video_air_t packet;
+    packet.curr_measured_encoder_bitrate = curr_measured_encoder_bitrate;
+    packet.curr_injected_bitrate = curr_injected_bitrate;
+    packet.curr_injected_pps = curr_injected_pps;
+    packet.curr_dropped_frames = curr_dropped_frames;
+    packet.dummy2 = dummy2;
+    packet.curr_recommended_bitrate = curr_recommended_bitrate;
+    packet.curr_fec_percentage = curr_fec_percentage;
+    packet.dummy1 = dummy1;
+    packet.link_index = link_index;
+    packet.dummy0 = dummy0;
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_LEN);
+#endif
+
+    msg->msgid = MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR;
+#if MAVLINK_CRC_EXTRA
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_MIN_LEN, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_LEN, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_CRC);
+#else
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_MIN_LEN, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_LEN, 0);
+#endif
+}
+
+/**
  * @brief Pack a openhd_stats_wb_video_air message on a channel
  * @param system_id ID of this system
  * @param component_id ID of this component (e.g. 200 for IMU)
@@ -135,7 +198,8 @@ static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_pack(uint8_t system
  * @param dummy2  for future use
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
+MAVLINK_WIP
+static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_pack_chan(uint32_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
                                    uint8_t link_index,int16_t curr_recommended_bitrate,int32_t curr_measured_encoder_bitrate,int32_t curr_injected_bitrate,int32_t curr_injected_pps,int32_t curr_dropped_frames,int16_t curr_fec_percentage,int8_t dummy0,int16_t dummy1,int32_t dummy2)
 {
@@ -181,7 +245,8 @@ static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_pack_chan(uint8_t s
  * @param msg The MAVLink message to compress the data into
  * @param openhd_stats_wb_video_air C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_stats_wb_video_air_t* openhd_stats_wb_video_air)
+MAVLINK_WIP
+static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_encode(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_stats_wb_video_air_t* openhd_stats_wb_video_air)
 {
     return mavlink_msg_openhd_stats_wb_video_air_pack(system_id, component_id, msg, openhd_stats_wb_video_air->link_index, openhd_stats_wb_video_air->curr_recommended_bitrate, openhd_stats_wb_video_air->curr_measured_encoder_bitrate, openhd_stats_wb_video_air->curr_injected_bitrate, openhd_stats_wb_video_air->curr_injected_pps, openhd_stats_wb_video_air->curr_dropped_frames, openhd_stats_wb_video_air->curr_fec_percentage, openhd_stats_wb_video_air->dummy0, openhd_stats_wb_video_air->dummy1, openhd_stats_wb_video_air->dummy2);
 }
@@ -195,9 +260,24 @@ static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_encode(uint8_t syst
  * @param msg The MAVLink message to compress the data into
  * @param openhd_stats_wb_video_air C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_stats_wb_video_air_t* openhd_stats_wb_video_air)
+MAVLINK_WIP
+static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_encode_chan(uint32_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_stats_wb_video_air_t* openhd_stats_wb_video_air)
 {
     return mavlink_msg_openhd_stats_wb_video_air_pack_chan(system_id, component_id, chan, msg, openhd_stats_wb_video_air->link_index, openhd_stats_wb_video_air->curr_recommended_bitrate, openhd_stats_wb_video_air->curr_measured_encoder_bitrate, openhd_stats_wb_video_air->curr_injected_bitrate, openhd_stats_wb_video_air->curr_injected_pps, openhd_stats_wb_video_air->curr_dropped_frames, openhd_stats_wb_video_air->curr_fec_percentage, openhd_stats_wb_video_air->dummy0, openhd_stats_wb_video_air->dummy1, openhd_stats_wb_video_air->dummy2);
+}
+
+/**
+ * @brief Encode a openhd_stats_wb_video_air struct with provided status structure
+ *
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ * @param openhd_stats_wb_video_air C-struct to read the message contents from
+ */
+static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_encode_status(uint32_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_openhd_stats_wb_video_air_t* openhd_stats_wb_video_air)
+{
+    return mavlink_msg_openhd_stats_wb_video_air_pack_status(system_id, component_id, _status, msg,  openhd_stats_wb_video_air->link_index, openhd_stats_wb_video_air->curr_recommended_bitrate, openhd_stats_wb_video_air->curr_measured_encoder_bitrate, openhd_stats_wb_video_air->curr_injected_bitrate, openhd_stats_wb_video_air->curr_injected_pps, openhd_stats_wb_video_air->curr_dropped_frames, openhd_stats_wb_video_air->curr_fec_percentage, openhd_stats_wb_video_air->dummy0, openhd_stats_wb_video_air->dummy1, openhd_stats_wb_video_air->dummy2);
 }
 
 /**
@@ -217,6 +297,7 @@ static inline uint16_t mavlink_msg_openhd_stats_wb_video_air_encode_chan(uint8_t
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
+MAVLINK_WIP
 static inline void mavlink_msg_openhd_stats_wb_video_air_send(mavlink_channel_t chan, uint8_t link_index, int16_t curr_recommended_bitrate, int32_t curr_measured_encoder_bitrate, int32_t curr_injected_bitrate, int32_t curr_injected_pps, int32_t curr_dropped_frames, int16_t curr_fec_percentage, int8_t dummy0, int16_t dummy1, int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -255,6 +336,7 @@ static inline void mavlink_msg_openhd_stats_wb_video_air_send(mavlink_channel_t 
  * @param chan MAVLink channel to send the message
  * @param struct The MAVLink struct to serialize
  */
+MAVLINK_WIP
 static inline void mavlink_msg_openhd_stats_wb_video_air_send_struct(mavlink_channel_t chan, const mavlink_openhd_stats_wb_video_air_t* openhd_stats_wb_video_air)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -266,12 +348,13 @@ static inline void mavlink_msg_openhd_stats_wb_video_air_send_struct(mavlink_cha
 
 #if MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
+  This variant of _send() can be used to save stack space by reusing
   memory from the receive buffer.  The caller provides a
   mavlink_message_t which is the size of a full mavlink message. This
   is usually the receive buffer for the channel, and allows a reply to an
   incoming message with minimum stack space usage.
  */
+MAVLINK_WIP
 static inline void mavlink_msg_openhd_stats_wb_video_air_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  uint8_t link_index, int16_t curr_recommended_bitrate, int32_t curr_measured_encoder_bitrate, int32_t curr_injected_bitrate, int32_t curr_injected_pps, int32_t curr_dropped_frames, int16_t curr_fec_percentage, int8_t dummy0, int16_t dummy1, int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -316,6 +399,7 @@ static inline void mavlink_msg_openhd_stats_wb_video_air_send_buf(mavlink_messag
  *
  * @return  link_index
  */
+MAVLINK_WIP
 static inline uint8_t mavlink_msg_openhd_stats_wb_video_air_get_link_index(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_uint8_t(msg,  26);
@@ -326,6 +410,7 @@ static inline uint8_t mavlink_msg_openhd_stats_wb_video_air_get_link_index(const
  *
  * @return  curr_recommended_bitrate
  */
+MAVLINK_WIP
 static inline int16_t mavlink_msg_openhd_stats_wb_video_air_get_curr_recommended_bitrate(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_int16_t(msg,  20);
@@ -336,6 +421,7 @@ static inline int16_t mavlink_msg_openhd_stats_wb_video_air_get_curr_recommended
  *
  * @return  curr_measured_encoder_bitrate
  */
+MAVLINK_WIP
 static inline int32_t mavlink_msg_openhd_stats_wb_video_air_get_curr_measured_encoder_bitrate(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_int32_t(msg,  0);
@@ -346,6 +432,7 @@ static inline int32_t mavlink_msg_openhd_stats_wb_video_air_get_curr_measured_en
  *
  * @return  curr_injected_bitrate (+FEC overhead)
  */
+MAVLINK_WIP
 static inline int32_t mavlink_msg_openhd_stats_wb_video_air_get_curr_injected_bitrate(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_int32_t(msg,  4);
@@ -356,6 +443,7 @@ static inline int32_t mavlink_msg_openhd_stats_wb_video_air_get_curr_injected_bi
  *
  * @return  curr_injected_pps
  */
+MAVLINK_WIP
 static inline int32_t mavlink_msg_openhd_stats_wb_video_air_get_curr_injected_pps(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_int32_t(msg,  8);
@@ -366,6 +454,7 @@ static inline int32_t mavlink_msg_openhd_stats_wb_video_air_get_curr_injected_pp
  *
  * @return  curr_dropped_frames
  */
+MAVLINK_WIP
 static inline int32_t mavlink_msg_openhd_stats_wb_video_air_get_curr_dropped_frames(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_int32_t(msg,  12);
@@ -376,6 +465,7 @@ static inline int32_t mavlink_msg_openhd_stats_wb_video_air_get_curr_dropped_fra
  *
  * @return  curr_fec_percentage
  */
+MAVLINK_WIP
 static inline int16_t mavlink_msg_openhd_stats_wb_video_air_get_curr_fec_percentage(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_int16_t(msg,  22);
@@ -386,6 +476,7 @@ static inline int16_t mavlink_msg_openhd_stats_wb_video_air_get_curr_fec_percent
  *
  * @return  for future use
  */
+MAVLINK_WIP
 static inline int8_t mavlink_msg_openhd_stats_wb_video_air_get_dummy0(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_int8_t(msg,  27);
@@ -396,6 +487,7 @@ static inline int8_t mavlink_msg_openhd_stats_wb_video_air_get_dummy0(const mavl
  *
  * @return  for future use
  */
+MAVLINK_WIP
 static inline int16_t mavlink_msg_openhd_stats_wb_video_air_get_dummy1(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_int16_t(msg,  24);
@@ -406,6 +498,7 @@ static inline int16_t mavlink_msg_openhd_stats_wb_video_air_get_dummy1(const mav
  *
  * @return  for future use
  */
+MAVLINK_WIP
 static inline int32_t mavlink_msg_openhd_stats_wb_video_air_get_dummy2(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_int32_t(msg,  16);
@@ -417,6 +510,7 @@ static inline int32_t mavlink_msg_openhd_stats_wb_video_air_get_dummy2(const mav
  * @param msg The message to decode
  * @param openhd_stats_wb_video_air C-struct to decode the message contents into
  */
+MAVLINK_WIP
 static inline void mavlink_msg_openhd_stats_wb_video_air_decode(const mavlink_message_t* msg, mavlink_openhd_stats_wb_video_air_t* openhd_stats_wb_video_air)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -430,9 +524,10 @@ static inline void mavlink_msg_openhd_stats_wb_video_air_decode(const mavlink_me
     openhd_stats_wb_video_air->dummy1 = mavlink_msg_openhd_stats_wb_video_air_get_dummy1(msg);
     openhd_stats_wb_video_air->link_index = mavlink_msg_openhd_stats_wb_video_air_get_link_index(msg);
     openhd_stats_wb_video_air->dummy0 = mavlink_msg_openhd_stats_wb_video_air_get_dummy0(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_LEN? msg->len : MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_LEN;
-        memset(openhd_stats_wb_video_air, 0, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_LEN ? msg->len : MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_LEN;
+    memset(openhd_stats_wb_video_air, 0, MAVLINK_MSG_ID_OPENHD_STATS_WB_VIDEO_AIR_LEN);
     memcpy(openhd_stats_wb_video_air, _MAV_PAYLOAD(msg), len);
 #endif
 }

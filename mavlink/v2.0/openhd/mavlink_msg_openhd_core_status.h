@@ -1,6 +1,8 @@
 #pragma once
 // MESSAGE OPENHD_CORE_STATUS PACKING
 
+#include <stdint.h>
+
 #define MAVLINK_MSG_ID_OPENHD_CORE_STATUS 1227
 
 
@@ -96,7 +98,7 @@ typedef struct __mavlink_openhd_core_status_t {
  * @param operating_mode  Operating mode
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_openhd_core_status_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
+static inline uint16_t mavlink_msg_openhd_core_status_pack(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg,
                                int8_t cpu_temp, int8_t wifi0_temp, int8_t wifi1_temp, uint16_t cpu_clock, uint16_t isp_clock, uint16_t h264_clock, uint16_t core_clock, uint16_t v3d_clock, uint32_t storage_left_mb, uint8_t undervolt_status, uint8_t platform_type, uint8_t encryption_enabled, uint8_t fc_sys_id, uint8_t operating_mode)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -142,6 +144,78 @@ static inline uint16_t mavlink_msg_openhd_core_status_pack(uint8_t system_id, ui
 }
 
 /**
+ * @brief Pack a openhd_core_status message
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ *
+ * @param cpu_temp [degC] CPU temperature
+ * @param wifi0_temp [degC] Wifi card 0 temperature
+ * @param wifi1_temp [degC] Wifi card 1 temperature
+ * @param cpu_clock [MHz] CPU clock
+ * @param isp_clock [MHz] ISP clock
+ * @param h264_clock [MHz] H264 clock
+ * @param core_clock [MHz] Core clock
+ * @param v3d_clock [MHz] V3D clock
+ * @param storage_left_mb [MiB] Storage space left
+ * @param undervolt_status  Undervolt status (0=false, 1=true)
+ * @param platform_type  Platform type
+ * @param encryption_enabled  Encryption enabled (0=false, 1=true)
+ * @param fc_sys_id  Flight controller system ID
+ * @param operating_mode  Operating mode
+ * @return length of the message in bytes (excluding serial stream start sign)
+ */
+static inline uint16_t mavlink_msg_openhd_core_status_pack_status(uint32_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
+                               int8_t cpu_temp, int8_t wifi0_temp, int8_t wifi1_temp, uint16_t cpu_clock, uint16_t isp_clock, uint16_t h264_clock, uint16_t core_clock, uint16_t v3d_clock, uint32_t storage_left_mb, uint8_t undervolt_status, uint8_t platform_type, uint8_t encryption_enabled, uint8_t fc_sys_id, uint8_t operating_mode)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+    char buf[MAVLINK_MSG_ID_OPENHD_CORE_STATUS_LEN];
+    _mav_put_uint32_t(buf, 0, storage_left_mb);
+    _mav_put_uint16_t(buf, 4, cpu_clock);
+    _mav_put_uint16_t(buf, 6, isp_clock);
+    _mav_put_uint16_t(buf, 8, h264_clock);
+    _mav_put_uint16_t(buf, 10, core_clock);
+    _mav_put_uint16_t(buf, 12, v3d_clock);
+    _mav_put_int8_t(buf, 14, cpu_temp);
+    _mav_put_int8_t(buf, 15, wifi0_temp);
+    _mav_put_int8_t(buf, 16, wifi1_temp);
+    _mav_put_uint8_t(buf, 17, undervolt_status);
+    _mav_put_uint8_t(buf, 18, platform_type);
+    _mav_put_uint8_t(buf, 19, encryption_enabled);
+    _mav_put_uint8_t(buf, 20, fc_sys_id);
+    _mav_put_uint8_t(buf, 21, operating_mode);
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_OPENHD_CORE_STATUS_LEN);
+#else
+    mavlink_openhd_core_status_t packet;
+    packet.storage_left_mb = storage_left_mb;
+    packet.cpu_clock = cpu_clock;
+    packet.isp_clock = isp_clock;
+    packet.h264_clock = h264_clock;
+    packet.core_clock = core_clock;
+    packet.v3d_clock = v3d_clock;
+    packet.cpu_temp = cpu_temp;
+    packet.wifi0_temp = wifi0_temp;
+    packet.wifi1_temp = wifi1_temp;
+    packet.undervolt_status = undervolt_status;
+    packet.platform_type = platform_type;
+    packet.encryption_enabled = encryption_enabled;
+    packet.fc_sys_id = fc_sys_id;
+    packet.operating_mode = operating_mode;
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_OPENHD_CORE_STATUS_LEN);
+#endif
+
+    msg->msgid = MAVLINK_MSG_ID_OPENHD_CORE_STATUS;
+#if MAVLINK_CRC_EXTRA
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_OPENHD_CORE_STATUS_MIN_LEN, MAVLINK_MSG_ID_OPENHD_CORE_STATUS_LEN, MAVLINK_MSG_ID_OPENHD_CORE_STATUS_CRC);
+#else
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_OPENHD_CORE_STATUS_MIN_LEN, MAVLINK_MSG_ID_OPENHD_CORE_STATUS_LEN, 0);
+#endif
+}
+
+/**
  * @brief Pack a openhd_core_status message on a channel
  * @param system_id ID of this system
  * @param component_id ID of this component (e.g. 200 for IMU)
@@ -163,7 +237,7 @@ static inline uint16_t mavlink_msg_openhd_core_status_pack(uint8_t system_id, ui
  * @param operating_mode  Operating mode
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_openhd_core_status_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
+static inline uint16_t mavlink_msg_openhd_core_status_pack_chan(uint32_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
                                    int8_t cpu_temp,int8_t wifi0_temp,int8_t wifi1_temp,uint16_t cpu_clock,uint16_t isp_clock,uint16_t h264_clock,uint16_t core_clock,uint16_t v3d_clock,uint32_t storage_left_mb,uint8_t undervolt_status,uint8_t platform_type,uint8_t encryption_enabled,uint8_t fc_sys_id,uint8_t operating_mode)
 {
@@ -217,7 +291,7 @@ static inline uint16_t mavlink_msg_openhd_core_status_pack_chan(uint8_t system_i
  * @param msg The MAVLink message to compress the data into
  * @param openhd_core_status C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_openhd_core_status_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_core_status_t* openhd_core_status)
+static inline uint16_t mavlink_msg_openhd_core_status_encode(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_core_status_t* openhd_core_status)
 {
     return mavlink_msg_openhd_core_status_pack(system_id, component_id, msg, openhd_core_status->cpu_temp, openhd_core_status->wifi0_temp, openhd_core_status->wifi1_temp, openhd_core_status->cpu_clock, openhd_core_status->isp_clock, openhd_core_status->h264_clock, openhd_core_status->core_clock, openhd_core_status->v3d_clock, openhd_core_status->storage_left_mb, openhd_core_status->undervolt_status, openhd_core_status->platform_type, openhd_core_status->encryption_enabled, openhd_core_status->fc_sys_id, openhd_core_status->operating_mode);
 }
@@ -231,9 +305,23 @@ static inline uint16_t mavlink_msg_openhd_core_status_encode(uint8_t system_id, 
  * @param msg The MAVLink message to compress the data into
  * @param openhd_core_status C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_openhd_core_status_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_core_status_t* openhd_core_status)
+static inline uint16_t mavlink_msg_openhd_core_status_encode_chan(uint32_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_core_status_t* openhd_core_status)
 {
     return mavlink_msg_openhd_core_status_pack_chan(system_id, component_id, chan, msg, openhd_core_status->cpu_temp, openhd_core_status->wifi0_temp, openhd_core_status->wifi1_temp, openhd_core_status->cpu_clock, openhd_core_status->isp_clock, openhd_core_status->h264_clock, openhd_core_status->core_clock, openhd_core_status->v3d_clock, openhd_core_status->storage_left_mb, openhd_core_status->undervolt_status, openhd_core_status->platform_type, openhd_core_status->encryption_enabled, openhd_core_status->fc_sys_id, openhd_core_status->operating_mode);
+}
+
+/**
+ * @brief Encode a openhd_core_status struct with provided status structure
+ *
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ * @param openhd_core_status C-struct to read the message contents from
+ */
+static inline uint16_t mavlink_msg_openhd_core_status_encode_status(uint32_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_openhd_core_status_t* openhd_core_status)
+{
+    return mavlink_msg_openhd_core_status_pack_status(system_id, component_id, _status, msg,  openhd_core_status->cpu_temp, openhd_core_status->wifi0_temp, openhd_core_status->wifi1_temp, openhd_core_status->cpu_clock, openhd_core_status->isp_clock, openhd_core_status->h264_clock, openhd_core_status->core_clock, openhd_core_status->v3d_clock, openhd_core_status->storage_left_mb, openhd_core_status->undervolt_status, openhd_core_status->platform_type, openhd_core_status->encryption_enabled, openhd_core_status->fc_sys_id, openhd_core_status->operating_mode);
 }
 
 /**
@@ -314,7 +402,7 @@ static inline void mavlink_msg_openhd_core_status_send_struct(mavlink_channel_t 
 
 #if MAVLINK_MSG_ID_OPENHD_CORE_STATUS_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
+  This variant of _send() can be used to save stack space by reusing
   memory from the receive buffer.  The caller provides a
   mavlink_message_t which is the size of a full mavlink message. This
   is usually the receive buffer for the channel, and allows a reply to an
@@ -530,9 +618,10 @@ static inline void mavlink_msg_openhd_core_status_decode(const mavlink_message_t
     openhd_core_status->encryption_enabled = mavlink_msg_openhd_core_status_get_encryption_enabled(msg);
     openhd_core_status->fc_sys_id = mavlink_msg_openhd_core_status_get_fc_sys_id(msg);
     openhd_core_status->operating_mode = mavlink_msg_openhd_core_status_get_operating_mode(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_OPENHD_CORE_STATUS_LEN? msg->len : MAVLINK_MSG_ID_OPENHD_CORE_STATUS_LEN;
-        memset(openhd_core_status, 0, MAVLINK_MSG_ID_OPENHD_CORE_STATUS_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_OPENHD_CORE_STATUS_LEN ? msg->len : MAVLINK_MSG_ID_OPENHD_CORE_STATUS_LEN;
+    memset(openhd_core_status, 0, MAVLINK_MSG_ID_OPENHD_CORE_STATUS_LEN);
     memcpy(openhd_core_status, _MAV_PAYLOAD(msg), len);
 #endif
 }

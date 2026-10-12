@@ -1,6 +1,8 @@
 #pragma once
 // MESSAGE OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS PACKING
 
+#include <stdint.h>
+
 #define MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS 1222
 
 
@@ -53,7 +55,7 @@ typedef struct __mavlink_openhd_wifbroadcast_supported_channels_t {
  * @param bandwidths  TODO
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_openhd_wifbroadcast_supported_channels_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
+static inline uint16_t mavlink_msg_openhd_wifbroadcast_supported_channels_pack(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg,
                                uint8_t card_index, const uint16_t *channels, const uint8_t *bandwidths)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -75,6 +77,43 @@ static inline uint16_t mavlink_msg_openhd_wifbroadcast_supported_channels_pack(u
 }
 
 /**
+ * @brief Pack a openhd_wifbroadcast_supported_channels message
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ *
+ * @param card_index  index of the wifibroadcast card (RX might have multiple)
+ * @param channels  List of supported channels, 0 to indicate an empty field.Always in 20Mhz increments
+ * @param bandwidths  TODO
+ * @return length of the message in bytes (excluding serial stream start sign)
+ */
+static inline uint16_t mavlink_msg_openhd_wifbroadcast_supported_channels_pack_status(uint32_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
+                               uint8_t card_index, const uint16_t *channels, const uint8_t *bandwidths)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+    char buf[MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN];
+    _mav_put_uint8_t(buf, 120, card_index);
+    _mav_put_uint16_t_array(buf, 0, channels, 60);
+    _mav_put_uint8_t_array(buf, 121, bandwidths, 60);
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN);
+#else
+    mavlink_openhd_wifbroadcast_supported_channels_t packet;
+    packet.card_index = card_index;
+    mav_array_memcpy(packet.channels, channels, sizeof(uint16_t)*60);
+    mav_array_memcpy(packet.bandwidths, bandwidths, sizeof(uint8_t)*60);
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN);
+#endif
+
+    msg->msgid = MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS;
+#if MAVLINK_CRC_EXTRA
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_MIN_LEN, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_CRC);
+#else
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_MIN_LEN, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN, 0);
+#endif
+}
+
+/**
  * @brief Pack a openhd_wifbroadcast_supported_channels message on a channel
  * @param system_id ID of this system
  * @param component_id ID of this component (e.g. 200 for IMU)
@@ -85,7 +124,7 @@ static inline uint16_t mavlink_msg_openhd_wifbroadcast_supported_channels_pack(u
  * @param bandwidths  TODO
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_openhd_wifbroadcast_supported_channels_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
+static inline uint16_t mavlink_msg_openhd_wifbroadcast_supported_channels_pack_chan(uint32_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
                                    uint8_t card_index,const uint16_t *channels,const uint8_t *bandwidths)
 {
@@ -115,7 +154,7 @@ static inline uint16_t mavlink_msg_openhd_wifbroadcast_supported_channels_pack_c
  * @param msg The MAVLink message to compress the data into
  * @param openhd_wifbroadcast_supported_channels C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_openhd_wifbroadcast_supported_channels_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_wifbroadcast_supported_channels_t* openhd_wifbroadcast_supported_channels)
+static inline uint16_t mavlink_msg_openhd_wifbroadcast_supported_channels_encode(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_wifbroadcast_supported_channels_t* openhd_wifbroadcast_supported_channels)
 {
     return mavlink_msg_openhd_wifbroadcast_supported_channels_pack(system_id, component_id, msg, openhd_wifbroadcast_supported_channels->card_index, openhd_wifbroadcast_supported_channels->channels, openhd_wifbroadcast_supported_channels->bandwidths);
 }
@@ -129,9 +168,23 @@ static inline uint16_t mavlink_msg_openhd_wifbroadcast_supported_channels_encode
  * @param msg The MAVLink message to compress the data into
  * @param openhd_wifbroadcast_supported_channels C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_openhd_wifbroadcast_supported_channels_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_wifbroadcast_supported_channels_t* openhd_wifbroadcast_supported_channels)
+static inline uint16_t mavlink_msg_openhd_wifbroadcast_supported_channels_encode_chan(uint32_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_wifbroadcast_supported_channels_t* openhd_wifbroadcast_supported_channels)
 {
     return mavlink_msg_openhd_wifbroadcast_supported_channels_pack_chan(system_id, component_id, chan, msg, openhd_wifbroadcast_supported_channels->card_index, openhd_wifbroadcast_supported_channels->channels, openhd_wifbroadcast_supported_channels->bandwidths);
+}
+
+/**
+ * @brief Encode a openhd_wifbroadcast_supported_channels struct with provided status structure
+ *
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ * @param openhd_wifbroadcast_supported_channels C-struct to read the message contents from
+ */
+static inline uint16_t mavlink_msg_openhd_wifbroadcast_supported_channels_encode_status(uint32_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_openhd_wifbroadcast_supported_channels_t* openhd_wifbroadcast_supported_channels)
+{
+    return mavlink_msg_openhd_wifbroadcast_supported_channels_pack_status(system_id, component_id, _status, msg,  openhd_wifbroadcast_supported_channels->card_index, openhd_wifbroadcast_supported_channels->channels, openhd_wifbroadcast_supported_channels->bandwidths);
 }
 
 /**
@@ -177,7 +230,7 @@ static inline void mavlink_msg_openhd_wifbroadcast_supported_channels_send_struc
 
 #if MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
+  This variant of _send() can be used to save stack space by reusing
   memory from the receive buffer.  The caller provides a
   mavlink_message_t which is the size of a full mavlink message. This
   is usually the receive buffer for the channel, and allows a reply to an
@@ -248,9 +301,10 @@ static inline void mavlink_msg_openhd_wifbroadcast_supported_channels_decode(con
     mavlink_msg_openhd_wifbroadcast_supported_channels_get_channels(msg, openhd_wifbroadcast_supported_channels->channels);
     openhd_wifbroadcast_supported_channels->card_index = mavlink_msg_openhd_wifbroadcast_supported_channels_get_card_index(msg);
     mavlink_msg_openhd_wifbroadcast_supported_channels_get_bandwidths(msg, openhd_wifbroadcast_supported_channels->bandwidths);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN? msg->len : MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN;
-        memset(openhd_wifbroadcast_supported_channels, 0, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN ? msg->len : MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN;
+    memset(openhd_wifbroadcast_supported_channels, 0, MAVLINK_MSG_ID_OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS_LEN);
     memcpy(openhd_wifbroadcast_supported_channels, _MAV_PAYLOAD(msg), len);
 #endif
 }

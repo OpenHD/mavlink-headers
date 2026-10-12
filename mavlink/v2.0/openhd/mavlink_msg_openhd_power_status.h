@@ -1,6 +1,8 @@
 #pragma once
 // MESSAGE OPENHD_POWER_STATUS PACKING
 
+#include <stdint.h>
+
 #define MAVLINK_MSG_ID_OPENHD_POWER_STATUS 1228
 
 
@@ -56,7 +58,7 @@ typedef struct __mavlink_openhd_power_status_t {
  * @param battery_percent [%] Battery percentage (0-100)
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_openhd_power_status_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
+static inline uint16_t mavlink_msg_openhd_power_status_pack(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg,
                                uint16_t voltage_mv, int16_t current_ma, uint8_t charging_status, uint8_t battery_percent)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -82,6 +84,48 @@ static inline uint16_t mavlink_msg_openhd_power_status_pack(uint8_t system_id, u
 }
 
 /**
+ * @brief Pack a openhd_power_status message
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ *
+ * @param voltage_mv [mV] Voltage in millivolts
+ * @param current_ma [mA] Current in milliamperes
+ * @param charging_status  0=Unknown, 1=Charging, 2=Discharging, 3=Not Charging
+ * @param battery_percent [%] Battery percentage (0-100)
+ * @return length of the message in bytes (excluding serial stream start sign)
+ */
+static inline uint16_t mavlink_msg_openhd_power_status_pack_status(uint32_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
+                               uint16_t voltage_mv, int16_t current_ma, uint8_t charging_status, uint8_t battery_percent)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+    char buf[MAVLINK_MSG_ID_OPENHD_POWER_STATUS_LEN];
+    _mav_put_uint16_t(buf, 0, voltage_mv);
+    _mav_put_int16_t(buf, 2, current_ma);
+    _mav_put_uint8_t(buf, 4, charging_status);
+    _mav_put_uint8_t(buf, 5, battery_percent);
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_OPENHD_POWER_STATUS_LEN);
+#else
+    mavlink_openhd_power_status_t packet;
+    packet.voltage_mv = voltage_mv;
+    packet.current_ma = current_ma;
+    packet.charging_status = charging_status;
+    packet.battery_percent = battery_percent;
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_OPENHD_POWER_STATUS_LEN);
+#endif
+
+    msg->msgid = MAVLINK_MSG_ID_OPENHD_POWER_STATUS;
+#if MAVLINK_CRC_EXTRA
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_OPENHD_POWER_STATUS_MIN_LEN, MAVLINK_MSG_ID_OPENHD_POWER_STATUS_LEN, MAVLINK_MSG_ID_OPENHD_POWER_STATUS_CRC);
+#else
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_OPENHD_POWER_STATUS_MIN_LEN, MAVLINK_MSG_ID_OPENHD_POWER_STATUS_LEN, 0);
+#endif
+}
+
+/**
  * @brief Pack a openhd_power_status message on a channel
  * @param system_id ID of this system
  * @param component_id ID of this component (e.g. 200 for IMU)
@@ -93,7 +137,7 @@ static inline uint16_t mavlink_msg_openhd_power_status_pack(uint8_t system_id, u
  * @param battery_percent [%] Battery percentage (0-100)
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_openhd_power_status_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
+static inline uint16_t mavlink_msg_openhd_power_status_pack_chan(uint32_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
                                    uint16_t voltage_mv,int16_t current_ma,uint8_t charging_status,uint8_t battery_percent)
 {
@@ -127,7 +171,7 @@ static inline uint16_t mavlink_msg_openhd_power_status_pack_chan(uint8_t system_
  * @param msg The MAVLink message to compress the data into
  * @param openhd_power_status C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_openhd_power_status_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_power_status_t* openhd_power_status)
+static inline uint16_t mavlink_msg_openhd_power_status_encode(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_power_status_t* openhd_power_status)
 {
     return mavlink_msg_openhd_power_status_pack(system_id, component_id, msg, openhd_power_status->voltage_mv, openhd_power_status->current_ma, openhd_power_status->charging_status, openhd_power_status->battery_percent);
 }
@@ -141,9 +185,23 @@ static inline uint16_t mavlink_msg_openhd_power_status_encode(uint8_t system_id,
  * @param msg The MAVLink message to compress the data into
  * @param openhd_power_status C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_openhd_power_status_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_power_status_t* openhd_power_status)
+static inline uint16_t mavlink_msg_openhd_power_status_encode_chan(uint32_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_power_status_t* openhd_power_status)
 {
     return mavlink_msg_openhd_power_status_pack_chan(system_id, component_id, chan, msg, openhd_power_status->voltage_mv, openhd_power_status->current_ma, openhd_power_status->charging_status, openhd_power_status->battery_percent);
+}
+
+/**
+ * @brief Encode a openhd_power_status struct with provided status structure
+ *
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ * @param openhd_power_status C-struct to read the message contents from
+ */
+static inline uint16_t mavlink_msg_openhd_power_status_encode_status(uint32_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_openhd_power_status_t* openhd_power_status)
+{
+    return mavlink_msg_openhd_power_status_pack_status(system_id, component_id, _status, msg,  openhd_power_status->voltage_mv, openhd_power_status->current_ma, openhd_power_status->charging_status, openhd_power_status->battery_percent);
 }
 
 /**
@@ -194,7 +252,7 @@ static inline void mavlink_msg_openhd_power_status_send_struct(mavlink_channel_t
 
 #if MAVLINK_MSG_ID_OPENHD_POWER_STATUS_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
+  This variant of _send() can be used to save stack space by reusing
   memory from the receive buffer.  The caller provides a
   mavlink_message_t which is the size of a full mavlink message. This
   is usually the receive buffer for the channel, and allows a reply to an
@@ -280,9 +338,10 @@ static inline void mavlink_msg_openhd_power_status_decode(const mavlink_message_
     openhd_power_status->current_ma = mavlink_msg_openhd_power_status_get_current_ma(msg);
     openhd_power_status->charging_status = mavlink_msg_openhd_power_status_get_charging_status(msg);
     openhd_power_status->battery_percent = mavlink_msg_openhd_power_status_get_battery_percent(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_OPENHD_POWER_STATUS_LEN? msg->len : MAVLINK_MSG_ID_OPENHD_POWER_STATUS_LEN;
-        memset(openhd_power_status, 0, MAVLINK_MSG_ID_OPENHD_POWER_STATUS_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_OPENHD_POWER_STATUS_LEN ? msg->len : MAVLINK_MSG_ID_OPENHD_POWER_STATUS_LEN;
+    memset(openhd_power_status, 0, MAVLINK_MSG_ID_OPENHD_POWER_STATUS_LEN);
     memcpy(openhd_power_status, _MAV_PAYLOAD(msg), len);
 #endif
 }

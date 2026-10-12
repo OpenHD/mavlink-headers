@@ -1,6 +1,8 @@
 #pragma once
 // MESSAGE OPENHD_MICROHARD_STATUS PACKING
 
+#include <stdint.h>
+
 #define MAVLINK_MSG_ID_OPENHD_MICROHARD_STATUS 1229
 
 
@@ -68,7 +70,7 @@ typedef struct __mavlink_openhd_microhard_status_t {
  * @param snr  SNR
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_openhd_microhard_status_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
+static inline uint16_t mavlink_msg_openhd_microhard_status_pack(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg,
                                uint8_t enabled, int8_t rssi, uint8_t tx_power, uint8_t bandwidth, uint32_t frequency, int8_t noise, uint8_t snr)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -100,6 +102,57 @@ static inline uint16_t mavlink_msg_openhd_microhard_status_pack(uint8_t system_i
 }
 
 /**
+ * @brief Pack a openhd_microhard_status message
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ *
+ * @param enabled  Enabled status
+ * @param rssi [dBm] RSSI
+ * @param tx_power  TX Power
+ * @param bandwidth  Bandwidth
+ * @param frequency [Hz] Frequency
+ * @param noise  Noise
+ * @param snr  SNR
+ * @return length of the message in bytes (excluding serial stream start sign)
+ */
+static inline uint16_t mavlink_msg_openhd_microhard_status_pack_status(uint32_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
+                               uint8_t enabled, int8_t rssi, uint8_t tx_power, uint8_t bandwidth, uint32_t frequency, int8_t noise, uint8_t snr)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+    char buf[MAVLINK_MSG_ID_OPENHD_MICROHARD_STATUS_LEN];
+    _mav_put_uint32_t(buf, 0, frequency);
+    _mav_put_uint8_t(buf, 4, enabled);
+    _mav_put_int8_t(buf, 5, rssi);
+    _mav_put_uint8_t(buf, 6, tx_power);
+    _mav_put_uint8_t(buf, 7, bandwidth);
+    _mav_put_int8_t(buf, 8, noise);
+    _mav_put_uint8_t(buf, 9, snr);
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_OPENHD_MICROHARD_STATUS_LEN);
+#else
+    mavlink_openhd_microhard_status_t packet;
+    packet.frequency = frequency;
+    packet.enabled = enabled;
+    packet.rssi = rssi;
+    packet.tx_power = tx_power;
+    packet.bandwidth = bandwidth;
+    packet.noise = noise;
+    packet.snr = snr;
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_OPENHD_MICROHARD_STATUS_LEN);
+#endif
+
+    msg->msgid = MAVLINK_MSG_ID_OPENHD_MICROHARD_STATUS;
+#if MAVLINK_CRC_EXTRA
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_OPENHD_MICROHARD_STATUS_MIN_LEN, MAVLINK_MSG_ID_OPENHD_MICROHARD_STATUS_LEN, MAVLINK_MSG_ID_OPENHD_MICROHARD_STATUS_CRC);
+#else
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_OPENHD_MICROHARD_STATUS_MIN_LEN, MAVLINK_MSG_ID_OPENHD_MICROHARD_STATUS_LEN, 0);
+#endif
+}
+
+/**
  * @brief Pack a openhd_microhard_status message on a channel
  * @param system_id ID of this system
  * @param component_id ID of this component (e.g. 200 for IMU)
@@ -114,7 +167,7 @@ static inline uint16_t mavlink_msg_openhd_microhard_status_pack(uint8_t system_i
  * @param snr  SNR
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_openhd_microhard_status_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
+static inline uint16_t mavlink_msg_openhd_microhard_status_pack_chan(uint32_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
                                    uint8_t enabled,int8_t rssi,uint8_t tx_power,uint8_t bandwidth,uint32_t frequency,int8_t noise,uint8_t snr)
 {
@@ -154,7 +207,7 @@ static inline uint16_t mavlink_msg_openhd_microhard_status_pack_chan(uint8_t sys
  * @param msg The MAVLink message to compress the data into
  * @param openhd_microhard_status C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_openhd_microhard_status_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_microhard_status_t* openhd_microhard_status)
+static inline uint16_t mavlink_msg_openhd_microhard_status_encode(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_microhard_status_t* openhd_microhard_status)
 {
     return mavlink_msg_openhd_microhard_status_pack(system_id, component_id, msg, openhd_microhard_status->enabled, openhd_microhard_status->rssi, openhd_microhard_status->tx_power, openhd_microhard_status->bandwidth, openhd_microhard_status->frequency, openhd_microhard_status->noise, openhd_microhard_status->snr);
 }
@@ -168,9 +221,23 @@ static inline uint16_t mavlink_msg_openhd_microhard_status_encode(uint8_t system
  * @param msg The MAVLink message to compress the data into
  * @param openhd_microhard_status C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_openhd_microhard_status_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_microhard_status_t* openhd_microhard_status)
+static inline uint16_t mavlink_msg_openhd_microhard_status_encode_chan(uint32_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_microhard_status_t* openhd_microhard_status)
 {
     return mavlink_msg_openhd_microhard_status_pack_chan(system_id, component_id, chan, msg, openhd_microhard_status->enabled, openhd_microhard_status->rssi, openhd_microhard_status->tx_power, openhd_microhard_status->bandwidth, openhd_microhard_status->frequency, openhd_microhard_status->noise, openhd_microhard_status->snr);
+}
+
+/**
+ * @brief Encode a openhd_microhard_status struct with provided status structure
+ *
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ * @param openhd_microhard_status C-struct to read the message contents from
+ */
+static inline uint16_t mavlink_msg_openhd_microhard_status_encode_status(uint32_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_openhd_microhard_status_t* openhd_microhard_status)
+{
+    return mavlink_msg_openhd_microhard_status_pack_status(system_id, component_id, _status, msg,  openhd_microhard_status->enabled, openhd_microhard_status->rssi, openhd_microhard_status->tx_power, openhd_microhard_status->bandwidth, openhd_microhard_status->frequency, openhd_microhard_status->noise, openhd_microhard_status->snr);
 }
 
 /**
@@ -230,7 +297,7 @@ static inline void mavlink_msg_openhd_microhard_status_send_struct(mavlink_chann
 
 #if MAVLINK_MSG_ID_OPENHD_MICROHARD_STATUS_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
+  This variant of _send() can be used to save stack space by reusing
   memory from the receive buffer.  The caller provides a
   mavlink_message_t which is the size of a full mavlink message. This
   is usually the receive buffer for the channel, and allows a reply to an
@@ -355,9 +422,10 @@ static inline void mavlink_msg_openhd_microhard_status_decode(const mavlink_mess
     openhd_microhard_status->bandwidth = mavlink_msg_openhd_microhard_status_get_bandwidth(msg);
     openhd_microhard_status->noise = mavlink_msg_openhd_microhard_status_get_noise(msg);
     openhd_microhard_status->snr = mavlink_msg_openhd_microhard_status_get_snr(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_OPENHD_MICROHARD_STATUS_LEN? msg->len : MAVLINK_MSG_ID_OPENHD_MICROHARD_STATUS_LEN;
-        memset(openhd_microhard_status, 0, MAVLINK_MSG_ID_OPENHD_MICROHARD_STATUS_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_OPENHD_MICROHARD_STATUS_LEN ? msg->len : MAVLINK_MSG_ID_OPENHD_MICROHARD_STATUS_LEN;
+    memset(openhd_microhard_status, 0, MAVLINK_MSG_ID_OPENHD_MICROHARD_STATUS_LEN);
     memcpy(openhd_microhard_status, _MAV_PAYLOAD(msg), len);
 #endif
 }

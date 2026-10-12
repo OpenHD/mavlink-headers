@@ -1,6 +1,8 @@
 #pragma once
 // MESSAGE CHANGE_OPERATOR_CONTROL_ACK PACKING
 
+#include <stdint.h>
+
 #define MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK 6
 
 
@@ -52,7 +54,7 @@ typedef struct __mavlink_change_operator_control_ack_t {
  * @param ack  0: ACK, 1: NACK: Wrong passkey, 2: NACK: Unsupported passkey encryption method, 3: NACK: Already under control
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_change_operator_control_ack_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
+static inline uint16_t mavlink_msg_change_operator_control_ack_pack(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg,
                                uint8_t gcs_system_id, uint8_t control_request, uint8_t ack)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -76,6 +78,45 @@ static inline uint16_t mavlink_msg_change_operator_control_ack_pack(uint8_t syst
 }
 
 /**
+ * @brief Pack a change_operator_control_ack message
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ *
+ * @param gcs_system_id  ID of the GCS this message 
+ * @param control_request  0: request control of this MAV, 1: Release control of this MAV
+ * @param ack  0: ACK, 1: NACK: Wrong passkey, 2: NACK: Unsupported passkey encryption method, 3: NACK: Already under control
+ * @return length of the message in bytes (excluding serial stream start sign)
+ */
+static inline uint16_t mavlink_msg_change_operator_control_ack_pack_status(uint32_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
+                               uint8_t gcs_system_id, uint8_t control_request, uint8_t ack)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+    char buf[MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK_LEN];
+    _mav_put_uint8_t(buf, 0, gcs_system_id);
+    _mav_put_uint8_t(buf, 1, control_request);
+    _mav_put_uint8_t(buf, 2, ack);
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK_LEN);
+#else
+    mavlink_change_operator_control_ack_t packet;
+    packet.gcs_system_id = gcs_system_id;
+    packet.control_request = control_request;
+    packet.ack = ack;
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK_LEN);
+#endif
+
+    msg->msgid = MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK;
+#if MAVLINK_CRC_EXTRA
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK_MIN_LEN, MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK_LEN, MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK_CRC);
+#else
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK_MIN_LEN, MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK_LEN, 0);
+#endif
+}
+
+/**
  * @brief Pack a change_operator_control_ack message on a channel
  * @param system_id ID of this system
  * @param component_id ID of this component (e.g. 200 for IMU)
@@ -86,7 +127,7 @@ static inline uint16_t mavlink_msg_change_operator_control_ack_pack(uint8_t syst
  * @param ack  0: ACK, 1: NACK: Wrong passkey, 2: NACK: Unsupported passkey encryption method, 3: NACK: Already under control
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_change_operator_control_ack_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
+static inline uint16_t mavlink_msg_change_operator_control_ack_pack_chan(uint32_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
                                    uint8_t gcs_system_id,uint8_t control_request,uint8_t ack)
 {
@@ -118,7 +159,7 @@ static inline uint16_t mavlink_msg_change_operator_control_ack_pack_chan(uint8_t
  * @param msg The MAVLink message to compress the data into
  * @param change_operator_control_ack C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_change_operator_control_ack_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_change_operator_control_ack_t* change_operator_control_ack)
+static inline uint16_t mavlink_msg_change_operator_control_ack_encode(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_change_operator_control_ack_t* change_operator_control_ack)
 {
     return mavlink_msg_change_operator_control_ack_pack(system_id, component_id, msg, change_operator_control_ack->gcs_system_id, change_operator_control_ack->control_request, change_operator_control_ack->ack);
 }
@@ -132,9 +173,23 @@ static inline uint16_t mavlink_msg_change_operator_control_ack_encode(uint8_t sy
  * @param msg The MAVLink message to compress the data into
  * @param change_operator_control_ack C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_change_operator_control_ack_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_change_operator_control_ack_t* change_operator_control_ack)
+static inline uint16_t mavlink_msg_change_operator_control_ack_encode_chan(uint32_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_change_operator_control_ack_t* change_operator_control_ack)
 {
     return mavlink_msg_change_operator_control_ack_pack_chan(system_id, component_id, chan, msg, change_operator_control_ack->gcs_system_id, change_operator_control_ack->control_request, change_operator_control_ack->ack);
+}
+
+/**
+ * @brief Encode a change_operator_control_ack struct with provided status structure
+ *
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ * @param change_operator_control_ack C-struct to read the message contents from
+ */
+static inline uint16_t mavlink_msg_change_operator_control_ack_encode_status(uint32_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_change_operator_control_ack_t* change_operator_control_ack)
+{
+    return mavlink_msg_change_operator_control_ack_pack_status(system_id, component_id, _status, msg,  change_operator_control_ack->gcs_system_id, change_operator_control_ack->control_request, change_operator_control_ack->ack);
 }
 
 /**
@@ -182,7 +237,7 @@ static inline void mavlink_msg_change_operator_control_ack_send_struct(mavlink_c
 
 #if MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
+  This variant of _send() can be used to save stack space by reusing
   memory from the receive buffer.  The caller provides a
   mavlink_message_t which is the size of a full mavlink message. This
   is usually the receive buffer for the channel, and allows a reply to an
@@ -255,9 +310,10 @@ static inline void mavlink_msg_change_operator_control_ack_decode(const mavlink_
     change_operator_control_ack->gcs_system_id = mavlink_msg_change_operator_control_ack_get_gcs_system_id(msg);
     change_operator_control_ack->control_request = mavlink_msg_change_operator_control_ack_get_control_request(msg);
     change_operator_control_ack->ack = mavlink_msg_change_operator_control_ack_get_ack(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK_LEN? msg->len : MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK_LEN;
-        memset(change_operator_control_ack, 0, MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK_LEN ? msg->len : MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK_LEN;
+    memset(change_operator_control_ack, 0, MAVLINK_MSG_ID_CHANGE_OPERATOR_CONTROL_ACK_LEN);
     memcpy(change_operator_control_ack, _MAV_PAYLOAD(msg), len);
 #endif
 }

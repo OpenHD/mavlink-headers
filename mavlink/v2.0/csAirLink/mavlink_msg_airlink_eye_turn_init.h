@@ -1,6 +1,8 @@
 #pragma once
 // MESSAGE AIRLINK_EYE_TURN_INIT PACKING
 
+#include <stdint.h>
+
 #define MAVLINK_MSG_ID_AIRLINK_EYE_TURN_INIT 52005
 
 
@@ -23,14 +25,14 @@ typedef struct __mavlink_airlink_eye_turn_init_t {
     52005, \
     "AIRLINK_EYE_TURN_INIT", \
     1, \
-    {  { "resp_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 0, 0 }, \
+    {  { "resp_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 0, offsetof(mavlink_airlink_eye_turn_init_t, resp_type) }, \
          } \
 }
 #else
 #define MAVLINK_MESSAGE_INFO_AIRLINK_EYE_TURN_INIT { \
     "AIRLINK_EYE_TURN_INIT", \
     1, \
-    {  { "resp_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 0, 0 }, \
+    {  { "resp_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 0, offsetof(mavlink_airlink_eye_turn_init_t, resp_type) }, \
          } \
 }
 #endif
@@ -44,7 +46,7 @@ typedef struct __mavlink_airlink_eye_turn_init_t {
  * @param resp_type  Turn init type
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_airlink_eye_turn_init_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
+static inline uint16_t mavlink_msg_airlink_eye_turn_init_pack(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg,
                                uint8_t resp_type)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -64,6 +66,39 @@ static inline uint16_t mavlink_msg_airlink_eye_turn_init_pack(uint8_t system_id,
 }
 
 /**
+ * @brief Pack a airlink_eye_turn_init message
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ *
+ * @param resp_type  Turn init type
+ * @return length of the message in bytes (excluding serial stream start sign)
+ */
+static inline uint16_t mavlink_msg_airlink_eye_turn_init_pack_status(uint32_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
+                               uint8_t resp_type)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+    char buf[MAVLINK_MSG_ID_AIRLINK_EYE_TURN_INIT_LEN];
+    _mav_put_uint8_t(buf, 0, resp_type);
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_AIRLINK_EYE_TURN_INIT_LEN);
+#else
+    mavlink_airlink_eye_turn_init_t packet;
+    packet.resp_type = resp_type;
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_AIRLINK_EYE_TURN_INIT_LEN);
+#endif
+
+    msg->msgid = MAVLINK_MSG_ID_AIRLINK_EYE_TURN_INIT;
+#if MAVLINK_CRC_EXTRA
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_AIRLINK_EYE_TURN_INIT_MIN_LEN, MAVLINK_MSG_ID_AIRLINK_EYE_TURN_INIT_LEN, MAVLINK_MSG_ID_AIRLINK_EYE_TURN_INIT_CRC);
+#else
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_AIRLINK_EYE_TURN_INIT_MIN_LEN, MAVLINK_MSG_ID_AIRLINK_EYE_TURN_INIT_LEN, 0);
+#endif
+}
+
+/**
  * @brief Pack a airlink_eye_turn_init message on a channel
  * @param system_id ID of this system
  * @param component_id ID of this component (e.g. 200 for IMU)
@@ -72,7 +107,7 @@ static inline uint16_t mavlink_msg_airlink_eye_turn_init_pack(uint8_t system_id,
  * @param resp_type  Turn init type
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_airlink_eye_turn_init_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
+static inline uint16_t mavlink_msg_airlink_eye_turn_init_pack_chan(uint32_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
                                    uint8_t resp_type)
 {
@@ -100,7 +135,7 @@ static inline uint16_t mavlink_msg_airlink_eye_turn_init_pack_chan(uint8_t syste
  * @param msg The MAVLink message to compress the data into
  * @param airlink_eye_turn_init C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_airlink_eye_turn_init_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_airlink_eye_turn_init_t* airlink_eye_turn_init)
+static inline uint16_t mavlink_msg_airlink_eye_turn_init_encode(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_airlink_eye_turn_init_t* airlink_eye_turn_init)
 {
     return mavlink_msg_airlink_eye_turn_init_pack(system_id, component_id, msg, airlink_eye_turn_init->resp_type);
 }
@@ -114,9 +149,23 @@ static inline uint16_t mavlink_msg_airlink_eye_turn_init_encode(uint8_t system_i
  * @param msg The MAVLink message to compress the data into
  * @param airlink_eye_turn_init C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_airlink_eye_turn_init_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_airlink_eye_turn_init_t* airlink_eye_turn_init)
+static inline uint16_t mavlink_msg_airlink_eye_turn_init_encode_chan(uint32_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_airlink_eye_turn_init_t* airlink_eye_turn_init)
 {
     return mavlink_msg_airlink_eye_turn_init_pack_chan(system_id, component_id, chan, msg, airlink_eye_turn_init->resp_type);
+}
+
+/**
+ * @brief Encode a airlink_eye_turn_init struct with provided status structure
+ *
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ * @param airlink_eye_turn_init C-struct to read the message contents from
+ */
+static inline uint16_t mavlink_msg_airlink_eye_turn_init_encode_status(uint32_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_airlink_eye_turn_init_t* airlink_eye_turn_init)
+{
+    return mavlink_msg_airlink_eye_turn_init_pack_status(system_id, component_id, _status, msg,  airlink_eye_turn_init->resp_type);
 }
 
 /**
@@ -158,7 +207,7 @@ static inline void mavlink_msg_airlink_eye_turn_init_send_struct(mavlink_channel
 
 #if MAVLINK_MSG_ID_AIRLINK_EYE_TURN_INIT_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
+  This variant of _send() can be used to save stack space by reusing
   memory from the receive buffer.  The caller provides a
   mavlink_message_t which is the size of a full mavlink message. This
   is usually the receive buffer for the channel, and allows a reply to an
@@ -205,9 +254,10 @@ static inline void mavlink_msg_airlink_eye_turn_init_decode(const mavlink_messag
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
     airlink_eye_turn_init->resp_type = mavlink_msg_airlink_eye_turn_init_get_resp_type(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_AIRLINK_EYE_TURN_INIT_LEN? msg->len : MAVLINK_MSG_ID_AIRLINK_EYE_TURN_INIT_LEN;
-        memset(airlink_eye_turn_init, 0, MAVLINK_MSG_ID_AIRLINK_EYE_TURN_INIT_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_AIRLINK_EYE_TURN_INIT_LEN ? msg->len : MAVLINK_MSG_ID_AIRLINK_EYE_TURN_INIT_LEN;
+    memset(airlink_eye_turn_init, 0, MAVLINK_MSG_ID_AIRLINK_EYE_TURN_INIT_LEN);
     memcpy(airlink_eye_turn_init, _MAV_PAYLOAD(msg), len);
 #endif
 }

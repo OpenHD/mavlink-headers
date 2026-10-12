@@ -1,6 +1,8 @@
 #pragma once
 // MESSAGE OPENHD_SYS_STATUS1 PACKING
 
+#include <stdint.h>
+
 #define MAVLINK_MSG_ID_OPENHD_SYS_STATUS1 1226
 
 
@@ -72,7 +74,7 @@ typedef struct __mavlink_openhd_sys_status1_t {
  * @param dummy2  future use
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_openhd_sys_status1_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
+static inline uint16_t mavlink_msg_openhd_sys_status1_pack(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg,
                                uint8_t platform_type, uint8_t external_devices_count, uint8_t wifi_hotspot_state, uint16_t wifi_hotspot_frequency, uint8_t ethernet_hotspot_state, uint8_t dummy0, int32_t dummy1, int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -106,6 +108,60 @@ static inline uint16_t mavlink_msg_openhd_sys_status1_pack(uint8_t system_id, ui
 }
 
 /**
+ * @brief Pack a openhd_sys_status1 message
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ *
+ * @param platform_type  platform type, as defined in openhd core
+ * @param external_devices_count  N of connected external devices
+ * @param wifi_hotspot_state  0 - not available, 1 - off, 2 - on
+ * @param wifi_hotspot_frequency  Frequency of the wifi hotspot.
+ * @param ethernet_hotspot_state   0 - not managed by openhd, 1 - dhcpcd client, 2 dhcpcd server
+ * @param dummy0  future use
+ * @param dummy1  future use
+ * @param dummy2  future use
+ * @return length of the message in bytes (excluding serial stream start sign)
+ */
+static inline uint16_t mavlink_msg_openhd_sys_status1_pack_status(uint32_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
+                               uint8_t platform_type, uint8_t external_devices_count, uint8_t wifi_hotspot_state, uint16_t wifi_hotspot_frequency, uint8_t ethernet_hotspot_state, uint8_t dummy0, int32_t dummy1, int32_t dummy2)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+    char buf[MAVLINK_MSG_ID_OPENHD_SYS_STATUS1_LEN];
+    _mav_put_int32_t(buf, 0, dummy1);
+    _mav_put_int32_t(buf, 4, dummy2);
+    _mav_put_uint16_t(buf, 8, wifi_hotspot_frequency);
+    _mav_put_uint8_t(buf, 10, platform_type);
+    _mav_put_uint8_t(buf, 11, external_devices_count);
+    _mav_put_uint8_t(buf, 12, wifi_hotspot_state);
+    _mav_put_uint8_t(buf, 13, ethernet_hotspot_state);
+    _mav_put_uint8_t(buf, 14, dummy0);
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_OPENHD_SYS_STATUS1_LEN);
+#else
+    mavlink_openhd_sys_status1_t packet;
+    packet.dummy1 = dummy1;
+    packet.dummy2 = dummy2;
+    packet.wifi_hotspot_frequency = wifi_hotspot_frequency;
+    packet.platform_type = platform_type;
+    packet.external_devices_count = external_devices_count;
+    packet.wifi_hotspot_state = wifi_hotspot_state;
+    packet.ethernet_hotspot_state = ethernet_hotspot_state;
+    packet.dummy0 = dummy0;
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_OPENHD_SYS_STATUS1_LEN);
+#endif
+
+    msg->msgid = MAVLINK_MSG_ID_OPENHD_SYS_STATUS1;
+#if MAVLINK_CRC_EXTRA
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_OPENHD_SYS_STATUS1_MIN_LEN, MAVLINK_MSG_ID_OPENHD_SYS_STATUS1_LEN, MAVLINK_MSG_ID_OPENHD_SYS_STATUS1_CRC);
+#else
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_OPENHD_SYS_STATUS1_MIN_LEN, MAVLINK_MSG_ID_OPENHD_SYS_STATUS1_LEN, 0);
+#endif
+}
+
+/**
  * @brief Pack a openhd_sys_status1 message on a channel
  * @param system_id ID of this system
  * @param component_id ID of this component (e.g. 200 for IMU)
@@ -121,7 +177,7 @@ static inline uint16_t mavlink_msg_openhd_sys_status1_pack(uint8_t system_id, ui
  * @param dummy2  future use
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_openhd_sys_status1_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
+static inline uint16_t mavlink_msg_openhd_sys_status1_pack_chan(uint32_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
                                    uint8_t platform_type,uint8_t external_devices_count,uint8_t wifi_hotspot_state,uint16_t wifi_hotspot_frequency,uint8_t ethernet_hotspot_state,uint8_t dummy0,int32_t dummy1,int32_t dummy2)
 {
@@ -163,7 +219,7 @@ static inline uint16_t mavlink_msg_openhd_sys_status1_pack_chan(uint8_t system_i
  * @param msg The MAVLink message to compress the data into
  * @param openhd_sys_status1 C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_openhd_sys_status1_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_sys_status1_t* openhd_sys_status1)
+static inline uint16_t mavlink_msg_openhd_sys_status1_encode(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_sys_status1_t* openhd_sys_status1)
 {
     return mavlink_msg_openhd_sys_status1_pack(system_id, component_id, msg, openhd_sys_status1->platform_type, openhd_sys_status1->external_devices_count, openhd_sys_status1->wifi_hotspot_state, openhd_sys_status1->wifi_hotspot_frequency, openhd_sys_status1->ethernet_hotspot_state, openhd_sys_status1->dummy0, openhd_sys_status1->dummy1, openhd_sys_status1->dummy2);
 }
@@ -177,9 +233,23 @@ static inline uint16_t mavlink_msg_openhd_sys_status1_encode(uint8_t system_id, 
  * @param msg The MAVLink message to compress the data into
  * @param openhd_sys_status1 C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_openhd_sys_status1_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_sys_status1_t* openhd_sys_status1)
+static inline uint16_t mavlink_msg_openhd_sys_status1_encode_chan(uint32_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_sys_status1_t* openhd_sys_status1)
 {
     return mavlink_msg_openhd_sys_status1_pack_chan(system_id, component_id, chan, msg, openhd_sys_status1->platform_type, openhd_sys_status1->external_devices_count, openhd_sys_status1->wifi_hotspot_state, openhd_sys_status1->wifi_hotspot_frequency, openhd_sys_status1->ethernet_hotspot_state, openhd_sys_status1->dummy0, openhd_sys_status1->dummy1, openhd_sys_status1->dummy2);
+}
+
+/**
+ * @brief Encode a openhd_sys_status1 struct with provided status structure
+ *
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ * @param openhd_sys_status1 C-struct to read the message contents from
+ */
+static inline uint16_t mavlink_msg_openhd_sys_status1_encode_status(uint32_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_openhd_sys_status1_t* openhd_sys_status1)
+{
+    return mavlink_msg_openhd_sys_status1_pack_status(system_id, component_id, _status, msg,  openhd_sys_status1->platform_type, openhd_sys_status1->external_devices_count, openhd_sys_status1->wifi_hotspot_state, openhd_sys_status1->wifi_hotspot_frequency, openhd_sys_status1->ethernet_hotspot_state, openhd_sys_status1->dummy0, openhd_sys_status1->dummy1, openhd_sys_status1->dummy2);
 }
 
 /**
@@ -242,7 +312,7 @@ static inline void mavlink_msg_openhd_sys_status1_send_struct(mavlink_channel_t 
 
 #if MAVLINK_MSG_ID_OPENHD_SYS_STATUS1_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
+  This variant of _send() can be used to save stack space by reusing
   memory from the receive buffer.  The caller provides a
   mavlink_message_t which is the size of a full mavlink message. This
   is usually the receive buffer for the channel, and allows a reply to an
@@ -380,9 +450,10 @@ static inline void mavlink_msg_openhd_sys_status1_decode(const mavlink_message_t
     openhd_sys_status1->wifi_hotspot_state = mavlink_msg_openhd_sys_status1_get_wifi_hotspot_state(msg);
     openhd_sys_status1->ethernet_hotspot_state = mavlink_msg_openhd_sys_status1_get_ethernet_hotspot_state(msg);
     openhd_sys_status1->dummy0 = mavlink_msg_openhd_sys_status1_get_dummy0(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_OPENHD_SYS_STATUS1_LEN? msg->len : MAVLINK_MSG_ID_OPENHD_SYS_STATUS1_LEN;
-        memset(openhd_sys_status1, 0, MAVLINK_MSG_ID_OPENHD_SYS_STATUS1_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_OPENHD_SYS_STATUS1_LEN ? msg->len : MAVLINK_MSG_ID_OPENHD_SYS_STATUS1_LEN;
+    memset(openhd_sys_status1, 0, MAVLINK_MSG_ID_OPENHD_SYS_STATUS1_LEN);
     memcpy(openhd_sys_status1, _MAV_PAYLOAD(msg), len);
 #endif
 }

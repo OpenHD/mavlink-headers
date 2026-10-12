@@ -1,6 +1,8 @@
 #pragma once
 // MESSAGE LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET PACKING
 
+#include <stdint.h>
+
 #define MAVLINK_MSG_ID_LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET 89
 
 
@@ -68,7 +70,7 @@ typedef struct __mavlink_local_position_ned_system_global_offset_t {
  * @param yaw [rad] Yaw
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_local_position_ned_system_global_offset_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
+static inline uint16_t mavlink_msg_local_position_ned_system_global_offset_pack(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg,
                                uint32_t time_boot_ms, float x, float y, float z, float roll, float pitch, float yaw)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -100,6 +102,57 @@ static inline uint16_t mavlink_msg_local_position_ned_system_global_offset_pack(
 }
 
 /**
+ * @brief Pack a local_position_ned_system_global_offset message
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ *
+ * @param time_boot_ms [ms] Timestamp (time since system boot).
+ * @param x [m] X Position
+ * @param y [m] Y Position
+ * @param z [m] Z Position
+ * @param roll [rad] Roll
+ * @param pitch [rad] Pitch
+ * @param yaw [rad] Yaw
+ * @return length of the message in bytes (excluding serial stream start sign)
+ */
+static inline uint16_t mavlink_msg_local_position_ned_system_global_offset_pack_status(uint32_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
+                               uint32_t time_boot_ms, float x, float y, float z, float roll, float pitch, float yaw)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+    char buf[MAVLINK_MSG_ID_LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET_LEN];
+    _mav_put_uint32_t(buf, 0, time_boot_ms);
+    _mav_put_float(buf, 4, x);
+    _mav_put_float(buf, 8, y);
+    _mav_put_float(buf, 12, z);
+    _mav_put_float(buf, 16, roll);
+    _mav_put_float(buf, 20, pitch);
+    _mav_put_float(buf, 24, yaw);
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET_LEN);
+#else
+    mavlink_local_position_ned_system_global_offset_t packet;
+    packet.time_boot_ms = time_boot_ms;
+    packet.x = x;
+    packet.y = y;
+    packet.z = z;
+    packet.roll = roll;
+    packet.pitch = pitch;
+    packet.yaw = yaw;
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET_LEN);
+#endif
+
+    msg->msgid = MAVLINK_MSG_ID_LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET;
+#if MAVLINK_CRC_EXTRA
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET_MIN_LEN, MAVLINK_MSG_ID_LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET_LEN, MAVLINK_MSG_ID_LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET_CRC);
+#else
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET_MIN_LEN, MAVLINK_MSG_ID_LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET_LEN, 0);
+#endif
+}
+
+/**
  * @brief Pack a local_position_ned_system_global_offset message on a channel
  * @param system_id ID of this system
  * @param component_id ID of this component (e.g. 200 for IMU)
@@ -114,7 +167,7 @@ static inline uint16_t mavlink_msg_local_position_ned_system_global_offset_pack(
  * @param yaw [rad] Yaw
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_local_position_ned_system_global_offset_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
+static inline uint16_t mavlink_msg_local_position_ned_system_global_offset_pack_chan(uint32_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
                                    uint32_t time_boot_ms,float x,float y,float z,float roll,float pitch,float yaw)
 {
@@ -154,7 +207,7 @@ static inline uint16_t mavlink_msg_local_position_ned_system_global_offset_pack_
  * @param msg The MAVLink message to compress the data into
  * @param local_position_ned_system_global_offset C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_local_position_ned_system_global_offset_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_local_position_ned_system_global_offset_t* local_position_ned_system_global_offset)
+static inline uint16_t mavlink_msg_local_position_ned_system_global_offset_encode(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_local_position_ned_system_global_offset_t* local_position_ned_system_global_offset)
 {
     return mavlink_msg_local_position_ned_system_global_offset_pack(system_id, component_id, msg, local_position_ned_system_global_offset->time_boot_ms, local_position_ned_system_global_offset->x, local_position_ned_system_global_offset->y, local_position_ned_system_global_offset->z, local_position_ned_system_global_offset->roll, local_position_ned_system_global_offset->pitch, local_position_ned_system_global_offset->yaw);
 }
@@ -168,9 +221,23 @@ static inline uint16_t mavlink_msg_local_position_ned_system_global_offset_encod
  * @param msg The MAVLink message to compress the data into
  * @param local_position_ned_system_global_offset C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_local_position_ned_system_global_offset_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_local_position_ned_system_global_offset_t* local_position_ned_system_global_offset)
+static inline uint16_t mavlink_msg_local_position_ned_system_global_offset_encode_chan(uint32_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_local_position_ned_system_global_offset_t* local_position_ned_system_global_offset)
 {
     return mavlink_msg_local_position_ned_system_global_offset_pack_chan(system_id, component_id, chan, msg, local_position_ned_system_global_offset->time_boot_ms, local_position_ned_system_global_offset->x, local_position_ned_system_global_offset->y, local_position_ned_system_global_offset->z, local_position_ned_system_global_offset->roll, local_position_ned_system_global_offset->pitch, local_position_ned_system_global_offset->yaw);
+}
+
+/**
+ * @brief Encode a local_position_ned_system_global_offset struct with provided status structure
+ *
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ * @param local_position_ned_system_global_offset C-struct to read the message contents from
+ */
+static inline uint16_t mavlink_msg_local_position_ned_system_global_offset_encode_status(uint32_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_local_position_ned_system_global_offset_t* local_position_ned_system_global_offset)
+{
+    return mavlink_msg_local_position_ned_system_global_offset_pack_status(system_id, component_id, _status, msg,  local_position_ned_system_global_offset->time_boot_ms, local_position_ned_system_global_offset->x, local_position_ned_system_global_offset->y, local_position_ned_system_global_offset->z, local_position_ned_system_global_offset->roll, local_position_ned_system_global_offset->pitch, local_position_ned_system_global_offset->yaw);
 }
 
 /**
@@ -230,7 +297,7 @@ static inline void mavlink_msg_local_position_ned_system_global_offset_send_stru
 
 #if MAVLINK_MSG_ID_LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
+  This variant of _send() can be used to save stack space by reusing
   memory from the receive buffer.  The caller provides a
   mavlink_message_t which is the size of a full mavlink message. This
   is usually the receive buffer for the channel, and allows a reply to an
@@ -355,9 +422,10 @@ static inline void mavlink_msg_local_position_ned_system_global_offset_decode(co
     local_position_ned_system_global_offset->roll = mavlink_msg_local_position_ned_system_global_offset_get_roll(msg);
     local_position_ned_system_global_offset->pitch = mavlink_msg_local_position_ned_system_global_offset_get_pitch(msg);
     local_position_ned_system_global_offset->yaw = mavlink_msg_local_position_ned_system_global_offset_get_yaw(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET_LEN? msg->len : MAVLINK_MSG_ID_LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET_LEN;
-        memset(local_position_ned_system_global_offset, 0, MAVLINK_MSG_ID_LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET_LEN ? msg->len : MAVLINK_MSG_ID_LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET_LEN;
+    memset(local_position_ned_system_global_offset, 0, MAVLINK_MSG_ID_LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET_LEN);
     memcpy(local_position_ned_system_global_offset, _MAV_PAYLOAD(msg), len);
 #endif
 }

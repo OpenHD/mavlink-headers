@@ -1,6 +1,8 @@
 #pragma once
 // MESSAGE CAMERA_IMAGE_CAPTURED PACKING
 
+#include <stdint.h>
+
 #define MAVLINK_MSG_ID_CAMERA_IMAGE_CAPTURED 263
 
 
@@ -85,7 +87,7 @@ typedef struct __mavlink_camera_image_captured_t {
  * @param file_url  URL of image taken. Either local storage or http://foo.jpg if camera provides an HTTP interface.
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_camera_image_captured_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
+static inline uint16_t mavlink_msg_camera_image_captured_pack(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg,
                                uint32_t time_boot_ms, uint64_t time_utc, uint8_t camera_id, int32_t lat, int32_t lon, int32_t alt, int32_t relative_alt, const float *q, int32_t image_index, int8_t capture_result, const char *file_url)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -123,6 +125,67 @@ static inline uint16_t mavlink_msg_camera_image_captured_pack(uint8_t system_id,
 }
 
 /**
+ * @brief Pack a camera_image_captured message
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ *
+ * @param time_boot_ms [ms] Timestamp (time since system boot).
+ * @param time_utc [us] Timestamp (time since UNIX epoch) in UTC. 0 for unknown.
+ * @param camera_id  Deprecated/unused. Component IDs are used to differentiate multiple cameras.
+ * @param lat [degE7] Latitude where image was taken
+ * @param lon [degE7] Longitude where capture was taken
+ * @param alt [mm] Altitude (MSL) where image was taken
+ * @param relative_alt [mm] Altitude above ground
+ * @param q  Quaternion of camera orientation (w, x, y, z order, zero-rotation is 1, 0, 0, 0)
+ * @param image_index  Zero based index of this image (i.e. a new image will have index CAMERA_CAPTURE_STATUS.image count -1)
+ * @param capture_result  Boolean indicating success (1) or failure (0) while capturing this image.
+ * @param file_url  URL of image taken. Either local storage or http://foo.jpg if camera provides an HTTP interface.
+ * @return length of the message in bytes (excluding serial stream start sign)
+ */
+static inline uint16_t mavlink_msg_camera_image_captured_pack_status(uint32_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
+                               uint32_t time_boot_ms, uint64_t time_utc, uint8_t camera_id, int32_t lat, int32_t lon, int32_t alt, int32_t relative_alt, const float *q, int32_t image_index, int8_t capture_result, const char *file_url)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+    char buf[MAVLINK_MSG_ID_CAMERA_IMAGE_CAPTURED_LEN];
+    _mav_put_uint64_t(buf, 0, time_utc);
+    _mav_put_uint32_t(buf, 8, time_boot_ms);
+    _mav_put_int32_t(buf, 12, lat);
+    _mav_put_int32_t(buf, 16, lon);
+    _mav_put_int32_t(buf, 20, alt);
+    _mav_put_int32_t(buf, 24, relative_alt);
+    _mav_put_int32_t(buf, 44, image_index);
+    _mav_put_uint8_t(buf, 48, camera_id);
+    _mav_put_int8_t(buf, 49, capture_result);
+    _mav_put_float_array(buf, 28, q, 4);
+    _mav_put_char_array(buf, 50, file_url, 205);
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_CAMERA_IMAGE_CAPTURED_LEN);
+#else
+    mavlink_camera_image_captured_t packet;
+    packet.time_utc = time_utc;
+    packet.time_boot_ms = time_boot_ms;
+    packet.lat = lat;
+    packet.lon = lon;
+    packet.alt = alt;
+    packet.relative_alt = relative_alt;
+    packet.image_index = image_index;
+    packet.camera_id = camera_id;
+    packet.capture_result = capture_result;
+    mav_array_memcpy(packet.q, q, sizeof(float)*4);
+    mav_array_memcpy(packet.file_url, file_url, sizeof(char)*205);
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_CAMERA_IMAGE_CAPTURED_LEN);
+#endif
+
+    msg->msgid = MAVLINK_MSG_ID_CAMERA_IMAGE_CAPTURED;
+#if MAVLINK_CRC_EXTRA
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_CAMERA_IMAGE_CAPTURED_MIN_LEN, MAVLINK_MSG_ID_CAMERA_IMAGE_CAPTURED_LEN, MAVLINK_MSG_ID_CAMERA_IMAGE_CAPTURED_CRC);
+#else
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_CAMERA_IMAGE_CAPTURED_MIN_LEN, MAVLINK_MSG_ID_CAMERA_IMAGE_CAPTURED_LEN, 0);
+#endif
+}
+
+/**
  * @brief Pack a camera_image_captured message on a channel
  * @param system_id ID of this system
  * @param component_id ID of this component (e.g. 200 for IMU)
@@ -141,7 +204,7 @@ static inline uint16_t mavlink_msg_camera_image_captured_pack(uint8_t system_id,
  * @param file_url  URL of image taken. Either local storage or http://foo.jpg if camera provides an HTTP interface.
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_camera_image_captured_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
+static inline uint16_t mavlink_msg_camera_image_captured_pack_chan(uint32_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
                                    uint32_t time_boot_ms,uint64_t time_utc,uint8_t camera_id,int32_t lat,int32_t lon,int32_t alt,int32_t relative_alt,const float *q,int32_t image_index,int8_t capture_result,const char *file_url)
 {
@@ -187,7 +250,7 @@ static inline uint16_t mavlink_msg_camera_image_captured_pack_chan(uint8_t syste
  * @param msg The MAVLink message to compress the data into
  * @param camera_image_captured C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_camera_image_captured_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_camera_image_captured_t* camera_image_captured)
+static inline uint16_t mavlink_msg_camera_image_captured_encode(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_camera_image_captured_t* camera_image_captured)
 {
     return mavlink_msg_camera_image_captured_pack(system_id, component_id, msg, camera_image_captured->time_boot_ms, camera_image_captured->time_utc, camera_image_captured->camera_id, camera_image_captured->lat, camera_image_captured->lon, camera_image_captured->alt, camera_image_captured->relative_alt, camera_image_captured->q, camera_image_captured->image_index, camera_image_captured->capture_result, camera_image_captured->file_url);
 }
@@ -201,9 +264,23 @@ static inline uint16_t mavlink_msg_camera_image_captured_encode(uint8_t system_i
  * @param msg The MAVLink message to compress the data into
  * @param camera_image_captured C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_camera_image_captured_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_camera_image_captured_t* camera_image_captured)
+static inline uint16_t mavlink_msg_camera_image_captured_encode_chan(uint32_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_camera_image_captured_t* camera_image_captured)
 {
     return mavlink_msg_camera_image_captured_pack_chan(system_id, component_id, chan, msg, camera_image_captured->time_boot_ms, camera_image_captured->time_utc, camera_image_captured->camera_id, camera_image_captured->lat, camera_image_captured->lon, camera_image_captured->alt, camera_image_captured->relative_alt, camera_image_captured->q, camera_image_captured->image_index, camera_image_captured->capture_result, camera_image_captured->file_url);
+}
+
+/**
+ * @brief Encode a camera_image_captured struct with provided status structure
+ *
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ * @param camera_image_captured C-struct to read the message contents from
+ */
+static inline uint16_t mavlink_msg_camera_image_captured_encode_status(uint32_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_camera_image_captured_t* camera_image_captured)
+{
+    return mavlink_msg_camera_image_captured_pack_status(system_id, component_id, _status, msg,  camera_image_captured->time_boot_ms, camera_image_captured->time_utc, camera_image_captured->camera_id, camera_image_captured->lat, camera_image_captured->lon, camera_image_captured->alt, camera_image_captured->relative_alt, camera_image_captured->q, camera_image_captured->image_index, camera_image_captured->capture_result, camera_image_captured->file_url);
 }
 
 /**
@@ -273,7 +350,7 @@ static inline void mavlink_msg_camera_image_captured_send_struct(mavlink_channel
 
 #if MAVLINK_MSG_ID_CAMERA_IMAGE_CAPTURED_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
+  This variant of _send() can be used to save stack space by reusing
   memory from the receive buffer.  The caller provides a
   mavlink_message_t which is the size of a full mavlink message. This
   is usually the receive buffer for the channel, and allows a reply to an
@@ -448,9 +525,10 @@ static inline void mavlink_msg_camera_image_captured_decode(const mavlink_messag
     camera_image_captured->camera_id = mavlink_msg_camera_image_captured_get_camera_id(msg);
     camera_image_captured->capture_result = mavlink_msg_camera_image_captured_get_capture_result(msg);
     mavlink_msg_camera_image_captured_get_file_url(msg, camera_image_captured->file_url);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_CAMERA_IMAGE_CAPTURED_LEN? msg->len : MAVLINK_MSG_ID_CAMERA_IMAGE_CAPTURED_LEN;
-        memset(camera_image_captured, 0, MAVLINK_MSG_ID_CAMERA_IMAGE_CAPTURED_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_CAMERA_IMAGE_CAPTURED_LEN ? msg->len : MAVLINK_MSG_ID_CAMERA_IMAGE_CAPTURED_LEN;
+    memset(camera_image_captured, 0, MAVLINK_MSG_ID_CAMERA_IMAGE_CAPTURED_LEN);
     memcpy(camera_image_captured, _MAV_PAYLOAD(msg), len);
 #endif
 }

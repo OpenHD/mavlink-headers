@@ -1,6 +1,8 @@
 #pragma once
 // MESSAGE AHRS PACKING
 
+#include <stdint.h>
+
 #define MAVLINK_MSG_ID_AHRS 163
 
 
@@ -68,7 +70,7 @@ typedef struct __mavlink_ahrs_t {
  * @param error_yaw  Average error_yaw value.
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_ahrs_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
+static inline uint16_t mavlink_msg_ahrs_pack(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg,
                                float omegaIx, float omegaIy, float omegaIz, float accel_weight, float renorm_val, float error_rp, float error_yaw)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -100,6 +102,57 @@ static inline uint16_t mavlink_msg_ahrs_pack(uint8_t system_id, uint8_t componen
 }
 
 /**
+ * @brief Pack a ahrs message
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ *
+ * @param omegaIx [rad/s] X gyro drift estimate.
+ * @param omegaIy [rad/s] Y gyro drift estimate.
+ * @param omegaIz [rad/s] Z gyro drift estimate.
+ * @param accel_weight  Average accel_weight.
+ * @param renorm_val  Average renormalisation value.
+ * @param error_rp  Average error_roll_pitch value.
+ * @param error_yaw  Average error_yaw value.
+ * @return length of the message in bytes (excluding serial stream start sign)
+ */
+static inline uint16_t mavlink_msg_ahrs_pack_status(uint32_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
+                               float omegaIx, float omegaIy, float omegaIz, float accel_weight, float renorm_val, float error_rp, float error_yaw)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+    char buf[MAVLINK_MSG_ID_AHRS_LEN];
+    _mav_put_float(buf, 0, omegaIx);
+    _mav_put_float(buf, 4, omegaIy);
+    _mav_put_float(buf, 8, omegaIz);
+    _mav_put_float(buf, 12, accel_weight);
+    _mav_put_float(buf, 16, renorm_val);
+    _mav_put_float(buf, 20, error_rp);
+    _mav_put_float(buf, 24, error_yaw);
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_AHRS_LEN);
+#else
+    mavlink_ahrs_t packet;
+    packet.omegaIx = omegaIx;
+    packet.omegaIy = omegaIy;
+    packet.omegaIz = omegaIz;
+    packet.accel_weight = accel_weight;
+    packet.renorm_val = renorm_val;
+    packet.error_rp = error_rp;
+    packet.error_yaw = error_yaw;
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_AHRS_LEN);
+#endif
+
+    msg->msgid = MAVLINK_MSG_ID_AHRS;
+#if MAVLINK_CRC_EXTRA
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_AHRS_MIN_LEN, MAVLINK_MSG_ID_AHRS_LEN, MAVLINK_MSG_ID_AHRS_CRC);
+#else
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_AHRS_MIN_LEN, MAVLINK_MSG_ID_AHRS_LEN, 0);
+#endif
+}
+
+/**
  * @brief Pack a ahrs message on a channel
  * @param system_id ID of this system
  * @param component_id ID of this component (e.g. 200 for IMU)
@@ -114,7 +167,7 @@ static inline uint16_t mavlink_msg_ahrs_pack(uint8_t system_id, uint8_t componen
  * @param error_yaw  Average error_yaw value.
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_ahrs_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
+static inline uint16_t mavlink_msg_ahrs_pack_chan(uint32_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
                                    float omegaIx,float omegaIy,float omegaIz,float accel_weight,float renorm_val,float error_rp,float error_yaw)
 {
@@ -154,7 +207,7 @@ static inline uint16_t mavlink_msg_ahrs_pack_chan(uint8_t system_id, uint8_t com
  * @param msg The MAVLink message to compress the data into
  * @param ahrs C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_ahrs_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_ahrs_t* ahrs)
+static inline uint16_t mavlink_msg_ahrs_encode(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_ahrs_t* ahrs)
 {
     return mavlink_msg_ahrs_pack(system_id, component_id, msg, ahrs->omegaIx, ahrs->omegaIy, ahrs->omegaIz, ahrs->accel_weight, ahrs->renorm_val, ahrs->error_rp, ahrs->error_yaw);
 }
@@ -168,9 +221,23 @@ static inline uint16_t mavlink_msg_ahrs_encode(uint8_t system_id, uint8_t compon
  * @param msg The MAVLink message to compress the data into
  * @param ahrs C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_ahrs_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_ahrs_t* ahrs)
+static inline uint16_t mavlink_msg_ahrs_encode_chan(uint32_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_ahrs_t* ahrs)
 {
     return mavlink_msg_ahrs_pack_chan(system_id, component_id, chan, msg, ahrs->omegaIx, ahrs->omegaIy, ahrs->omegaIz, ahrs->accel_weight, ahrs->renorm_val, ahrs->error_rp, ahrs->error_yaw);
+}
+
+/**
+ * @brief Encode a ahrs struct with provided status structure
+ *
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ * @param ahrs C-struct to read the message contents from
+ */
+static inline uint16_t mavlink_msg_ahrs_encode_status(uint32_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_ahrs_t* ahrs)
+{
+    return mavlink_msg_ahrs_pack_status(system_id, component_id, _status, msg,  ahrs->omegaIx, ahrs->omegaIy, ahrs->omegaIz, ahrs->accel_weight, ahrs->renorm_val, ahrs->error_rp, ahrs->error_yaw);
 }
 
 /**
@@ -230,7 +297,7 @@ static inline void mavlink_msg_ahrs_send_struct(mavlink_channel_t chan, const ma
 
 #if MAVLINK_MSG_ID_AHRS_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
+  This variant of _send() can be used to save stack space by reusing
   memory from the receive buffer.  The caller provides a
   mavlink_message_t which is the size of a full mavlink message. This
   is usually the receive buffer for the channel, and allows a reply to an
@@ -355,9 +422,10 @@ static inline void mavlink_msg_ahrs_decode(const mavlink_message_t* msg, mavlink
     ahrs->renorm_val = mavlink_msg_ahrs_get_renorm_val(msg);
     ahrs->error_rp = mavlink_msg_ahrs_get_error_rp(msg);
     ahrs->error_yaw = mavlink_msg_ahrs_get_error_yaw(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_AHRS_LEN? msg->len : MAVLINK_MSG_ID_AHRS_LEN;
-        memset(ahrs, 0, MAVLINK_MSG_ID_AHRS_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_AHRS_LEN ? msg->len : MAVLINK_MSG_ID_AHRS_LEN;
+    memset(ahrs, 0, MAVLINK_MSG_ID_AHRS_LEN);
     memcpy(ahrs, _MAV_PAYLOAD(msg), len);
 #endif
 }

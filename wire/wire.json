@@ -1,0 +1,5047 @@
+{
+  "0": {
+    "name": "HEARTBEAT",
+    "crc": 50,
+    "length": 9,
+    "minimumLength": 9,
+    "fields": {
+      "custom_mode": 0,
+      "type": 4,
+      "autopilot": 5,
+      "base_mode": 6,
+      "system_status": 7,
+      "mavlink_version": 8
+    }
+  },
+  "1": {
+    "name": "SYS_STATUS",
+    "crc": 124,
+    "length": 43,
+    "minimumLength": 31,
+    "fields": {
+      "onboard_control_sensors_present": 0,
+      "onboard_control_sensors_enabled": 4,
+      "onboard_control_sensors_health": 8,
+      "load": 12,
+      "voltage_battery": 14,
+      "current_battery": 16,
+      "drop_rate_comm": 18,
+      "errors_comm": 20,
+      "errors_count1": 22,
+      "errors_count2": 24,
+      "errors_count3": 26,
+      "errors_count4": 28,
+      "battery_remaining": 30,
+      "onboard_control_sensors_present_extended": 31,
+      "onboard_control_sensors_enabled_extended": 35,
+      "onboard_control_sensors_health_extended": 39
+    }
+  },
+  "2": {
+    "name": "SYSTEM_TIME",
+    "crc": 137,
+    "length": 12,
+    "minimumLength": 12,
+    "fields": {
+      "time_unix_usec": 0,
+      "time_boot_ms": 8
+    }
+  },
+  "4": {
+    "name": "PING",
+    "crc": 237,
+    "length": 14,
+    "minimumLength": 14,
+    "fields": {
+      "time_usec": 0,
+      "seq": 8,
+      "target_system": 12,
+      "target_component": 13
+    }
+  },
+  "5": {
+    "name": "CHANGE_OPERATOR_CONTROL",
+    "crc": 217,
+    "length": 28,
+    "minimumLength": 28,
+    "fields": {
+      "target_system": 0,
+      "control_request": 1,
+      "version": 2,
+      "passkey": 3
+    }
+  },
+  "6": {
+    "name": "CHANGE_OPERATOR_CONTROL_ACK",
+    "crc": 104,
+    "length": 3,
+    "minimumLength": 3,
+    "fields": {
+      "gcs_system_id": 0,
+      "control_request": 1,
+      "ack": 2
+    }
+  },
+  "7": {
+    "name": "AUTH_KEY",
+    "crc": 119,
+    "length": 32,
+    "minimumLength": 32,
+    "fields": {
+      "key": 0
+    }
+  },
+  "8": {
+    "name": "LINK_NODE_STATUS",
+    "crc": 117,
+    "length": 36,
+    "minimumLength": 36,
+    "fields": {
+      "timestamp": 0,
+      "tx_rate": 8,
+      "rx_rate": 12,
+      "messages_sent": 16,
+      "messages_received": 20,
+      "messages_lost": 24,
+      "rx_parse_err": 28,
+      "tx_overflows": 30,
+      "rx_overflows": 32,
+      "tx_buf": 34,
+      "rx_buf": 35
+    }
+  },
+  "11": {
+    "name": "SET_MODE",
+    "crc": 89,
+    "length": 6,
+    "minimumLength": 6,
+    "fields": {
+      "custom_mode": 0,
+      "target_system": 4,
+      "base_mode": 5
+    }
+  },
+  "20": {
+    "name": "PARAM_REQUEST_READ",
+    "crc": 214,
+    "length": 20,
+    "minimumLength": 20,
+    "fields": {
+      "param_index": 0,
+      "target_system": 2,
+      "target_component": 3,
+      "param_id": 4
+    }
+  },
+  "21": {
+    "name": "PARAM_REQUEST_LIST",
+    "crc": 159,
+    "length": 2,
+    "minimumLength": 2,
+    "fields": {
+      "target_system": 0,
+      "target_component": 1
+    }
+  },
+  "22": {
+    "name": "PARAM_VALUE",
+    "crc": 220,
+    "length": 25,
+    "minimumLength": 25,
+    "fields": {
+      "param_value": 0,
+      "param_count": 4,
+      "param_index": 6,
+      "param_id": 8,
+      "param_type": 24
+    }
+  },
+  "23": {
+    "name": "PARAM_SET",
+    "crc": 168,
+    "length": 23,
+    "minimumLength": 23,
+    "fields": {
+      "param_value": 0,
+      "target_system": 4,
+      "target_component": 5,
+      "param_id": 6,
+      "param_type": 22
+    }
+  },
+  "24": {
+    "name": "GPS_RAW_INT",
+    "crc": 24,
+    "length": 52,
+    "minimumLength": 30,
+    "fields": {
+      "time_usec": 0,
+      "lat": 8,
+      "lon": 12,
+      "alt": 16,
+      "eph": 20,
+      "epv": 22,
+      "vel": 24,
+      "cog": 26,
+      "fix_type": 28,
+      "satellites_visible": 29,
+      "alt_ellipsoid": 30,
+      "h_acc": 34,
+      "v_acc": 38,
+      "vel_acc": 42,
+      "hdg_acc": 46,
+      "yaw": 50
+    }
+  },
+  "25": {
+    "name": "GPS_STATUS",
+    "crc": 23,
+    "length": 101,
+    "minimumLength": 101,
+    "fields": {
+      "satellites_visible": 0,
+      "satellite_prn": 1,
+      "satellite_used": 21,
+      "satellite_elevation": 41,
+      "satellite_azimuth": 61,
+      "satellite_snr": 81
+    }
+  },
+  "26": {
+    "name": "SCALED_IMU",
+    "crc": 170,
+    "length": 24,
+    "minimumLength": 22,
+    "fields": {
+      "time_boot_ms": 0,
+      "xacc": 4,
+      "yacc": 6,
+      "zacc": 8,
+      "xgyro": 10,
+      "ygyro": 12,
+      "zgyro": 14,
+      "xmag": 16,
+      "ymag": 18,
+      "zmag": 20,
+      "temperature": 22
+    }
+  },
+  "27": {
+    "name": "RAW_IMU",
+    "crc": 144,
+    "length": 29,
+    "minimumLength": 26,
+    "fields": {
+      "time_usec": 0,
+      "xacc": 8,
+      "yacc": 10,
+      "zacc": 12,
+      "xgyro": 14,
+      "ygyro": 16,
+      "zgyro": 18,
+      "xmag": 20,
+      "ymag": 22,
+      "zmag": 24,
+      "id": 26,
+      "temperature": 27
+    }
+  },
+  "28": {
+    "name": "RAW_PRESSURE",
+    "crc": 67,
+    "length": 16,
+    "minimumLength": 16,
+    "fields": {
+      "time_usec": 0,
+      "press_abs": 8,
+      "press_diff1": 10,
+      "press_diff2": 12,
+      "temperature": 14
+    }
+  },
+  "29": {
+    "name": "SCALED_PRESSURE",
+    "crc": 115,
+    "length": 16,
+    "minimumLength": 14,
+    "fields": {
+      "time_boot_ms": 0,
+      "press_abs": 4,
+      "press_diff": 8,
+      "temperature": 12,
+      "temperature_press_diff": 14
+    }
+  },
+  "30": {
+    "name": "ATTITUDE",
+    "crc": 39,
+    "length": 28,
+    "minimumLength": 28,
+    "fields": {
+      "time_boot_ms": 0,
+      "roll": 4,
+      "pitch": 8,
+      "yaw": 12,
+      "rollspeed": 16,
+      "pitchspeed": 20,
+      "yawspeed": 24
+    }
+  },
+  "31": {
+    "name": "ATTITUDE_QUATERNION",
+    "crc": 246,
+    "length": 48,
+    "minimumLength": 32,
+    "fields": {
+      "time_boot_ms": 0,
+      "q1": 4,
+      "q2": 8,
+      "q3": 12,
+      "q4": 16,
+      "rollspeed": 20,
+      "pitchspeed": 24,
+      "yawspeed": 28,
+      "repr_offset_q": 32
+    }
+  },
+  "32": {
+    "name": "LOCAL_POSITION_NED",
+    "crc": 185,
+    "length": 28,
+    "minimumLength": 28,
+    "fields": {
+      "time_boot_ms": 0,
+      "x": 4,
+      "y": 8,
+      "z": 12,
+      "vx": 16,
+      "vy": 20,
+      "vz": 24
+    }
+  },
+  "33": {
+    "name": "GLOBAL_POSITION_INT",
+    "crc": 104,
+    "length": 28,
+    "minimumLength": 28,
+    "fields": {
+      "time_boot_ms": 0,
+      "lat": 4,
+      "lon": 8,
+      "alt": 12,
+      "relative_alt": 16,
+      "vx": 20,
+      "vy": 22,
+      "vz": 24,
+      "hdg": 26
+    }
+  },
+  "34": {
+    "name": "RC_CHANNELS_SCALED",
+    "crc": 237,
+    "length": 22,
+    "minimumLength": 22,
+    "fields": {
+      "time_boot_ms": 0,
+      "chan1_scaled": 4,
+      "chan2_scaled": 6,
+      "chan3_scaled": 8,
+      "chan4_scaled": 10,
+      "chan5_scaled": 12,
+      "chan6_scaled": 14,
+      "chan7_scaled": 16,
+      "chan8_scaled": 18,
+      "port": 20,
+      "rssi": 21
+    }
+  },
+  "35": {
+    "name": "RC_CHANNELS_RAW",
+    "crc": 244,
+    "length": 22,
+    "minimumLength": 22,
+    "fields": {
+      "time_boot_ms": 0,
+      "chan1_raw": 4,
+      "chan2_raw": 6,
+      "chan3_raw": 8,
+      "chan4_raw": 10,
+      "chan5_raw": 12,
+      "chan6_raw": 14,
+      "chan7_raw": 16,
+      "chan8_raw": 18,
+      "port": 20,
+      "rssi": 21
+    }
+  },
+  "36": {
+    "name": "SERVO_OUTPUT_RAW",
+    "crc": 222,
+    "length": 37,
+    "minimumLength": 21,
+    "fields": {
+      "time_usec": 0,
+      "servo1_raw": 4,
+      "servo2_raw": 6,
+      "servo3_raw": 8,
+      "servo4_raw": 10,
+      "servo5_raw": 12,
+      "servo6_raw": 14,
+      "servo7_raw": 16,
+      "servo8_raw": 18,
+      "port": 20,
+      "servo9_raw": 21,
+      "servo10_raw": 23,
+      "servo11_raw": 25,
+      "servo12_raw": 27,
+      "servo13_raw": 29,
+      "servo14_raw": 31,
+      "servo15_raw": 33,
+      "servo16_raw": 35
+    }
+  },
+  "37": {
+    "name": "MISSION_REQUEST_PARTIAL_LIST",
+    "crc": 212,
+    "length": 7,
+    "minimumLength": 6,
+    "fields": {
+      "start_index": 0,
+      "end_index": 2,
+      "target_system": 4,
+      "target_component": 5,
+      "mission_type": 6
+    }
+  },
+  "38": {
+    "name": "MISSION_WRITE_PARTIAL_LIST",
+    "crc": 9,
+    "length": 7,
+    "minimumLength": 6,
+    "fields": {
+      "start_index": 0,
+      "end_index": 2,
+      "target_system": 4,
+      "target_component": 5,
+      "mission_type": 6
+    }
+  },
+  "39": {
+    "name": "MISSION_ITEM",
+    "crc": 254,
+    "length": 38,
+    "minimumLength": 37,
+    "fields": {
+      "param1": 0,
+      "param2": 4,
+      "param3": 8,
+      "param4": 12,
+      "x": 16,
+      "y": 20,
+      "z": 24,
+      "seq": 28,
+      "command": 30,
+      "target_system": 32,
+      "target_component": 33,
+      "frame": 34,
+      "current": 35,
+      "autocontinue": 36,
+      "mission_type": 37
+    }
+  },
+  "40": {
+    "name": "MISSION_REQUEST",
+    "crc": 230,
+    "length": 5,
+    "minimumLength": 4,
+    "fields": {
+      "seq": 0,
+      "target_system": 2,
+      "target_component": 3,
+      "mission_type": 4
+    }
+  },
+  "41": {
+    "name": "MISSION_SET_CURRENT",
+    "crc": 28,
+    "length": 4,
+    "minimumLength": 4,
+    "fields": {
+      "seq": 0,
+      "target_system": 2,
+      "target_component": 3
+    }
+  },
+  "42": {
+    "name": "MISSION_CURRENT",
+    "crc": 28,
+    "length": 18,
+    "minimumLength": 2,
+    "fields": {
+      "seq": 0,
+      "total": 2,
+      "mission_state": 4,
+      "mission_mode": 5,
+      "mission_id": 6,
+      "fence_id": 10,
+      "rally_points_id": 14
+    }
+  },
+  "43": {
+    "name": "MISSION_REQUEST_LIST",
+    "crc": 132,
+    "length": 3,
+    "minimumLength": 2,
+    "fields": {
+      "target_system": 0,
+      "target_component": 1,
+      "mission_type": 2
+    }
+  },
+  "44": {
+    "name": "MISSION_COUNT",
+    "crc": 221,
+    "length": 9,
+    "minimumLength": 4,
+    "fields": {
+      "count": 0,
+      "target_system": 2,
+      "target_component": 3,
+      "mission_type": 4,
+      "opaque_id": 5
+    }
+  },
+  "45": {
+    "name": "MISSION_CLEAR_ALL",
+    "crc": 232,
+    "length": 3,
+    "minimumLength": 2,
+    "fields": {
+      "target_system": 0,
+      "target_component": 1,
+      "mission_type": 2
+    }
+  },
+  "46": {
+    "name": "MISSION_ITEM_REACHED",
+    "crc": 11,
+    "length": 2,
+    "minimumLength": 2,
+    "fields": {
+      "seq": 0
+    }
+  },
+  "47": {
+    "name": "MISSION_ACK",
+    "crc": 153,
+    "length": 8,
+    "minimumLength": 3,
+    "fields": {
+      "target_system": 0,
+      "target_component": 1,
+      "type": 2,
+      "mission_type": 3,
+      "opaque_id": 4
+    }
+  },
+  "48": {
+    "name": "SET_GPS_GLOBAL_ORIGIN",
+    "crc": 41,
+    "length": 21,
+    "minimumLength": 13,
+    "fields": {
+      "latitude": 0,
+      "longitude": 4,
+      "altitude": 8,
+      "target_system": 12,
+      "time_usec": 13
+    }
+  },
+  "49": {
+    "name": "GPS_GLOBAL_ORIGIN",
+    "crc": 39,
+    "length": 20,
+    "minimumLength": 12,
+    "fields": {
+      "latitude": 0,
+      "longitude": 4,
+      "altitude": 8,
+      "time_usec": 12
+    }
+  },
+  "50": {
+    "name": "PARAM_MAP_RC",
+    "crc": 78,
+    "length": 37,
+    "minimumLength": 37,
+    "fields": {
+      "param_value0": 0,
+      "scale": 4,
+      "param_value_min": 8,
+      "param_value_max": 12,
+      "param_index": 16,
+      "target_system": 18,
+      "target_component": 19,
+      "param_id": 20,
+      "parameter_rc_channel_index": 36
+    }
+  },
+  "51": {
+    "name": "MISSION_REQUEST_INT",
+    "crc": 196,
+    "length": 5,
+    "minimumLength": 4,
+    "fields": {
+      "seq": 0,
+      "target_system": 2,
+      "target_component": 3,
+      "mission_type": 4
+    }
+  },
+  "54": {
+    "name": "SAFETY_SET_ALLOWED_AREA",
+    "crc": 15,
+    "length": 27,
+    "minimumLength": 27,
+    "fields": {
+      "p1x": 0,
+      "p1y": 4,
+      "p1z": 8,
+      "p2x": 12,
+      "p2y": 16,
+      "p2z": 20,
+      "target_system": 24,
+      "target_component": 25,
+      "frame": 26
+    }
+  },
+  "55": {
+    "name": "SAFETY_ALLOWED_AREA",
+    "crc": 3,
+    "length": 25,
+    "minimumLength": 25,
+    "fields": {
+      "p1x": 0,
+      "p1y": 4,
+      "p1z": 8,
+      "p2x": 12,
+      "p2y": 16,
+      "p2z": 20,
+      "frame": 24
+    }
+  },
+  "61": {
+    "name": "ATTITUDE_QUATERNION_COV",
+    "crc": 167,
+    "length": 72,
+    "minimumLength": 72,
+    "fields": {
+      "time_usec": 0,
+      "q": 8,
+      "rollspeed": 24,
+      "pitchspeed": 28,
+      "yawspeed": 32,
+      "covariance": 36
+    }
+  },
+  "62": {
+    "name": "NAV_CONTROLLER_OUTPUT",
+    "crc": 183,
+    "length": 26,
+    "minimumLength": 26,
+    "fields": {
+      "nav_roll": 0,
+      "nav_pitch": 4,
+      "alt_error": 8,
+      "aspd_error": 12,
+      "xtrack_error": 16,
+      "nav_bearing": 20,
+      "target_bearing": 22,
+      "wp_dist": 24
+    }
+  },
+  "63": {
+    "name": "GLOBAL_POSITION_INT_COV",
+    "crc": 119,
+    "length": 181,
+    "minimumLength": 181,
+    "fields": {
+      "time_usec": 0,
+      "lat": 8,
+      "lon": 12,
+      "alt": 16,
+      "relative_alt": 20,
+      "vx": 24,
+      "vy": 28,
+      "vz": 32,
+      "covariance": 36,
+      "estimator_type": 180
+    }
+  },
+  "64": {
+    "name": "LOCAL_POSITION_NED_COV",
+    "crc": 191,
+    "length": 225,
+    "minimumLength": 225,
+    "fields": {
+      "time_usec": 0,
+      "x": 8,
+      "y": 12,
+      "z": 16,
+      "vx": 20,
+      "vy": 24,
+      "vz": 28,
+      "ax": 32,
+      "ay": 36,
+      "az": 40,
+      "covariance": 44,
+      "estimator_type": 224
+    }
+  },
+  "65": {
+    "name": "RC_CHANNELS",
+    "crc": 118,
+    "length": 42,
+    "minimumLength": 42,
+    "fields": {
+      "time_boot_ms": 0,
+      "chan1_raw": 4,
+      "chan2_raw": 6,
+      "chan3_raw": 8,
+      "chan4_raw": 10,
+      "chan5_raw": 12,
+      "chan6_raw": 14,
+      "chan7_raw": 16,
+      "chan8_raw": 18,
+      "chan9_raw": 20,
+      "chan10_raw": 22,
+      "chan11_raw": 24,
+      "chan12_raw": 26,
+      "chan13_raw": 28,
+      "chan14_raw": 30,
+      "chan15_raw": 32,
+      "chan16_raw": 34,
+      "chan17_raw": 36,
+      "chan18_raw": 38,
+      "chancount": 40,
+      "rssi": 41
+    }
+  },
+  "66": {
+    "name": "REQUEST_DATA_STREAM",
+    "crc": 148,
+    "length": 6,
+    "minimumLength": 6,
+    "fields": {
+      "req_message_rate": 0,
+      "target_system": 2,
+      "target_component": 3,
+      "req_stream_id": 4,
+      "start_stop": 5
+    }
+  },
+  "67": {
+    "name": "DATA_STREAM",
+    "crc": 21,
+    "length": 4,
+    "minimumLength": 4,
+    "fields": {
+      "message_rate": 0,
+      "stream_id": 2,
+      "on_off": 3
+    }
+  },
+  "69": {
+    "name": "MANUAL_CONTROL",
+    "crc": 243,
+    "length": 30,
+    "minimumLength": 11,
+    "fields": {
+      "x": 0,
+      "y": 2,
+      "z": 4,
+      "r": 6,
+      "buttons": 8,
+      "target": 10,
+      "buttons2": 11,
+      "enabled_extensions": 13,
+      "s": 14,
+      "t": 16,
+      "aux1": 18,
+      "aux2": 20,
+      "aux3": 22,
+      "aux4": 24,
+      "aux5": 26,
+      "aux6": 28
+    }
+  },
+  "70": {
+    "name": "RC_CHANNELS_OVERRIDE",
+    "crc": 124,
+    "length": 38,
+    "minimumLength": 18,
+    "fields": {
+      "chan1_raw": 0,
+      "chan2_raw": 2,
+      "chan3_raw": 4,
+      "chan4_raw": 6,
+      "chan5_raw": 8,
+      "chan6_raw": 10,
+      "chan7_raw": 12,
+      "chan8_raw": 14,
+      "target_system": 16,
+      "target_component": 17,
+      "chan9_raw": 18,
+      "chan10_raw": 20,
+      "chan11_raw": 22,
+      "chan12_raw": 24,
+      "chan13_raw": 26,
+      "chan14_raw": 28,
+      "chan15_raw": 30,
+      "chan16_raw": 32,
+      "chan17_raw": 34,
+      "chan18_raw": 36
+    }
+  },
+  "73": {
+    "name": "MISSION_ITEM_INT",
+    "crc": 38,
+    "length": 38,
+    "minimumLength": 37,
+    "fields": {
+      "param1": 0,
+      "param2": 4,
+      "param3": 8,
+      "param4": 12,
+      "x": 16,
+      "y": 20,
+      "z": 24,
+      "seq": 28,
+      "command": 30,
+      "target_system": 32,
+      "target_component": 33,
+      "frame": 34,
+      "current": 35,
+      "autocontinue": 36,
+      "mission_type": 37
+    }
+  },
+  "74": {
+    "name": "VFR_HUD",
+    "crc": 20,
+    "length": 20,
+    "minimumLength": 20,
+    "fields": {
+      "airspeed": 0,
+      "groundspeed": 4,
+      "alt": 8,
+      "climb": 12,
+      "heading": 16,
+      "throttle": 18
+    }
+  },
+  "75": {
+    "name": "COMMAND_INT",
+    "crc": 158,
+    "length": 35,
+    "minimumLength": 35,
+    "fields": {
+      "param1": 0,
+      "param2": 4,
+      "param3": 8,
+      "param4": 12,
+      "x": 16,
+      "y": 20,
+      "z": 24,
+      "command": 28,
+      "target_system": 30,
+      "target_component": 31,
+      "frame": 32,
+      "current": 33,
+      "autocontinue": 34
+    }
+  },
+  "76": {
+    "name": "COMMAND_LONG",
+    "crc": 152,
+    "length": 33,
+    "minimumLength": 33,
+    "fields": {
+      "param1": 0,
+      "param2": 4,
+      "param3": 8,
+      "param4": 12,
+      "param5": 16,
+      "param6": 20,
+      "param7": 24,
+      "command": 28,
+      "target_system": 30,
+      "target_component": 31,
+      "confirmation": 32
+    }
+  },
+  "77": {
+    "name": "COMMAND_ACK",
+    "crc": 143,
+    "length": 10,
+    "minimumLength": 3,
+    "fields": {
+      "command": 0,
+      "result": 2,
+      "progress": 3,
+      "result_param2": 4,
+      "target_system": 8,
+      "target_component": 9
+    }
+  },
+  "80": {
+    "name": "COMMAND_CANCEL",
+    "crc": 14,
+    "length": 4,
+    "minimumLength": 4,
+    "fields": {
+      "command": 0,
+      "target_system": 2,
+      "target_component": 3
+    }
+  },
+  "81": {
+    "name": "MANUAL_SETPOINT",
+    "crc": 106,
+    "length": 22,
+    "minimumLength": 22,
+    "fields": {
+      "time_boot_ms": 0,
+      "roll": 4,
+      "pitch": 8,
+      "yaw": 12,
+      "thrust": 16,
+      "mode_switch": 20,
+      "manual_override_switch": 21
+    }
+  },
+  "82": {
+    "name": "SET_ATTITUDE_TARGET",
+    "crc": 49,
+    "length": 51,
+    "minimumLength": 39,
+    "fields": {
+      "time_boot_ms": 0,
+      "q": 4,
+      "body_roll_rate": 20,
+      "body_pitch_rate": 24,
+      "body_yaw_rate": 28,
+      "thrust": 32,
+      "target_system": 36,
+      "target_component": 37,
+      "type_mask": 38,
+      "thrust_body": 39
+    }
+  },
+  "83": {
+    "name": "ATTITUDE_TARGET",
+    "crc": 22,
+    "length": 37,
+    "minimumLength": 37,
+    "fields": {
+      "time_boot_ms": 0,
+      "q": 4,
+      "body_roll_rate": 20,
+      "body_pitch_rate": 24,
+      "body_yaw_rate": 28,
+      "thrust": 32,
+      "type_mask": 36
+    }
+  },
+  "84": {
+    "name": "SET_POSITION_TARGET_LOCAL_NED",
+    "crc": 143,
+    "length": 53,
+    "minimumLength": 53,
+    "fields": {
+      "time_boot_ms": 0,
+      "x": 4,
+      "y": 8,
+      "z": 12,
+      "vx": 16,
+      "vy": 20,
+      "vz": 24,
+      "afx": 28,
+      "afy": 32,
+      "afz": 36,
+      "yaw": 40,
+      "yaw_rate": 44,
+      "type_mask": 48,
+      "target_system": 50,
+      "target_component": 51,
+      "coordinate_frame": 52
+    }
+  },
+  "85": {
+    "name": "POSITION_TARGET_LOCAL_NED",
+    "crc": 140,
+    "length": 51,
+    "minimumLength": 51,
+    "fields": {
+      "time_boot_ms": 0,
+      "x": 4,
+      "y": 8,
+      "z": 12,
+      "vx": 16,
+      "vy": 20,
+      "vz": 24,
+      "afx": 28,
+      "afy": 32,
+      "afz": 36,
+      "yaw": 40,
+      "yaw_rate": 44,
+      "type_mask": 48,
+      "coordinate_frame": 50
+    }
+  },
+  "86": {
+    "name": "SET_POSITION_TARGET_GLOBAL_INT",
+    "crc": 5,
+    "length": 53,
+    "minimumLength": 53,
+    "fields": {
+      "time_boot_ms": 0,
+      "lat_int": 4,
+      "lon_int": 8,
+      "alt": 12,
+      "vx": 16,
+      "vy": 20,
+      "vz": 24,
+      "afx": 28,
+      "afy": 32,
+      "afz": 36,
+      "yaw": 40,
+      "yaw_rate": 44,
+      "type_mask": 48,
+      "target_system": 50,
+      "target_component": 51,
+      "coordinate_frame": 52
+    }
+  },
+  "87": {
+    "name": "POSITION_TARGET_GLOBAL_INT",
+    "crc": 150,
+    "length": 51,
+    "minimumLength": 51,
+    "fields": {
+      "time_boot_ms": 0,
+      "lat_int": 4,
+      "lon_int": 8,
+      "alt": 12,
+      "vx": 16,
+      "vy": 20,
+      "vz": 24,
+      "afx": 28,
+      "afy": 32,
+      "afz": 36,
+      "yaw": 40,
+      "yaw_rate": 44,
+      "type_mask": 48,
+      "coordinate_frame": 50
+    }
+  },
+  "89": {
+    "name": "LOCAL_POSITION_NED_SYSTEM_GLOBAL_OFFSET",
+    "crc": 231,
+    "length": 28,
+    "minimumLength": 28,
+    "fields": {
+      "time_boot_ms": 0,
+      "x": 4,
+      "y": 8,
+      "z": 12,
+      "roll": 16,
+      "pitch": 20,
+      "yaw": 24
+    }
+  },
+  "90": {
+    "name": "HIL_STATE",
+    "crc": 183,
+    "length": 56,
+    "minimumLength": 56,
+    "fields": {
+      "time_usec": 0,
+      "roll": 8,
+      "pitch": 12,
+      "yaw": 16,
+      "rollspeed": 20,
+      "pitchspeed": 24,
+      "yawspeed": 28,
+      "lat": 32,
+      "lon": 36,
+      "alt": 40,
+      "vx": 44,
+      "vy": 46,
+      "vz": 48,
+      "xacc": 50,
+      "yacc": 52,
+      "zacc": 54
+    }
+  },
+  "91": {
+    "name": "HIL_CONTROLS",
+    "crc": 63,
+    "length": 42,
+    "minimumLength": 42,
+    "fields": {
+      "time_usec": 0,
+      "roll_ailerons": 8,
+      "pitch_elevator": 12,
+      "yaw_rudder": 16,
+      "throttle": 20,
+      "aux1": 24,
+      "aux2": 28,
+      "aux3": 32,
+      "aux4": 36,
+      "mode": 40,
+      "nav_mode": 41
+    }
+  },
+  "92": {
+    "name": "HIL_RC_INPUTS_RAW",
+    "crc": 54,
+    "length": 33,
+    "minimumLength": 33,
+    "fields": {
+      "time_usec": 0,
+      "chan1_raw": 8,
+      "chan2_raw": 10,
+      "chan3_raw": 12,
+      "chan4_raw": 14,
+      "chan5_raw": 16,
+      "chan6_raw": 18,
+      "chan7_raw": 20,
+      "chan8_raw": 22,
+      "chan9_raw": 24,
+      "chan10_raw": 26,
+      "chan11_raw": 28,
+      "chan12_raw": 30,
+      "rssi": 32
+    }
+  },
+  "93": {
+    "name": "HIL_ACTUATOR_CONTROLS",
+    "crc": 47,
+    "length": 81,
+    "minimumLength": 81,
+    "fields": {
+      "time_usec": 0,
+      "flags": 8,
+      "controls": 16,
+      "mode": 80
+    }
+  },
+  "100": {
+    "name": "OPTICAL_FLOW",
+    "crc": 175,
+    "length": 34,
+    "minimumLength": 26,
+    "fields": {
+      "time_usec": 0,
+      "flow_comp_m_x": 8,
+      "flow_comp_m_y": 12,
+      "ground_distance": 16,
+      "flow_x": 20,
+      "flow_y": 22,
+      "sensor_id": 24,
+      "quality": 25,
+      "flow_rate_x": 26,
+      "flow_rate_y": 30
+    }
+  },
+  "101": {
+    "name": "GLOBAL_VISION_POSITION_ESTIMATE",
+    "crc": 102,
+    "length": 117,
+    "minimumLength": 32,
+    "fields": {
+      "usec": 0,
+      "x": 8,
+      "y": 12,
+      "z": 16,
+      "roll": 20,
+      "pitch": 24,
+      "yaw": 28,
+      "covariance": 32,
+      "reset_counter": 116
+    }
+  },
+  "102": {
+    "name": "VISION_POSITION_ESTIMATE",
+    "crc": 158,
+    "length": 117,
+    "minimumLength": 32,
+    "fields": {
+      "usec": 0,
+      "x": 8,
+      "y": 12,
+      "z": 16,
+      "roll": 20,
+      "pitch": 24,
+      "yaw": 28,
+      "covariance": 32,
+      "reset_counter": 116
+    }
+  },
+  "103": {
+    "name": "VISION_SPEED_ESTIMATE",
+    "crc": 208,
+    "length": 57,
+    "minimumLength": 20,
+    "fields": {
+      "usec": 0,
+      "x": 8,
+      "y": 12,
+      "z": 16,
+      "covariance": 20,
+      "reset_counter": 56
+    }
+  },
+  "104": {
+    "name": "VICON_POSITION_ESTIMATE",
+    "crc": 56,
+    "length": 116,
+    "minimumLength": 32,
+    "fields": {
+      "usec": 0,
+      "x": 8,
+      "y": 12,
+      "z": 16,
+      "roll": 20,
+      "pitch": 24,
+      "yaw": 28,
+      "covariance": 32
+    }
+  },
+  "105": {
+    "name": "HIGHRES_IMU",
+    "crc": 93,
+    "length": 63,
+    "minimumLength": 62,
+    "fields": {
+      "time_usec": 0,
+      "xacc": 8,
+      "yacc": 12,
+      "zacc": 16,
+      "xgyro": 20,
+      "ygyro": 24,
+      "zgyro": 28,
+      "xmag": 32,
+      "ymag": 36,
+      "zmag": 40,
+      "abs_pressure": 44,
+      "diff_pressure": 48,
+      "pressure_alt": 52,
+      "temperature": 56,
+      "fields_updated": 60,
+      "id": 62
+    }
+  },
+  "106": {
+    "name": "OPTICAL_FLOW_RAD",
+    "crc": 138,
+    "length": 44,
+    "minimumLength": 44,
+    "fields": {
+      "time_usec": 0,
+      "integration_time_us": 8,
+      "integrated_x": 12,
+      "integrated_y": 16,
+      "integrated_xgyro": 20,
+      "integrated_ygyro": 24,
+      "integrated_zgyro": 28,
+      "time_delta_distance_us": 32,
+      "distance": 36,
+      "temperature": 40,
+      "sensor_id": 42,
+      "quality": 43
+    }
+  },
+  "107": {
+    "name": "HIL_SENSOR",
+    "crc": 108,
+    "length": 65,
+    "minimumLength": 64,
+    "fields": {
+      "time_usec": 0,
+      "xacc": 8,
+      "yacc": 12,
+      "zacc": 16,
+      "xgyro": 20,
+      "ygyro": 24,
+      "zgyro": 28,
+      "xmag": 32,
+      "ymag": 36,
+      "zmag": 40,
+      "abs_pressure": 44,
+      "diff_pressure": 48,
+      "pressure_alt": 52,
+      "temperature": 56,
+      "fields_updated": 60,
+      "id": 64
+    }
+  },
+  "108": {
+    "name": "SIM_STATE",
+    "crc": 32,
+    "length": 92,
+    "minimumLength": 84,
+    "fields": {
+      "q1": 0,
+      "q2": 4,
+      "q3": 8,
+      "q4": 12,
+      "roll": 16,
+      "pitch": 20,
+      "yaw": 24,
+      "xacc": 28,
+      "yacc": 32,
+      "zacc": 36,
+      "xgyro": 40,
+      "ygyro": 44,
+      "zgyro": 48,
+      "lat": 52,
+      "lon": 56,
+      "alt": 60,
+      "std_dev_horz": 64,
+      "std_dev_vert": 68,
+      "vn": 72,
+      "ve": 76,
+      "vd": 80,
+      "lat_int": 84,
+      "lon_int": 88
+    }
+  },
+  "109": {
+    "name": "RADIO_STATUS",
+    "crc": 185,
+    "length": 9,
+    "minimumLength": 9,
+    "fields": {
+      "rxerrors": 0,
+      "fixed": 2,
+      "rssi": 4,
+      "remrssi": 5,
+      "txbuf": 6,
+      "noise": 7,
+      "remnoise": 8
+    }
+  },
+  "110": {
+    "name": "FILE_TRANSFER_PROTOCOL",
+    "crc": 84,
+    "length": 254,
+    "minimumLength": 254,
+    "fields": {
+      "target_network": 0,
+      "target_system": 1,
+      "target_component": 2,
+      "payload": 3
+    }
+  },
+  "111": {
+    "name": "TIMESYNC",
+    "crc": 34,
+    "length": 18,
+    "minimumLength": 16,
+    "fields": {
+      "tc1": 0,
+      "ts1": 8,
+      "target_system": 16,
+      "target_component": 17
+    }
+  },
+  "112": {
+    "name": "CAMERA_TRIGGER",
+    "crc": 174,
+    "length": 12,
+    "minimumLength": 12,
+    "fields": {
+      "time_usec": 0,
+      "seq": 8
+    }
+  },
+  "113": {
+    "name": "HIL_GPS",
+    "crc": 124,
+    "length": 39,
+    "minimumLength": 36,
+    "fields": {
+      "time_usec": 0,
+      "lat": 8,
+      "lon": 12,
+      "alt": 16,
+      "eph": 20,
+      "epv": 22,
+      "vel": 24,
+      "vn": 26,
+      "ve": 28,
+      "vd": 30,
+      "cog": 32,
+      "fix_type": 34,
+      "satellites_visible": 35,
+      "id": 36,
+      "yaw": 37
+    }
+  },
+  "114": {
+    "name": "HIL_OPTICAL_FLOW",
+    "crc": 237,
+    "length": 44,
+    "minimumLength": 44,
+    "fields": {
+      "time_usec": 0,
+      "integration_time_us": 8,
+      "integrated_x": 12,
+      "integrated_y": 16,
+      "integrated_xgyro": 20,
+      "integrated_ygyro": 24,
+      "integrated_zgyro": 28,
+      "time_delta_distance_us": 32,
+      "distance": 36,
+      "temperature": 40,
+      "sensor_id": 42,
+      "quality": 43
+    }
+  },
+  "115": {
+    "name": "HIL_STATE_QUATERNION",
+    "crc": 4,
+    "length": 64,
+    "minimumLength": 64,
+    "fields": {
+      "time_usec": 0,
+      "attitude_quaternion": 8,
+      "rollspeed": 24,
+      "pitchspeed": 28,
+      "yawspeed": 32,
+      "lat": 36,
+      "lon": 40,
+      "alt": 44,
+      "vx": 48,
+      "vy": 50,
+      "vz": 52,
+      "ind_airspeed": 54,
+      "true_airspeed": 56,
+      "xacc": 58,
+      "yacc": 60,
+      "zacc": 62
+    }
+  },
+  "116": {
+    "name": "SCALED_IMU2",
+    "crc": 76,
+    "length": 24,
+    "minimumLength": 22,
+    "fields": {
+      "time_boot_ms": 0,
+      "xacc": 4,
+      "yacc": 6,
+      "zacc": 8,
+      "xgyro": 10,
+      "ygyro": 12,
+      "zgyro": 14,
+      "xmag": 16,
+      "ymag": 18,
+      "zmag": 20,
+      "temperature": 22
+    }
+  },
+  "117": {
+    "name": "LOG_REQUEST_LIST",
+    "crc": 128,
+    "length": 6,
+    "minimumLength": 6,
+    "fields": {
+      "start": 0,
+      "end": 2,
+      "target_system": 4,
+      "target_component": 5
+    }
+  },
+  "118": {
+    "name": "LOG_ENTRY",
+    "crc": 56,
+    "length": 14,
+    "minimumLength": 14,
+    "fields": {
+      "time_utc": 0,
+      "size": 4,
+      "id": 8,
+      "num_logs": 10,
+      "last_log_num": 12
+    }
+  },
+  "119": {
+    "name": "LOG_REQUEST_DATA",
+    "crc": 116,
+    "length": 12,
+    "minimumLength": 12,
+    "fields": {
+      "ofs": 0,
+      "count": 4,
+      "id": 8,
+      "target_system": 10,
+      "target_component": 11
+    }
+  },
+  "120": {
+    "name": "LOG_DATA",
+    "crc": 134,
+    "length": 97,
+    "minimumLength": 97,
+    "fields": {
+      "ofs": 0,
+      "id": 4,
+      "count": 6,
+      "data": 7
+    }
+  },
+  "121": {
+    "name": "LOG_ERASE",
+    "crc": 237,
+    "length": 2,
+    "minimumLength": 2,
+    "fields": {
+      "target_system": 0,
+      "target_component": 1
+    }
+  },
+  "122": {
+    "name": "LOG_REQUEST_END",
+    "crc": 203,
+    "length": 2,
+    "minimumLength": 2,
+    "fields": {
+      "target_system": 0,
+      "target_component": 1
+    }
+  },
+  "123": {
+    "name": "GPS_INJECT_DATA",
+    "crc": 250,
+    "length": 113,
+    "minimumLength": 113,
+    "fields": {
+      "target_system": 0,
+      "target_component": 1,
+      "len": 2,
+      "data": 3
+    }
+  },
+  "124": {
+    "name": "GPS2_RAW",
+    "crc": 87,
+    "length": 57,
+    "minimumLength": 35,
+    "fields": {
+      "time_usec": 0,
+      "lat": 8,
+      "lon": 12,
+      "alt": 16,
+      "dgps_age": 20,
+      "eph": 24,
+      "epv": 26,
+      "vel": 28,
+      "cog": 30,
+      "fix_type": 32,
+      "satellites_visible": 33,
+      "dgps_numch": 34,
+      "yaw": 35,
+      "alt_ellipsoid": 37,
+      "h_acc": 41,
+      "v_acc": 45,
+      "vel_acc": 49,
+      "hdg_acc": 53
+    }
+  },
+  "125": {
+    "name": "POWER_STATUS",
+    "crc": 203,
+    "length": 6,
+    "minimumLength": 6,
+    "fields": {
+      "Vcc": 0,
+      "Vservo": 2,
+      "flags": 4
+    }
+  },
+  "126": {
+    "name": "SERIAL_CONTROL",
+    "crc": 220,
+    "length": 81,
+    "minimumLength": 79,
+    "fields": {
+      "baudrate": 0,
+      "timeout": 4,
+      "device": 6,
+      "flags": 7,
+      "count": 8,
+      "data": 9,
+      "target_system": 79,
+      "target_component": 80
+    }
+  },
+  "127": {
+    "name": "GPS_RTK",
+    "crc": 25,
+    "length": 35,
+    "minimumLength": 35,
+    "fields": {
+      "time_last_baseline_ms": 0,
+      "tow": 4,
+      "baseline_a_mm": 8,
+      "baseline_b_mm": 12,
+      "baseline_c_mm": 16,
+      "accuracy": 20,
+      "iar_num_hypotheses": 24,
+      "wn": 28,
+      "rtk_receiver_id": 30,
+      "rtk_health": 31,
+      "rtk_rate": 32,
+      "nsats": 33,
+      "baseline_coords_type": 34
+    }
+  },
+  "128": {
+    "name": "GPS2_RTK",
+    "crc": 226,
+    "length": 35,
+    "minimumLength": 35,
+    "fields": {
+      "time_last_baseline_ms": 0,
+      "tow": 4,
+      "baseline_a_mm": 8,
+      "baseline_b_mm": 12,
+      "baseline_c_mm": 16,
+      "accuracy": 20,
+      "iar_num_hypotheses": 24,
+      "wn": 28,
+      "rtk_receiver_id": 30,
+      "rtk_health": 31,
+      "rtk_rate": 32,
+      "nsats": 33,
+      "baseline_coords_type": 34
+    }
+  },
+  "129": {
+    "name": "SCALED_IMU3",
+    "crc": 46,
+    "length": 24,
+    "minimumLength": 22,
+    "fields": {
+      "time_boot_ms": 0,
+      "xacc": 4,
+      "yacc": 6,
+      "zacc": 8,
+      "xgyro": 10,
+      "ygyro": 12,
+      "zgyro": 14,
+      "xmag": 16,
+      "ymag": 18,
+      "zmag": 20,
+      "temperature": 22
+    }
+  },
+  "130": {
+    "name": "DATA_TRANSMISSION_HANDSHAKE",
+    "crc": 29,
+    "length": 13,
+    "minimumLength": 13,
+    "fields": {
+      "size": 0,
+      "width": 4,
+      "height": 6,
+      "packets": 8,
+      "type": 10,
+      "payload": 11,
+      "jpg_quality": 12
+    }
+  },
+  "131": {
+    "name": "ENCAPSULATED_DATA",
+    "crc": 223,
+    "length": 255,
+    "minimumLength": 255,
+    "fields": {
+      "seqnr": 0,
+      "data": 2
+    }
+  },
+  "132": {
+    "name": "DISTANCE_SENSOR",
+    "crc": 85,
+    "length": 39,
+    "minimumLength": 14,
+    "fields": {
+      "time_boot_ms": 0,
+      "min_distance": 4,
+      "max_distance": 6,
+      "current_distance": 8,
+      "type": 10,
+      "id": 11,
+      "orientation": 12,
+      "covariance": 13,
+      "horizontal_fov": 14,
+      "vertical_fov": 18,
+      "quaternion": 22,
+      "signal_quality": 38
+    }
+  },
+  "133": {
+    "name": "TERRAIN_REQUEST",
+    "crc": 6,
+    "length": 18,
+    "minimumLength": 18,
+    "fields": {
+      "mask": 0,
+      "lat": 8,
+      "lon": 12,
+      "grid_spacing": 16
+    }
+  },
+  "134": {
+    "name": "TERRAIN_DATA",
+    "crc": 229,
+    "length": 43,
+    "minimumLength": 43,
+    "fields": {
+      "lat": 0,
+      "lon": 4,
+      "grid_spacing": 8,
+      "data": 10,
+      "gridbit": 42
+    }
+  },
+  "135": {
+    "name": "TERRAIN_CHECK",
+    "crc": 203,
+    "length": 8,
+    "minimumLength": 8,
+    "fields": {
+      "lat": 0,
+      "lon": 4
+    }
+  },
+  "136": {
+    "name": "TERRAIN_REPORT",
+    "crc": 1,
+    "length": 22,
+    "minimumLength": 22,
+    "fields": {
+      "lat": 0,
+      "lon": 4,
+      "terrain_height": 8,
+      "current_height": 12,
+      "spacing": 16,
+      "pending": 18,
+      "loaded": 20
+    }
+  },
+  "137": {
+    "name": "SCALED_PRESSURE2",
+    "crc": 195,
+    "length": 16,
+    "minimumLength": 14,
+    "fields": {
+      "time_boot_ms": 0,
+      "press_abs": 4,
+      "press_diff": 8,
+      "temperature": 12,
+      "temperature_press_diff": 14
+    }
+  },
+  "138": {
+    "name": "ATT_POS_MOCAP",
+    "crc": 109,
+    "length": 120,
+    "minimumLength": 36,
+    "fields": {
+      "time_usec": 0,
+      "q": 8,
+      "x": 24,
+      "y": 28,
+      "z": 32,
+      "covariance": 36
+    }
+  },
+  "139": {
+    "name": "SET_ACTUATOR_CONTROL_TARGET",
+    "crc": 168,
+    "length": 43,
+    "minimumLength": 43,
+    "fields": {
+      "time_usec": 0,
+      "controls": 8,
+      "group_mlx": 40,
+      "target_system": 41,
+      "target_component": 42
+    }
+  },
+  "140": {
+    "name": "ACTUATOR_CONTROL_TARGET",
+    "crc": 181,
+    "length": 41,
+    "minimumLength": 41,
+    "fields": {
+      "time_usec": 0,
+      "controls": 8,
+      "group_mlx": 40
+    }
+  },
+  "141": {
+    "name": "ALTITUDE",
+    "crc": 47,
+    "length": 32,
+    "minimumLength": 32,
+    "fields": {
+      "time_usec": 0,
+      "altitude_monotonic": 8,
+      "altitude_amsl": 12,
+      "altitude_local": 16,
+      "altitude_relative": 20,
+      "altitude_terrain": 24,
+      "bottom_clearance": 28
+    }
+  },
+  "142": {
+    "name": "RESOURCE_REQUEST",
+    "crc": 72,
+    "length": 243,
+    "minimumLength": 243,
+    "fields": {
+      "request_id": 0,
+      "uri_type": 1,
+      "uri": 2,
+      "transfer_type": 122,
+      "storage": 123
+    }
+  },
+  "143": {
+    "name": "SCALED_PRESSURE3",
+    "crc": 131,
+    "length": 16,
+    "minimumLength": 14,
+    "fields": {
+      "time_boot_ms": 0,
+      "press_abs": 4,
+      "press_diff": 8,
+      "temperature": 12,
+      "temperature_press_diff": 14
+    }
+  },
+  "144": {
+    "name": "FOLLOW_TARGET",
+    "crc": 127,
+    "length": 93,
+    "minimumLength": 93,
+    "fields": {
+      "timestamp": 0,
+      "custom_state": 8,
+      "lat": 16,
+      "lon": 20,
+      "alt": 24,
+      "vel": 28,
+      "acc": 40,
+      "attitude_q": 52,
+      "rates": 68,
+      "position_cov": 80,
+      "est_capabilities": 92
+    }
+  },
+  "146": {
+    "name": "CONTROL_SYSTEM_STATE",
+    "crc": 103,
+    "length": 100,
+    "minimumLength": 100,
+    "fields": {
+      "time_usec": 0,
+      "x_acc": 8,
+      "y_acc": 12,
+      "z_acc": 16,
+      "x_vel": 20,
+      "y_vel": 24,
+      "z_vel": 28,
+      "x_pos": 32,
+      "y_pos": 36,
+      "z_pos": 40,
+      "airspeed": 44,
+      "vel_variance": 48,
+      "pos_variance": 60,
+      "q": 72,
+      "roll_rate": 88,
+      "pitch_rate": 92,
+      "yaw_rate": 96
+    }
+  },
+  "147": {
+    "name": "BATTERY_STATUS",
+    "crc": 154,
+    "length": 54,
+    "minimumLength": 36,
+    "fields": {
+      "current_consumed": 0,
+      "energy_consumed": 4,
+      "temperature": 8,
+      "voltages": 10,
+      "current_battery": 30,
+      "id": 32,
+      "battery_function": 33,
+      "type": 34,
+      "battery_remaining": 35,
+      "time_remaining": 36,
+      "charge_state": 40,
+      "voltages_ext": 41,
+      "mode": 49,
+      "fault_bitmask": 50
+    }
+  },
+  "148": {
+    "name": "AUTOPILOT_VERSION",
+    "crc": 178,
+    "length": 78,
+    "minimumLength": 60,
+    "fields": {
+      "capabilities": 0,
+      "uid": 8,
+      "flight_sw_version": 16,
+      "middleware_sw_version": 20,
+      "os_sw_version": 24,
+      "board_version": 28,
+      "vendor_id": 32,
+      "product_id": 34,
+      "flight_custom_version": 36,
+      "middleware_custom_version": 44,
+      "os_custom_version": 52,
+      "uid2": 60
+    }
+  },
+  "149": {
+    "name": "LANDING_TARGET",
+    "crc": 200,
+    "length": 60,
+    "minimumLength": 30,
+    "fields": {
+      "time_usec": 0,
+      "angle_x": 8,
+      "angle_y": 12,
+      "distance": 16,
+      "size_x": 20,
+      "size_y": 24,
+      "target_num": 28,
+      "frame": 29,
+      "x": 30,
+      "y": 34,
+      "z": 38,
+      "q": 42,
+      "type": 58,
+      "position_valid": 59
+    }
+  },
+  "150": {
+    "name": "SENSOR_OFFSETS",
+    "crc": 134,
+    "length": 42,
+    "minimumLength": 42,
+    "fields": {
+      "mag_declination": 0,
+      "raw_press": 4,
+      "raw_temp": 8,
+      "gyro_cal_x": 12,
+      "gyro_cal_y": 16,
+      "gyro_cal_z": 20,
+      "accel_cal_x": 24,
+      "accel_cal_y": 28,
+      "accel_cal_z": 32,
+      "mag_ofs_x": 36,
+      "mag_ofs_y": 38,
+      "mag_ofs_z": 40
+    }
+  },
+  "151": {
+    "name": "SET_MAG_OFFSETS",
+    "crc": 219,
+    "length": 8,
+    "minimumLength": 8,
+    "fields": {
+      "mag_ofs_x": 0,
+      "mag_ofs_y": 2,
+      "mag_ofs_z": 4,
+      "target_system": 6,
+      "target_component": 7
+    }
+  },
+  "152": {
+    "name": "MEMINFO",
+    "crc": 208,
+    "length": 8,
+    "minimumLength": 4,
+    "fields": {
+      "brkval": 0,
+      "freemem": 2,
+      "freemem32": 4
+    }
+  },
+  "153": {
+    "name": "AP_ADC",
+    "crc": 188,
+    "length": 12,
+    "minimumLength": 12,
+    "fields": {
+      "adc1": 0,
+      "adc2": 2,
+      "adc3": 4,
+      "adc4": 6,
+      "adc5": 8,
+      "adc6": 10
+    }
+  },
+  "154": {
+    "name": "DIGICAM_CONFIGURE",
+    "crc": 84,
+    "length": 15,
+    "minimumLength": 15,
+    "fields": {
+      "extra_value": 0,
+      "shutter_speed": 4,
+      "target_system": 6,
+      "target_component": 7,
+      "mode": 8,
+      "aperture": 9,
+      "iso": 10,
+      "exposure_type": 11,
+      "command_id": 12,
+      "engine_cut_off": 13,
+      "extra_param": 14
+    }
+  },
+  "155": {
+    "name": "DIGICAM_CONTROL",
+    "crc": 22,
+    "length": 13,
+    "minimumLength": 13,
+    "fields": {
+      "extra_value": 0,
+      "target_system": 4,
+      "target_component": 5,
+      "session": 6,
+      "zoom_pos": 7,
+      "zoom_step": 8,
+      "focus_lock": 9,
+      "shot": 10,
+      "command_id": 11,
+      "extra_param": 12
+    }
+  },
+  "156": {
+    "name": "MOUNT_CONFIGURE",
+    "crc": 19,
+    "length": 6,
+    "minimumLength": 6,
+    "fields": {
+      "target_system": 0,
+      "target_component": 1,
+      "mount_mode": 2,
+      "stab_roll": 3,
+      "stab_pitch": 4,
+      "stab_yaw": 5
+    }
+  },
+  "157": {
+    "name": "MOUNT_CONTROL",
+    "crc": 21,
+    "length": 15,
+    "minimumLength": 15,
+    "fields": {
+      "input_a": 0,
+      "input_b": 4,
+      "input_c": 8,
+      "target_system": 12,
+      "target_component": 13,
+      "save_position": 14
+    }
+  },
+  "158": {
+    "name": "MOUNT_STATUS",
+    "crc": 134,
+    "length": 15,
+    "minimumLength": 14,
+    "fields": {
+      "pointing_a": 0,
+      "pointing_b": 4,
+      "pointing_c": 8,
+      "target_system": 12,
+      "target_component": 13,
+      "mount_mode": 14
+    }
+  },
+  "160": {
+    "name": "FENCE_POINT",
+    "crc": 78,
+    "length": 12,
+    "minimumLength": 12,
+    "fields": {
+      "lat": 0,
+      "lng": 4,
+      "target_system": 8,
+      "target_component": 9,
+      "idx": 10,
+      "count": 11
+    }
+  },
+  "161": {
+    "name": "FENCE_FETCH_POINT",
+    "crc": 68,
+    "length": 3,
+    "minimumLength": 3,
+    "fields": {
+      "target_system": 0,
+      "target_component": 1,
+      "idx": 2
+    }
+  },
+  "162": {
+    "name": "FENCE_STATUS",
+    "crc": 189,
+    "length": 9,
+    "minimumLength": 8,
+    "fields": {
+      "breach_time": 0,
+      "breach_count": 4,
+      "breach_status": 6,
+      "breach_type": 7,
+      "breach_mitigation": 8
+    }
+  },
+  "163": {
+    "name": "AHRS",
+    "crc": 127,
+    "length": 28,
+    "minimumLength": 28,
+    "fields": {
+      "omegaIx": 0,
+      "omegaIy": 4,
+      "omegaIz": 8,
+      "accel_weight": 12,
+      "renorm_val": 16,
+      "error_rp": 20,
+      "error_yaw": 24
+    }
+  },
+  "164": {
+    "name": "SIMSTATE",
+    "crc": 154,
+    "length": 44,
+    "minimumLength": 44,
+    "fields": {
+      "roll": 0,
+      "pitch": 4,
+      "yaw": 8,
+      "xacc": 12,
+      "yacc": 16,
+      "zacc": 20,
+      "xgyro": 24,
+      "ygyro": 28,
+      "zgyro": 32,
+      "lat": 36,
+      "lng": 40
+    }
+  },
+  "165": {
+    "name": "HWSTATUS",
+    "crc": 21,
+    "length": 3,
+    "minimumLength": 3,
+    "fields": {
+      "Vcc": 0,
+      "I2Cerr": 2
+    }
+  },
+  "166": {
+    "name": "RADIO",
+    "crc": 21,
+    "length": 9,
+    "minimumLength": 9,
+    "fields": {
+      "rxerrors": 0,
+      "fixed": 2,
+      "rssi": 4,
+      "remrssi": 5,
+      "txbuf": 6,
+      "noise": 7,
+      "remnoise": 8
+    }
+  },
+  "167": {
+    "name": "LIMITS_STATUS",
+    "crc": 144,
+    "length": 22,
+    "minimumLength": 22,
+    "fields": {
+      "last_trigger": 0,
+      "last_action": 4,
+      "last_recovery": 8,
+      "last_clear": 12,
+      "breach_count": 16,
+      "limits_state": 18,
+      "mods_enabled": 19,
+      "mods_required": 20,
+      "mods_triggered": 21
+    }
+  },
+  "168": {
+    "name": "WIND",
+    "crc": 1,
+    "length": 12,
+    "minimumLength": 12,
+    "fields": {
+      "direction": 0,
+      "speed": 4,
+      "speed_z": 8
+    }
+  },
+  "169": {
+    "name": "DATA16",
+    "crc": 234,
+    "length": 18,
+    "minimumLength": 18,
+    "fields": {
+      "type": 0,
+      "len": 1,
+      "data": 2
+    }
+  },
+  "170": {
+    "name": "DATA32",
+    "crc": 73,
+    "length": 34,
+    "minimumLength": 34,
+    "fields": {
+      "type": 0,
+      "len": 1,
+      "data": 2
+    }
+  },
+  "171": {
+    "name": "DATA64",
+    "crc": 181,
+    "length": 66,
+    "minimumLength": 66,
+    "fields": {
+      "type": 0,
+      "len": 1,
+      "data": 2
+    }
+  },
+  "172": {
+    "name": "DATA96",
+    "crc": 22,
+    "length": 98,
+    "minimumLength": 98,
+    "fields": {
+      "type": 0,
+      "len": 1,
+      "data": 2
+    }
+  },
+  "173": {
+    "name": "RANGEFINDER",
+    "crc": 83,
+    "length": 8,
+    "minimumLength": 8,
+    "fields": {
+      "distance": 0,
+      "voltage": 4
+    }
+  },
+  "174": {
+    "name": "AIRSPEED_AUTOCAL",
+    "crc": 167,
+    "length": 48,
+    "minimumLength": 48,
+    "fields": {
+      "vx": 0,
+      "vy": 4,
+      "vz": 8,
+      "diff_pressure": 12,
+      "EAS2TAS": 16,
+      "ratio": 20,
+      "state_x": 24,
+      "state_y": 28,
+      "state_z": 32,
+      "Pax": 36,
+      "Pby": 40,
+      "Pcz": 44
+    }
+  },
+  "175": {
+    "name": "RALLY_POINT",
+    "crc": 138,
+    "length": 19,
+    "minimumLength": 19,
+    "fields": {
+      "lat": 0,
+      "lng": 4,
+      "alt": 8,
+      "break_alt": 10,
+      "land_dir": 12,
+      "target_system": 14,
+      "target_component": 15,
+      "idx": 16,
+      "count": 17,
+      "flags": 18
+    }
+  },
+  "176": {
+    "name": "RALLY_FETCH_POINT",
+    "crc": 234,
+    "length": 3,
+    "minimumLength": 3,
+    "fields": {
+      "target_system": 0,
+      "target_component": 1,
+      "idx": 2
+    }
+  },
+  "177": {
+    "name": "COMPASSMOT_STATUS",
+    "crc": 240,
+    "length": 20,
+    "minimumLength": 20,
+    "fields": {
+      "current": 0,
+      "CompensationX": 4,
+      "CompensationY": 8,
+      "CompensationZ": 12,
+      "throttle": 16,
+      "interference": 18
+    }
+  },
+  "178": {
+    "name": "AHRS2",
+    "crc": 47,
+    "length": 24,
+    "minimumLength": 24,
+    "fields": {
+      "roll": 0,
+      "pitch": 4,
+      "yaw": 8,
+      "altitude": 12,
+      "lat": 16,
+      "lng": 20
+    }
+  },
+  "179": {
+    "name": "CAMERA_STATUS",
+    "crc": 189,
+    "length": 29,
+    "minimumLength": 29,
+    "fields": {
+      "time_usec": 0,
+      "p1": 8,
+      "p2": 12,
+      "p3": 16,
+      "p4": 20,
+      "img_idx": 24,
+      "target_system": 26,
+      "cam_idx": 27,
+      "event_id": 28
+    }
+  },
+  "180": {
+    "name": "CAMERA_FEEDBACK",
+    "crc": 52,
+    "length": 47,
+    "minimumLength": 45,
+    "fields": {
+      "time_usec": 0,
+      "lat": 8,
+      "lng": 12,
+      "alt_msl": 16,
+      "alt_rel": 20,
+      "roll": 24,
+      "pitch": 28,
+      "yaw": 32,
+      "foc_len": 36,
+      "img_idx": 40,
+      "target_system": 42,
+      "cam_idx": 43,
+      "flags": 44,
+      "completed_captures": 45
+    }
+  },
+  "181": {
+    "name": "BATTERY2",
+    "crc": 174,
+    "length": 4,
+    "minimumLength": 4,
+    "fields": {
+      "voltage": 0,
+      "current_battery": 2
+    }
+  },
+  "182": {
+    "name": "AHRS3",
+    "crc": 229,
+    "length": 40,
+    "minimumLength": 40,
+    "fields": {
+      "roll": 0,
+      "pitch": 4,
+      "yaw": 8,
+      "altitude": 12,
+      "lat": 16,
+      "lng": 20,
+      "v1": 24,
+      "v2": 28,
+      "v3": 32,
+      "v4": 36
+    }
+  },
+  "183": {
+    "name": "AUTOPILOT_VERSION_REQUEST",
+    "crc": 85,
+    "length": 2,
+    "minimumLength": 2,
+    "fields": {
+      "target_system": 0,
+      "target_component": 1
+    }
+  },
+  "184": {
+    "name": "REMOTE_LOG_DATA_BLOCK",
+    "crc": 159,
+    "length": 206,
+    "minimumLength": 206,
+    "fields": {
+      "seqno": 0,
+      "target_system": 4,
+      "target_component": 5,
+      "data": 6
+    }
+  },
+  "185": {
+    "name": "REMOTE_LOG_BLOCK_STATUS",
+    "crc": 186,
+    "length": 7,
+    "minimumLength": 7,
+    "fields": {
+      "seqno": 0,
+      "target_system": 4,
+      "target_component": 5,
+      "status": 6
+    }
+  },
+  "186": {
+    "name": "LED_CONTROL",
+    "crc": 72,
+    "length": 29,
+    "minimumLength": 29,
+    "fields": {
+      "target_system": 0,
+      "target_component": 1,
+      "instance": 2,
+      "pattern": 3,
+      "custom_len": 4,
+      "custom_bytes": 5
+    }
+  },
+  "191": {
+    "name": "MAG_CAL_PROGRESS",
+    "crc": 92,
+    "length": 27,
+    "minimumLength": 27,
+    "fields": {
+      "direction_x": 0,
+      "direction_y": 4,
+      "direction_z": 8,
+      "compass_id": 12,
+      "cal_mask": 13,
+      "cal_status": 14,
+      "attempt": 15,
+      "completion_pct": 16,
+      "completion_mask": 17
+    }
+  },
+  "192": {
+    "name": "MAG_CAL_REPORT",
+    "crc": 36,
+    "length": 54,
+    "minimumLength": 44,
+    "fields": {
+      "fitness": 0,
+      "ofs_x": 4,
+      "ofs_y": 8,
+      "ofs_z": 12,
+      "diag_x": 16,
+      "diag_y": 20,
+      "diag_z": 24,
+      "offdiag_x": 28,
+      "offdiag_y": 32,
+      "offdiag_z": 36,
+      "compass_id": 40,
+      "cal_mask": 41,
+      "cal_status": 42,
+      "autosaved": 43,
+      "orientation_confidence": 44,
+      "old_orientation": 48,
+      "new_orientation": 49,
+      "scale_factor": 50
+    }
+  },
+  "193": {
+    "name": "EKF_STATUS_REPORT",
+    "crc": 71,
+    "length": 26,
+    "minimumLength": 22,
+    "fields": {
+      "velocity_variance": 0,
+      "pos_horiz_variance": 4,
+      "pos_vert_variance": 8,
+      "compass_variance": 12,
+      "terrain_alt_variance": 16,
+      "flags": 20,
+      "airspeed_variance": 22
+    }
+  },
+  "194": {
+    "name": "PID_TUNING",
+    "crc": 98,
+    "length": 33,
+    "minimumLength": 25,
+    "fields": {
+      "desired": 0,
+      "achieved": 4,
+      "FF": 8,
+      "P": 12,
+      "I": 16,
+      "D": 20,
+      "axis": 24,
+      "SRate": 25,
+      "PDmod": 29
+    }
+  },
+  "195": {
+    "name": "DEEPSTALL",
+    "crc": 120,
+    "length": 37,
+    "minimumLength": 37,
+    "fields": {
+      "landing_lat": 0,
+      "landing_lon": 4,
+      "path_lat": 8,
+      "path_lon": 12,
+      "arc_entry_lat": 16,
+      "arc_entry_lon": 20,
+      "altitude": 24,
+      "expected_travel_distance": 28,
+      "cross_track_error": 32,
+      "stage": 36
+    }
+  },
+  "200": {
+    "name": "GIMBAL_REPORT",
+    "crc": 134,
+    "length": 42,
+    "minimumLength": 42,
+    "fields": {
+      "delta_time": 0,
+      "delta_angle_x": 4,
+      "delta_angle_y": 8,
+      "delta_angle_z": 12,
+      "delta_velocity_x": 16,
+      "delta_velocity_y": 20,
+      "delta_velocity_z": 24,
+      "joint_roll": 28,
+      "joint_el": 32,
+      "joint_az": 36,
+      "target_system": 40,
+      "target_component": 41
+    }
+  },
+  "201": {
+    "name": "GIMBAL_CONTROL",
+    "crc": 205,
+    "length": 14,
+    "minimumLength": 14,
+    "fields": {
+      "demanded_rate_x": 0,
+      "demanded_rate_y": 4,
+      "demanded_rate_z": 8,
+      "target_system": 12,
+      "target_component": 13
+    }
+  },
+  "214": {
+    "name": "GIMBAL_TORQUE_CMD_REPORT",
+    "crc": 69,
+    "length": 8,
+    "minimumLength": 8,
+    "fields": {
+      "rl_torque_cmd": 0,
+      "el_torque_cmd": 2,
+      "az_torque_cmd": 4,
+      "target_system": 6,
+      "target_component": 7
+    }
+  },
+  "215": {
+    "name": "GOPRO_HEARTBEAT",
+    "crc": 101,
+    "length": 3,
+    "minimumLength": 3,
+    "fields": {
+      "status": 0,
+      "capture_mode": 1,
+      "flags": 2
+    }
+  },
+  "216": {
+    "name": "GOPRO_GET_REQUEST",
+    "crc": 50,
+    "length": 3,
+    "minimumLength": 3,
+    "fields": {
+      "target_system": 0,
+      "target_component": 1,
+      "cmd_id": 2
+    }
+  },
+  "217": {
+    "name": "GOPRO_GET_RESPONSE",
+    "crc": 202,
+    "length": 6,
+    "minimumLength": 6,
+    "fields": {
+      "cmd_id": 0,
+      "status": 1,
+      "value": 2
+    }
+  },
+  "218": {
+    "name": "GOPRO_SET_REQUEST",
+    "crc": 17,
+    "length": 7,
+    "minimumLength": 7,
+    "fields": {
+      "target_system": 0,
+      "target_component": 1,
+      "cmd_id": 2,
+      "value": 3
+    }
+  },
+  "219": {
+    "name": "GOPRO_SET_RESPONSE",
+    "crc": 162,
+    "length": 2,
+    "minimumLength": 2,
+    "fields": {
+      "cmd_id": 0,
+      "status": 1
+    }
+  },
+  "225": {
+    "name": "EFI_STATUS",
+    "crc": 208,
+    "length": 73,
+    "minimumLength": 65,
+    "fields": {
+      "ecu_index": 0,
+      "rpm": 4,
+      "fuel_consumed": 8,
+      "fuel_flow": 12,
+      "engine_load": 16,
+      "throttle_position": 20,
+      "spark_dwell_time": 24,
+      "barometric_pressure": 28,
+      "intake_manifold_pressure": 32,
+      "intake_manifold_temperature": 36,
+      "cylinder_head_temperature": 40,
+      "ignition_timing": 44,
+      "injection_time": 48,
+      "exhaust_gas_temperature": 52,
+      "throttle_out": 56,
+      "pt_compensation": 60,
+      "health": 64,
+      "ignition_voltage": 65,
+      "fuel_pressure": 69
+    }
+  },
+  "226": {
+    "name": "RPM",
+    "crc": 207,
+    "length": 8,
+    "minimumLength": 8,
+    "fields": {
+      "rpm1": 0,
+      "rpm2": 4
+    }
+  },
+  "230": {
+    "name": "ESTIMATOR_STATUS",
+    "crc": 163,
+    "length": 42,
+    "minimumLength": 42,
+    "fields": {
+      "time_usec": 0,
+      "vel_ratio": 8,
+      "pos_horiz_ratio": 12,
+      "pos_vert_ratio": 16,
+      "mag_ratio": 20,
+      "hagl_ratio": 24,
+      "tas_ratio": 28,
+      "pos_horiz_accuracy": 32,
+      "pos_vert_accuracy": 36,
+      "flags": 40
+    }
+  },
+  "231": {
+    "name": "WIND_COV",
+    "crc": 105,
+    "length": 40,
+    "minimumLength": 40,
+    "fields": {
+      "time_usec": 0,
+      "wind_x": 8,
+      "wind_y": 12,
+      "wind_z": 16,
+      "var_horiz": 20,
+      "var_vert": 24,
+      "wind_alt": 28,
+      "horiz_accuracy": 32,
+      "vert_accuracy": 36
+    }
+  },
+  "232": {
+    "name": "GPS_INPUT",
+    "crc": 151,
+    "length": 65,
+    "minimumLength": 63,
+    "fields": {
+      "time_usec": 0,
+      "time_week_ms": 8,
+      "lat": 12,
+      "lon": 16,
+      "alt": 20,
+      "hdop": 24,
+      "vdop": 28,
+      "vn": 32,
+      "ve": 36,
+      "vd": 40,
+      "speed_accuracy": 44,
+      "horiz_accuracy": 48,
+      "vert_accuracy": 52,
+      "ignore_flags": 56,
+      "time_week": 58,
+      "gps_id": 60,
+      "fix_type": 61,
+      "satellites_visible": 62,
+      "yaw": 63
+    }
+  },
+  "233": {
+    "name": "GPS_RTCM_DATA",
+    "crc": 35,
+    "length": 182,
+    "minimumLength": 182,
+    "fields": {
+      "flags": 0,
+      "len": 1,
+      "data": 2
+    }
+  },
+  "234": {
+    "name": "HIGH_LATENCY",
+    "crc": 150,
+    "length": 40,
+    "minimumLength": 40,
+    "fields": {
+      "custom_mode": 0,
+      "latitude": 4,
+      "longitude": 8,
+      "roll": 12,
+      "pitch": 14,
+      "heading": 16,
+      "heading_sp": 18,
+      "altitude_amsl": 20,
+      "altitude_sp": 22,
+      "wp_distance": 24,
+      "base_mode": 26,
+      "landed_state": 27,
+      "throttle": 28,
+      "airspeed": 29,
+      "airspeed_sp": 30,
+      "groundspeed": 31,
+      "climb_rate": 32,
+      "gps_nsat": 33,
+      "gps_fix_type": 34,
+      "battery_remaining": 35,
+      "temperature": 36,
+      "temperature_air": 37,
+      "failsafe": 38,
+      "wp_num": 39
+    }
+  },
+  "235": {
+    "name": "HIGH_LATENCY2",
+    "crc": 179,
+    "length": 42,
+    "minimumLength": 42,
+    "fields": {
+      "timestamp": 0,
+      "latitude": 4,
+      "longitude": 8,
+      "custom_mode": 12,
+      "altitude": 14,
+      "target_altitude": 16,
+      "target_distance": 18,
+      "wp_num": 20,
+      "failure_flags": 22,
+      "type": 24,
+      "autopilot": 25,
+      "heading": 26,
+      "target_heading": 27,
+      "throttle": 28,
+      "airspeed": 29,
+      "airspeed_sp": 30,
+      "groundspeed": 31,
+      "windspeed": 32,
+      "wind_heading": 33,
+      "eph": 34,
+      "epv": 35,
+      "temperature_air": 36,
+      "climb_rate": 37,
+      "battery": 38,
+      "custom0": 39,
+      "custom1": 40,
+      "custom2": 41
+    }
+  },
+  "241": {
+    "name": "VIBRATION",
+    "crc": 90,
+    "length": 32,
+    "minimumLength": 32,
+    "fields": {
+      "time_usec": 0,
+      "vibration_x": 8,
+      "vibration_y": 12,
+      "vibration_z": 16,
+      "clipping_0": 20,
+      "clipping_1": 24,
+      "clipping_2": 28
+    }
+  },
+  "242": {
+    "name": "HOME_POSITION",
+    "crc": 104,
+    "length": 60,
+    "minimumLength": 52,
+    "fields": {
+      "latitude": 0,
+      "longitude": 4,
+      "altitude": 8,
+      "x": 12,
+      "y": 16,
+      "z": 20,
+      "q": 24,
+      "approach_x": 40,
+      "approach_y": 44,
+      "approach_z": 48,
+      "time_usec": 52
+    }
+  },
+  "243": {
+    "name": "SET_HOME_POSITION",
+    "crc": 85,
+    "length": 61,
+    "minimumLength": 53,
+    "fields": {
+      "latitude": 0,
+      "longitude": 4,
+      "altitude": 8,
+      "x": 12,
+      "y": 16,
+      "z": 20,
+      "q": 24,
+      "approach_x": 40,
+      "approach_y": 44,
+      "approach_z": 48,
+      "target_system": 52,
+      "time_usec": 53
+    }
+  },
+  "244": {
+    "name": "MESSAGE_INTERVAL",
+    "crc": 95,
+    "length": 6,
+    "minimumLength": 6,
+    "fields": {
+      "interval_us": 0,
+      "message_id": 4
+    }
+  },
+  "245": {
+    "name": "EXTENDED_SYS_STATE",
+    "crc": 130,
+    "length": 2,
+    "minimumLength": 2,
+    "fields": {
+      "vtol_state": 0,
+      "landed_state": 1
+    }
+  },
+  "246": {
+    "name": "ADSB_VEHICLE",
+    "crc": 184,
+    "length": 38,
+    "minimumLength": 38,
+    "fields": {
+      "ICAO_address": 0,
+      "lat": 4,
+      "lon": 8,
+      "altitude": 12,
+      "heading": 16,
+      "hor_velocity": 18,
+      "ver_velocity": 20,
+      "flags": 22,
+      "squawk": 24,
+      "altitude_type": 26,
+      "callsign": 27,
+      "emitter_type": 36,
+      "tslc": 37
+    }
+  },
+  "247": {
+    "name": "COLLISION",
+    "crc": 81,
+    "length": 19,
+    "minimumLength": 19,
+    "fields": {
+      "id": 0,
+      "time_to_minimum_delta": 4,
+      "altitude_minimum_delta": 8,
+      "horizontal_minimum_delta": 12,
+      "src": 16,
+      "action": 17,
+      "threat_level": 18
+    }
+  },
+  "248": {
+    "name": "V2_EXTENSION",
+    "crc": 8,
+    "length": 254,
+    "minimumLength": 254,
+    "fields": {
+      "message_type": 0,
+      "target_network": 2,
+      "target_system": 3,
+      "target_component": 4,
+      "payload": 5
+    }
+  },
+  "249": {
+    "name": "MEMORY_VECT",
+    "crc": 204,
+    "length": 36,
+    "minimumLength": 36,
+    "fields": {
+      "address": 0,
+      "ver": 2,
+      "type": 3,
+      "value": 4
+    }
+  },
+  "250": {
+    "name": "DEBUG_VECT",
+    "crc": 49,
+    "length": 30,
+    "minimumLength": 30,
+    "fields": {
+      "time_usec": 0,
+      "x": 8,
+      "y": 12,
+      "z": 16,
+      "name": 20
+    }
+  },
+  "251": {
+    "name": "NAMED_VALUE_FLOAT",
+    "crc": 170,
+    "length": 18,
+    "minimumLength": 18,
+    "fields": {
+      "time_boot_ms": 0,
+      "value": 4,
+      "name": 8
+    }
+  },
+  "252": {
+    "name": "NAMED_VALUE_INT",
+    "crc": 44,
+    "length": 18,
+    "minimumLength": 18,
+    "fields": {
+      "time_boot_ms": 0,
+      "value": 4,
+      "name": 8
+    }
+  },
+  "253": {
+    "name": "STATUSTEXT",
+    "crc": 83,
+    "length": 54,
+    "minimumLength": 51,
+    "fields": {
+      "severity": 0,
+      "text": 1,
+      "id": 51,
+      "chunk_seq": 53
+    }
+  },
+  "254": {
+    "name": "DEBUG",
+    "crc": 46,
+    "length": 9,
+    "minimumLength": 9,
+    "fields": {
+      "time_boot_ms": 0,
+      "value": 4,
+      "ind": 8
+    }
+  },
+  "256": {
+    "name": "SETUP_SIGNING",
+    "crc": 71,
+    "length": 42,
+    "minimumLength": 42,
+    "fields": {
+      "initial_timestamp": 0,
+      "target_system": 8,
+      "target_component": 9,
+      "secret_key": 10
+    }
+  },
+  "257": {
+    "name": "BUTTON_CHANGE",
+    "crc": 131,
+    "length": 9,
+    "minimumLength": 9,
+    "fields": {
+      "time_boot_ms": 0,
+      "last_change_ms": 4,
+      "state": 8
+    }
+  },
+  "258": {
+    "name": "PLAY_TUNE",
+    "crc": 187,
+    "length": 232,
+    "minimumLength": 32,
+    "fields": {
+      "target_system": 0,
+      "target_component": 1,
+      "tune": 2,
+      "tune2": 32
+    }
+  },
+  "259": {
+    "name": "CAMERA_INFORMATION",
+    "crc": 92,
+    "length": 236,
+    "minimumLength": 235,
+    "fields": {
+      "time_boot_ms": 0,
+      "firmware_version": 4,
+      "focal_length": 8,
+      "sensor_size_h": 12,
+      "sensor_size_v": 16,
+      "flags": 20,
+      "resolution_h": 24,
+      "resolution_v": 26,
+      "cam_definition_version": 28,
+      "vendor_name": 30,
+      "model_name": 62,
+      "lens_id": 94,
+      "cam_definition_uri": 95,
+      "gimbal_device_id": 235
+    }
+  },
+  "260": {
+    "name": "CAMERA_SETTINGS",
+    "crc": 146,
+    "length": 13,
+    "minimumLength": 5,
+    "fields": {
+      "time_boot_ms": 0,
+      "mode_id": 4,
+      "zoomLevel": 5,
+      "focusLevel": 9
+    }
+  },
+  "261": {
+    "name": "STORAGE_INFORMATION",
+    "crc": 179,
+    "length": 61,
+    "minimumLength": 27,
+    "fields": {
+      "time_boot_ms": 0,
+      "total_capacity": 4,
+      "used_capacity": 8,
+      "available_capacity": 12,
+      "read_speed": 16,
+      "write_speed": 20,
+      "storage_id": 24,
+      "storage_count": 25,
+      "status": 26,
+      "type": 27,
+      "name": 28,
+      "storage_usage": 60
+    }
+  },
+  "262": {
+    "name": "CAMERA_CAPTURE_STATUS",
+    "crc": 12,
+    "length": 22,
+    "minimumLength": 18,
+    "fields": {
+      "time_boot_ms": 0,
+      "image_interval": 4,
+      "recording_time_ms": 8,
+      "available_capacity": 12,
+      "image_status": 16,
+      "video_status": 17,
+      "image_count": 18
+    }
+  },
+  "263": {
+    "name": "CAMERA_IMAGE_CAPTURED",
+    "crc": 133,
+    "length": 255,
+    "minimumLength": 255,
+    "fields": {
+      "time_utc": 0,
+      "time_boot_ms": 8,
+      "lat": 12,
+      "lon": 16,
+      "alt": 20,
+      "relative_alt": 24,
+      "q": 28,
+      "image_index": 44,
+      "camera_id": 48,
+      "capture_result": 49,
+      "file_url": 50
+    }
+  },
+  "264": {
+    "name": "FLIGHT_INFORMATION",
+    "crc": 49,
+    "length": 32,
+    "minimumLength": 28,
+    "fields": {
+      "arming_time_utc": 0,
+      "takeoff_time_utc": 8,
+      "flight_uuid": 16,
+      "time_boot_ms": 24,
+      "landing_time": 28
+    }
+  },
+  "265": {
+    "name": "MOUNT_ORIENTATION",
+    "crc": 26,
+    "length": 20,
+    "minimumLength": 16,
+    "fields": {
+      "time_boot_ms": 0,
+      "roll": 4,
+      "pitch": 8,
+      "yaw": 12,
+      "yaw_absolute": 16
+    }
+  },
+  "266": {
+    "name": "LOGGING_DATA",
+    "crc": 193,
+    "length": 255,
+    "minimumLength": 255,
+    "fields": {
+      "sequence": 0,
+      "target_system": 2,
+      "target_component": 3,
+      "length": 4,
+      "first_message_offset": 5,
+      "data": 6
+    }
+  },
+  "267": {
+    "name": "LOGGING_DATA_ACKED",
+    "crc": 35,
+    "length": 255,
+    "minimumLength": 255,
+    "fields": {
+      "sequence": 0,
+      "target_system": 2,
+      "target_component": 3,
+      "length": 4,
+      "first_message_offset": 5,
+      "data": 6
+    }
+  },
+  "268": {
+    "name": "LOGGING_ACK",
+    "crc": 14,
+    "length": 4,
+    "minimumLength": 4,
+    "fields": {
+      "sequence": 0,
+      "target_system": 2,
+      "target_component": 3
+    }
+  },
+  "269": {
+    "name": "VIDEO_STREAM_INFORMATION",
+    "crc": 109,
+    "length": 213,
+    "minimumLength": 213,
+    "fields": {
+      "framerate": 0,
+      "bitrate": 4,
+      "flags": 8,
+      "resolution_h": 10,
+      "resolution_v": 12,
+      "rotation": 14,
+      "hfov": 16,
+      "stream_id": 18,
+      "count": 19,
+      "type": 20,
+      "name": 21,
+      "uri": 53
+    }
+  },
+  "270": {
+    "name": "VIDEO_STREAM_STATUS",
+    "crc": 59,
+    "length": 19,
+    "minimumLength": 19,
+    "fields": {
+      "framerate": 0,
+      "bitrate": 4,
+      "flags": 8,
+      "resolution_h": 10,
+      "resolution_v": 12,
+      "rotation": 14,
+      "hfov": 16,
+      "stream_id": 18
+    }
+  },
+  "271": {
+    "name": "CAMERA_FOV_STATUS",
+    "crc": 22,
+    "length": 52,
+    "minimumLength": 52,
+    "fields": {
+      "time_boot_ms": 0,
+      "lat_camera": 4,
+      "lon_camera": 8,
+      "alt_camera": 12,
+      "lat_image": 16,
+      "lon_image": 20,
+      "alt_image": 24,
+      "q": 28,
+      "hfov": 44,
+      "vfov": 48
+    }
+  },
+  "275": {
+    "name": "CAMERA_TRACKING_IMAGE_STATUS",
+    "crc": 126,
+    "length": 31,
+    "minimumLength": 31,
+    "fields": {
+      "point_x": 0,
+      "point_y": 4,
+      "radius": 8,
+      "rec_top_x": 12,
+      "rec_top_y": 16,
+      "rec_bottom_x": 20,
+      "rec_bottom_y": 24,
+      "tracking_status": 28,
+      "tracking_mode": 29,
+      "target_data": 30
+    }
+  },
+  "276": {
+    "name": "CAMERA_TRACKING_GEO_STATUS",
+    "crc": 18,
+    "length": 49,
+    "minimumLength": 49,
+    "fields": {
+      "lat": 0,
+      "lon": 4,
+      "alt": 8,
+      "h_acc": 12,
+      "v_acc": 16,
+      "vel_n": 20,
+      "vel_e": 24,
+      "vel_d": 28,
+      "vel_acc": 32,
+      "dist": 36,
+      "hdg": 40,
+      "hdg_acc": 44,
+      "tracking_status": 48
+    }
+  },
+  "280": {
+    "name": "GIMBAL_MANAGER_INFORMATION",
+    "crc": 70,
+    "length": 33,
+    "minimumLength": 33,
+    "fields": {
+      "time_boot_ms": 0,
+      "cap_flags": 4,
+      "roll_min": 8,
+      "roll_max": 12,
+      "pitch_min": 16,
+      "pitch_max": 20,
+      "yaw_min": 24,
+      "yaw_max": 28,
+      "gimbal_device_id": 32
+    }
+  },
+  "281": {
+    "name": "GIMBAL_MANAGER_STATUS",
+    "crc": 48,
+    "length": 13,
+    "minimumLength": 13,
+    "fields": {
+      "time_boot_ms": 0,
+      "flags": 4,
+      "gimbal_device_id": 8,
+      "primary_control_sysid": 9,
+      "primary_control_compid": 10,
+      "secondary_control_sysid": 11,
+      "secondary_control_compid": 12
+    }
+  },
+  "282": {
+    "name": "GIMBAL_MANAGER_SET_ATTITUDE",
+    "crc": 123,
+    "length": 35,
+    "minimumLength": 35,
+    "fields": {
+      "flags": 0,
+      "q": 4,
+      "angular_velocity_x": 20,
+      "angular_velocity_y": 24,
+      "angular_velocity_z": 28,
+      "target_system": 32,
+      "target_component": 33,
+      "gimbal_device_id": 34
+    }
+  },
+  "283": {
+    "name": "GIMBAL_DEVICE_INFORMATION",
+    "crc": 74,
+    "length": 145,
+    "minimumLength": 144,
+    "fields": {
+      "uid": 0,
+      "time_boot_ms": 8,
+      "firmware_version": 12,
+      "hardware_version": 16,
+      "roll_min": 20,
+      "roll_max": 24,
+      "pitch_min": 28,
+      "pitch_max": 32,
+      "yaw_min": 36,
+      "yaw_max": 40,
+      "cap_flags": 44,
+      "custom_cap_flags": 46,
+      "vendor_name": 48,
+      "model_name": 80,
+      "custom_name": 112,
+      "gimbal_device_id": 144
+    }
+  },
+  "284": {
+    "name": "GIMBAL_DEVICE_SET_ATTITUDE",
+    "crc": 99,
+    "length": 32,
+    "minimumLength": 32,
+    "fields": {
+      "q": 0,
+      "angular_velocity_x": 16,
+      "angular_velocity_y": 20,
+      "angular_velocity_z": 24,
+      "flags": 28,
+      "target_system": 30,
+      "target_component": 31
+    }
+  },
+  "285": {
+    "name": "GIMBAL_DEVICE_ATTITUDE_STATUS",
+    "crc": 137,
+    "length": 49,
+    "minimumLength": 40,
+    "fields": {
+      "time_boot_ms": 0,
+      "q": 4,
+      "angular_velocity_x": 20,
+      "angular_velocity_y": 24,
+      "angular_velocity_z": 28,
+      "failure_flags": 32,
+      "flags": 36,
+      "target_system": 38,
+      "target_component": 39,
+      "delta_yaw": 40,
+      "delta_yaw_velocity": 44,
+      "gimbal_device_id": 48
+    }
+  },
+  "286": {
+    "name": "AUTOPILOT_STATE_FOR_GIMBAL_DEVICE",
+    "crc": 210,
+    "length": 57,
+    "minimumLength": 53,
+    "fields": {
+      "time_boot_us": 0,
+      "q": 8,
+      "q_estimated_delay_us": 24,
+      "vx": 28,
+      "vy": 32,
+      "vz": 36,
+      "v_estimated_delay_us": 40,
+      "feed_forward_angular_velocity_z": 44,
+      "estimator_status": 48,
+      "target_system": 50,
+      "target_component": 51,
+      "landed_state": 52,
+      "angular_velocity_z": 53
+    }
+  },
+  "287": {
+    "name": "GIMBAL_MANAGER_SET_PITCHYAW",
+    "crc": 1,
+    "length": 23,
+    "minimumLength": 23,
+    "fields": {
+      "flags": 0,
+      "pitch": 4,
+      "yaw": 8,
+      "pitch_rate": 12,
+      "yaw_rate": 16,
+      "target_system": 20,
+      "target_component": 21,
+      "gimbal_device_id": 22
+    }
+  },
+  "288": {
+    "name": "GIMBAL_MANAGER_SET_MANUAL_CONTROL",
+    "crc": 20,
+    "length": 23,
+    "minimumLength": 23,
+    "fields": {
+      "flags": 0,
+      "pitch": 4,
+      "yaw": 8,
+      "pitch_rate": 12,
+      "yaw_rate": 16,
+      "target_system": 20,
+      "target_component": 21,
+      "gimbal_device_id": 22
+    }
+  },
+  "290": {
+    "name": "ESC_INFO",
+    "crc": 251,
+    "length": 46,
+    "minimumLength": 46,
+    "fields": {
+      "time_usec": 0,
+      "error_count": 8,
+      "counter": 24,
+      "failure_flags": 26,
+      "temperature": 34,
+      "index": 42,
+      "count": 43,
+      "connection_type": 44,
+      "info": 45
+    }
+  },
+  "291": {
+    "name": "ESC_STATUS",
+    "crc": 10,
+    "length": 57,
+    "minimumLength": 57,
+    "fields": {
+      "time_usec": 0,
+      "rpm": 8,
+      "voltage": 24,
+      "current": 40,
+      "index": 56
+    }
+  },
+  "299": {
+    "name": "WIFI_CONFIG_AP",
+    "crc": 19,
+    "length": 98,
+    "minimumLength": 96,
+    "fields": {
+      "ssid": 0,
+      "password": 32,
+      "mode": 96,
+      "response": 97
+    }
+  },
+  "300": {
+    "name": "PROTOCOL_VERSION",
+    "crc": 217,
+    "length": 22,
+    "minimumLength": 22,
+    "fields": {
+      "version": 0,
+      "min_version": 2,
+      "max_version": 4,
+      "spec_version_hash": 6,
+      "library_version_hash": 14
+    }
+  },
+  "301": {
+    "name": "AIS_VESSEL",
+    "crc": 243,
+    "length": 58,
+    "minimumLength": 58,
+    "fields": {
+      "MMSI": 0,
+      "lat": 4,
+      "lon": 8,
+      "COG": 12,
+      "heading": 14,
+      "velocity": 16,
+      "dimension_bow": 18,
+      "dimension_stern": 20,
+      "tslc": 22,
+      "flags": 24,
+      "turn_rate": 26,
+      "navigational_status": 27,
+      "type": 28,
+      "dimension_port": 29,
+      "dimension_starboard": 30,
+      "callsign": 31,
+      "name": 38
+    }
+  },
+  "310": {
+    "name": "UAVCAN_NODE_STATUS",
+    "crc": 28,
+    "length": 17,
+    "minimumLength": 17,
+    "fields": {
+      "time_usec": 0,
+      "uptime_sec": 8,
+      "vendor_specific_status_code": 12,
+      "health": 14,
+      "mode": 15,
+      "sub_mode": 16
+    }
+  },
+  "311": {
+    "name": "UAVCAN_NODE_INFO",
+    "crc": 95,
+    "length": 116,
+    "minimumLength": 116,
+    "fields": {
+      "time_usec": 0,
+      "uptime_sec": 8,
+      "sw_vcs_commit": 12,
+      "name": 16,
+      "hw_version_major": 96,
+      "hw_version_minor": 97,
+      "hw_unique_id": 98,
+      "sw_version_major": 114,
+      "sw_version_minor": 115
+    }
+  },
+  "320": {
+    "name": "PARAM_EXT_REQUEST_READ",
+    "crc": 243,
+    "length": 20,
+    "minimumLength": 20,
+    "fields": {
+      "param_index": 0,
+      "target_system": 2,
+      "target_component": 3,
+      "param_id": 4
+    }
+  },
+  "321": {
+    "name": "PARAM_EXT_REQUEST_LIST",
+    "crc": 88,
+    "length": 2,
+    "minimumLength": 2,
+    "fields": {
+      "target_system": 0,
+      "target_component": 1
+    }
+  },
+  "322": {
+    "name": "PARAM_EXT_VALUE",
+    "crc": 243,
+    "length": 149,
+    "minimumLength": 149,
+    "fields": {
+      "param_count": 0,
+      "param_index": 2,
+      "param_id": 4,
+      "param_value": 20,
+      "param_type": 148
+    }
+  },
+  "323": {
+    "name": "PARAM_EXT_SET",
+    "crc": 78,
+    "length": 147,
+    "minimumLength": 147,
+    "fields": {
+      "target_system": 0,
+      "target_component": 1,
+      "param_id": 2,
+      "param_value": 18,
+      "param_type": 146
+    }
+  },
+  "324": {
+    "name": "PARAM_EXT_ACK",
+    "crc": 132,
+    "length": 146,
+    "minimumLength": 146,
+    "fields": {
+      "param_id": 0,
+      "param_value": 16,
+      "param_type": 144,
+      "param_result": 145
+    }
+  },
+  "330": {
+    "name": "OBSTACLE_DISTANCE",
+    "crc": 23,
+    "length": 167,
+    "minimumLength": 158,
+    "fields": {
+      "time_usec": 0,
+      "distances": 8,
+      "min_distance": 152,
+      "max_distance": 154,
+      "sensor_type": 156,
+      "increment": 157,
+      "increment_f": 158,
+      "angle_offset": 162,
+      "frame": 166
+    }
+  },
+  "331": {
+    "name": "ODOMETRY",
+    "crc": 91,
+    "length": 233,
+    "minimumLength": 230,
+    "fields": {
+      "time_usec": 0,
+      "x": 8,
+      "y": 12,
+      "z": 16,
+      "q": 20,
+      "vx": 36,
+      "vy": 40,
+      "vz": 44,
+      "rollspeed": 48,
+      "pitchspeed": 52,
+      "yawspeed": 56,
+      "pose_covariance": 60,
+      "velocity_covariance": 144,
+      "frame_id": 228,
+      "child_frame_id": 229,
+      "reset_counter": 230,
+      "estimator_type": 231,
+      "quality": 232
+    }
+  },
+  "332": {
+    "name": "TRAJECTORY_REPRESENTATION_WAYPOINTS",
+    "crc": 236,
+    "length": 239,
+    "minimumLength": 239,
+    "fields": {
+      "time_usec": 0,
+      "pos_x": 8,
+      "pos_y": 28,
+      "pos_z": 48,
+      "vel_x": 68,
+      "vel_y": 88,
+      "vel_z": 108,
+      "acc_x": 128,
+      "acc_y": 148,
+      "acc_z": 168,
+      "pos_yaw": 188,
+      "vel_yaw": 208,
+      "command": 228,
+      "valid_points": 238
+    }
+  },
+  "333": {
+    "name": "TRAJECTORY_REPRESENTATION_BEZIER",
+    "crc": 231,
+    "length": 109,
+    "minimumLength": 109,
+    "fields": {
+      "time_usec": 0,
+      "pos_x": 8,
+      "pos_y": 28,
+      "pos_z": 48,
+      "delta": 68,
+      "pos_yaw": 88,
+      "valid_points": 108
+    }
+  },
+  "334": {
+    "name": "CELLULAR_STATUS",
+    "crc": 72,
+    "length": 10,
+    "minimumLength": 10,
+    "fields": {
+      "mcc": 0,
+      "mnc": 2,
+      "lac": 4,
+      "status": 6,
+      "failure_reason": 7,
+      "type": 8,
+      "quality": 9
+    }
+  },
+  "335": {
+    "name": "ISBD_LINK_STATUS",
+    "crc": 225,
+    "length": 24,
+    "minimumLength": 24,
+    "fields": {
+      "timestamp": 0,
+      "last_heartbeat": 8,
+      "failed_sessions": 16,
+      "successful_sessions": 18,
+      "signal_quality": 20,
+      "ring_pending": 21,
+      "tx_session_pending": 22,
+      "rx_session_pending": 23
+    }
+  },
+  "336": {
+    "name": "CELLULAR_CONFIG",
+    "crc": 245,
+    "length": 84,
+    "minimumLength": 84,
+    "fields": {
+      "enable_lte": 0,
+      "enable_pin": 1,
+      "pin": 2,
+      "new_pin": 18,
+      "apn": 34,
+      "puk": 66,
+      "roaming": 82,
+      "response": 83
+    }
+  },
+  "339": {
+    "name": "RAW_RPM",
+    "crc": 199,
+    "length": 5,
+    "minimumLength": 5,
+    "fields": {
+      "frequency": 0,
+      "index": 4
+    }
+  },
+  "340": {
+    "name": "UTM_GLOBAL_POSITION",
+    "crc": 99,
+    "length": 70,
+    "minimumLength": 70,
+    "fields": {
+      "time": 0,
+      "lat": 8,
+      "lon": 12,
+      "alt": 16,
+      "relative_alt": 20,
+      "next_lat": 24,
+      "next_lon": 28,
+      "next_alt": 32,
+      "vx": 36,
+      "vy": 38,
+      "vz": 40,
+      "h_acc": 42,
+      "v_acc": 44,
+      "vel_acc": 46,
+      "update_rate": 48,
+      "uas_id": 50,
+      "flight_state": 68,
+      "flags": 69
+    }
+  },
+  "350": {
+    "name": "DEBUG_FLOAT_ARRAY",
+    "crc": 232,
+    "length": 252,
+    "minimumLength": 20,
+    "fields": {
+      "time_usec": 0,
+      "array_id": 8,
+      "name": 10,
+      "data": 20
+    }
+  },
+  "360": {
+    "name": "ORBIT_EXECUTION_STATUS",
+    "crc": 11,
+    "length": 25,
+    "minimumLength": 25,
+    "fields": {
+      "time_usec": 0,
+      "radius": 8,
+      "x": 12,
+      "y": 16,
+      "z": 20,
+      "frame": 24
+    }
+  },
+  "370": {
+    "name": "BATTERY_INFO",
+    "crc": 26,
+    "length": 140,
+    "minimumLength": 140,
+    "fields": {
+      "discharge_minimum_voltage": 0,
+      "charging_minimum_voltage": 4,
+      "resting_minimum_voltage": 8,
+      "charging_maximum_voltage": 12,
+      "charging_maximum_current": 16,
+      "nominal_voltage": 20,
+      "discharge_maximum_current": 24,
+      "discharge_maximum_burst_current": 28,
+      "design_capacity": 32,
+      "full_charge_capacity": 36,
+      "cycle_count": 40,
+      "weight": 42,
+      "id": 44,
+      "battery_function": 45,
+      "type": 46,
+      "state_of_health": 47,
+      "cells_in_series": 48,
+      "manufacture_date": 49,
+      "serial_number": 58,
+      "name": 90
+    }
+  },
+  "373": {
+    "name": "GENERATOR_STATUS",
+    "crc": 117,
+    "length": 42,
+    "minimumLength": 42,
+    "fields": {
+      "status": 0,
+      "battery_current": 8,
+      "load_current": 12,
+      "power_generated": 16,
+      "bus_voltage": 20,
+      "bat_current_setpoint": 24,
+      "runtime": 28,
+      "time_until_maintenance": 32,
+      "generator_speed": 36,
+      "rectifier_temperature": 38,
+      "generator_temperature": 40
+    }
+  },
+  "375": {
+    "name": "ACTUATOR_OUTPUT_STATUS",
+    "crc": 251,
+    "length": 140,
+    "minimumLength": 140,
+    "fields": {
+      "time_usec": 0,
+      "active": 8,
+      "actuator": 12
+    }
+  },
+  "380": {
+    "name": "TIME_ESTIMATE_TO_TARGET",
+    "crc": 232,
+    "length": 20,
+    "minimumLength": 20,
+    "fields": {
+      "safe_return": 0,
+      "land": 4,
+      "mission_next_item": 8,
+      "mission_end": 12,
+      "commanded_action": 16
+    }
+  },
+  "385": {
+    "name": "TUNNEL",
+    "crc": 147,
+    "length": 133,
+    "minimumLength": 133,
+    "fields": {
+      "payload_type": 0,
+      "target_system": 2,
+      "target_component": 3,
+      "payload_length": 4,
+      "payload": 5
+    }
+  },
+  "386": {
+    "name": "CAN_FRAME",
+    "crc": 132,
+    "length": 16,
+    "minimumLength": 16,
+    "fields": {
+      "id": 0,
+      "target_system": 4,
+      "target_component": 5,
+      "bus": 6,
+      "len": 7,
+      "data": 8
+    }
+  },
+  "387": {
+    "name": "CANFD_FRAME",
+    "crc": 4,
+    "length": 72,
+    "minimumLength": 72,
+    "fields": {
+      "id": 0,
+      "target_system": 4,
+      "target_component": 5,
+      "bus": 6,
+      "len": 7,
+      "data": 8
+    }
+  },
+  "388": {
+    "name": "CAN_FILTER_MODIFY",
+    "crc": 8,
+    "length": 37,
+    "minimumLength": 37,
+    "fields": {
+      "ids": 0,
+      "target_system": 32,
+      "target_component": 33,
+      "bus": 34,
+      "operation": 35,
+      "num_ids": 36
+    }
+  },
+  "390": {
+    "name": "ONBOARD_COMPUTER_STATUS",
+    "crc": 156,
+    "length": 238,
+    "minimumLength": 238,
+    "fields": {
+      "time_usec": 0,
+      "uptime": 8,
+      "ram_usage": 12,
+      "ram_total": 16,
+      "storage_type": 20,
+      "storage_usage": 36,
+      "storage_total": 52,
+      "link_type": 68,
+      "link_tx_rate": 92,
+      "link_rx_rate": 116,
+      "link_tx_max": 140,
+      "link_rx_max": 164,
+      "fan_speed": 188,
+      "type": 196,
+      "cpu_cores": 197,
+      "cpu_combined": 205,
+      "gpu_cores": 215,
+      "gpu_combined": 219,
+      "temperature_board": 229,
+      "temperature_core": 230
+    }
+  },
+  "395": {
+    "name": "COMPONENT_INFORMATION",
+    "crc": 0,
+    "length": 212,
+    "minimumLength": 212,
+    "fields": {
+      "time_boot_ms": 0,
+      "general_metadata_file_crc": 4,
+      "peripherals_metadata_file_crc": 8,
+      "general_metadata_uri": 12,
+      "peripherals_metadata_uri": 112
+    }
+  },
+  "397": {
+    "name": "COMPONENT_METADATA",
+    "crc": 182,
+    "length": 108,
+    "minimumLength": 108,
+    "fields": {
+      "time_boot_ms": 0,
+      "file_crc": 4,
+      "uri": 8
+    }
+  },
+  "400": {
+    "name": "PLAY_TUNE_V2",
+    "crc": 110,
+    "length": 254,
+    "minimumLength": 254,
+    "fields": {
+      "format": 0,
+      "target_system": 4,
+      "target_component": 5,
+      "tune": 6
+    }
+  },
+  "401": {
+    "name": "SUPPORTED_TUNES",
+    "crc": 183,
+    "length": 6,
+    "minimumLength": 6,
+    "fields": {
+      "format": 0,
+      "target_system": 4,
+      "target_component": 5
+    }
+  },
+  "410": {
+    "name": "EVENT",
+    "crc": 160,
+    "length": 53,
+    "minimumLength": 53,
+    "fields": {
+      "id": 0,
+      "event_time_boot_ms": 4,
+      "sequence": 8,
+      "destination_component": 10,
+      "destination_system": 11,
+      "log_levels": 12,
+      "arguments": 13
+    }
+  },
+  "411": {
+    "name": "CURRENT_EVENT_SEQUENCE",
+    "crc": 106,
+    "length": 3,
+    "minimumLength": 3,
+    "fields": {
+      "sequence": 0,
+      "flags": 2
+    }
+  },
+  "412": {
+    "name": "REQUEST_EVENT",
+    "crc": 33,
+    "length": 6,
+    "minimumLength": 6,
+    "fields": {
+      "first_sequence": 0,
+      "last_sequence": 2,
+      "target_system": 4,
+      "target_component": 5
+    }
+  },
+  "413": {
+    "name": "RESPONSE_EVENT_ERROR",
+    "crc": 77,
+    "length": 7,
+    "minimumLength": 7,
+    "fields": {
+      "sequence": 0,
+      "sequence_oldest_available": 2,
+      "target_system": 4,
+      "target_component": 5,
+      "reason": 6
+    }
+  },
+  "1211": {
+    "name": "OPENHD_STATS_MONITOR_MODE_WIFI_LINK",
+    "crc": 134,
+    "length": 42,
+    "minimumLength": 42,
+    "fields": {
+      "curr_tx_bps": 0,
+      "curr_rx_bps": 4,
+      "count_tx_inj_error_hint": 8,
+      "count_tx_dropped_packets": 12,
+      "dummy2": 16,
+      "curr_tx_pps": 20,
+      "curr_rx_pps": 22,
+      "curr_rx_big_gaps_counter": 24,
+      "curr_tx_channel_mhz": 26,
+      "curr_rate_kbits": 28,
+      "dummy1": 30,
+      "curr_rx_packet_loss_perc": 32,
+      "curr_tx_channel_w_mhz": 33,
+      "curr_tx_mcs_index": 34,
+      "curr_n_rate_adjustments": 35,
+      "bitfield": 36,
+      "pollution_perc": 37,
+      "rx_snr_antenna1": 38,
+      "rx_snr_antenna2": 39,
+      "card_temperature": 40,
+      "dummy0": 41
+    }
+  },
+  "1212": {
+    "name": "OPENHD_STATS_MONITOR_MODE_WIFI_CARD",
+    "crc": 205,
+    "length": 38,
+    "minimumLength": 38,
+    "fields": {
+      "count_p_received": 0,
+      "count_p_injected": 4,
+      "dummy2": 8,
+      "tx_power_current": 12,
+      "tx_power_armed": 14,
+      "tx_power_disarmed": 16,
+      "dummy1": 18,
+      "card_index": 20,
+      "card_type": 21,
+      "tx_active": 22,
+      "rx_rssi": 23,
+      "rx_rssi_1": 24,
+      "rx_rssi_2": 25,
+      "rx_noise_adapter": 26,
+      "rx_noise_antenna1": 27,
+      "rx_noise_antenna2": 28,
+      "rx_signal_quality_adapter": 29,
+      "rx_signal_quality_antenna1": 30,
+      "rx_signal_quality_antenna2": 31,
+      "curr_rx_packet_loss_perc": 32,
+      "curr_status": 33,
+      "rx_snr_antenna1": 34,
+      "rx_snr_antenna2": 35,
+      "card_temperature": 36,
+      "dummy0": 37
+    }
+  },
+  "1213": {
+    "name": "OPENHD_STATS_TELEMETRY",
+    "crc": 172,
+    "length": 21,
+    "minimumLength": 21,
+    "fields": {
+      "curr_tx_bps": 0,
+      "curr_rx_bps": 4,
+      "dummy2": 8,
+      "curr_tx_pps": 12,
+      "curr_rx_pps": 14,
+      "curr_rx_packet_loss_perc": 16,
+      "dummy1": 18,
+      "dummy0": 20
+    }
+  },
+  "1214": {
+    "name": "OPENHD_STATS_WB_VIDEO_AIR",
+    "crc": 137,
+    "length": 28,
+    "minimumLength": 28,
+    "fields": {
+      "curr_measured_encoder_bitrate": 0,
+      "curr_injected_bitrate": 4,
+      "curr_injected_pps": 8,
+      "curr_dropped_frames": 12,
+      "dummy2": 16,
+      "curr_recommended_bitrate": 20,
+      "curr_fec_percentage": 22,
+      "dummy1": 24,
+      "link_index": 26,
+      "dummy0": 27
+    }
+  },
+  "1215": {
+    "name": "OPENHD_STATS_WB_VIDEO_AIR_FEC_PERFORMANCE",
+    "crc": 210,
+    "length": 32,
+    "minimumLength": 32,
+    "fields": {
+      "curr_fec_encode_time_avg_us": 0,
+      "curr_fec_encode_time_min_us": 4,
+      "curr_fec_encode_time_max_us": 8,
+      "dummy2": 12,
+      "curr_fec_block_size_avg": 16,
+      "curr_fec_block_size_min": 18,
+      "curr_fec_block_size_max": 20,
+      "curr_tx_delay_avg_us": 22,
+      "curr_tx_delay_min_us": 24,
+      "curr_tx_delay_max_us": 26,
+      "dummy1": 28,
+      "link_index": 30,
+      "dummy0": 31
+    }
+  },
+  "1216": {
+    "name": "OPENHD_STATS_WB_VIDEO_GROUND",
+    "crc": 45,
+    "length": 28,
+    "minimumLength": 28,
+    "fields": {
+      "curr_incoming_bitrate": 0,
+      "count_blocks_total": 4,
+      "count_blocks_lost": 8,
+      "count_blocks_recovered": 12,
+      "count_fragments_recovered": 16,
+      "dummy2": 20,
+      "dummy1": 24,
+      "link_index": 26,
+      "dummy0": 27
+    }
+  },
+  "1217": {
+    "name": "OPENHD_STATS_WB_VIDEO_GROUND_FEC_PERFORMANCE",
+    "crc": 247,
+    "length": 20,
+    "minimumLength": 20,
+    "fields": {
+      "curr_fec_decode_time_avg_us": 0,
+      "curr_fec_decode_time_min_us": 4,
+      "curr_fec_decode_time_max_us": 8,
+      "dummy2": 12,
+      "dummy1": 16,
+      "link_index": 18,
+      "dummy0": 19
+    }
+  },
+  "1218": {
+    "name": "OPENHD_ONBOARD_COMPUTER_STATUS_EXTENSION",
+    "crc": 239,
+    "length": 11,
+    "minimumLength": 11,
+    "fields": {
+      "cpu_core_voltage_milliV": 0,
+      "reserved1": 2,
+      "reserved2": 4,
+      "reserved3": 6,
+      "reserved4": 8,
+      "over_current": 10
+    }
+  },
+  "1219": {
+    "name": "OPENHD_CAMERA_STATUS_AIR",
+    "crc": 71,
+    "length": 21,
+    "minimumLength": 21,
+    "fields": {
+      "dummy2": 0,
+      "encoding_bitrate_kbits": 4,
+      "stream_w": 6,
+      "stream_h": 8,
+      "stream_fps": 10,
+      "dummy1": 12,
+      "cam_type": 14,
+      "cam_status": 15,
+      "supports_variable_bitrate": 16,
+      "air_recording_active": 17,
+      "encoding_format": 18,
+      "encoding_keyframe_interval": 19,
+      "dummy0": 20
+    }
+  },
+  "1221": {
+    "name": "OPENHD_VERSION_MESSAGE",
+    "crc": 246,
+    "length": 5,
+    "minimumLength": 5,
+    "fields": {
+      "major": 0,
+      "minor": 1,
+      "patch": 2,
+      "release_type": 3,
+      "dummy": 4
+    }
+  },
+  "1222": {
+    "name": "OPENHD_WIFBROADCAST_SUPPORTED_CHANNELS",
+    "crc": 150,
+    "length": 181,
+    "minimumLength": 181,
+    "fields": {
+      "channels": 0,
+      "card_index": 120,
+      "bandwidths": 121
+    }
+  },
+  "1223": {
+    "name": "OPENHD_WIFBROADCAST_SCAN_CHANNELS_PROGRESS",
+    "crc": 60,
+    "length": 5,
+    "minimumLength": 5,
+    "fields": {
+      "channel_mhz": 0,
+      "progress": 2,
+      "channel_width_mhz": 3,
+      "success": 4
+    }
+  },
+  "1224": {
+    "name": "OPENHD_WIFBROADCAST_ANALYZE_CHANNELS_PROGRESS",
+    "crc": 163,
+    "length": 191,
+    "minimumLength": 191,
+    "fields": {
+      "dummy1": 0,
+      "dummy2": 4,
+      "channels_mhz": 8,
+      "foreign_packets": 68,
+      "dummy": 128,
+      "dummy0": 188,
+      "progress_perc": 190
+    }
+  },
+  "1225": {
+    "name": "OPENHD_WIFBROADCAST_GND_OPERATING_MODE",
+    "crc": 169,
+    "length": 12,
+    "minimumLength": 12,
+    "fields": {
+      "dummy1": 0,
+      "dummy2": 4,
+      "dummy0": 8,
+      "operating_mode": 10,
+      "tx_passive_mode_is_enabled": 11
+    }
+  },
+  "1226": {
+    "name": "OPENHD_SYS_STATUS1",
+    "crc": 87,
+    "length": 15,
+    "minimumLength": 15,
+    "fields": {
+      "dummy1": 0,
+      "dummy2": 4,
+      "wifi_hotspot_frequency": 8,
+      "platform_type": 10,
+      "external_devices_count": 11,
+      "wifi_hotspot_state": 12,
+      "ethernet_hotspot_state": 13,
+      "dummy0": 14
+    }
+  },
+  "1227": {
+    "name": "OPENHD_CORE_STATUS",
+    "crc": 59,
+    "length": 22,
+    "minimumLength": 22,
+    "fields": {
+      "storage_left_mb": 0,
+      "cpu_clock": 4,
+      "isp_clock": 6,
+      "h264_clock": 8,
+      "core_clock": 10,
+      "v3d_clock": 12,
+      "cpu_temp": 14,
+      "wifi0_temp": 15,
+      "wifi1_temp": 16,
+      "undervolt_status": 17,
+      "platform_type": 18,
+      "encryption_enabled": 19,
+      "fc_sys_id": 20,
+      "operating_mode": 21
+    }
+  },
+  "1228": {
+    "name": "OPENHD_POWER_STATUS",
+    "crc": 218,
+    "length": 6,
+    "minimumLength": 6,
+    "fields": {
+      "voltage_mv": 0,
+      "current_ma": 2,
+      "charging_status": 4,
+      "battery_percent": 5
+    }
+  },
+  "1229": {
+    "name": "OPENHD_MICROHARD_STATUS",
+    "crc": 224,
+    "length": 10,
+    "minimumLength": 10,
+    "fields": {
+      "frequency": 0,
+      "enabled": 4,
+      "rssi": 5,
+      "tx_power": 6,
+      "bandwidth": 7,
+      "noise": 8,
+      "snr": 9
+    }
+  },
+  "1230": {
+    "name": "OPENHD_RTSP_CONFIGURATION",
+    "crc": 47,
+    "length": 255,
+    "minimumLength": 255,
+    "fields": {
+      "stream_uri": 0
+    }
+  },
+  "1231": {
+    "name": "OPENHD_WIFBROADCAST_RADIO_SETTINGS",
+    "crc": 178,
+    "length": 6,
+    "minimumLength": 6,
+    "fields": {
+      "target_system": 0,
+      "target_component": 1,
+      "enable_rc_openhd_control": 2,
+      "mcs_via_rc_channel": 3,
+      "bw_via_rc_channel": 4,
+      "tx_mode_via_rc_channel": 5
+    }
+  },
+  "9000": {
+    "name": "WHEEL_DISTANCE",
+    "crc": 113,
+    "length": 137,
+    "minimumLength": 137,
+    "fields": {
+      "time_usec": 0,
+      "distance": 8,
+      "count": 136
+    }
+  },
+  "9005": {
+    "name": "WINCH_STATUS",
+    "crc": 117,
+    "length": 34,
+    "minimumLength": 34,
+    "fields": {
+      "time_usec": 0,
+      "line_length": 8,
+      "speed": 12,
+      "tension": 16,
+      "voltage": 20,
+      "current": 24,
+      "status": 28,
+      "temperature": 32
+    }
+  },
+  "10001": {
+    "name": "UAVIONIX_ADSB_OUT_CFG",
+    "crc": 209,
+    "length": 20,
+    "minimumLength": 20,
+    "fields": {
+      "ICAO": 0,
+      "stallSpeed": 4,
+      "callsign": 6,
+      "emitterType": 15,
+      "aircraftSize": 16,
+      "gpsOffsetLat": 17,
+      "gpsOffsetLon": 18,
+      "rfSelect": 19
+    }
+  },
+  "10002": {
+    "name": "UAVIONIX_ADSB_OUT_DYNAMIC",
+    "crc": 186,
+    "length": 41,
+    "minimumLength": 41,
+    "fields": {
+      "utcTime": 0,
+      "gpsLat": 4,
+      "gpsLon": 8,
+      "gpsAlt": 12,
+      "baroAltMSL": 16,
+      "accuracyHor": 20,
+      "accuracyVert": 24,
+      "accuracyVel": 26,
+      "velVert": 28,
+      "velNS": 30,
+      "VelEW": 32,
+      "state": 34,
+      "squawk": 36,
+      "gpsFix": 38,
+      "numSats": 39,
+      "emergencyStatus": 40
+    }
+  },
+  "10003": {
+    "name": "UAVIONIX_ADSB_TRANSCEIVER_HEALTH_REPORT",
+    "crc": 4,
+    "length": 1,
+    "minimumLength": 1,
+    "fields": {
+      "rfHealth": 0
+    }
+  },
+  "11000": {
+    "name": "DEVICE_OP_READ",
+    "crc": 134,
+    "length": 52,
+    "minimumLength": 51,
+    "fields": {
+      "request_id": 0,
+      "target_system": 4,
+      "target_component": 5,
+      "bustype": 6,
+      "bus": 7,
+      "address": 8,
+      "busname": 9,
+      "regstart": 49,
+      "count": 50,
+      "bank": 51
+    }
+  },
+  "11001": {
+    "name": "DEVICE_OP_READ_REPLY",
+    "crc": 15,
+    "length": 136,
+    "minimumLength": 135,
+    "fields": {
+      "request_id": 0,
+      "result": 4,
+      "regstart": 5,
+      "count": 6,
+      "data": 7,
+      "bank": 135
+    }
+  },
+  "11002": {
+    "name": "DEVICE_OP_WRITE",
+    "crc": 234,
+    "length": 180,
+    "minimumLength": 179,
+    "fields": {
+      "request_id": 0,
+      "target_system": 4,
+      "target_component": 5,
+      "bustype": 6,
+      "bus": 7,
+      "address": 8,
+      "busname": 9,
+      "regstart": 49,
+      "count": 50,
+      "data": 51,
+      "bank": 179
+    }
+  },
+  "11003": {
+    "name": "DEVICE_OP_WRITE_REPLY",
+    "crc": 64,
+    "length": 5,
+    "minimumLength": 5,
+    "fields": {
+      "request_id": 0,
+      "result": 4
+    }
+  },
+  "11010": {
+    "name": "ADAP_TUNING",
+    "crc": 46,
+    "length": 49,
+    "minimumLength": 49,
+    "fields": {
+      "desired": 0,
+      "achieved": 4,
+      "error": 8,
+      "theta": 12,
+      "omega": 16,
+      "sigma": 20,
+      "theta_dot": 24,
+      "omega_dot": 28,
+      "sigma_dot": 32,
+      "f": 36,
+      "f_dot": 40,
+      "u": 44,
+      "axis": 48
+    }
+  },
+  "11011": {
+    "name": "VISION_POSITION_DELTA",
+    "crc": 106,
+    "length": 44,
+    "minimumLength": 44,
+    "fields": {
+      "time_usec": 0,
+      "time_delta_usec": 8,
+      "angle_delta": 16,
+      "position_delta": 28,
+      "confidence": 40
+    }
+  },
+  "11020": {
+    "name": "AOA_SSA",
+    "crc": 205,
+    "length": 16,
+    "minimumLength": 16,
+    "fields": {
+      "time_usec": 0,
+      "AOA": 8,
+      "SSA": 12
+    }
+  },
+  "11030": {
+    "name": "ESC_TELEMETRY_1_TO_4",
+    "crc": 144,
+    "length": 44,
+    "minimumLength": 44,
+    "fields": {
+      "voltage": 0,
+      "current": 8,
+      "totalcurrent": 16,
+      "rpm": 24,
+      "count": 32,
+      "temperature": 40
+    }
+  },
+  "11031": {
+    "name": "ESC_TELEMETRY_5_TO_8",
+    "crc": 133,
+    "length": 44,
+    "minimumLength": 44,
+    "fields": {
+      "voltage": 0,
+      "current": 8,
+      "totalcurrent": 16,
+      "rpm": 24,
+      "count": 32,
+      "temperature": 40
+    }
+  },
+  "11032": {
+    "name": "ESC_TELEMETRY_9_TO_12",
+    "crc": 85,
+    "length": 44,
+    "minimumLength": 44,
+    "fields": {
+      "voltage": 0,
+      "current": 8,
+      "totalcurrent": 16,
+      "rpm": 24,
+      "count": 32,
+      "temperature": 40
+    }
+  },
+  "11033": {
+    "name": "OSD_PARAM_CONFIG",
+    "crc": 195,
+    "length": 37,
+    "minimumLength": 37,
+    "fields": {
+      "request_id": 0,
+      "min_value": 4,
+      "max_value": 8,
+      "increment": 12,
+      "target_system": 16,
+      "target_component": 17,
+      "osd_screen": 18,
+      "osd_index": 19,
+      "param_id": 20,
+      "config_type": 36
+    }
+  },
+  "11034": {
+    "name": "OSD_PARAM_CONFIG_REPLY",
+    "crc": 79,
+    "length": 5,
+    "minimumLength": 5,
+    "fields": {
+      "request_id": 0,
+      "result": 4
+    }
+  },
+  "11035": {
+    "name": "OSD_PARAM_SHOW_CONFIG",
+    "crc": 128,
+    "length": 8,
+    "minimumLength": 8,
+    "fields": {
+      "request_id": 0,
+      "target_system": 4,
+      "target_component": 5,
+      "osd_screen": 6,
+      "osd_index": 7
+    }
+  },
+  "11036": {
+    "name": "OSD_PARAM_SHOW_CONFIG_REPLY",
+    "crc": 177,
+    "length": 34,
+    "minimumLength": 34,
+    "fields": {
+      "request_id": 0,
+      "min_value": 4,
+      "max_value": 8,
+      "increment": 12,
+      "result": 16,
+      "param_id": 17,
+      "config_type": 33
+    }
+  },
+  "11037": {
+    "name": "OBSTACLE_DISTANCE_3D",
+    "crc": 130,
+    "length": 28,
+    "minimumLength": 28,
+    "fields": {
+      "time_boot_ms": 0,
+      "x": 4,
+      "y": 8,
+      "z": 12,
+      "min_distance": 16,
+      "max_distance": 20,
+      "obstacle_id": 24,
+      "sensor_type": 26,
+      "frame": 27
+    }
+  },
+  "11038": {
+    "name": "WATER_DEPTH",
+    "crc": 47,
+    "length": 38,
+    "minimumLength": 38,
+    "fields": {
+      "time_boot_ms": 0,
+      "lat": 4,
+      "lng": 8,
+      "alt": 12,
+      "roll": 16,
+      "pitch": 20,
+      "yaw": 24,
+      "distance": 28,
+      "temperature": 32,
+      "id": 36,
+      "healthy": 37
+    }
+  },
+  "11039": {
+    "name": "MCU_STATUS",
+    "crc": 142,
+    "length": 9,
+    "minimumLength": 9,
+    "fields": {
+      "MCU_temperature": 0,
+      "MCU_voltage": 2,
+      "MCU_voltage_min": 4,
+      "MCU_voltage_max": 6,
+      "id": 8
+    }
+  },
+  "12900": {
+    "name": "OPEN_DRONE_ID_BASIC_ID",
+    "crc": 114,
+    "length": 44,
+    "minimumLength": 44,
+    "fields": {
+      "target_system": 0,
+      "target_component": 1,
+      "id_or_mac": 2,
+      "id_type": 22,
+      "ua_type": 23,
+      "uas_id": 24
+    }
+  },
+  "12901": {
+    "name": "OPEN_DRONE_ID_LOCATION",
+    "crc": 254,
+    "length": 59,
+    "minimumLength": 59,
+    "fields": {
+      "latitude": 0,
+      "longitude": 4,
+      "altitude_barometric": 8,
+      "altitude_geodetic": 12,
+      "height": 16,
+      "timestamp": 20,
+      "direction": 24,
+      "speed_horizontal": 26,
+      "speed_vertical": 28,
+      "target_system": 30,
+      "target_component": 31,
+      "id_or_mac": 32,
+      "status": 52,
+      "height_reference": 53,
+      "horizontal_accuracy": 54,
+      "vertical_accuracy": 55,
+      "barometer_accuracy": 56,
+      "speed_accuracy": 57,
+      "timestamp_accuracy": 58
+    }
+  },
+  "12902": {
+    "name": "OPEN_DRONE_ID_AUTHENTICATION",
+    "crc": 140,
+    "length": 53,
+    "minimumLength": 53,
+    "fields": {
+      "timestamp": 0,
+      "target_system": 4,
+      "target_component": 5,
+      "id_or_mac": 6,
+      "authentication_type": 26,
+      "data_page": 27,
+      "last_page_index": 28,
+      "length": 29,
+      "authentication_data": 30
+    }
+  },
+  "12903": {
+    "name": "OPEN_DRONE_ID_SELF_ID",
+    "crc": 249,
+    "length": 46,
+    "minimumLength": 46,
+    "fields": {
+      "target_system": 0,
+      "target_component": 1,
+      "id_or_mac": 2,
+      "description_type": 22,
+      "description": 23
+    }
+  },
+  "12904": {
+    "name": "OPEN_DRONE_ID_SYSTEM",
+    "crc": 77,
+    "length": 54,
+    "minimumLength": 54,
+    "fields": {
+      "operator_latitude": 0,
+      "operator_longitude": 4,
+      "area_ceiling": 8,
+      "area_floor": 12,
+      "operator_altitude_geo": 16,
+      "timestamp": 20,
+      "area_count": 24,
+      "area_radius": 26,
+      "target_system": 28,
+      "target_component": 29,
+      "id_or_mac": 30,
+      "operator_location_type": 50,
+      "classification_type": 51,
+      "category_eu": 52,
+      "class_eu": 53
+    }
+  },
+  "12905": {
+    "name": "OPEN_DRONE_ID_OPERATOR_ID",
+    "crc": 49,
+    "length": 43,
+    "minimumLength": 43,
+    "fields": {
+      "target_system": 0,
+      "target_component": 1,
+      "id_or_mac": 2,
+      "operator_id_type": 22,
+      "operator_id": 23
+    }
+  },
+  "12915": {
+    "name": "OPEN_DRONE_ID_MESSAGE_PACK",
+    "crc": 94,
+    "length": 249,
+    "minimumLength": 249,
+    "fields": {
+      "target_system": 0,
+      "target_component": 1,
+      "id_or_mac": 2,
+      "single_message_size": 22,
+      "msg_pack_size": 23,
+      "messages": 24
+    }
+  },
+  "12918": {
+    "name": "OPEN_DRONE_ID_ARM_STATUS",
+    "crc": 139,
+    "length": 51,
+    "minimumLength": 51,
+    "fields": {
+      "status": 0,
+      "error": 1
+    }
+  },
+  "12919": {
+    "name": "OPEN_DRONE_ID_SYSTEM_UPDATE",
+    "crc": 7,
+    "length": 18,
+    "minimumLength": 18,
+    "fields": {
+      "operator_latitude": 0,
+      "operator_longitude": 4,
+      "operator_altitude_geo": 8,
+      "timestamp": 12,
+      "target_system": 16,
+      "target_component": 17
+    }
+  },
+  "12920": {
+    "name": "HYGROMETER_SENSOR",
+    "crc": 20,
+    "length": 5,
+    "minimumLength": 5,
+    "fields": {
+      "temperature": 0,
+      "humidity": 2,
+      "id": 4
+    }
+  },
+  "42000": {
+    "name": "ICAROUS_HEARTBEAT",
+    "crc": 227,
+    "length": 1,
+    "minimumLength": 1,
+    "fields": {
+      "status": 0
+    }
+  },
+  "42001": {
+    "name": "ICAROUS_KINEMATIC_BANDS",
+    "crc": 239,
+    "length": 46,
+    "minimumLength": 46,
+    "fields": {
+      "min1": 0,
+      "max1": 4,
+      "min2": 8,
+      "max2": 12,
+      "min3": 16,
+      "max3": 20,
+      "min4": 24,
+      "max4": 28,
+      "min5": 32,
+      "max5": 36,
+      "numBands": 40,
+      "type1": 41,
+      "type2": 42,
+      "type3": 43,
+      "type4": 44,
+      "type5": 45
+    }
+  },
+  "50001": {
+    "name": "CUBEPILOT_RAW_RC",
+    "crc": 246,
+    "length": 32,
+    "minimumLength": 32,
+    "fields": {
+      "rc_raw": 0
+    }
+  },
+  "50002": {
+    "name": "HERELINK_VIDEO_STREAM_INFORMATION",
+    "crc": 181,
+    "length": 246,
+    "minimumLength": 246,
+    "fields": {
+      "framerate": 0,
+      "bitrate": 4,
+      "resolution_h": 8,
+      "resolution_v": 10,
+      "rotation": 12,
+      "camera_id": 14,
+      "status": 15,
+      "uri": 16
+    }
+  },
+  "50003": {
+    "name": "HERELINK_TELEM",
+    "crc": 62,
+    "length": 19,
+    "minimumLength": 19,
+    "fields": {
+      "rf_freq": 0,
+      "link_bw": 4,
+      "link_rate": 8,
+      "snr": 12,
+      "cpu_temp": 14,
+      "board_temp": 16,
+      "rssi": 18
+    }
+  },
+  "50004": {
+    "name": "CUBEPILOT_FIRMWARE_UPDATE_START",
+    "crc": 240,
+    "length": 10,
+    "minimumLength": 10,
+    "fields": {
+      "size": 0,
+      "crc": 4,
+      "target_system": 8,
+      "target_component": 9
+    }
+  },
+  "50005": {
+    "name": "CUBEPILOT_FIRMWARE_UPDATE_RESP",
+    "crc": 152,
+    "length": 6,
+    "minimumLength": 6,
+    "fields": {
+      "offset": 0,
+      "target_system": 4,
+      "target_component": 5
+    }
+  },
+  "52000": {
+    "name": "AIRLINK_AUTH",
+    "crc": 13,
+    "length": 100,
+    "minimumLength": 100,
+    "fields": {
+      "login": 0,
+      "password": 50
+    }
+  },
+  "52001": {
+    "name": "AIRLINK_AUTH_RESPONSE",
+    "crc": 239,
+    "length": 1,
+    "minimumLength": 1,
+    "fields": {
+      "resp_type": 0
+    }
+  },
+  "52002": {
+    "name": "AIRLINK_EYE_GS_HOLE_PUSH_REQUEST",
+    "crc": 24,
+    "length": 1,
+    "minimumLength": 1,
+    "fields": {
+      "resp_type": 0
+    }
+  },
+  "52003": {
+    "name": "AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE",
+    "crc": 166,
+    "length": 26,
+    "minimumLength": 26,
+    "fields": {
+      "ip_port": 0,
+      "resp_type": 4,
+      "ip_version": 5,
+      "ip_address_4": 6,
+      "ip_address_6": 10
+    }
+  },
+  "52004": {
+    "name": "AIRLINK_EYE_HP",
+    "crc": 39,
+    "length": 1,
+    "minimumLength": 1,
+    "fields": {
+      "resp_type": 0
+    }
+  },
+  "52005": {
+    "name": "AIRLINK_EYE_TURN_INIT",
+    "crc": 145,
+    "length": 1,
+    "minimumLength": 1,
+    "fields": {
+      "resp_type": 0
+    }
+  }
+}

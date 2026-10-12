@@ -1,6 +1,8 @@
 #pragma once
 // MESSAGE OPENHD_STATS_TELEMETRY PACKING
 
+#include <stdint.h>
+
 #define MAVLINK_MSG_ID_OPENHD_STATS_TELEMETRY 1213
 
 
@@ -72,7 +74,8 @@ typedef struct __mavlink_openhd_stats_telemetry_t {
  * @param dummy2  for future use
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_openhd_stats_telemetry_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
+MAVLINK_WIP
+static inline uint16_t mavlink_msg_openhd_stats_telemetry_pack(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg,
                                int16_t curr_tx_pps, int16_t curr_rx_pps, int32_t curr_tx_bps, int32_t curr_rx_bps, int16_t curr_rx_packet_loss_perc, int8_t dummy0, int16_t dummy1, int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -106,6 +109,60 @@ static inline uint16_t mavlink_msg_openhd_stats_telemetry_pack(uint8_t system_id
 }
 
 /**
+ * @brief Pack a openhd_stats_telemetry message
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ *
+ * @param curr_tx_pps  tx packets per second
+ * @param curr_rx_pps  rx packets per second
+ * @param curr_tx_bps  tx bits per second
+ * @param curr_rx_bps  rx bits per second
+ * @param curr_rx_packet_loss_perc  curr_rx_packet_loss_perc
+ * @param dummy0  for future use
+ * @param dummy1  for future use
+ * @param dummy2  for future use
+ * @return length of the message in bytes (excluding serial stream start sign)
+ */
+static inline uint16_t mavlink_msg_openhd_stats_telemetry_pack_status(uint32_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
+                               int16_t curr_tx_pps, int16_t curr_rx_pps, int32_t curr_tx_bps, int32_t curr_rx_bps, int16_t curr_rx_packet_loss_perc, int8_t dummy0, int16_t dummy1, int32_t dummy2)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+    char buf[MAVLINK_MSG_ID_OPENHD_STATS_TELEMETRY_LEN];
+    _mav_put_int32_t(buf, 0, curr_tx_bps);
+    _mav_put_int32_t(buf, 4, curr_rx_bps);
+    _mav_put_int32_t(buf, 8, dummy2);
+    _mav_put_int16_t(buf, 12, curr_tx_pps);
+    _mav_put_int16_t(buf, 14, curr_rx_pps);
+    _mav_put_int16_t(buf, 16, curr_rx_packet_loss_perc);
+    _mav_put_int16_t(buf, 18, dummy1);
+    _mav_put_int8_t(buf, 20, dummy0);
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_OPENHD_STATS_TELEMETRY_LEN);
+#else
+    mavlink_openhd_stats_telemetry_t packet;
+    packet.curr_tx_bps = curr_tx_bps;
+    packet.curr_rx_bps = curr_rx_bps;
+    packet.dummy2 = dummy2;
+    packet.curr_tx_pps = curr_tx_pps;
+    packet.curr_rx_pps = curr_rx_pps;
+    packet.curr_rx_packet_loss_perc = curr_rx_packet_loss_perc;
+    packet.dummy1 = dummy1;
+    packet.dummy0 = dummy0;
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_OPENHD_STATS_TELEMETRY_LEN);
+#endif
+
+    msg->msgid = MAVLINK_MSG_ID_OPENHD_STATS_TELEMETRY;
+#if MAVLINK_CRC_EXTRA
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_OPENHD_STATS_TELEMETRY_MIN_LEN, MAVLINK_MSG_ID_OPENHD_STATS_TELEMETRY_LEN, MAVLINK_MSG_ID_OPENHD_STATS_TELEMETRY_CRC);
+#else
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_OPENHD_STATS_TELEMETRY_MIN_LEN, MAVLINK_MSG_ID_OPENHD_STATS_TELEMETRY_LEN, 0);
+#endif
+}
+
+/**
  * @brief Pack a openhd_stats_telemetry message on a channel
  * @param system_id ID of this system
  * @param component_id ID of this component (e.g. 200 for IMU)
@@ -121,7 +178,8 @@ static inline uint16_t mavlink_msg_openhd_stats_telemetry_pack(uint8_t system_id
  * @param dummy2  for future use
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_openhd_stats_telemetry_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
+MAVLINK_WIP
+static inline uint16_t mavlink_msg_openhd_stats_telemetry_pack_chan(uint32_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
                                    int16_t curr_tx_pps,int16_t curr_rx_pps,int32_t curr_tx_bps,int32_t curr_rx_bps,int16_t curr_rx_packet_loss_perc,int8_t dummy0,int16_t dummy1,int32_t dummy2)
 {
@@ -163,7 +221,8 @@ static inline uint16_t mavlink_msg_openhd_stats_telemetry_pack_chan(uint8_t syst
  * @param msg The MAVLink message to compress the data into
  * @param openhd_stats_telemetry C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_openhd_stats_telemetry_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_stats_telemetry_t* openhd_stats_telemetry)
+MAVLINK_WIP
+static inline uint16_t mavlink_msg_openhd_stats_telemetry_encode(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_stats_telemetry_t* openhd_stats_telemetry)
 {
     return mavlink_msg_openhd_stats_telemetry_pack(system_id, component_id, msg, openhd_stats_telemetry->curr_tx_pps, openhd_stats_telemetry->curr_rx_pps, openhd_stats_telemetry->curr_tx_bps, openhd_stats_telemetry->curr_rx_bps, openhd_stats_telemetry->curr_rx_packet_loss_perc, openhd_stats_telemetry->dummy0, openhd_stats_telemetry->dummy1, openhd_stats_telemetry->dummy2);
 }
@@ -177,9 +236,24 @@ static inline uint16_t mavlink_msg_openhd_stats_telemetry_encode(uint8_t system_
  * @param msg The MAVLink message to compress the data into
  * @param openhd_stats_telemetry C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_openhd_stats_telemetry_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_stats_telemetry_t* openhd_stats_telemetry)
+MAVLINK_WIP
+static inline uint16_t mavlink_msg_openhd_stats_telemetry_encode_chan(uint32_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_stats_telemetry_t* openhd_stats_telemetry)
 {
     return mavlink_msg_openhd_stats_telemetry_pack_chan(system_id, component_id, chan, msg, openhd_stats_telemetry->curr_tx_pps, openhd_stats_telemetry->curr_rx_pps, openhd_stats_telemetry->curr_tx_bps, openhd_stats_telemetry->curr_rx_bps, openhd_stats_telemetry->curr_rx_packet_loss_perc, openhd_stats_telemetry->dummy0, openhd_stats_telemetry->dummy1, openhd_stats_telemetry->dummy2);
+}
+
+/**
+ * @brief Encode a openhd_stats_telemetry struct with provided status structure
+ *
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ * @param openhd_stats_telemetry C-struct to read the message contents from
+ */
+static inline uint16_t mavlink_msg_openhd_stats_telemetry_encode_status(uint32_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_openhd_stats_telemetry_t* openhd_stats_telemetry)
+{
+    return mavlink_msg_openhd_stats_telemetry_pack_status(system_id, component_id, _status, msg,  openhd_stats_telemetry->curr_tx_pps, openhd_stats_telemetry->curr_rx_pps, openhd_stats_telemetry->curr_tx_bps, openhd_stats_telemetry->curr_rx_bps, openhd_stats_telemetry->curr_rx_packet_loss_perc, openhd_stats_telemetry->dummy0, openhd_stats_telemetry->dummy1, openhd_stats_telemetry->dummy2);
 }
 
 /**
@@ -197,6 +271,7 @@ static inline uint16_t mavlink_msg_openhd_stats_telemetry_encode_chan(uint8_t sy
  */
 #ifdef MAVLINK_USE_CONVENIENCE_FUNCTIONS
 
+MAVLINK_WIP
 static inline void mavlink_msg_openhd_stats_telemetry_send(mavlink_channel_t chan, int16_t curr_tx_pps, int16_t curr_rx_pps, int32_t curr_tx_bps, int32_t curr_rx_bps, int16_t curr_rx_packet_loss_perc, int8_t dummy0, int16_t dummy1, int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -231,6 +306,7 @@ static inline void mavlink_msg_openhd_stats_telemetry_send(mavlink_channel_t cha
  * @param chan MAVLink channel to send the message
  * @param struct The MAVLink struct to serialize
  */
+MAVLINK_WIP
 static inline void mavlink_msg_openhd_stats_telemetry_send_struct(mavlink_channel_t chan, const mavlink_openhd_stats_telemetry_t* openhd_stats_telemetry)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -242,12 +318,13 @@ static inline void mavlink_msg_openhd_stats_telemetry_send_struct(mavlink_channe
 
 #if MAVLINK_MSG_ID_OPENHD_STATS_TELEMETRY_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
+  This variant of _send() can be used to save stack space by reusing
   memory from the receive buffer.  The caller provides a
   mavlink_message_t which is the size of a full mavlink message. This
   is usually the receive buffer for the channel, and allows a reply to an
   incoming message with minimum stack space usage.
  */
+MAVLINK_WIP
 static inline void mavlink_msg_openhd_stats_telemetry_send_buf(mavlink_message_t *msgbuf, mavlink_channel_t chan,  int16_t curr_tx_pps, int16_t curr_rx_pps, int32_t curr_tx_bps, int32_t curr_rx_bps, int16_t curr_rx_packet_loss_perc, int8_t dummy0, int16_t dummy1, int32_t dummy2)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -288,6 +365,7 @@ static inline void mavlink_msg_openhd_stats_telemetry_send_buf(mavlink_message_t
  *
  * @return  tx packets per second
  */
+MAVLINK_WIP
 static inline int16_t mavlink_msg_openhd_stats_telemetry_get_curr_tx_pps(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_int16_t(msg,  12);
@@ -298,6 +376,7 @@ static inline int16_t mavlink_msg_openhd_stats_telemetry_get_curr_tx_pps(const m
  *
  * @return  rx packets per second
  */
+MAVLINK_WIP
 static inline int16_t mavlink_msg_openhd_stats_telemetry_get_curr_rx_pps(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_int16_t(msg,  14);
@@ -308,6 +387,7 @@ static inline int16_t mavlink_msg_openhd_stats_telemetry_get_curr_rx_pps(const m
  *
  * @return  tx bits per second
  */
+MAVLINK_WIP
 static inline int32_t mavlink_msg_openhd_stats_telemetry_get_curr_tx_bps(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_int32_t(msg,  0);
@@ -318,6 +398,7 @@ static inline int32_t mavlink_msg_openhd_stats_telemetry_get_curr_tx_bps(const m
  *
  * @return  rx bits per second
  */
+MAVLINK_WIP
 static inline int32_t mavlink_msg_openhd_stats_telemetry_get_curr_rx_bps(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_int32_t(msg,  4);
@@ -328,6 +409,7 @@ static inline int32_t mavlink_msg_openhd_stats_telemetry_get_curr_rx_bps(const m
  *
  * @return  curr_rx_packet_loss_perc
  */
+MAVLINK_WIP
 static inline int16_t mavlink_msg_openhd_stats_telemetry_get_curr_rx_packet_loss_perc(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_int16_t(msg,  16);
@@ -338,6 +420,7 @@ static inline int16_t mavlink_msg_openhd_stats_telemetry_get_curr_rx_packet_loss
  *
  * @return  for future use
  */
+MAVLINK_WIP
 static inline int8_t mavlink_msg_openhd_stats_telemetry_get_dummy0(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_int8_t(msg,  20);
@@ -348,6 +431,7 @@ static inline int8_t mavlink_msg_openhd_stats_telemetry_get_dummy0(const mavlink
  *
  * @return  for future use
  */
+MAVLINK_WIP
 static inline int16_t mavlink_msg_openhd_stats_telemetry_get_dummy1(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_int16_t(msg,  18);
@@ -358,6 +442,7 @@ static inline int16_t mavlink_msg_openhd_stats_telemetry_get_dummy1(const mavlin
  *
  * @return  for future use
  */
+MAVLINK_WIP
 static inline int32_t mavlink_msg_openhd_stats_telemetry_get_dummy2(const mavlink_message_t* msg)
 {
     return _MAV_RETURN_int32_t(msg,  8);
@@ -369,6 +454,7 @@ static inline int32_t mavlink_msg_openhd_stats_telemetry_get_dummy2(const mavlin
  * @param msg The message to decode
  * @param openhd_stats_telemetry C-struct to decode the message contents into
  */
+MAVLINK_WIP
 static inline void mavlink_msg_openhd_stats_telemetry_decode(const mavlink_message_t* msg, mavlink_openhd_stats_telemetry_t* openhd_stats_telemetry)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -380,9 +466,10 @@ static inline void mavlink_msg_openhd_stats_telemetry_decode(const mavlink_messa
     openhd_stats_telemetry->curr_rx_packet_loss_perc = mavlink_msg_openhd_stats_telemetry_get_curr_rx_packet_loss_perc(msg);
     openhd_stats_telemetry->dummy1 = mavlink_msg_openhd_stats_telemetry_get_dummy1(msg);
     openhd_stats_telemetry->dummy0 = mavlink_msg_openhd_stats_telemetry_get_dummy0(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_OPENHD_STATS_TELEMETRY_LEN? msg->len : MAVLINK_MSG_ID_OPENHD_STATS_TELEMETRY_LEN;
-        memset(openhd_stats_telemetry, 0, MAVLINK_MSG_ID_OPENHD_STATS_TELEMETRY_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_OPENHD_STATS_TELEMETRY_LEN ? msg->len : MAVLINK_MSG_ID_OPENHD_STATS_TELEMETRY_LEN;
+    memset(openhd_stats_telemetry, 0, MAVLINK_MSG_ID_OPENHD_STATS_TELEMETRY_LEN);
     memcpy(openhd_stats_telemetry, _MAV_PAYLOAD(msg), len);
 #endif
 }

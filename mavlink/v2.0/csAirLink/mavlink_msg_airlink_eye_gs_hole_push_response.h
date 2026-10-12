@@ -1,6 +1,8 @@
 #pragma once
 // MESSAGE AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE PACKING
 
+#include <stdint.h>
+
 #define MAVLINK_MSG_ID_AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE 52003
 
 
@@ -28,22 +30,22 @@ typedef struct __mavlink_airlink_eye_gs_hole_push_response_t {
     52003, \
     "AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE", \
     5, \
-    {  { "resp_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 4, 4 }, \
-         { "ip_version", NULL, MAVLINK_TYPE_UINT8_T, 0, 5, 5 }, \
-         { "ip_address_4", NULL, MAVLINK_TYPE_UINT8_T, 4, 6, 6 }, \
-         { "ip_address_6", NULL, MAVLINK_TYPE_UINT8_T, 16, 10, 10 }, \
-         { "ip_port", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, 0 }, \
+    {  { "resp_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 4, offsetof(mavlink_airlink_eye_gs_hole_push_response_t, resp_type) }, \
+         { "ip_version", NULL, MAVLINK_TYPE_UINT8_T, 0, 5, offsetof(mavlink_airlink_eye_gs_hole_push_response_t, ip_version) }, \
+         { "ip_address_4", NULL, MAVLINK_TYPE_UINT8_T, 4, 6, offsetof(mavlink_airlink_eye_gs_hole_push_response_t, ip_address_4) }, \
+         { "ip_address_6", NULL, MAVLINK_TYPE_UINT8_T, 16, 10, offsetof(mavlink_airlink_eye_gs_hole_push_response_t, ip_address_6) }, \
+         { "ip_port", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_airlink_eye_gs_hole_push_response_t, ip_port) }, \
          } \
 }
 #else
 #define MAVLINK_MESSAGE_INFO_AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE { \
     "AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE", \
     5, \
-    {  { "resp_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 4, 4 }, \
-         { "ip_version", NULL, MAVLINK_TYPE_UINT8_T, 0, 5, 5 }, \
-         { "ip_address_4", NULL, MAVLINK_TYPE_UINT8_T, 4, 6, 6 }, \
-         { "ip_address_6", NULL, MAVLINK_TYPE_UINT8_T, 16, 10, 10 }, \
-         { "ip_port", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, 0 }, \
+    {  { "resp_type", NULL, MAVLINK_TYPE_UINT8_T, 0, 4, offsetof(mavlink_airlink_eye_gs_hole_push_response_t, resp_type) }, \
+         { "ip_version", NULL, MAVLINK_TYPE_UINT8_T, 0, 5, offsetof(mavlink_airlink_eye_gs_hole_push_response_t, ip_version) }, \
+         { "ip_address_4", NULL, MAVLINK_TYPE_UINT8_T, 4, 6, offsetof(mavlink_airlink_eye_gs_hole_push_response_t, ip_address_4) }, \
+         { "ip_address_6", NULL, MAVLINK_TYPE_UINT8_T, 16, 10, offsetof(mavlink_airlink_eye_gs_hole_push_response_t, ip_address_6) }, \
+         { "ip_port", NULL, MAVLINK_TYPE_UINT32_T, 0, 0, offsetof(mavlink_airlink_eye_gs_hole_push_response_t, ip_port) }, \
          } \
 }
 #endif
@@ -61,7 +63,7 @@ typedef struct __mavlink_airlink_eye_gs_hole_push_response_t {
  * @param ip_port  port
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_airlink_eye_gs_hole_push_response_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
+static inline uint16_t mavlink_msg_airlink_eye_gs_hole_push_response_pack(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg,
                                uint8_t resp_type, uint8_t ip_version, const uint8_t *ip_address_4, const uint8_t *ip_address_6, uint32_t ip_port)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -87,6 +89,49 @@ static inline uint16_t mavlink_msg_airlink_eye_gs_hole_push_response_pack(uint8_
 }
 
 /**
+ * @brief Pack a airlink_eye_gs_hole_push_response message
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ *
+ * @param resp_type  Hole push response type
+ * @param ip_version  ip version
+ * @param ip_address_4  ip 4 address
+ * @param ip_address_6  ip 6 address
+ * @param ip_port  port
+ * @return length of the message in bytes (excluding serial stream start sign)
+ */
+static inline uint16_t mavlink_msg_airlink_eye_gs_hole_push_response_pack_status(uint32_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
+                               uint8_t resp_type, uint8_t ip_version, const uint8_t *ip_address_4, const uint8_t *ip_address_6, uint32_t ip_port)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+    char buf[MAVLINK_MSG_ID_AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE_LEN];
+    _mav_put_uint32_t(buf, 0, ip_port);
+    _mav_put_uint8_t(buf, 4, resp_type);
+    _mav_put_uint8_t(buf, 5, ip_version);
+    _mav_put_uint8_t_array(buf, 6, ip_address_4, 4);
+    _mav_put_uint8_t_array(buf, 10, ip_address_6, 16);
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE_LEN);
+#else
+    mavlink_airlink_eye_gs_hole_push_response_t packet;
+    packet.ip_port = ip_port;
+    packet.resp_type = resp_type;
+    packet.ip_version = ip_version;
+    mav_array_memcpy(packet.ip_address_4, ip_address_4, sizeof(uint8_t)*4);
+    mav_array_memcpy(packet.ip_address_6, ip_address_6, sizeof(uint8_t)*16);
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE_LEN);
+#endif
+
+    msg->msgid = MAVLINK_MSG_ID_AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE;
+#if MAVLINK_CRC_EXTRA
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE_MIN_LEN, MAVLINK_MSG_ID_AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE_LEN, MAVLINK_MSG_ID_AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE_CRC);
+#else
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE_MIN_LEN, MAVLINK_MSG_ID_AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE_LEN, 0);
+#endif
+}
+
+/**
  * @brief Pack a airlink_eye_gs_hole_push_response message on a channel
  * @param system_id ID of this system
  * @param component_id ID of this component (e.g. 200 for IMU)
@@ -99,7 +144,7 @@ static inline uint16_t mavlink_msg_airlink_eye_gs_hole_push_response_pack(uint8_
  * @param ip_port  port
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_airlink_eye_gs_hole_push_response_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
+static inline uint16_t mavlink_msg_airlink_eye_gs_hole_push_response_pack_chan(uint32_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
                                    uint8_t resp_type,uint8_t ip_version,const uint8_t *ip_address_4,const uint8_t *ip_address_6,uint32_t ip_port)
 {
@@ -133,7 +178,7 @@ static inline uint16_t mavlink_msg_airlink_eye_gs_hole_push_response_pack_chan(u
  * @param msg The MAVLink message to compress the data into
  * @param airlink_eye_gs_hole_push_response C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_airlink_eye_gs_hole_push_response_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_airlink_eye_gs_hole_push_response_t* airlink_eye_gs_hole_push_response)
+static inline uint16_t mavlink_msg_airlink_eye_gs_hole_push_response_encode(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_airlink_eye_gs_hole_push_response_t* airlink_eye_gs_hole_push_response)
 {
     return mavlink_msg_airlink_eye_gs_hole_push_response_pack(system_id, component_id, msg, airlink_eye_gs_hole_push_response->resp_type, airlink_eye_gs_hole_push_response->ip_version, airlink_eye_gs_hole_push_response->ip_address_4, airlink_eye_gs_hole_push_response->ip_address_6, airlink_eye_gs_hole_push_response->ip_port);
 }
@@ -147,9 +192,23 @@ static inline uint16_t mavlink_msg_airlink_eye_gs_hole_push_response_encode(uint
  * @param msg The MAVLink message to compress the data into
  * @param airlink_eye_gs_hole_push_response C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_airlink_eye_gs_hole_push_response_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_airlink_eye_gs_hole_push_response_t* airlink_eye_gs_hole_push_response)
+static inline uint16_t mavlink_msg_airlink_eye_gs_hole_push_response_encode_chan(uint32_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_airlink_eye_gs_hole_push_response_t* airlink_eye_gs_hole_push_response)
 {
     return mavlink_msg_airlink_eye_gs_hole_push_response_pack_chan(system_id, component_id, chan, msg, airlink_eye_gs_hole_push_response->resp_type, airlink_eye_gs_hole_push_response->ip_version, airlink_eye_gs_hole_push_response->ip_address_4, airlink_eye_gs_hole_push_response->ip_address_6, airlink_eye_gs_hole_push_response->ip_port);
+}
+
+/**
+ * @brief Encode a airlink_eye_gs_hole_push_response struct with provided status structure
+ *
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ * @param airlink_eye_gs_hole_push_response C-struct to read the message contents from
+ */
+static inline uint16_t mavlink_msg_airlink_eye_gs_hole_push_response_encode_status(uint32_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_airlink_eye_gs_hole_push_response_t* airlink_eye_gs_hole_push_response)
+{
+    return mavlink_msg_airlink_eye_gs_hole_push_response_pack_status(system_id, component_id, _status, msg,  airlink_eye_gs_hole_push_response->resp_type, airlink_eye_gs_hole_push_response->ip_version, airlink_eye_gs_hole_push_response->ip_address_4, airlink_eye_gs_hole_push_response->ip_address_6, airlink_eye_gs_hole_push_response->ip_port);
 }
 
 /**
@@ -201,7 +260,7 @@ static inline void mavlink_msg_airlink_eye_gs_hole_push_response_send_struct(mav
 
 #if MAVLINK_MSG_ID_AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
+  This variant of _send() can be used to save stack space by reusing
   memory from the receive buffer.  The caller provides a
   mavlink_message_t which is the size of a full mavlink message. This
   is usually the receive buffer for the channel, and allows a reply to an
@@ -298,9 +357,10 @@ static inline void mavlink_msg_airlink_eye_gs_hole_push_response_decode(const ma
     airlink_eye_gs_hole_push_response->ip_version = mavlink_msg_airlink_eye_gs_hole_push_response_get_ip_version(msg);
     mavlink_msg_airlink_eye_gs_hole_push_response_get_ip_address_4(msg, airlink_eye_gs_hole_push_response->ip_address_4);
     mavlink_msg_airlink_eye_gs_hole_push_response_get_ip_address_6(msg, airlink_eye_gs_hole_push_response->ip_address_6);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE_LEN? msg->len : MAVLINK_MSG_ID_AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE_LEN;
-        memset(airlink_eye_gs_hole_push_response, 0, MAVLINK_MSG_ID_AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE_LEN ? msg->len : MAVLINK_MSG_ID_AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE_LEN;
+    memset(airlink_eye_gs_hole_push_response, 0, MAVLINK_MSG_ID_AIRLINK_EYE_GS_HOLE_PUSH_RESPONSE_LEN);
     memcpy(airlink_eye_gs_hole_push_response, _MAV_PAYLOAD(msg), len);
 #endif
 }

@@ -1,6 +1,8 @@
 #pragma once
 // MESSAGE OPENHD_VERSION_MESSAGE PACKING
 
+#include <stdint.h>
+
 #define MAVLINK_MSG_ID_OPENHD_VERSION_MESSAGE 1221
 
 
@@ -60,7 +62,7 @@ typedef struct __mavlink_openhd_version_message_t {
  * @param dummy  reserved for future use
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_openhd_version_message_pack(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg,
+static inline uint16_t mavlink_msg_openhd_version_message_pack(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg,
                                uint8_t major, uint8_t minor, uint8_t patch, uint8_t release_type, uint8_t dummy)
 {
 #if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
@@ -88,6 +90,51 @@ static inline uint16_t mavlink_msg_openhd_version_message_pack(uint8_t system_id
 }
 
 /**
+ * @brief Pack a openhd_version_message message
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ *
+ * @param major  major version,e.g. 2
+ * @param minor  minor version,e.g. 5
+ * @param patch  patch version,e.g. 1
+ * @param release_type  release=0,beta=1,alpha=2,development=3
+ * @param dummy  reserved for future use
+ * @return length of the message in bytes (excluding serial stream start sign)
+ */
+static inline uint16_t mavlink_msg_openhd_version_message_pack_status(uint32_t system_id, uint8_t component_id, mavlink_status_t *_status, mavlink_message_t* msg,
+                               uint8_t major, uint8_t minor, uint8_t patch, uint8_t release_type, uint8_t dummy)
+{
+#if MAVLINK_NEED_BYTE_SWAP || !MAVLINK_ALIGNED_FIELDS
+    char buf[MAVLINK_MSG_ID_OPENHD_VERSION_MESSAGE_LEN];
+    _mav_put_uint8_t(buf, 0, major);
+    _mav_put_uint8_t(buf, 1, minor);
+    _mav_put_uint8_t(buf, 2, patch);
+    _mav_put_uint8_t(buf, 3, release_type);
+    _mav_put_uint8_t(buf, 4, dummy);
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), buf, MAVLINK_MSG_ID_OPENHD_VERSION_MESSAGE_LEN);
+#else
+    mavlink_openhd_version_message_t packet;
+    packet.major = major;
+    packet.minor = minor;
+    packet.patch = patch;
+    packet.release_type = release_type;
+    packet.dummy = dummy;
+
+        memcpy(_MAV_PAYLOAD_NON_CONST(msg), &packet, MAVLINK_MSG_ID_OPENHD_VERSION_MESSAGE_LEN);
+#endif
+
+    msg->msgid = MAVLINK_MSG_ID_OPENHD_VERSION_MESSAGE;
+#if MAVLINK_CRC_EXTRA
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_OPENHD_VERSION_MESSAGE_MIN_LEN, MAVLINK_MSG_ID_OPENHD_VERSION_MESSAGE_LEN, MAVLINK_MSG_ID_OPENHD_VERSION_MESSAGE_CRC);
+#else
+    return mavlink_finalize_message_buffer(msg, system_id, component_id, _status, MAVLINK_MSG_ID_OPENHD_VERSION_MESSAGE_MIN_LEN, MAVLINK_MSG_ID_OPENHD_VERSION_MESSAGE_LEN, 0);
+#endif
+}
+
+/**
  * @brief Pack a openhd_version_message message on a channel
  * @param system_id ID of this system
  * @param component_id ID of this component (e.g. 200 for IMU)
@@ -100,7 +147,7 @@ static inline uint16_t mavlink_msg_openhd_version_message_pack(uint8_t system_id
  * @param dummy  reserved for future use
  * @return length of the message in bytes (excluding serial stream start sign)
  */
-static inline uint16_t mavlink_msg_openhd_version_message_pack_chan(uint8_t system_id, uint8_t component_id, uint8_t chan,
+static inline uint16_t mavlink_msg_openhd_version_message_pack_chan(uint32_t system_id, uint8_t component_id, uint8_t chan,
                                mavlink_message_t* msg,
                                    uint8_t major,uint8_t minor,uint8_t patch,uint8_t release_type,uint8_t dummy)
 {
@@ -136,7 +183,7 @@ static inline uint16_t mavlink_msg_openhd_version_message_pack_chan(uint8_t syst
  * @param msg The MAVLink message to compress the data into
  * @param openhd_version_message C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_openhd_version_message_encode(uint8_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_version_message_t* openhd_version_message)
+static inline uint16_t mavlink_msg_openhd_version_message_encode(uint32_t system_id, uint8_t component_id, mavlink_message_t* msg, const mavlink_openhd_version_message_t* openhd_version_message)
 {
     return mavlink_msg_openhd_version_message_pack(system_id, component_id, msg, openhd_version_message->major, openhd_version_message->minor, openhd_version_message->patch, openhd_version_message->release_type, openhd_version_message->dummy);
 }
@@ -150,9 +197,23 @@ static inline uint16_t mavlink_msg_openhd_version_message_encode(uint8_t system_
  * @param msg The MAVLink message to compress the data into
  * @param openhd_version_message C-struct to read the message contents from
  */
-static inline uint16_t mavlink_msg_openhd_version_message_encode_chan(uint8_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_version_message_t* openhd_version_message)
+static inline uint16_t mavlink_msg_openhd_version_message_encode_chan(uint32_t system_id, uint8_t component_id, uint8_t chan, mavlink_message_t* msg, const mavlink_openhd_version_message_t* openhd_version_message)
 {
     return mavlink_msg_openhd_version_message_pack_chan(system_id, component_id, chan, msg, openhd_version_message->major, openhd_version_message->minor, openhd_version_message->patch, openhd_version_message->release_type, openhd_version_message->dummy);
+}
+
+/**
+ * @brief Encode a openhd_version_message struct with provided status structure
+ *
+ * @param system_id ID of this system
+ * @param component_id ID of this component (e.g. 200 for IMU)
+ * @param status MAVLink status structure
+ * @param msg The MAVLink message to compress the data into
+ * @param openhd_version_message C-struct to read the message contents from
+ */
+static inline uint16_t mavlink_msg_openhd_version_message_encode_status(uint32_t system_id, uint8_t component_id, mavlink_status_t* _status, mavlink_message_t* msg, const mavlink_openhd_version_message_t* openhd_version_message)
+{
+    return mavlink_msg_openhd_version_message_pack_status(system_id, component_id, _status, msg,  openhd_version_message->major, openhd_version_message->minor, openhd_version_message->patch, openhd_version_message->release_type, openhd_version_message->dummy);
 }
 
 /**
@@ -206,7 +267,7 @@ static inline void mavlink_msg_openhd_version_message_send_struct(mavlink_channe
 
 #if MAVLINK_MSG_ID_OPENHD_VERSION_MESSAGE_LEN <= MAVLINK_MAX_PAYLOAD_LEN
 /*
-  This variant of _send() can be used to save stack space by re-using
+  This variant of _send() can be used to save stack space by reusing
   memory from the receive buffer.  The caller provides a
   mavlink_message_t which is the size of a full mavlink message. This
   is usually the receive buffer for the channel, and allows a reply to an
@@ -305,9 +366,10 @@ static inline void mavlink_msg_openhd_version_message_decode(const mavlink_messa
     openhd_version_message->patch = mavlink_msg_openhd_version_message_get_patch(msg);
     openhd_version_message->release_type = mavlink_msg_openhd_version_message_get_release_type(msg);
     openhd_version_message->dummy = mavlink_msg_openhd_version_message_get_dummy(msg);
+
 #else
-        uint8_t len = msg->len < MAVLINK_MSG_ID_OPENHD_VERSION_MESSAGE_LEN? msg->len : MAVLINK_MSG_ID_OPENHD_VERSION_MESSAGE_LEN;
-        memset(openhd_version_message, 0, MAVLINK_MSG_ID_OPENHD_VERSION_MESSAGE_LEN);
+    uint8_t len = msg->len < MAVLINK_MSG_ID_OPENHD_VERSION_MESSAGE_LEN ? msg->len : MAVLINK_MSG_ID_OPENHD_VERSION_MESSAGE_LEN;
+    memset(openhd_version_message, 0, MAVLINK_MSG_ID_OPENHD_VERSION_MESSAGE_LEN);
     memcpy(openhd_version_message, _MAV_PAYLOAD(msg), len);
 #endif
 }
