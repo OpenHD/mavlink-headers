@@ -1,6 +1,6 @@
 {
   "repository": "https://github.com/OpenHD/mavlink",
-  "revision": "dcd4b0b955decba444d3b09773bde5ccd08e917e",
+  "revision": "6782304a9d3c85805ae2df734d5e9b3d92668b05",
   "generatorRevision": "5660c2482740bcfd26898546fad5db47c9b4e22c",
   "wireProtocol": "2.0"
 }
